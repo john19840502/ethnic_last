@@ -39,4 +39,25 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'capybara'
+end
+
+group :development do
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+  gem 'pry-rescue'
+
+  gem 'quiet_assets'
+  gem 'xray-rails'
+  gem 'letter_opener_web', '~> 1.2.0'
 end
