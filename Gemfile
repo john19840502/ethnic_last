@@ -61,3 +61,7 @@ group :development do
   gem 'xray-rails'
   gem 'letter_opener_web', '~> 1.2.0'
 end
+
+gem 'spree', github: 'spree/spree', branch: 'master'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
+gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 'master'
