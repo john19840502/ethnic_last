@@ -62,6 +62,6 @@ group :development do
   gem 'letter_opener_web', '~> 1.2.0'
 end
 
-gem 'spree', github: 'spree/spree', branch: 'master'
+gem 'spree', github: 'spree/spree', branch: '3-0-stable'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 'master'
