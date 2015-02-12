@@ -1,0 +1,32 @@
+source 'http://rubygems.org'
+
+gem 'sqlite3'
+
+group :development do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+  gem 'listen'
+  gem 'libnotify'
+  gem 'byebug'
+end
+
+group :test do
+  gem 'rspec-rails'
+end
+
+group :cucumber do
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'nokogiri'
+  gem 'capybara'
+end
+
+group :cucumber, :test do
+  gem 'faker'
+  gem 'factory_girl'
+end
+
+gemspec
