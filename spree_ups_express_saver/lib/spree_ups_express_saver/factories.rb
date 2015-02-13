@@ -1,0 +1,2 @@
+require 'spree_ups_express_saver/factories/ups_shipping_method_factory.rb'
+require 'spree_ups_express_saver/factories/ups_express_saver_factory.rb'

@@ -15,9 +15,9 @@ Spree.config do |config|
   # config.track_inventory_levels = false
 end
 
-Spree.user_class = 'Spree::LegacyUser'
+Spree.user_class = 'Spree::User'
 
-          
+
 config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
 attachment_config = {
 
@@ -55,4 +55,3 @@ else
   Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/products/:id/:style/:basename.:extension"
   Spree::Slider.attachment_definitions[:image][:url] = '/spree/products/:id/:style/:basename.:extension'
 end
-          
