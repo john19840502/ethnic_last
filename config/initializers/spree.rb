@@ -50,6 +50,6 @@ if Rails.env == 'production'
     Spree::Slider.attachment_definitions[:image][key.to_sym] = value
   end
 else
-  Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/products/:id/:style/:basename.:extension"
-  Spree::Slider.attachment_definitions[:image][:url] = '/spree/products/:id/:style/:basename.:extension'
+  Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/sliders/:id/:style/:basename.:extension"
+  Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
 end
