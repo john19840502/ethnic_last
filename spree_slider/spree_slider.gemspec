@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> 3.0.0.rc2'
   s.add_dependency 'sass-rails'
   s.add_dependency 'coffee-rails'
-  s.add_dependency 'fog'
+  s.add_dependency 'aws-sdk'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'factory_girl'

@@ -69,4 +69,5 @@ gem 'spree_contact_us', github: 'jdutil/spree_contact_us'
 gem 'spree_static_content', github: 'spree/spree_static_content'
 
 gem 'spree_slider', path: 'spree_slider'
+gem 'spree-html-email', path: 'spree-html-email'
 

@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'sqlite3'
-
 group :development do
   gem 'guard'
   gem 'guard-rspec'
@@ -15,16 +13,10 @@ end
 
 group :test do
   gem 'rspec-rails'
-end
-
-group :cucumber do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'nokogiri'
   gem 'capybara'
-end
-
-group :cucumber, :test do
   gem 'faker'
   gem 'factory_girl'
 end

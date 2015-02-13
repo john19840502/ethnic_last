@@ -17,7 +17,7 @@ end
 
 Spree.user_class = 'Spree::LegacyUser'
 
-          
+
 config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
 attachment_config = {
 
