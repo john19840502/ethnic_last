@@ -1,0 +1,30 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_slider_link">
+      <%= button_link_to "Add Slider", new_object_url, {:icon => 'add'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1>Sliders</h1>
+
+<table class="index" id="sliders">
+  <tr data-hook="admin_sliders_index_headers">
+    <th>thumb</th>
+    <th>group_key</th>
+    <th>url</th>
+    <th data-hook="admin_sliders_index_headers_actions"></th>
+  </tr>
+  <% @sliders.each do |slider| -%>
+    <tr>
+      <td><%= image_tag slider.image(:thumb) %></td>
+      <td><%= slider.group_key %></td>
+      <td><%= slider.url %></td>
+      <td class="actions" data-hook="admin_sliders_index_row_actions">
+        <%= link_to_edit slider %>
+        <%= link_to_delete slider %>
+      </td>
+    </tr>
+  <% end -%>
+</table>

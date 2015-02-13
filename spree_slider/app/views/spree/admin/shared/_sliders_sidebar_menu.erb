@@ -1,0 +1,5 @@
+<% if can? :admin, Spree::Slider %>
+    <ul class="nav nav-sidebar">
+      <%= tab Spree::Slider, url: spree.admin_sliders_url, icon: 'film', label: Spree::Slider.model_name.human(count: :many) %>
+    </ul>
+<% end %>

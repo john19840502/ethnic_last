@@ -62,8 +62,13 @@ group :development do
   gem 'letter_opener_web', '~> 1.2.0'
 end
 
-gem 'spree', github: 'spree/spree', branch: '3-0-stable'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
-gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 'master'
+gem 'aws-sdk', '~> 1.61.0'
 
+gem 'spree', github: 'spree/spree', branch: '3-0-stable'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
+gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
+gem 'spree_contact_us', github: 'jdutil/spree_contact_us'
+gem 'spree_static_content', github: 'spree/spree_static_content'
+
+gem 'spree_slider', path: 'spree_slider'
 gem "spree_ups_express_saver", :path => "spree_ups_express_saver"
