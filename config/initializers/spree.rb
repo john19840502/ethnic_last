@@ -44,12 +44,10 @@ attachment_config = {
     default_url:    '/spree/:class/:id/:style/:basename.:extension',
     default_style:  'product'
 }
+
 if Rails.env == 'production'
   attachment_config.each do |key, value|
     Spree::Slider.attachment_definitions[:image][key.to_sym] = value
-  end
-  Paperclip.interpolates(:s3_eu_url) do |attachment, style|
-    "#{attachment.s3_protocol}://#{Spree::Config[:s3_host_alias]}/#{attachment.bucket_name}/#{attachment.path(style).gsub(%r{^/}, '')}"
   end
 else
   Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/products/:id/:style/:basename.:extension"
