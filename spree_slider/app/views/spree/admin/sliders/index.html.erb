@@ -1,15 +1,14 @@
-<div class='toolbar'>
-  <ul class='actions'>
-    <li id="new_slider_link">
-      <%= button_link_to "Add Slider", new_object_url, {:icon => 'add'} %>
-    </li>
-  </ul>
-  <br class='clear' />
+<div>
+  <h1 class="col-sm-5 pull-left">Sliders</h1>
+  <div class='pull-right col-sm-2 add-slider' style="margin-top: 20px">
+        <%= button_link_to 'Add Slider', new_object_url, {class: 'btn btn-success', icon: 'add'} %>
+  </div>
+  <div class="clearfix"></div>
 </div>
 
-<h1>Sliders</h1>
+<hr>
 
-<table class="index" id="sliders">
+<table class="table" id="sliders">
   <tr data-hook="admin_sliders_index_headers">
     <th>thumb</th>
     <th>group_key</th>
