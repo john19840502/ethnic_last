@@ -1,0 +1,8 @@
+<!-- surround "[data-hook='products_search_results_heading']" -->
+<% if @taxon.try(:invisible?, current_spree_user) %>
+      <div class="products-empty">
+         <p>This very unique brand requires you to <%= link_to t(:login), spree.login_path %> or <%= link_to t(:register), spree.signup_path %> to view the collection / prices</p>
+      </div>
+<% else %>
+    <%= render_original %>
+<% end %>
