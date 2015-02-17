@@ -1,5 +1,5 @@
 <div id="logo">
-  <h1><%= link_to(Spree::Config[:site_name], "http://#{ Spree::Config[:site_url] }") %></h1>
+  <h1><%= link_to(Spree::Store.current.name, "http://#{ Spree::Store.current.url }") %></h1>
 </div>
 <p>
   Sarphatistraat 370 - A16 (on appointment ONLY) <br />

@@ -1,6 +1,6 @@
 <div class="address" id="shipping">
   <h2><%= t(:shipping_address) %></h2>
-  <%= render :partial => 'spree/shared/email/address', :locals => {:address => shipment.address} %>
+  <%= render partial: 'spree/shared/email/address', locals: {address: shipment.address} %>
 </div>
 
 <table data-hook="shipment_details">

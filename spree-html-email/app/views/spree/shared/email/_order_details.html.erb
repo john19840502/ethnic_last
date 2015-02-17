@@ -15,7 +15,7 @@
   <% else %>
     <tr>
       <td>Submitted</td>
-      <td><%= l(order.completed_at.to_date, :format => :short) %></td>
+      <td><%= l(order.completed_at.to_date, format: :short) %></td>
     </tr>
   <% end %>
 </table>
@@ -24,11 +24,11 @@
   <tr>
     <td>
       <h2><span><%= t(:billing_address) %></span></h2>
-      <%= render :partial => 'spree/shared/email/address', :locals => {:address => order.bill_address} %>
+      <%= render partial: 'spree/shared/email/address', locals: {address: order.bill_address} %>
     </td>
     <td>
       <h2><span><%= t(:shipping_address) %></span></h2>
-      <%= render :partial => 'spree/shared/email/address', :locals => {:address => order.ship_address} %>
+      <%= render partial: 'spree/shared/email/address', locals: {address: order.ship_address} %>
     </td>
   </tr>
 </table>

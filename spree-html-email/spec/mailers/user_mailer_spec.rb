@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'user_mailer'
+# require 'spree_auth_devise'
 
-describe UserMailer do
-  let(:user) { mock(:user) }
+describe 'Spree::UserMailer' do
+  let(:user) { FactoryGirl.create(:user) }
 
   context "reset password instructions email" do
-    let(:email) { UserMailer.reset_password_instructions(user) }
+    let(:email) { Spree::UserMailer.reset_password_instructions(user) }
 
     specify { email.content_type.should match("text/html") }
   end

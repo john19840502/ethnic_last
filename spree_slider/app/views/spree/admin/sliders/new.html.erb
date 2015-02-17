@@ -1,7 +1,6 @@
 <h1>Add new Slider</h1>
 <%= render "spree/shared/error_messages", :target => @slider %>
 
-<%= form_for [:admin, @slider], :html => { :multipart => true } do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
-<% end %>
+<hr>
+
+<%= render 'form', resource: @slider %>

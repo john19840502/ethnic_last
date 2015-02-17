@@ -9,14 +9,17 @@ Gem::Specification.new do |s|
 
   s.author            = 'Joshua Nussbaum'
   s.email             = 'joshnuss@gmail.com'
-  # s.homepage          = 'http://www.rubyonrails.org'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core'
+  s.add_dependency 'spree_core', '~> 3.0.0.rc2'
+  s.add_dependency 'sass-rails'
+  s.add_dependency 'coffee-rails'
+
   s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'factory_girl'
 end
 

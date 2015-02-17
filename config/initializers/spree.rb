@@ -9,14 +9,14 @@
 #
 # In order to initialize a setting do:
 # config.setting_name = 'new value'
+
 Spree.config do |config|
   # Example:
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false
 end
 
-Spree.user_class = 'Spree::LegacyUser'
-
+Spree.user_class = 'Spree::User'
 
 config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
 attachment_config = {
@@ -44,15 +44,12 @@ attachment_config = {
     default_url:    '/spree/:class/:id/:style/:basename.:extension',
     default_style:  'product'
 }
+
 if Rails.env == 'production'
   attachment_config.each do |key, value|
     Spree::Slider.attachment_definitions[:image][key.to_sym] = value
   end
-  Paperclip.interpolates(:s3_eu_url) do |attachment, style|
-    "#{attachment.s3_protocol}://#{Spree::Config[:s3_host_alias]}/#{attachment.bucket_name}/#{attachment.path(style).gsub(%r{^/}, '')}"
-  end
 else
-  Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/products/:id/:style/:basename.:extension"
-  Spree::Slider.attachment_definitions[:image][:url] = '/spree/products/:id/:style/:basename.:extension'
+  Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/sliders/:id/:style/:basename.:extension"
+  Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
 end
-          
