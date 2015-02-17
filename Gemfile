@@ -72,3 +72,4 @@ gem 'spree_static_content', github: 'spree/spree_static_content'
 
 gem 'spree_slider', path: 'spree_slider'
 gem "spree_ups_express_saver", :path => "spree_ups_express_saver"
+gem "spree_brands_on_taxons", :path => "spree_brands_on_taxons"

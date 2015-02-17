@@ -1,0 +1,5 @@
+<!-- insert_bottom "[data-hook='admin_inside_taxon_form']" -->
+<%= f.field_container :enabled, class: ['form-group'] do %>
+  <%= f.label :enabled, Spree.t(:taxon_enabled) %>
+  <%= f.check_box :enabled %>
+<% end %>
