@@ -9,3 +9,4 @@
 //= require spree/backend
 
 //= require_tree .
+//= require spree/backend/spree_brands_on_taxons

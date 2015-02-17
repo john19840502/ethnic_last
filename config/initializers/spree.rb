@@ -16,6 +16,7 @@ Spree.config do |config|
   # config.track_inventory_levels = false
 end
 
+
 Spree.user_class = 'Spree::User'
 
 config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
@@ -53,3 +54,34 @@ else
   Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/sliders/:id/:style/:basename.:extension"
   Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
 end
+
+
+config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
+attachment_config = {
+
+    s3_credentials: {
+        access_key_id:     config['aws_access_key_id'],
+        secret_access_key: config['aws_secret_access_key'],
+        bucket:            config['aws_bucket_name']
+    },
+
+    storage:        :s3,
+    s3_headers:     { 'Cache-Control' => 'max-age=31557600' },
+    s3_protocol:    'https',
+    bucket:         config['aws_bucket_name'],
+    url:            ':s3_domain_url',
+
+    styles: {
+        small:    '100x100>'
+    },
+
+    path:           '/spree/:class/:id/:style/:basename.:extension',
+    default_url:    '/spree/:class/:id/:style/:basename.:extension',
+    default_style:  'product'
+}
+if Rails.env == 'production'
+  attachment_config.each do |key, value|
+    Spree::Taxon.attachment_definitions[:icon][key.to_sym] = value
+  end
+end
+          
