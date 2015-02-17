@@ -1,15 +1,21 @@
 GIT
+  remote: git://github.com/jdutil/spree_contact_us.git
+  revision: a55281239b0e73a493a4e488b28ac3f56fa52d17
+  specs:
+    spree_contact_us (2.2.0)
+      spree_core (~> 3.0.0.beta)
+
+GIT
   remote: git://github.com/spree-contrib/spree_mail_settings.git
   revision: 73549e3a377606b20a45ac319d0774f054382445
-  branch: master
   specs:
     spree_mail_settings (2.2.0)
       spree_backend (~> 3.0.0.beta)
 
 GIT
   remote: git://github.com/spree/spree.git
-  revision: 1e9fdecde4a62f2b6eb775d37c28c0a7fef2ae47
-  branch: master
+  revision: 47d064d3faa39216779dcebdc109098731167308
+  branch: 3-0-stable
   specs:
     spree (3.0.0.rc2)
       spree_api (= 3.0.0.rc2)
@@ -33,7 +39,7 @@ GIT
     spree_cmd (3.0.0.rc2)
       thor (~> 0.14)
     spree_core (3.0.0.rc2)
-      activemerchant (~> 1.44.1)
+      activemerchant (~> 1.46.0)
       acts_as_list (~> 0.6)
       awesome_nested_set (~> 3.0.1)
       cancancan (~> 1.9.2)
@@ -69,8 +75,8 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
-  revision: a87c8d7b7407085b5d3bae133d9ca8219a3da9c2
-  branch: master
+  revision: f70e29f94a1ee86e40b9cde8d4740a49d8f3fcfd
+  branch: 3-0-stable
   specs:
     spree_auth_devise (3.0.0)
       devise (~> 3.4.1)
@@ -79,11 +85,27 @@ GIT
       multi_json
       spree_core (~> 3.0.0.beta)
 
+GIT
+  remote: git://github.com/spree/spree_static_content.git
+  revision: 78b4248dfcedd1f69983b080a6782c3517a40505
+  specs:
+    spree_static_content (3.0.0.beta)
+      spree_core (~> 3.0.0.beta)
+
 PATH
   remote: spree_brands_on_taxons
   specs:
     spree_brands_on_taxons (3.0.0.rc2)
       aws-sdk (~> 1.61.0)
+      spree_core (~> 3.0.0.rc2)
+
+PATH
+  remote: spree_slider
+  specs:
+    spree_slider (1.3.0)
+      coffee-rails
+      fog
+      sass-rails
       spree_core (~> 3.0.0.rc2)
 
 PATH
@@ -95,6 +117,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.0)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -114,20 +137,14 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active_utils (2.2.3)
-      activesupport (>= 2.3.11)
-      i18n
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
-    activemerchant (1.44.1)
-      active_utils (~> 2.2.0)
+    activemerchant (1.46.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
-      json (~> 1.7)
       nokogiri (~> 1.4)
-      offsite_payments (~> 2.0.0)
     activemodel (4.2.0)
       activesupport (= 4.2.0)
       builder (~> 3.1)
@@ -219,10 +236,89 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    excon (0.44.1)
     execjs (2.3.0)
     ffaker (1.32.1)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.27.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.3)
+      fog-ecloud
+      fog-json
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.1.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.28.0)
+      builder
+      excon (~> 0.38)
+      formatador (~> 0.2)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-ecloud (0.0.2)
+      fog-core
+      fog-xml
+    fog-json (1.0.0)
+      multi_json (~> 1.0)
+    fog-profitbricks (0.0.1)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.3)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-sakuracloud (1.0.0)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.1)
+      fog-core
+      fog-json
+    fog-softlayer (0.4.0)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.0)
+      fog-core
+      fog-json
+    fog-terremark (0.0.3)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.0.1)
+      fission
+      fog-core
+    fog-voxel (0.0.2)
+      fog-core
+      fog-xml
+    fog-xml (0.1.1)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    formatador (0.2.5)
     friendly_id (5.0.5)
       activerecord (>= 4.0.0)
     globalid (0.3.2)
@@ -234,7 +330,9 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    inflecto (0.0.2)
     interception (0.5)
+    ipaddress (0.8.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -273,16 +371,11 @@ GEM
       i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    offsite_payments (2.0.1)
-      active_utils (~> 2.2.0)
-      activesupport (>= 3.2.14, < 5.0.0)
-      builder (>= 2.1.2, < 4.0.0)
-      i18n (~> 0.5)
-      json (~> 1.7)
-      money (< 7.0.0)
-      nokogiri (~> 1.4)
     orm_adapter (0.5.0)
     paperclip (4.2.1)
       activemodel (>= 3.0.0)
@@ -447,6 +540,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  aws-sdk (~> 1.61.0)
   better_errors
   binding_of_caller
   byebug
@@ -469,7 +563,10 @@ DEPENDENCIES
   spree!
   spree_auth_devise!
   spree_brands_on_taxons!
+  spree_contact_us!
   spree_mail_settings!
+  spree_slider!
+  spree_static_content!
   spree_ups_express_saver!
   turbolinks
   uglifier (>= 1.3.0)
