@@ -67,3 +67,4 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 'master'
 
 gem "spree_ups_express_saver", :path => "spree_ups_express_saver"
+gem "spree_brands_on_taxons", :path => "spree_brands_on_taxons"

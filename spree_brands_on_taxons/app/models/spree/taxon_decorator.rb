@@ -12,8 +12,12 @@ Spree::Taxon.class_eval do
     partial
   end
 
-  def invisible?(current_spree_user)
-    VISIBILITIES[self.visibility.to_s] == "Invisible" && current_spree_user.nil?
+  def invisible?
+    VISIBILITIES[self.visibility.to_s] == "Invisible"
+  end
+
+  def invisible_for_not_logged_in?(current_spree_user)
+    VISIBILITIES[self.visibility.to_s] == "Only logged in clients" && current_spree_user.nil?
   end
 end
 

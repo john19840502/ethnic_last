@@ -1,10 +1,7 @@
 Spree::Core::Search::Base.class_eval do
 
   def get_base_scope_with_visibility
-    bscope = get_base_scope_without_visibility.available_to(@properties[:current_user])
-    Rails.logger.error @properties[:current_user].inspect
-    Rails.logger.error bscope.count
-    bscope
+    get_base_scope_without_visibility.available_to(@properties[:current_user])
   end
 
   def prepare_with_visibility(params)
