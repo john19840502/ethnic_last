@@ -1,0 +1,4 @@
+<!-- insert_bottom "#main-sidebar" -->
+<ul class="nav nav-sidebar">
+    <%= tab *Spree::Background, icon: 'picture', url: spree.admin_backgrounds_url, label: 'Backgrounds' %>
+</ul>
