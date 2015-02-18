@@ -84,4 +84,17 @@ if Rails.env == 'production'
     Spree::Taxon.attachment_definitions[:icon][key.to_sym] = value
   end
 end
+
+Rails.configuration.to_prepare do
+  if Rails.env == 'production'
+    attachment_config.each do |key, value|
+      Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
+      Spree::Product.attachment_definitions[:pdf_file][:url] = ':s3_eu_url'
+    end
+  else
+    Spree::Product.attachment_definitions[:pdf_file][:path]= "#{Rails.root}/public/spree/product_pdf_file/:id/:style/:basename.:extension"
+    Spree::Product.attachment_definitions[:pdf_file][:url] = '/spree/product_pdf_file/:id/:style/:basename.:extension'
+  end
+end
+
           

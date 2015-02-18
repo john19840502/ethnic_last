@@ -2,7 +2,7 @@ require 'spec_helper'
 # require 'spree_auth_devise'
 
 describe 'Spree::UserMailer' do
-  let!(:store) { create(:store) }
+  let!(:frontend) { create(:frontend) }
   let(:user) { FactoryGirl.create(:user) }
 
   context "reset password instructions email" do
