@@ -1,0 +1,28 @@
+source 'http://rubygems.org'
+
+
+gem 'spree', github: 'spree/spree', branch: '3-0-stable'
+gem 'spree_auth_devise', git: 'git://github.com/spree/spree_auth_devise', branch: '3-0-stable'
+
+gem 'sqlite3'
+
+group :development do
+  # gem 'guard'
+  # gem 'guard-rspec'
+  # gem 'listen'
+  # gem 'libnotify'
+  gem 'byebug'
+  gem 'letter_opener_web'
+end
+
+group :test do
+  gem 'rspec-rails'
+  # gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'nokogiri'
+  gem 'capybara'
+  gem 'faker'
+  gem 'factory_girl'
+end
+
+gemspec

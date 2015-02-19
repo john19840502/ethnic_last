@@ -1,0 +1,19 @@
+<!-- insert_bottom "[data-hook='admin_product_form_right']" -->
+<div data-hook="admin_product_form_pdf">
+  <p><%= f.label :pdf_file, t(:pdf_file) %></p>
+  <% if @product.pdf_file.present? %>
+      <%= f.field_container :pdf_file_delete do %>
+          <%= link_to @product.pdf_file_file_name, @product.pdf_file.url %>
+          <br />
+          <%= f.check_box :pdf_file_delete %>
+          <%= f.label :pdf_file_delete, 'Remove this PDF' %>
+      <% end %>
+  <% end %>
+
+  <%= f.field_container :pdf_file do %>
+      <span>Upload the pdf tech sheet</span>
+      <div class="field">
+        <%= f.file_field :pdf_file %>
+      </div>
+  <% end %>
+</div>
