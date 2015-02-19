@@ -1,0 +1,17 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:new_background) %>
+<% end %>
+
+<div data-hook="admin_background_new_form_header">
+  <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @background } %>
+</div>
+
+<div data-hook="admin_background_new_form">
+  <%= form_for [:admin, @background], url: admin_backgrounds_url, method: :post do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+
+      <div data-hook="admin_user_new_form_buttons">
+        <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+      </div>
+  <% end %>
+</div>

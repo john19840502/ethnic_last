@@ -77,3 +77,4 @@ gem 'spree_product_pdf', path: 'spree_product_pdf'
 
 gem 'spree_ups_express_saver', path: 'spree_ups_express_saver'
 gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
+gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'

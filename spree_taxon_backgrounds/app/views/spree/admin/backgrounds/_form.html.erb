@@ -1,0 +1,11 @@
+<div data-hook="admin_inside_background_form">
+  <%= f.field_container :image, class: ['form-group'] do %>
+      <%= f.label :image, Spree.t(:image) %>
+      <%= f.file_field :image %>
+  <% end %>
+
+  <%= f.field_container :taxon, class: ['form-group'] do %>
+      <%= f.label :taxon_id, t(:taxon) %><br />
+      <%= f.collection_select(:taxon_id, Spree::Taxon.all, :id, :name, { :include_blank => true }, { 'style' => 'width:200px' }) %>
+  <% end %>
+</div>
