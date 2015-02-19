@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:new_impression) %>
+<% end %>
+
+<div data-hook="admin_impression_new_form_header">
+  <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @impression } %>
+</div>
+
+<div data-hook="admin_impression_new_form">
+  <%= form_for [:admin, @impression], url: admin_impressions_url, method: :post do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+
+      <div data-hook="admin_impression_new_form_buttons">
+        <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+      </div>
+  <% end %>
+</div>
+
