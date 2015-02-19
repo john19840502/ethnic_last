@@ -10,3 +10,4 @@
 
 //= require_tree .
 //= require spree/frontend/spree_brands_on_taxons
+//= require spree/frontend/spree_taxon_backgrounds
