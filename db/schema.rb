@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150218073701) do
+ActiveRecord::Schema.define(version: 20150219082712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150218073701) do
     t.text     "alt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "search_result_asset",                default: false
   end
 
   add_index "spree_assets", ["viewable_id"], name: "index_assets_on_viewable_id", using: :btree

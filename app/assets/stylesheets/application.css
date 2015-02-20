@@ -12,4 +12,6 @@
  *
  *= require_tree .
  *= require_self
- */
+  *= require backend/spree_image_cropper
+ *= require spree/backend/spree_image_cropper
+*/
