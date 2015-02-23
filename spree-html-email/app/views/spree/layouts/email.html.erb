@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+     <%= render :partial => 'spree/shared/email/stylesheet' %>
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <%= render :partial => 'spree/shared/email/header' %>
+      </header>
+      <section id="main">
+        <%= yield %>
+      </section>
+      <footer>
+        <%= render :partial => 'spree/shared/email/footer' %>
+      </footer>
+    </div>
+  </body>
+</html>

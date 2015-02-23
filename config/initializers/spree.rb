@@ -9,6 +9,7 @@
 #
 # In order to initialize a setting do:
 # config.setting_name = 'new value'
+
 Spree.config do |config|
   # Example:
   # Uncomment to stop tracking inventory levels in the application
@@ -17,7 +18,6 @@ end
 
 
 Spree.user_class = 'Spree::User'
-
 
 config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
 attachment_config = {
@@ -54,8 +54,12 @@ if Rails.env == 'production'
 
     Spree::Background.attachment_definitions[:image][key.to_sym] = value
     Spree::Background.attachment_definitions[:image][:styles] = { thumb: "100x100>" }
+
+    Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
+    Spree::Product.attachment_definitions[:pdf_file][:url] = ':s3_eu_url'
   end
 else
   Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/sliders/:id/:style/:basename.:extension"
   Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
+
 end
