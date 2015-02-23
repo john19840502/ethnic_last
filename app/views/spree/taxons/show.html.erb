@@ -1,0 +1,90 @@
+<head>
+	<%= stylesheet_link_tag "jquery-ui" %>
+	<%= javascript_include_tag "jquery-ui" %>
+	<%= javascript_include_tag "price_range_selector" %>
+</head>
+<%= render :partial => 'shared/header' %>
+<% @brand = get_brand(params[:brand_id]) %>
+<% if @brand %>
+<%= content_for :head do %>
+  <% bg = get_background_image(@brand) %>
+  <% if bg %>
+  <style type="text/css">
+    html{
+      background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+  <% end %>
+<% end %>
+<% end %>
+
+<section class="content">
+  <aside>
+    <% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+    <%= form_tag products_path, :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+      </div>
+    <% end %>
+    <%= render :partial => 'spree/shared/taxonomies' %>
+    <% unless @taxon.parent.present? %>
+      <%= render :partial => 'shared/brands' %>
+    <% else %>
+			<%= render :partial => 'shared/subcategory_page_brands' %>
+    <% end %>
+    <p>
+		<label for="amount">PRICE RANGE:</label>
+		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
+	</p>
+	<div id="slider-range"></div>
+  </aside>
+  <div class="products-wrapper">
+    <% if @products == nil || @products.empty? %>
+       <ul id="products" class="inline product-listing products" data-hook="">
+		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
+	   </ul>
+    <% else %>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+    <% end %>
+  </div>
+</section>
+
+
+<script>
+	$('document').ready(function(){
+		$('ul.categories.filter:has( > li.selected)').css('display','block');
+		
+		var currency = $("a[title='Currency selection'] small").text();
+		if(currency == "USD")
+			{currency_type = '$';}
+		else
+			{currency_type = '€';}
+		$('#amount').val(currency_type+"25 - Max");
+	});
+
+	$("#slider-range").mouseup(function() {
+		var full_url = window.location.pathname + window.location.search;
+		var price_range = $('#amount').val();
+		var currency_type;
+		var currency = $("a[title='Currency selection'] small").text();
+		$('#amount').attr('class','true');
+		if(currency == "USD")
+			{price_range = price_range.replace(/\$/g,'')}
+		else
+			{price_range = price_range.replace(/\€/g,'')}
+		
+//		window.location.replace(full_url + "&price_range=" + price_range);
+		$.ajax({
+		  type: 'get',
+		  url: full_url,
+		  format: 'js',
+		  data: {price_range: price_range, price_filter_req: true},
+		  success: function (data) {
+			$('#products.product-listing').html(data);
+		  }
+		 });
+		
+	});
+</script>

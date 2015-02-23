@@ -1,0 +1,65 @@
+/* =========== Tabs */
+
+@import "core/settings";
+@import "core/mixins";
+ul.tabs {
+    border-bottom: 1px solid rgba(#ffffff, 0.15);
+    margin-bottom: $margin-bottom;
+    li {
+        display: inline-block;
+        @include displayfix;
+        position: relative;
+    }
+    a {
+        background: none;
+        @include border-radius(0.3em 0.3em 0 0);
+        color: rgba(white, 0.75);
+        display: block;
+        padding: 0.35em 0.65em;
+        text-decoration: none;
+
+        &:hover {
+        }
+    }
+    li.selected a {
+        background: rgba(#fff, 0.85);
+        background-image: image-url('opacity85.png') \9;
+        color: lighten($color-basic, 15%);
+        font-weight: bold;
+        padding: 0.35em 0.65em;
+    }
+}
+
+ul.steps {
+    margin-top: -$margin-bottom;
+    border-bottom: 1px solid rgba(#000, 0.2);
+    background: rgba(#fff, 0.5);
+    @include border-radius(2px 2px 0px 0px);
+    @include box-shadow(0px 1px 3px rgba(#000, 0.07));
+    margin-bottom: $margin-bottom;
+    text-transform: uppercase;
+    @include clearfix;
+    li {
+        float: left;
+        @include displayfix;
+        background: image-url('step.png') 0px center no-repeat;
+        &:first-child {
+            background: none;
+            a { padding-left: 2.5em; }
+        }
+    }
+    a {
+        font-size: 0.8em;
+        font-weight: 500;
+        color: #7d7d7d;
+        display: block;
+        padding: 2em 0.5em 2em 3em;
+        text-decoration: none;
+    }
+    li.completed a { color: lighten($color-basic, 15%); }
+    li:hover a { color: lighten($color-basic, 15%); }
+    li.selected a {
+        color: #674b6c;
+        font-weight: bold;
+    }
+}

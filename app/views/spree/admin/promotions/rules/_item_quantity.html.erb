@@ -1,0 +1,15 @@
+<p class="field">
+  <label for="<%= "#{param_prefix}_preferred_amount" %>">
+    <span style="margin-right: 20px;">
+      <%= t('promotion_rule_types.item_quantity.description') %>
+    </span>
+    <span style="margin-right: 20px;">
+      <%= select_tag "#{param_prefix}[preferred_operator1]", options_for_select(Spree::Promotion::Rules::ItemQuantity::MIN_OPERATORS.map{|o| [t("item_quantity_rule.operators.#{o}"),o]}, promotion_rule.preferred_operator1) %>
+      <%= text_field_tag "#{param_prefix}[preferred_min_quantity]", promotion_rule.preferred_min_quantity, :size => 10 %>
+    </span>
+    <span>
+      <%= select_tag "#{param_prefix}[preferred_operator2]", options_for_select(Spree::Promotion::Rules::ItemQuantity::MAX_OPERATORS.map{|o| [t("item_quantity_rule.operators.#{o}"),o]}, promotion_rule.preferred_operator2) %>
+      <%= text_field_tag "#{param_prefix}[preferred_max_quantity]", promotion_rule.preferred_max_quantity, :size => 10 %>
+    </span>
+  </label>
+</p>

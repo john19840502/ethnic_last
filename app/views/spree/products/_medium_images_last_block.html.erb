@@ -1,0 +1,15 @@
+<div class="block_1">
+	<% medium_images.each_with_index do |image, index| %>
+		<% if index==0 or index==2 %>
+			<div class="block_2">
+		<% end %>
+		<div class="block_4">
+			<a href="<%= image.url%>" target = "<%= image.new_tab ? '_blank' : '' %>">
+				<%=image_tag image.attachment.url(:medium), :class=>"block_4_images" %>
+			</a>
+		</div>
+		<% if index==1 or index==3 %>
+			</div>
+		<% end %>
+	<% end %>
+</div>

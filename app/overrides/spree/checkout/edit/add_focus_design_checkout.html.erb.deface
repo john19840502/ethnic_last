@@ -1,0 +1,19 @@
+<!-- replace "div#checkout" -->
+<% if @order && @order.errors.any? %>
+  <ul class="messages">
+      <% @order.errors.full_messages.each do |msg| %>
+       <li class="error"><%= msg %></li>
+     <% end %>
+  </ul>
+<% end %>
+
+<section class="focus">
+    <header>
+        <h1><%= t(:checkout) %></h1>
+        <span class="close"><a href="/collection" title="close"></a></span>
+    </header>
+    <%= checkout_progress %>
+    <%= form_for @order, :url => update_checkout_path(@order.state), :html => { :id => "checkout_form_#{@order.state}" } do |form| %>
+      <%= render @order.state, :form => form %>
+    <% end %>
+</section>

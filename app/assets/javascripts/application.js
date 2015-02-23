@@ -13,4 +13,31 @@
 //= require jquery
 //= require jquery_ujs
 // require turbolinks
+
+
+//= require frontend/all
+//= require library
+//= require interface
+//= require jquery.lazyload.min
+//= require jquery.cycle
+//= require jquery.touchSwipe
+//= require fancybox
+//= require jquery.infinitescroll
+
+$(document).ready(function() {
+    $("a#country_currency_selector").click(function(event){
+        event.preventDefault();
+        $('#country_selector').show();
+    });
+
+    if( $('input#order_use_billing').length ){
+        $('input#order_use_billing').prop('checked', true);
+        $('#shipping .inner').hide();
+        $('#shipping .inner input, #shipping .inner select').prop('disabled', true);
+    }
+
+});
+
+
+
 //= require_tree .

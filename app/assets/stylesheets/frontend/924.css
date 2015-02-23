@@ -1,0 +1,96 @@
+/*
+    Document   : 924
+    Created on : 24/Set/2012, 14:10:00
+    Author     : Bruno F
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* `924 Content container
+----------------------------------------------------------------------------------------------------*/
+
+.block {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.block_1 > div{
+	float: left;
+}
+.products-wrapper .block a {
+	padding: 0;
+}
+.block_1 .block_1_div {width: 50%; float: left;}
+
+.block_2 {
+  max-width: 440px;
+  max-height: 640px;
+  width: 50%;
+}
+/* EXTRA 2 BLOCOS*/
+.block_2-l{
+    width: 452px;
+    margin-right: 10px;
+    float: left;
+}
+.block_2-r{
+    width: 452px;
+    margin-left: 10px;
+    float: left;
+}
+/* FIM EXTRA 2 BLOCOS*/
+
+
+.block_3 {
+  width: 308px;
+}
+
+.block_4 {
+  max-width: 220px;
+  max-height: 320px;
+  width: 50%;
+}
+
+.block_6 {
+  width: 154px;
+}
+
+.block_7 {
+  width: 132px;
+}
+
+.block_11 {
+  width: 84px;
+}
+
+.block_12 {
+  width: 77px;
+}
+
+.block_14 {
+  width: 66px;
+}
+
+/* `block >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.block_1,
+.block_2,
+.block_3,
+.block_4,
+.block_5,
+.block_6,
+.block_7,
+.block_8,
+.block_9,
+.block_10,
+.block_11,
+.block_12,
+.block_13,
+.block_14,
+.block_15,
+.block_16 {
+  display: inline;
+  float: left;
+}

@@ -11,4 +11,4 @@
 //= require_tree .
 //= require spree/backend/spree_brands_on_taxons
 //= require spree/backend/spree_taxon_backgrounds
-//= require spree/backend/spree_image_cropper
+// require spree/backend/spree_image_cropper

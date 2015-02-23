@@ -1,0 +1,17 @@
+<section>
+  <h2><%= t(:shipping_method) %></h2>
+    <div>
+		<ul>
+		  <li>
+			<% @order.rate_hash.each do |shipping_method| %>
+			  <div><%= radio_button(:order, :shipping_method_id, shipping_method[:id]) %> &nbsp; <%= shipping_method.name %> <%= shipping_method.display_price %></div>
+			<% end %>
+		  </li>
+		</ul>
+    </div>
+    <div class="free_shipping_text">Free shipping for purchase: <br/> +€350 within Europe <br/> +€500 worldwide</div>
+</section>
+
+<div class="buttons">
+  <%= submit_tag t(:save_and_continue), :class => 'continue button primary right' %>
+</div>
