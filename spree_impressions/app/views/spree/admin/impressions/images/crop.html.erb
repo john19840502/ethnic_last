@@ -51,7 +51,7 @@
   <%= image_tag @image.attachment.url(:crop), :id => "crop_preview" %>
 </div>
 
-<%= form_for [:backend, @impression, @image] do |form| %>
+<%= form_for [:admin, @impression, @image] do |form| %>
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= form.hidden_field attribute, :id => attribute %>
   <% end %>

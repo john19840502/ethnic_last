@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '3.0.0'
   s.summary     = 'Impressions / Portfolio for Spree'
   s.description = 'Impressions / Portfolio for Spree'
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 2.1.5'
 
   s.author    = 'Peter Berkenbosch'
   s.email     = 'peter@pero-ict.nl'
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 3.0.0.rc2'
+  s.add_dependency 'spree_image_cropper', '~> 1.3.0'
 
   s.add_development_dependency 'capybara', '~> 2.4'
   s.add_development_dependency 'coffee-rails'
