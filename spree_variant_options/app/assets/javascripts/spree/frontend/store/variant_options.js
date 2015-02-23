@@ -92,8 +92,7 @@ function VariantOptions(params) {
   var options = params['options'];
   var allow_backorders = !params['track_inventory_levels'] ||  params['allow_backorders'];
   var allow_select_outofstock = params['allow_select_outofstock'];
-  //var default_instock = params['default_instock'];
-  var default_instock = true;
+  var default_instock = params['default_instock'];
 
   var variant, divs, parent, index = 0;
   var selection = [];
