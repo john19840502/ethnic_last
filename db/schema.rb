@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218085544) do
+ActiveRecord::Schema.define(version: 20150224064336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150218085544) do
     t.text     "alt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "search_result_asset",                default: false
   end
 
   add_index "spree_assets", ["viewable_id"], name: "index_assets_on_viewable_id", using: :btree
@@ -167,6 +168,23 @@ ActiveRecord::Schema.define(version: 20150218085544) do
 
   add_index "spree_gateways", ["active"], name: "index_spree_gateways_on_active", using: :btree
   add_index "spree_gateways", ["test_mode"], name: "index_spree_gateways_on_test_mode", using: :btree
+
+  create_table "spree_impression_brands", force: :cascade do |t|
+    t.integer  "impression_id"
+    t.integer  "brand_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_impressions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "sub_title"
+    t.integer  "position"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spree_inventory_units", force: :cascade do |t|
     t.string   "state"
@@ -792,6 +810,7 @@ ActiveRecord::Schema.define(version: 20150218085544) do
   add_index "spree_stock_items", ["deleted_at"], name: "index_spree_stock_items_on_deleted_at", using: :btree
   add_index "spree_stock_items", ["stock_location_id", "variant_id"], name: "stock_item_by_loc_and_var_id", using: :btree
   add_index "spree_stock_items", ["stock_location_id"], name: "index_spree_stock_items_on_stock_location_id", using: :btree
+  add_index "spree_stock_items", ["variant_id"], name: "index_spree_stock_items_on_variant_id", using: :btree
 
   create_table "spree_stock_locations", force: :cascade do |t|
     t.string   "name"
