@@ -12,3 +12,4 @@
 //= require spree/frontend/spree_brands_on_taxons
 //= require spree/frontend/spree_taxon_backgrounds
 //= require spree/frontend/spree_impressions
+//= require spree/frontend/spree_variant_options
