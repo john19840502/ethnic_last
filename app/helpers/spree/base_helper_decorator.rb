@@ -1,7 +1,7 @@
 Spree::BaseHelper.class_eval do
 
   def money_with_currency(amount)
-    if session[:currency] && session[:currency] == "USD"
+    if session[:currency] && session[:currency] == 'USD'
       m = Spree::Money.new(amount).money
       amount = m.exchange_to(:USD)
       amount.format

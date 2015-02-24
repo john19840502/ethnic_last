@@ -20,4 +20,28 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  order_state:
+    address: address
+    adjustments: adjustments
+    awaiting_return: awaiting return
+    canceled: canceled
+    cart: cart
+    complete: complete
+    confirm: Confirm and pay
+    delivery: delivery
+    payment: payment
+    resumed: resumed
+    returned: returned
+  requests_list: Back to Requests list
+  promotion_rule_types:
+    item_quantity:
+      name: Discount By Products Quantity
+      description: Add products Quantity for Discount
+  item_quantity_rule:
+    operators:
+      gt: greater than
+      gte: greater than or equal to
+      lt: less than
+      lte: less than or equal to
+  discount_per_item_quantity: Discount per Item Quantity
+

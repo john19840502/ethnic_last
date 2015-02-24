@@ -4,7 +4,7 @@
 
 <header>
     <ul class="slider" id="slider">
-        <% for slider in Spree::Slider.by_group_key("about_us") %>
+        <% for slider in Spree::Slider.by_group_key('about_us') %>
             <li style="background-image: url('<%=slider.image%>');">
                 <% if slider.url.present? %><a href="<%=slider.url%>"></a><% end %>
             </li>
@@ -15,8 +15,8 @@
 
 <div class="brands">
     <ul id="brand-list" data-display="10">
-        <% for brand in Spree::Brand.active %>
-            <li><%= link_to(image_tag(brand.logo), brand_url(brand))%></li>
+        <% for taxon in Spree::Taxon.active %>
+            <li><%= link_to(image_tag(taxon.icon), nested_taxons_url(taxon))%></li>
         <% end %>
     </ul>
     <a class="more-brands" id="brands-more">More brands</a>

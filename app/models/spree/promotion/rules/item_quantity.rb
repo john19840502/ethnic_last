@@ -6,10 +6,10 @@ module Spree
       class ItemQuantity < PromotionRule
         preference :min_quantity, :integer
         preference :max_quantity, :integer
-        preference :operator1, :string, :default => '>='
-        preference :operator2, :string, :default => '<='
+        preference :operator1, :string, default: '>='
+        preference :operator2, :string, default: '<='
 		
-        attr_accessible :preferred_min_quantity, :preferred_max_quantity, :preferred_operator1, :preferred_operator2
+        # attr_accessible :preferred_min_quantity, :preferred_max_quantity, :preferred_operator1, :preferred_operator2
 		
         MIN_OPERATORS = ['gte']
         MAX_OPERATORS = ['lte']

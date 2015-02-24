@@ -20,7 +20,7 @@ Spree::Product.class_eval do
     taxon_filter_props = []
     grouped_by_taxonomy = taxons.group_by(&:taxonomy)
     grouped_by_taxonomy.keys.select{|m| m.is_a_filter}.each do |key|
-      taxon_filter_props << [ key.name, grouped_by_taxonomy[key].collect(&:name).join(", ") ]
+      taxon_filter_props << [ key.name, grouped_by_taxonomy[key].collect(&:name).join(', ') ]
     end
     taxon_filter_props
   end
@@ -31,16 +31,16 @@ Spree::Product.class_eval do
     measurements = variants.measurements
 
     widths = measurements.collect(&:width).uniq.compact
-    measurements_props << ["Width (cm)", widths.join(", ")] unless widths.empty?
+    measurements_props << ['Width (cm)', widths.join(', ')] unless widths.empty?
 
     heights = measurements.collect(&:height).uniq.compact
-    measurements_props << ["Height (cm)", heights.join(", ")] unless heights.empty?
+    measurements_props << ['Height (cm)', heights.join(', ')] unless heights.empty?
 
     weights = measurements.collect(&:weight).uniq.compact
-    measurements_props << ["Weight (g)", weights.join(", ")] unless weights.empty?
+    measurements_props << ['Weight (g)', weights.join(', ')] unless weights.empty?
 
     repeats = measurements.collect(&:repeat).uniq.compact
-    measurements_props << ["Repeat (cm)", repeats.join(",")] unless repeats.empty?
+    measurements_props << ['Repeat (cm)', repeats.join(',')] unless repeats.empty?
 
     measurements_props
   end

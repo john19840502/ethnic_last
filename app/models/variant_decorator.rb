@@ -10,7 +10,7 @@ Spree::Variant.class_eval do
   end
 
   def self.measurements
-    select([:width, :height, :depth, :weight, "spree_variants.repeat"])
+    select([:width, :height, :depth, :weight, 'spree_variants.repeat'])
   end
 
   def price_without_tax

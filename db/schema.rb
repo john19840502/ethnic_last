@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223140734) do
-
+ActiveRecord::Schema.define(version: 20150322222099) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -464,6 +463,7 @@ ActiveRecord::Schema.define(version: 20150223140734) do
     t.string   "pdf_file_content_type"
     t.integer  "pdf_file_file_size"
     t.datetime "pdf_file_updated_at"
+    t.string   "subtitle"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree

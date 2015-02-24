@@ -71,7 +71,7 @@
 
 html {
     color: #fff;
-    color: #ddd \9;
+//    color: #ddd \9;
     font-family: $font-family;
     font-weight: 400;
     font-size: $font-size;
@@ -91,7 +91,7 @@ body {
     height: auto;
     min-height: 100%;
     width: 100%;
-    background: image-url('pattern.png') center top repeat, rbga(#000, 0.2);
+    background: image-url('pattern.png') center top repeat rgba(0, 0 , 0, 0.2);
 }
 
 h1, h2, h3, h4, h5, h6 {
