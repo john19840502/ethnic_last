@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150223140734) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -168,6 +169,23 @@ ActiveRecord::Schema.define(version: 20150223140734) do
 
   add_index "spree_gateways", ["active"], name: "index_spree_gateways_on_active", using: :btree
   add_index "spree_gateways", ["test_mode"], name: "index_spree_gateways_on_test_mode", using: :btree
+
+  create_table "spree_impression_brands", force: :cascade do |t|
+    t.integer  "impression_id"
+    t.integer  "brand_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_impressions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "sub_title"
+    t.integer  "position"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spree_inventory_units", force: :cascade do |t|
     t.string   "state"

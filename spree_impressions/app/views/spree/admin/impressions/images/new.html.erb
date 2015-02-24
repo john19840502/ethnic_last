@@ -1,0 +1,19 @@
+<%= render :partial => 'spree/admin/impressions/sidemenu', :locals => {:current => 'Images'} %>
+
+<% content_for :page_title do %>
+    / <%= Spree.t(:new_image) %>
+<% end %>
+
+<div data-hook="admin_impression_edit_form_header">
+  <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @impression } %>
+</div>
+
+<%= form_for [:admin, @impression, @image], :html => { :multipart => true } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <p class="form-buttons" data-hook="buttons">
+      <%= button t(:create) %>
+      <%= t(:or) %> <%= link_to t(:cancel), admin_impression_images_url(@impression), :id => 'cancel_link' %>
+    </p>
+<% end %>
+
+

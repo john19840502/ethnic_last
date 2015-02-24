@@ -1,0 +1,22 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:edit_impression) %>
+<% end %>
+
+<%= render :partial => "sidemenu", :locals => { :current => 'Impression Details' } %>
+
+
+<div data-hook="admin_impression_edit_form_header">
+  <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @impression } %>
+</div>
+
+<div data-hook="admin_impression_edit_form">
+  <%= form_for [:admin, @impression], url: admin_impression_url(@impression), method: :put do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+
+      <div data-hook="admin_impression_edit_form_button">
+        <%= render :partial => 'spree/admin/shared/edit_resource_links', :locals => { :collection_url => admin_impressions_url } %>
+      </div>
+  <% end %>
+</div>
+
+
