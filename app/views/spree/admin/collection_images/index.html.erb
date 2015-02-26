@@ -1,18 +1,17 @@
-<div class="toolbar" data-hook="toolbar">
-  <ul class="actions">
-    <li id="new_product_link">
-      <%= button_link_to t(:new_image), new_admin_collection_image_path, { :remote => false, :icon => 'add', :id => 'new_collection_image' } %>
-    </li>
-  </ul>
-  <br class="clear" />
+<div>
+  <h1 class="col-sm-5 pull-left"><%= t(:listing_requests) %></h1>
+  <div class='pull-right col-sm-2 add-slider' style="margin-top: 20px">
+    <%= button_link_to t(:new_image), new_admin_collection_image_path, { remote: false, icon: 'add', id: 'new_collection_image' } %>
+  </div>
+  <div class="clearfix"></div>
 </div>
 
-<h1><%= t(:listing_requests) %></h1>
+<hr>
 
-<div id="requests" data-hook></div>
+<!--<div id="requests" data-hook></div>-->
 
-<table class="index" id="listing_requests">
-  <tr data-hook="admin_products_index_headers">
+<table class="table" id="listing_requests">
+  <tr data-hook="admin_collection_images_index_headers">
     <th>Name</th>
     <th>position</th>
     <th>Url</th>
@@ -34,8 +33,8 @@
     <td><%= image.medium %></td>
     <td><%= image.small %></td>
     <td>
-		<%= link_to "Delete ", admin_collection_image_path(image), :method => 'delete', :class => 'edit' %>
-		|<%= link_to " Edit", edit_admin_collection_image_path(image), :class => 'edit' %></td>
+		<%= link_to 'Delete', admin_collection_image_path(image), method: 'delete', class: 'edit' %>
+		|<%= link_to ' Edit', edit_admin_collection_image_path(image), class: 'edit' %></td>
 	</td>
   </tr>
 <% end %>

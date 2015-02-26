@@ -1,0 +1,5 @@
+<% if can? :admin, CollectionImage %>
+    <ul class="nav nav-sidebar">
+      <%= tab CollectionImage, url: spree.admin_collection_images_url, icon: 'picture', label: CollectionImage.model_name.human(count: :many) %>
+    </ul>
+<% end %>
