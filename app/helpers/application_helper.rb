@@ -172,12 +172,12 @@ module ApplicationHelper
     end
   end
   
-  def get_brand(brand_id)
-    Spree::Brand.find_by_id(brand_id)
+  def get_taxon(taxon_id)
+    Spree::Taxon.find_by_id(taxon_id)
   end
   
-  def get_background_image(brand)
-    Spree::Background.find(brand_id: brand.id)
+  def get_background_image(taxon)
+    Spree::Background.find(taxon_id: taxon.id)
   end
   
   def all_taxon_filters(taxon)
@@ -185,7 +185,7 @@ module ApplicationHelper
   end
   
   def get_slider1_images
-    @slider1_imgs = CollectionImage.where(slider: true)
+    @slider1_imgs = CollectionImage.where(slider1: true)
   end
   
   def get_medium_images_block1

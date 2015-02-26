@@ -45,3 +45,8 @@ en:
       lte: less than or equal to
   discount_per_item_quantity: Discount per Item Quantity
 
+  login: Login
+  search: Search
+  create: Create
+  reset_password: Reset Password
+

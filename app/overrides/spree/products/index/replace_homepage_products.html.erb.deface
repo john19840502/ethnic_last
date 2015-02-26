@@ -22,7 +22,7 @@
   <aside>
     <%= form_tag products_path, :method => :get, :class => "search" do %>
       <div>
-        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+        <%= search_field_tag :keywords, params[:keywords], placeholder: t(:search) %>
       </div>
     <% end %>
     <%= render :partial => 'spree/shared/taxonomies'%>

@@ -4,7 +4,7 @@
 	<%= javascript_include_tag "price_range_selector" %>
 </head>
 <%= render :partial => 'shared/header' %>
-<% @brand = get_brand(params[:brand_id]) %>
+<% @brand = get_taxon(params[:taxon_id]) %>
 <% if @brand %>
 <%= content_for :head do %>
   <% bg = get_background_image(@brand) %>
@@ -32,7 +32,7 @@
     <% unless @taxon.parent.present? %>
       <%= render :partial => 'shared/brands' %>
     <% else %>
-			<%= render :partial => 'shared/subcategory_page_brands' %>
+      <%= render :partial => 'shared/subcategory_page_brands' %>
     <% end %>
     <p>
 		<label for="amount">PRICE RANGE:</label>

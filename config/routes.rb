@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   
 end
 
-# Spree::Core::Engine.routes.draw do
-#   namespace :admin do
-#     resources :information_requests
-#     resources :collection_images
-#   end
-# end
+Spree::Core::Engine.routes.draw do
+  namespace :admin do
+    resources :information_requests
+    resources :collection_images
+  end
+end

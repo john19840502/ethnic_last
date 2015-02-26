@@ -4,7 +4,7 @@ Spree::Taxon.class_eval do
   
   def fetch_uniq_product_brands
 	#Spree::Brand.where("id in (?)", self.products.map(&:brand_id).uniq).sort_by(&:name)
-	Spree::Brand.joins(products: :taxons).where('spree_taxons.name= ?',self.name).active.uniq.sort_by(&:name)
+	Spree::Taxon.where('name= ?',self.name).active.uniq.sort_by(&:name)
   end
   
   def to_filter_params(params = {})
@@ -15,6 +15,10 @@ Spree::Taxon.class_eval do
       filter_params << (Spree::Taxon.find(taxon_filter).name.strip)
     end
     filter_params.map {|f| "filters[]=#{f}"}.join('&')
+  end
+
+  def self.active
+    where(enabled: true)
   end
   
 end

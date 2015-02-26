@@ -3,6 +3,6 @@
   <%= link_to product, :class => 'info', :itemprop => "name", :title => product.name do %>
     <%= product_image(product, :itemprop => "image") %>
     <div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
-    <% if product.brand %><span class="product-brand" style="background-image: url('<%=product.brand.logo%>');"></span><% end %>
+
   <% end %>
 </li>
