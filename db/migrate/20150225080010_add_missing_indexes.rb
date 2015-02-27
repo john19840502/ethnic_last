@@ -14,7 +14,7 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :spree_products_taxons, [:product_id, :taxon_id]
     add_index :spree_products_promotion_rules, [:promotion_rule_id, :product_id], :name => "idx_prod_promo_on_promo_rule_id_and_prod_id"
     add_index :spree_return_authorizations, :order_id
-    
+
     add_index :spree_users, [:persistence_token], name: "idx_spree_users_index_users_on_persistence_token", using: :btree
     add_index :spree_backgrounds, [:taxon_id], name: "index_spree_backgrounds_on_taxon_id", using: :btree
   end
