@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(version: 20150225083011) do
     t.datetime "updated_at"
   end
 
+  add_index "spree_backgrounds", ["taxon_id"], name: "index_spree_backgrounds_on_taxon_id", using: :btree
+
   create_table "spree_calculators", force: :cascade do |t|
     t.string   "type"
     t.integer  "calculable_id"
@@ -1063,6 +1065,7 @@ ActiveRecord::Schema.define(version: 20150225083011) do
   add_index "spree_users", ["bill_address_id"], name: "index_spree_users_on_bill_address_id", using: :btree
   add_index "spree_users", ["deleted_at"], name: "index_spree_users_on_deleted_at", using: :btree
   add_index "spree_users", ["email"], name: "email_idx_unique", unique: true, using: :btree
+  add_index "spree_users", ["persistence_token"], name: "idx_spree_users_index_users_on_persistence_token", using: :btree
   add_index "spree_users", ["ship_address_id"], name: "index_spree_users_on_ship_address_id", using: :btree
   add_index "spree_users", ["spree_api_key"], name: "index_spree_users_on_spree_api_key", using: :btree
 
