@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225080009) do
+ActiveRecord::Schema.define(version: 20150225083011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,9 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.datetime "updated_at"
   end
 
+  add_index "spree_impression_brands", ["brand_id"], name: "index_spree_impression_brands_on_brand_id", using: :btree
+  add_index "spree_impression_brands", ["impression_id"], name: "index_spree_impression_brands_on_impression_id", using: :btree
+
   create_table "spree_impressions", force: :cascade do |t|
     t.string   "title"
     t.string   "sub_title"
@@ -277,6 +280,9 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.integer "option_type_id"
   end
 
+  add_index "spree_option_types_prototypes", ["option_type_id", "prototype_id"], name: "idx_opt_proto_on_opt_id_and_proto_id", using: :btree
+  add_index "spree_option_types_prototypes", ["prototype_id", "option_type_id"], name: "idx_opt_proto_on_proto_id_and_opt_id", using: :btree
+
   create_table "spree_option_values", force: :cascade do |t|
     t.integer  "position"
     t.string   "name"
@@ -298,6 +304,7 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.integer "option_value_id"
   end
 
+  add_index "spree_option_values_variants", ["option_value_id", "variant_id"], name: "idx_optval_on_optval_id_and_var_id", using: :btree
   add_index "spree_option_values_variants", ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id", using: :btree
   add_index "spree_option_values_variants", ["variant_id"], name: "index_spree_option_values_variants_on_variant_id", using: :btree
 
@@ -511,6 +518,7 @@ ActiveRecord::Schema.define(version: 20150225080009) do
   end
 
   add_index "spree_products_promotion_rules", ["product_id"], name: "index_products_promotion_rules_on_product_id", using: :btree
+  add_index "spree_products_promotion_rules", ["promotion_rule_id", "product_id"], name: "idx_prod_promo_on_promo_rule_id_and_prod_id", using: :btree
   add_index "spree_products_promotion_rules", ["promotion_rule_id"], name: "index_products_promotion_rules_on_promotion_rule_id", using: :btree
 
   create_table "spree_products_taxons", force: :cascade do |t|
@@ -520,7 +528,9 @@ ActiveRecord::Schema.define(version: 20150225080009) do
   end
 
   add_index "spree_products_taxons", ["position"], name: "index_spree_products_taxons_on_position", using: :btree
+  add_index "spree_products_taxons", ["product_id", "taxon_id"], name: "index_spree_products_taxons_on_product_id_and_taxon_id", using: :btree
   add_index "spree_products_taxons", ["product_id"], name: "index_spree_products_taxons_on_product_id", using: :btree
+  add_index "spree_products_taxons", ["taxon_id", "product_id"], name: "index_spree_products_taxons_on_taxon_id_and_product_id", using: :btree
   add_index "spree_products_taxons", ["taxon_id"], name: "index_spree_products_taxons_on_taxon_id", using: :btree
 
   create_table "spree_promotion_action_line_items", force: :cascade do |t|
@@ -561,6 +571,7 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.text     "preferences"
   end
 
+  add_index "spree_promotion_rules", ["id", "type"], name: "index_spree_promotion_rules_on_id_and_type", using: :btree
   add_index "spree_promotion_rules", ["product_group_id"], name: "index_promotion_rules_on_product_group_id", using: :btree
   add_index "spree_promotion_rules", ["promotion_id"], name: "index_spree_promotion_rules_on_promotion_id", using: :btree
   add_index "spree_promotion_rules", ["user_id"], name: "index_promotion_rules_on_user_id", using: :btree
@@ -607,6 +618,9 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.integer "prototype_id"
     t.integer "property_id"
   end
+
+  add_index "spree_properties_prototypes", ["property_id", "prototype_id"], name: "idx_props_proto_on_prop_id_and_proto_id", using: :btree
+  add_index "spree_properties_prototypes", ["prototype_id", "property_id"], name: "idx_props_proto_on_proto_id_and_prop_id", using: :btree
 
   create_table "spree_prototypes", force: :cascade do |t|
     t.string   "name"
@@ -684,6 +698,7 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.integer  "return_authorization_reason_id"
   end
 
+  add_index "spree_return_authorizations", ["order_id"], name: "index_spree_return_authorizations_on_order_id", using: :btree
   add_index "spree_return_authorizations", ["return_authorization_reason_id"], name: "index_return_authorizations_on_return_authorization_reason_id", using: :btree
 
   create_table "spree_return_items", force: :cascade do |t|
@@ -1045,8 +1060,10 @@ ActiveRecord::Schema.define(version: 20150225080009) do
     t.datetime "confirmation_sent_at"
   end
 
+  add_index "spree_users", ["bill_address_id"], name: "index_spree_users_on_bill_address_id", using: :btree
   add_index "spree_users", ["deleted_at"], name: "index_spree_users_on_deleted_at", using: :btree
   add_index "spree_users", ["email"], name: "email_idx_unique", unique: true, using: :btree
+  add_index "spree_users", ["ship_address_id"], name: "index_spree_users_on_ship_address_id", using: :btree
   add_index "spree_users", ["spree_api_key"], name: "index_spree_users_on_spree_api_key", using: :btree
 
   create_table "spree_variants", force: :cascade do |t|
