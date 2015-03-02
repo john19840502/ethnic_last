@@ -41,13 +41,13 @@
 	<div id="slider-range"></div>
   </aside>
   <div class="products-wrapper">
-    <% if @products == nil || @products.empty? %>
-       <ul id="products" class="inline product-listing products" data-hook="">
+    <ul id="products" class="inline product-listing products" data-hook="">
+      <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
-	   </ul>
-    <% else %>
-      <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
-    <% end %>
+      <% else %>
+        <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+      <% end %>
+    </ul>
   </div>
 </section>
 

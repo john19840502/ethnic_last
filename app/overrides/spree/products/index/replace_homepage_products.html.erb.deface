@@ -1,10 +1,10 @@
 <!-- replace "[data-hook='homepage_products']" -->
 <head>
-	<%= stylesheet_link_tag 'store/960' %>
-	<%= stylesheet_link_tag 'store/924' %>
-	<%= stylesheet_link_tag 'store/_bl_novo-menu' %>
-	<%= stylesheet_link_tag 'store/flexslider' %>
-	<%= stylesheet_link_tag 'store/jquery' %>
+	<%= stylesheet_link_tag 'frontend/960' %>
+	<%= stylesheet_link_tag 'frontend/924' %>
+	<%= stylesheet_link_tag 'frontend/_bl_novo-menu' %>
+	<%= stylesheet_link_tag 'frontend/flexslider' %>
+	<%= stylesheet_link_tag 'frontend/jquery' %>
 	<%= javascript_include_tag 'jquery.flexslider' %>
 	
 	<script type="text/javascript">

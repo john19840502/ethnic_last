@@ -31,7 +31,7 @@
 </header>
 
 <section class="content">
-  <% if @product.brand && Spree::Brand::VISIBILITIES[@product.brand.visibility.to_s] == "Invisible" && !current_user %>
+  <% if @product.brand && @product.brand.invisible? && !current_user %>
     <div class="products-empty">
       <p>This very unique brand requires you to <%= link_to t(:login), spree.login_path %> or <%= link_to t(:register), spree.signup_path %> to view the collection / prices</p>
     </div>
@@ -55,7 +55,7 @@
       <h1>
         <%= @product.name %>
         <span class="product-brand">
-          <%= link_to(image_tag(@product.brand.logo, :alt => @product.brand.name), brand_url(@product.brand)) if @product.brand.present? %>
+          <%= link_to(image_tag(@product.brand.icon, :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
         </span>
       </h1>
 
@@ -98,7 +98,7 @@
           <% partial = @product.brand.cart_partial(spree_current_user) %>
           <% if partial %>
             <div id="cart-form" data-hook="cart_form">
-            <%= render :partial => partial %>
+              <%= render :partial => partial %>
             </div>
           <% else %>
             Please <%= link_to "contact us", contact_us_path %> for the prices.

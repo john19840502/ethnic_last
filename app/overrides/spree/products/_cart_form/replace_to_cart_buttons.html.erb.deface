@@ -1,3 +1,4 @@
+<!-- remove ".product-section-title" -->
 <!-- replace "[data-hook='product_price']" -->
 <div data-hook="product_price" class="columns five <% if !@product.has_variants? %> alpha <% else %> omega <% end %>">
   <div class="buttons">
@@ -11,15 +12,12 @@
         <p>Subtotal <strong id="product-price" class="buy--price"><span class="price selling" itemprop="price"><%= money_with_currency @product.price %></span></strong><small>(including VAT)</small></p>
     <% end %>
     <div class="add-to-cart">
-      <% if @product.on_sale? %>
+
         <%= hidden_field_tag (@product.has_variants? ? :quantity : "variants[#{@product.master.id}]"),
-          1, :class => 'title', :in => 1..@product.on_hand, :min => 1 %>
+          1, :class => 'title', :in => 1..@product.total_on_hand, :min => 1 %>
         <%= button_tag :class => 'right', :id => 'add-to-cart-button', :type => :submit do %>
           <%= t(:add_to_cart) %>
         <% end %>
-      <% else %>
-        <%= content_tag('strong', t(:out_of_stock)) %>
-      <% end %>
     </div>
   </div>
 </div>

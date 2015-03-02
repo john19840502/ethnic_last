@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322222107) do
+ActiveRecord::Schema.define(version: 20150322222108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1061,6 +1061,7 @@ ActiveRecord::Schema.define(version: 20150322222107) do
     t.integer  "tax_category_id"
     t.datetime "updated_at"
     t.integer  "stock_items_count",                          default: 0,     null: false
+    t.integer  "repeat"
   end
 
   add_index "spree_variants", ["deleted_at"], name: "index_spree_variants_on_deleted_at", using: :btree

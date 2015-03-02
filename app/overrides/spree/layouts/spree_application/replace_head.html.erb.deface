@@ -24,8 +24,8 @@
 <%= javascript_include_tag 'application' %>
 
 <% bg = Spree::Background.where(taxon_id: nil).first %>
-<% if @product %>
-  <% bg = Spree::Background.where(taxon_id: @product.taxon_id).first %>
+<% if @product && @product.brand %>
+  <% bg = Spree::Background.where(taxon_id: @product.brand.id).first %>
 <% end %>
 
 <% if bg %>
