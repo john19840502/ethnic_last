@@ -1,0 +1,22 @@
+<% @product.grouped_option_values.keys.each do |key| %>
+  <ul>
+    <li><b><%= key.name %></b></li>
+    <% @product.grouped_option_values[key].each do |val| %>
+
+      <% selected = @option_values.collect(&:id) if @option_values %>
+
+      <% if @option_values && @option_values.include?(val) %>
+        <%
+          s_dup = selected.dup
+          s_dup.delete_if {|id| id == val.id}
+          params[:option_values] = s_dup
+        %>
+        <li><strong><%= link_to "remove filter op #{val.presentation}", params %>  </strong></li>
+      <% else %>
+        <% params[:option_values] = selected %>
+        <li><%= link_to "filter on #{val.presentation}", params.merge("option_values[]" => val.id) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+<%= link_to "clear filters",admin_product_variants_path(@product) %>
