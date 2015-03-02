@@ -207,6 +207,7 @@ function elementExists($element) {
 }
 
 function add_popup_click(){
+
     $(".pop").click(function(e){
         e.preventDefault();
         $("div.popout").hide();
