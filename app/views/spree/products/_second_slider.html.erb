@@ -1,0 +1,20 @@
+<div class="block_2">
+	<div class="block_2 top-slider-intro right_side_slider" style="width: 100%;">
+		<div class="slider-container">
+			<div style="overflow: hidden; position: relative;" class="flex-viewport">
+				<ul style="width: 2000%; transition-duration: 0s; transform: translate3d(-924px, 0px, 0px);" class="slides">
+					<% slider2_images.each do |image| %>
+						<li>
+							<a href="<%= image.url %>" target = "<%= image.new_tab ? '_blank' : '' %>">
+								<%=image_tag image.attachment.url(:slider2), :class=>"right_side_slider_img" %>
+							</a>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+			<ul class="flex-direction-nav" style="margin-bottom: 0;">
+				<li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

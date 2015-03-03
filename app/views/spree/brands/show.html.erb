@@ -1,0 +1,35 @@
+<%= content_for :head do %>
+  <% bg = Spree::Background.where(brand_id: @brand.id).first %>
+  <% if bg %>
+  <style type="text/css">
+    html{
+      background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+  <% end %>
+<% end %>
+
+<section class="focus">
+    <header>
+        <h1><%=@brand.name%></h1>
+        <span class="close"><a href="<%=redirect_back_link%>" title="Close"></a></span>
+    </header>
+    <section>
+        <p><%= @brand.description %></p>
+        <h2>Popular products</h2>
+        <ul class="products">
+          <% @products.each do |product| %>
+            <li>
+              <%= link_to product_path(product) do %>
+                <%= product_image(product) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+    </section>
+    <div class="buttons">
+      <%= link_to "All products", products_brand_path(@brand), :class=> "button soft center" %>
+    </div>
+</section>

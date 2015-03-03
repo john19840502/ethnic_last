@@ -9,6 +9,9 @@ Spree::Core::Search::Base.class_eval do
     @properties[:current_user] = params[:current_user]
   end
 
-  alias_method_chain :get_base_scope, :visibility
-  alias_method_chain :prepare, :visibility
+  unless @search_initialized
+    alias_method_chain :get_base_scope, :visibility
+    alias_method_chain :prepare, :visibility
+    @search_initialized = true
+  end
 end

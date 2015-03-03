@@ -1,0 +1,31 @@
+/* =========== Messages */
+
+@import "core/settings";
+@import "core/mixins";
+ul.messages  {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    list-style: none;
+    margin-bottom: $margin-bottom;
+    li {
+        @include box-shadow(0px 1px 4px rgba(#000, 0.2));
+        font-weight: bold;
+        padding: 0.5em 0.6em 0.6em 0.6em;
+        text-shadow: 1px 1px 0px rgba(lighten($color-basic, 100%), 0.4);
+        &.success {
+            color: $color-success;
+            @include gradient(top, lighten($color-success, 70%), lighten($color-success, 60%));
+        }
+        &.notice {
+            color: $color-success;
+            @include gradient(top, lighten($color-success, 70%), lighten($color-success, 60%));
+        }
+        &.error, &.fail {
+            color: $color-error;
+            @include gradient(top, lighten($color-error, 60%), lighten($color-error, 55%));
+        }
+    }
+}

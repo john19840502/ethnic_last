@@ -62,6 +62,10 @@ group :development do
   gem 'letter_opener_web', '~> 1.2.0'
 end
 
+gem 'fancybox2-rails'
+
+gem 'geoip'
+
 gem 'aws-sdk', '~> 1.61.0'
 
 gem 'spree', github: 'spree/spree', branch: '3-0-stable'
@@ -79,5 +83,6 @@ gem 'spree_image_cropper', github: 'pero-ict-solutions/spree_image_cropper'
 gem 'spree_ups_express_saver', path: 'spree_ups_express_saver'
 gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
 gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'
+gem 'spree_taxon_filters', git: 'https://github.com/pero-ict-solutions/spree_taxon_filters.git'
 gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'

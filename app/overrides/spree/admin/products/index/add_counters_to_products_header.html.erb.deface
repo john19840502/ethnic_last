@@ -1,0 +1,4 @@
+<!-- replace "h1" -->
+<h1>Listing Products</h1>
+<h2>Total active products: <%= Spree::Product.active.count %> </h2>
+<h2>Total active variants: <%= Spree::Variant.active.count %> </h2>

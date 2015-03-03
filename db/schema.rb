@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224070439) do
+ActiveRecord::Schema.define(version: 20150322222108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collection_images", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.string   "url"
+    t.string   "attachment"
+    t.boolean  "slider1",                 default: false
+    t.boolean  "slider2",                 default: false
+    t.boolean  "medium",                  default: false
+    t.boolean  "small",                   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.boolean  "new_tab"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -28,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150224070439) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "information_requests", force: :cascade do |t|
+    t.string   "email"
+    t.string   "name"
+    t.string   "company"
+    t.text     "address"
+    t.text     "question"
+    t.string   "product_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spree_addresses", force: :cascade do |t|
     t.string   "firstname"
@@ -467,6 +496,7 @@ ActiveRecord::Schema.define(version: 20150224070439) do
     t.string   "pdf_file_content_type"
     t.integer  "pdf_file_file_size"
     t.datetime "pdf_file_updated_at"
+    t.string   "subtitle"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree
@@ -917,13 +947,19 @@ ActiveRecord::Schema.define(version: 20150224070439) do
   add_index "spree_tax_rates", ["zone_id"], name: "index_spree_tax_rates_on_zone_id", using: :btree
 
   create_table "spree_taxonomies", force: :cascade do |t|
-    t.string   "name",                   null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "position",   default: 0
+    t.string   "name",                        null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "position",    default: 0
+    t.boolean  "is_a_filter", default: false
   end
 
   add_index "spree_taxonomies", ["position"], name: "index_spree_taxonomies_on_position", using: :btree
+
+  create_table "spree_taxonomies_filters", id: false, force: :cascade do |t|
+    t.integer "taxon_id"
+    t.integer "taxonomy_id"
+  end
 
   create_table "spree_taxons", force: :cascade do |t|
     t.integer  "parent_id"
@@ -1030,6 +1066,7 @@ ActiveRecord::Schema.define(version: 20150224070439) do
     t.integer  "tax_category_id"
     t.datetime "updated_at"
     t.integer  "stock_items_count",                          default: 0,     null: false
+    t.integer  "repeat"
   end
 
   add_index "spree_variants", ["deleted_at"], name: "index_spree_variants_on_deleted_at", using: :btree
@@ -1059,6 +1096,7 @@ ActiveRecord::Schema.define(version: 20150224070439) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "kind"
+    t.boolean  "for_popup",          default: false
   end
 
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree

@@ -1,0 +1,74 @@
+<!-- replace "[data-hook='homepage_products']" -->
+<head>
+	<%= stylesheet_link_tag 'frontend/960' %>
+	<%= stylesheet_link_tag 'frontend/924' %>
+	<%= stylesheet_link_tag 'frontend/_bl_novo-menu' %>
+	<%= stylesheet_link_tag 'frontend/flexslider' %>
+	<%= stylesheet_link_tag 'frontend/jquery' %>
+	<%= javascript_include_tag 'jquery.flexslider' %>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.slider-container').flexslider({
+				animation: "slide", directionNav: true, animationSpeed: 600, controlNav: false}
+			);
+		});
+	</script>
+</head>
+	
+<%= render :partial => "shared/header" %>
+
+<section class="content">
+  <aside>
+    <%= form_tag products_path, :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], placeholder: t(:search) %>
+      </div>
+    <% end %>
+    <%= render :partial => 'spree/shared/taxonomies'%>
+    <%= render :partial => 'shared/brands' %>
+  </aside>
+  <div class="products-wrapper">
+    <div class="block">
+			<div class="clear"></div>
+			<div class="home-thumb">
+				<!-- Bloco topo -->
+				<% slider1_images =  get_slider1_images %>
+				<% if slider1_images.present? %>
+					<%=render :partial => "first_slider", :locals => {:slider1_images => slider1_images } %> 
+				<% end %>
+				
+				<% medium_images1 =  get_medium_images_block1 %>
+				<% if medium_images1.present? %>
+					<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images1 } %> 
+				<% end %>
+				
+				<% small_images1 =  get_small_images_block1 %>
+				<% if small_images1.present? %>
+					<%=render :partial => "small_images", :locals => {:small_images1 => small_images1 } %> 
+				<% end %>
+				
+				<% medium_images2 =  get_medium_images_block2 %>
+				<% if medium_images2.present? %>
+					<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images2 } %> 
+				<% end %>
+				
+				<% slider2_images =  get_slider2_images %>
+				<% if slider2_images.present? %>
+					<%=render :partial => "second_slider", :locals => {:slider2_images => slider2_images } %> 
+				<% end %>
+				
+				<% medium_images3 =  get_medium_images_block3 %>
+				<% if medium_images3.present? %>
+					<%=render :partial => "medium_images_last_block", :locals => {:medium_images => medium_images3 } %> 
+				<% end %>
+				
+				<% small_images2 =  get_small_images_block2 %>
+				<% if small_images2.present? %>
+					<%=render :partial => "small_images", :locals => {:small_images => small_images2 } %> 
+				<% end %>
+				<div class="clear"></div>
+			</div>
+		</div>
+  </div>
+</section>
