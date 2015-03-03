@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
+# Use mysql for migrations from old database
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -74,6 +76,7 @@ gem 'spree_contact_us', github: 'jdutil/spree_contact_us'
 gem 'spree_static_content', github: 'pero-ict-solutions/spree-static-content'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: '3-0-stable'
 gem 'spree_email_to_friend', github: 'spree-contrib/spree_email_to_friend', branch: '3-0-stable'
+gem 'spree_taxon_filters', github: 'pero-ict-solutions/spree_taxon_filters'
 
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'
@@ -83,6 +86,5 @@ gem 'spree_image_cropper', github: 'pero-ict-solutions/spree_image_cropper'
 gem 'spree_ups_express_saver', path: 'spree_ups_express_saver'
 gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
 gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'
-gem 'spree_taxon_filters', git: 'https://github.com/pero-ict-solutions/spree_taxon_filters.git'
 gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'
