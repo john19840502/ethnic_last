@@ -64,6 +64,10 @@ group :development do
   gem 'letter_opener_web', '~> 1.2.0'
 end
 
+gem 'fancybox2-rails'
+
+gem 'geoip'
+
 gem 'aws-sdk', '~> 1.61.0'
 
 gem 'spree', github: 'spree/spree', branch: '3-0-stable'

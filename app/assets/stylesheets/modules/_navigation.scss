@@ -1,0 +1,105 @@
+// =========== Navigation
+
+@import "core/settings";
+@import "core/mixins";
+@import "core/grid";
+nav {
+    text-align: center;
+    padding-top: 0.5em;
+    strong {
+        font-weight: 100;
+        text-transform: uppercase;
+        font-size: 2.5em;
+        display: block;
+        text-shadow: 1px 1px 1px rgba(#000, 0.15);
+        margin-bottom: $margin-bottom / 2;
+        @include animation(logo, 2s, default, 0s);
+        @include transform(translate3d(0, 0, 0));
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        a { color: #ffffff; }
+    }
+    ul {
+        margin-bottom: $margin-bottom * 2;
+        @include animation(nav, 2s, default, 0s);
+        @include transform(translate3d(0, 0, 0));
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        li {
+            display: inline-block;
+            margin-bottom: $margin-bottom / 4;
+            margin-left: -1px;
+            margin-right: -1px;
+            margin-left: 0 \9;
+            margin-right: 0 \9;
+        }
+        a {
+            @include link-opacity;
+            display: block;
+            text-transform: uppercase;
+            font-family: $font-family;
+            @include border-radius(0);
+            font-weight: 600;
+            font-size: 0.95em;
+            padding: 0.4em 2em 0.4em 2em;
+            &:hover { position: relative; }
+        }
+        li:first-child a { @include border-radius(4px 0px 0px 4px); }
+        li:last-child a { @include border-radius(0px 4px 4px 0px); }
+        li.selected a {
+            background: rgba(#000, 0.45);
+            color: rgba(#fff, 0.85);
+        }
+    }
+}
+
+footer {
+    clear: both;
+    @include clearfix;
+    padding-top: 2em;
+    padding-bottom: 3em;
+    @include animation(footer, 2s, default, 0s);
+    @include transform(translate3d(0, 0, 0));
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    span {
+        display: block;
+        margin-top: 1.25em;
+        height: 3em;
+        @include grid(17);
+        border-top: 1px solid rgba(#ffffff, 0.15);
+    }
+    strong {
+        @include grid(14);
+        font-weight: 100;
+        text-transform: uppercase;
+        font-size: 2.5em;
+        line-height: 1em;
+        text-align: center;
+        display: block;
+        text-shadow: 1px 1px 1px rgba(#000, 0.15);
+        margin-bottom: $margin-bottom / 2;
+        a {
+            opacity: 0.5;
+            color: #ffffff;
+            @include transition(opacity 0.2s);
+            &:hover { opacity: 1; }
+        }
+    }
+    ul.nav {
+        clear: both;
+        text-align: center;
+        li {
+            display: inline-block;
+            margin-left: 0.25em;
+            margin-right: 0.25em;
+        }
+        a {
+            font-weight: normal;
+            color: #ffffff;
+            opacity: 0.5;
+            @include transition(opacity 0.2s);
+            &:hover { opacity: 1; }
+        }
+    }
+}

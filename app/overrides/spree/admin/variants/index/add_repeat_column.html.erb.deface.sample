@@ -1,0 +1,2 @@
+<!-- insert_before "td.actions" -->
+<td><%= f.text_field :repeat, :value => variant.repeat, :size => 5, :class => "variant_repeat" %></td>

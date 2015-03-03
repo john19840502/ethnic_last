@@ -1,0 +1,31 @@
+<ul class="bag">
+  <li>
+    <%
+      country_val = session[:country_name]
+      country_val ||= "Select your country"
+    %>
+    <a id="country_currency_selector" href="#" title="Select country"><%= country_val %> <span class="ss-icon">dropdown</span></a>
+  </li>
+
+  <li id="currency_dropdown">
+    <a href="#" title="Currency selection"><small><%=session[:currency] || "EUR"%></small><span class="ss-icon">dropdown</span></a>
+    <ul>
+      <li><a href="/country/set_currency?currency=EUR">EUR</a></li>
+      <li><a href="/country/set_currency?currency=USD">USD</a></li>
+    </ul>
+  </li>
+
+  <li id="dropdown">
+    <a href="#" title="Shopping Bag">Shopping Bag <small><%= current_order ? current_order.item_count : 0 %></small><span class="ss-icon">dropdown</span></a>
+    <ul>
+      <li><%= link_to "Shopping cart", spree.cart_path %></li>
+      <% if spree_current_user %>
+        <li><%= link_to t(:my_account), spree.account_path %></li>
+        <li><%= link_to t(:logout), spree.destroy_spree_user_session_path %></li>
+      <% else %>
+        <li id="link-to-login"><%= link_to t(:login), spree.login_path %></li>
+      <% end %>
+      <span></span>
+    </ul>
+  </li>
+</ul>

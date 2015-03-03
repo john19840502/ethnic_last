@@ -61,3 +61,4 @@ else
   Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
 
 end
+          

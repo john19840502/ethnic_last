@@ -1,0 +1,17 @@
+/* =========== Icons */
+
+@import "core/settings";
+@import "core/mixins";
+.icon {
+    display: inline-block;
+    float: left;
+    height: 1em;
+    margin: 0.3em 0.25em 0 0;
+    overflow: hidden;
+    text-indent: -9999px;
+    width: 1em;
+    background-size: 100%;
+    &.back { background: image-url('back.png') no-repeat; }
+    &.facebook { background: image-url('facebook.jpg') no-repeat; }
+    &.mail { background: image-url('mail.png') no-repeat; }
+}

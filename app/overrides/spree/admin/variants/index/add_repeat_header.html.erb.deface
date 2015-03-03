@@ -1,0 +1,4 @@
+<!-- insert_before "th.action_header" -->
+ <th width="50"><%= link_to "repeat (cm)", '#', :onclick => "setAll('repeat');return false;" %></th>
+
+

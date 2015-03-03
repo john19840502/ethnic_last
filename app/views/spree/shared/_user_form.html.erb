@@ -1,0 +1,19 @@
+<section>
+  <ul>
+    <li>
+      <%= f.label :email, t(:email) %>
+      <div><%= f.email_field :email %></div>
+    </li>
+    <li>
+      <%= f.label :password, t(:password) %>
+      <div>
+        <%= f.password_field :password %>
+      </div>
+    </li>
+    <li>
+      <%= f.label :password_confirmation, t(:confirm_password) %>
+      <div><%= f.password_field :password_confirmation %></div>
+    </li>
+  </ul>
+  <div data-hook="signup_below_password_fields"></div>
+</section>

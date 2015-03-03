@@ -1,0 +1,154 @@
+<!-- replace "[data-hook='product_show']" -->
+
+<% content_for :head do %>
+  <head>
+    <meta property="og:title" content="<%=accurate_title%>" />
+    <meta property="og:description" content="<%=@product.description%>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content=<%="http://#{request.host+request.fullpath}"%> />
+    <meta property="og:site_name" content="Ethnic Chic Ethnic Chic - Home Couture Online Shop" />
+
+    <% @product.images.where(:search_result_asset => false).each do |i| %>
+      <meta property="og:image" content="<%= i.attachment.url(:large) %>" />
+    <% end %>
+    <meta property="og:price:amount" content="<%=@product.price.to_f%>" />
+    <meta property="og:price:currency" content="EUR" />
+
+    <% @product_properties.each do |product_property| %>
+      <meta property="product:<%= product_property.property.name %>" content="<%=product_property.value%>" >
+    <% end %>
+  </head>
+
+<% end %>
+
+<header>
+  <ul class="options">
+    <li><a href="/products" title="Back to collection" class="ss-left">Back to collection</a></li>
+    <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=accurate_title%>" class="ss-like" id="facebook-share">Like</a></li>
+    <li><%= link_to "Mail", email_to_friend_path("product", @product), :class => "ss-mail"%></li>
+  </ul>
+  <%= render :partial => '/shared/shopping_bag' %>
+</header>
+
+<section class="content">
+  <% if @product.brand && @product.brand.invisible? && !current_user %>
+    <div class="products-empty">
+      <p>This very unique brand requires you to <%= link_to t(:login), spree.login_path %> or <%= link_to t(:register), spree.signup_path %> to view the collection / prices</p>
+    </div>
+  <% else %>
+    <section class="halfLarge first" data-hook="product_images">
+      <figure data-hook="main-image">
+        <%= large_image(@product, :itemprop => "image") %>
+      </figure>
+      <% if @product.images.where(:search_result_asset => false).size > 1 %>
+      <ul class="thumbnails">
+      <% @product.images.where(:search_result_asset => false).each do |i| %>
+        <li>
+          <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), i.attachment.url(:large), :class=> "fancybox", :rel=> "gallery" %></span>
+        </li>
+      <% end %>
+      </ul>
+      <%end %>
+    </section>
+
+    <section class="halfLarge">
+      <h1>
+        <%= @product.name %>
+        <span class="product-brand">
+          <%= link_to(image_tag(@product.brand.icon, :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
+        </span>
+      </h1>
+
+      <ul id="tabContainer" class="tabs">
+        <li class="selected"><a href="#tab_intro">Introduction</a></li>
+        <% unless @product.combined_properties.empty? %>
+          <li><a href="#tab_props">Specifications</a></li>
+        <% end %>
+        <% @permalinks = @product.taxons.map(&:permalink) %>
+        <% if @permalinks.include?("categories/fabrics") || @permalinks.include?("categories/wallpapers") %>
+			<li><a href="#tab_calc">Calculate</a></li>
+		<% end %>
+		<li><a href="#designer_or_project">Designer or Project?</a></li>
+      </ul>
+      <div id="tab_intro" class="tabContents"><div id="introduction_contents" class="less_height"><%= product_description(@product) rescue t(:product_has_no_description) %></div>
+		<div style="display: block;">
+			<a class="introduction_tab" id="brands-more" style="float: right;">More information</a>
+			<a class="introduction_tab" id="brands-less" style="display: none; float: right;">Less information</a>
+		</div>
+      </div>
+      <%= render :partial => 'properties' %>
+		<% if @permalinks.include?("categories/fabrics") %>
+			<%= render :partial => 'calculate_fabric_need' %>
+		<% end %>
+	  <%= render :partial => 'designer_or_project' %>
+	  <% if @permalinks.include?("categories/wallpapers") %>
+		<%= render :partial => 'calculate_wallpapre_need' %>
+	  <% end %>
+
+      <% if @product.pdf_file.present? %>
+        <br />
+        <p class="referral">
+          <%= link_to "Download spec sheet", @product.pdf_file.url, :class => "ss-download", :target => "_blank" %>
+        </p>
+      <% end %>
+
+      <div class="buy">
+        <h2>Assemble and get your price</h2>
+        <% if @product.brand %>
+          <% partial = @product.brand.cart_partial(spree_current_user) %>
+          <% if partial %>
+            <div id="cart-form" data-hook="cart_form">
+              <%= render :partial => partial %>
+            </div>
+          <% else %>
+            Please <%= link_to "contact us", contact_us_path %> for the prices.
+          <% end %>
+        <% else %>
+          <div id="cart-form" data-hook="cart_form">
+            <%= render :partial => 'cart_form' %>
+          </div>
+        <% end %>
+
+      </div>
+    </section>
+  <% end %>
+</section>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('ul.thumbnails a').unbind("click");
+    $("a.fancybox").fancybox();
+
+    $(".tabContents").hide();
+    $(".tabContents:first").show();
+
+    $("#tabContainer li a").click(function(event){ //Fire the click event
+      event.preventDefault();
+      var activeTab = $(this).attr("href"); // Catch the click link
+      $("#tabContainer li").removeClass("selected"); // Remove pre-highlighted link
+      $(this).parent().addClass("selected"); // set clicked link to highlight state
+      $(".tabContents").hide(); // hide currently visible tab content div
+      $(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
+    });
+
+  });
+
+  $('.introduction_tab').click(function(e){
+	e.preventDefault();
+	if($(this).attr('id')=="brands-more")
+		{
+			$('#brands-more').hide();
+			$('#brands-less').show();
+			$('#introduction_contents').removeClass("less_height");
+			$('#introduction_contents').addClass("full_height");
+		}
+	else
+		{
+			$('#brands-less').hide();
+			$('#brands-more').show();
+			$('#introduction_contents').removeClass("full_height");
+			$('#introduction_contents').addClass("less_height");
+		}
+  });
+
+</script>

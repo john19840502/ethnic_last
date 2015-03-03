@@ -1,0 +1,6 @@
+<!-- insert_bottom "[data-hook='admin_product_form_left']" -->
+<%= f.field_container :subtitle do %>
+  <%= f.label :subtitle, t(:subtitle) %><br />
+  <%= f.text_field :subtitle, :class => 'fullwidth title' %>
+  <%= f.error_message_on :subtitle %>
+<% end %>

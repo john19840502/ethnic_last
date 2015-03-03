@@ -1,0 +1,11 @@
+<!-- replace "body" -->
+<body>
+  <div class="container large">
+    <%= render :partial => 'shared/header_menu' %>
+    <%= flash_messages %>
+    <%= yield %>
+    <%= render :partial => 'shared/footer' %>
+    <%= render :partial => 'spree/shared/google_analytics' %>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvn61Qq27-qO7r9QCFMSp_IFiALTonwdA&sensor=false"></script>
+</body>

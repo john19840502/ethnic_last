@@ -1,0 +1,67 @@
+/* =========== Media queries */
+
+/*
+
+    Almost everything in Taiga works with em units.
+    This way you only need to change the body font on other screen sizes to make everything fit.
+
+/*
+
+/* Tablets */
+
+
+@import "core/settings";
+@import "core/mixins";
+@import "core/grid";
+
+@media only screen and (max-width: 1140px) {
+    section.content {
+        &.cta { @include grid(48, 1.5); }
+        &.small { @include grid(48, 3); }
+        &.smaller { @include grid(48, 5); }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    body { font-size: 15px; }
+    div.container { padding: 1em; }
+    section.content {
+        &.cta, &.small, &.smaller { @include grid-reset; }
+    }
+    ul.brands li {
+        @include grid(12, 0.5);
+    }
+    form ol li > label {
+        @include grid-reset;
+        text-align: left;
+        display: block;
+    }
+    ul.impressions {
+        &.odd { @include grid-reset; }
+        &.even { @include grid-reset; }
+    }
+}
+
+/* Phones */
+
+/*@media only screen and (max-width: 520px) {
+    body { font-size: 14px; }
+    section.content, section.content.small {
+        @include grid-reset;
+        section, .half {
+            @include grid-reset;
+            width: 100%;
+        }
+    }
+    ul.brands li {
+        @include grid(24, 0.5);
+    }
+    form ol li > div { @include grid-reset; }
+    input[type=text], textarea { width: 100%; }
+}*/
+
+/* Retina */
+
+@media only screen and (-webkit-min-device-pixel-ratio : 2), only screen and (min-device-pixel-ratio : 2) {
+
+}

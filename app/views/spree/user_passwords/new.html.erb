@@ -1,0 +1,21 @@
+<section class="focus">
+  <header>
+    <h1><%= t(:forgot_password) %></h1>
+    <span class="close"><a href="<%=redirect_back_link%>" title="go back"></a></span>
+  </header>
+  <%= form_for Spree::User.new, as: :spree_user, url: spree.spree_user_password_path do |f| %>
+    <section>
+      <p><%= t(:instructions_to_reset_password) %></p>
+      <ul>
+        <li>
+          <%= f.label :email, t(:email) %>
+          <div><%= f.email_field :email %></div>
+        </li>
+      </ul>
+    </section>
+    <div class="buttons">
+      <%= f.submit t(:reset_password), class: 'right' %>
+    </div>
+  <% end %>
+</section>
+
