@@ -118,7 +118,7 @@ module ApplicationHelper
               "<span></span>Back to #{current_taxon.parent.name}".html_safe
             end
           else
-            if current_taxon.children.empty? && current_taxon.parent.parent.id == root_taxon.id
+            if current_taxon.children.empty? && current_taxon.parent.parent && current_taxon.parent.parent.id == root_taxon.id
               link_to "/collection" do
                 "<span></span>Back to #{current_taxon.parent.parent.name}".html_safe
               end
