@@ -3,9 +3,15 @@
     <div>
 		<ul>
 		  <li>
-			<% @order.rate_hash.each do |shipping_method| %>
-			  <div><%= radio_button(:order, :shipping_method_id, shipping_method[:id]) %> &nbsp; <%= shipping_method.name %> <%= shipping_method.display_price %></div>
-			<% end %>
+            <%= form.fields_for :shipments do |ship_form| %>
+               <% ship_form.object.shipping_rates.each do |rate| %>
+                   <div>
+                     <%= ship_form.radio_button :selected_shipping_rate_id, rate.id %> &nbsp;
+                     <%= rate.name %> <%= rate.display_cost %>
+                   </div>
+                <% end %>
+            <% end %>
+
 		  </li>
 		</ul>
     </div>

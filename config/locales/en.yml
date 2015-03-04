@@ -29,6 +29,7 @@ en:
     complete: complete
     confirm: Confirm and pay
     delivery: delivery
+    delivery_quote: Delivery Quote
     payment: payment
     resumed: resumed
     returned: returned
@@ -49,4 +50,7 @@ en:
   search: Search
   create: Create
   reset_password: Reset Password
+  save_and_continue: Save and Continue
+  email: Email
+  continue: Continue
 
