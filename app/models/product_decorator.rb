@@ -1,6 +1,4 @@
 Spree::Product.class_eval do
-  after_touch :generate_meta_tags
-
   delegate_belongs_to :master, :price_without_tax
   
   def combined_properties
@@ -44,28 +42,5 @@ Spree::Product.class_eval do
     measurements_props << ['Repeat (cm)', repeats.join(',')] unless repeats.empty?
 
     measurements_props
-  end
-
-  def generate_meta_tags
-    products = Spree::Product.all
-    products.each do |product|
-
-      # Set meta keywords value
-      meta_keywords = []
-      meta_keywords << product.name
-      meta_keywords << product.brand.try(:name)
-      meta_keywords << product.taxons.map(&:name)
-      meta_keywords = meta_keywords.flatten
-      product.meta_keywords = meta_keywords.join(",")
-
-      # Set meta description value
-      meta_description = []
-      meta_description << "#{product.brand.try(:name)} online shop #{product.name} #{product.tax_category.name}"
-      taxons_name = product.taxons.map(&:name)
-      taxons_name[taxons_name.index(taxons_name.last)] = "#{taxons_name.last} - worldwide shipping" if taxons_name.present?
-      meta_description << taxons_name
-      product.meta_description = meta_description.flatten.join(",")
-      product.save!
-    end
   end
 end

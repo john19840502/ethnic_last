@@ -1,10 +1,8 @@
 Spree::Taxon.class_eval do
-  # Spree::Taxon.attachment_definitions[:icon][:path] = '/spree/taxons/:id/:style/:basename.:extension' if Spree::Config[:use_s3]
-  # Spree::Taxon.attachment_definitions[:icon][:url] = ':s3_eu_url' if Spree::Config[:use_s3]
+  after_save :generate_meta_tags
   
   def fetch_uniq_product_brands
-	#Spree::Brand.where("id in (?)", self.products.map(&:brand_id).uniq).sort_by(&:name)
-	Spree::Taxon.where('name= ?',self.name).active.uniq.sort_by(&:name)
+  	Spree::Taxon.where('name= ?',self.name).active.uniq.sort_by(&:name)
   end
   
   def to_filter_params(params = {})
@@ -20,5 +18,29 @@ Spree::Taxon.class_eval do
   def self.active
     where(enabled: true)
   end
-  
+
+  def generate_meta_tags
+    products = self.products
+    products.each do |product|
+
+      # Set meta keywords value
+      meta_keywords = []
+      meta_keywords << product.name
+      meta_keywords << product.brand.try(:name)
+      meta_keywords << product.taxons.map(&:name)
+      meta_keywords = meta_keywords.flatten
+      product.meta_keywords = meta_keywords.join(",")
+
+      # Set meta description value
+      meta_description = []
+      meta_description << "#{product.brand.try(:name)} online shop #{product.name} #{product.tax_category.name}"
+      taxons_name = product.taxons.map(&:name)
+      taxons_name[taxons_name.index(taxons_name.last)] = "#{taxons_name.last} - worldwide shipping" if taxons_name.present?
+      meta_description << taxons_name
+      product.meta_description = meta_description.flatten.join(",")
+      if product.save!
+        puts meta_description.flatten.join(",")
+      end
+    end
+  end
 end
