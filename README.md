@@ -17,5 +17,5 @@ bundle exec rake db:drop db:create db:migrate db:seed
 ```
 
 ```
-rake ethicchic:update_alt_text - rake task for update alt text in product's image
+rake ethnicchic:update_alt_text - rake task for update alt text in product's image
 ```
