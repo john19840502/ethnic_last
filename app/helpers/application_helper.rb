@@ -211,5 +211,9 @@ module ApplicationHelper
   def get_small_images_block2
     @small_imgs = CollectionImage.where(small: true).limit(4).offset(4)
   end
+
+  def money(count)
+    Spree::Money.new(count).to_html
+  end
   
 end

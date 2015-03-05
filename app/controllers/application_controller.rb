@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  helper 'spree/base'
   self.responder = ApplicationResponder
   respond_to :html
 

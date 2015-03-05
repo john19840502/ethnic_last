@@ -1,5 +1,4 @@
 Spree::Product.class_eval do
-  # attr_accessible :subtitle
   delegate_belongs_to :master, :price_without_tax
   
   def combined_properties

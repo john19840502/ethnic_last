@@ -6,23 +6,25 @@
     <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
     <% if @order.has_step?("delivery") %>
         <dt><%= Spree.t(:shipping_method) %></dt>
-        <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
+        <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
     <% end %>
     <% if @order.all_adjustments.present? %>
         <% @order.all_adjustments.keys.each do |key| %>
             <dt> <%= key %> </dt>
-            <dd><%= @order.all_adjustments[key].amount %></dd>
+            <dd><%= money @order.all_adjustments[key].amount %></dd>
         <% end %>
     <% end %>
     <dt><%= Spree.t(:subtotal) %></dt>
-    <dd><%= @order.item_total %></dd>
+    <dd><%= money @order.item_total %></dd>
     <% @order.adjustments.eligible.each do |adjustment| %>
         <% next if (adjustment.originator_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
         <dt> <%= adjustment.label %> </dt>
         <dd><%= money adjustment.amount %></dd>
     <% end %>
+    <dt><%= Spree.t(:shipping_total) %></dt>
+    <dd><%= money @order.shipment_total %></dd>
     <dt><%= Spree.t(:order_total) %></dt>
-    <dd><%= @order.total %></dd>
+    <dd><%= money @order.total %></dd>
   </dl>
 </section>
 
@@ -42,11 +44,11 @@
           <p><%= item.variant.options_text %></p>
           <dl class="advanced">
             <dt>Price</dt>
-            <dd><%=item.price%></dd>
+            <dd><%= money item.price %></dd>
             <dt>Quantity</dt>
             <dd><%=item.quantity%></dd>
             <dt>Total</dt>
-            <dd><%= item.price * item.quantity %></dd>
+            <dd><%= money(item.price * item.quantity) %></dd>
           </dl>
         </div>
       </li>
