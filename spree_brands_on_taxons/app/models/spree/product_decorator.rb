@@ -7,7 +7,7 @@ Spree::Product.class_eval do
 
   scope :with_taxons_visibilities, ->(visibilities) { includes(:taxons).where(:spree_taxons => {visibility: visibilities}).map(&:id) }
 
-  TAXONOMY_BRAND = 'Brand'
+  TAXONOMY_BRAND = 'Brands'
 
   def brand
     @product_brand ||= taxons.joins(:taxonomy).where(['spree_taxonomies.name = ?', TAXONOMY_BRAND]).first

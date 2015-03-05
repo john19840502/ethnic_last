@@ -1,4 +1,8 @@
 class BrandsMigration < ::Migration
+
+  IMAGE_SOURCE = "http://s3-eu-west-1.amazonaws.com/ethnic-chic-production/spree/brands"
+
+
   def migrate
     connection = self.external_connection
 
@@ -16,13 +20,13 @@ class BrandsMigration < ::Migration
             description: brand[2],
             parent_id: parent_id,
             child_index: index,
-            icon_file_name: brand[5],
-            icon_content_type: brand[6],
-            icon_file_size: brand[7],
-            icon_updated_at: brand[8],
             enabled: brand[10],
             visibility: brand[11]
         )
+        begin
+          taxon.update icon: icon_link(brand_id: brand[0], image_name: brand[5])
+        rescue OpenURI::HTTPError
+        end
         product_ids = connection.execute("select id from spree_products where brand_id=#{brand[0]};")
         product_ids.each do |product_id|
           pr = Spree::Product.unscoped.find(product_id).first
@@ -32,8 +36,12 @@ class BrandsMigration < ::Migration
       end
       Spree::Product.set_callback(:create)
     end
+  end
 
+  def icon_link(options)
+    brand_id = options[:brand_id]
+    image_name = options[:image_name]
 
-
+    "#{IMAGE_SOURCE}/#{brand_id}/original/#{image_name}"
   end
 end
