@@ -1,11 +1,12 @@
 Spree::Variant.class_eval do
   # attr_accessible :repeat
 
-  def on_hand
-    (1.0/0) #Infity
+  def total_on_hand
+    #(1.0/0) #Infity
+    1000000
   end
 
-  def on_hand=(val)
+  def total_on_hand=(val)
     #ignore
   end
 

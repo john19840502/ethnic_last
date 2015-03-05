@@ -23,7 +23,8 @@
 //= require jquery.touchSwipe
 //= require fancybox
 //= require jquery.infinitescroll
-//= require ../../../spree_variant_options/app/assets/javascripts/spree/frontend/spree_variant_options
+//= require spree/frontend/all
+// require spree/backend/all
 
 $(document).ready(function() {
     $("a#country_currency_selector").click(function(event){

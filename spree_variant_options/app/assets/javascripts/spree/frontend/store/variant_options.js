@@ -1,7 +1,12 @@
+function hide_popouts(){
+  $("div.popout").hide();
+  $("div.locked-popout").hide();
+}
+
 function add_popup_click(){
   $(".pop").click(function(e){
     e.preventDefault();
-    $("div.popout").hide();
+    hide_popouts();
 
     $dropdown = $(this).parent().find("div.popout");
     $dropdown.show();
@@ -53,6 +58,16 @@ function add_popup_click(){
 
   });
 }
+
+function add_locked_popup_click(){
+  $('#product-variants .locked').unbind('click');
+  $('#product-variants .locked').click(function(e){
+    e.preventDefault();
+    hide_popouts();
+    $(this).parent().find('.locked-popout').show();
+  });
+}
+
 
 
 $.extend({
@@ -167,6 +182,7 @@ function VariantOptions(params) {
     inventory(buttons.removeClass('locked'));
     enable(buttons);
     add_popup_click();
+    add_locked_popup_click();
   }
 
   function inventory(btns) {

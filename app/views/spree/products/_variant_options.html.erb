@@ -29,6 +29,11 @@
                 <% else %>
                   <%= link_to content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %>
                 <% end %>
+                <div class="locked-popout" style="display:none;" rel=<%="popup-#{type.id}-#{value.id}-locked"%>>
+                  <span class="popout--arrow"></span>
+                  <a class="button" onclick="$('div[rel]').hide();">Close</a>
+                  <p class="warning"> <%= Spree.t('warnings.option_variants.choose_previous') %></p>
+                </div>
               </li>
             <% end %>
           <% end %>
