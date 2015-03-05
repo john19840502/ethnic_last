@@ -157,7 +157,15 @@
                         @include box-shadow((inset 0px 1px 6px rgba(#000, 0.5), 0 0 0));
                     }
                 }
+              &.variant-description {
+                p.option-value {
+                  img {
+                    vertical-align: middle;
+                  }
+                }
+              }
             }
+
             span.ss-delete {
                 font-size: 0.7em;
                 position: absolute;

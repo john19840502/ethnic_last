@@ -19,4 +19,10 @@ Spree::Variant.class_eval do
     BigDecimal.new(amount_ex_vat.to_s).round(2, BigDecimal::ROUND_HALF_UP)
   end
 
+  def sorted_option_values
+    values = self.option_values.sort do |a, b|
+      a.option_type.position <=> b.option_type.position
+    end
+  end
+
 end

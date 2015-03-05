@@ -21,10 +21,9 @@
               <%= image_tag(variant.images.first.attachment.url(:small)) %>
             <% end %>
           </figure>
-          <div>
+          <div class="variant-description">
             <h2><%= link_to variant.product.name, product_path(variant.product) %></h2>
-            <p><%= line_item_description(variant) %></p>
-            <p><%= variant.options_text %></p>
+            <%= render partial: 'options', locals: { options: variant.sorted_option_values } %>
             <%= item_form.number_field :quantity, :min => 0, :class => "line_item_quantity", :size => 5 %>
             <em><strong><%= money_with_currency line_item.price %></strong></em>
           </div>
