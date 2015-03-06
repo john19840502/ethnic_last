@@ -9,11 +9,11 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
   
   def initialize(params)
     super
-    if params[:brand_id].present?
-			@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brand_id]).map(&:id)
-		else
-			@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brands]).map(&:id)
-		end
+    # if params[:brand_id].present?
+		# 	@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brand_id]).map(&:id)
+		# else
+		# 	@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brands]).map(&:id)
+		# end
 		@taxon_filters = params["filters"].present? ? Spree::Taxon.where("name in (?)", params["filters"]).map(&:id) : []
 		@properties[:taxon_filters] =  @taxon_filters
 		if params[:price_range].present?
@@ -30,7 +30,7 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 			price_range = @properties[:price_range].split(" - ")
 			base_scope = base_scope.joins(:master).where("spree_variants.price>=? and spree_variants.price<=?",price_range[0], price_range[1]) if price_range[1].to_i != 0
 		end
-		base_scope = base_scope.with_active_brands(current_user).order(:name)
+		base_scope = base_scope.available_to(current_user).order(:name)
   end
   
 	# method should return new scope based on base_scope
