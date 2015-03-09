@@ -694,7 +694,16 @@ h1 {
     padding: 1em 1em 1.25em 1em !important;
   }
 }
-
+#scroller{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ff0000;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display:none;
+}
 footer.footer {
   background: transparent;
   border-top: none !important;

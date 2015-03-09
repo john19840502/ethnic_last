@@ -37,6 +37,20 @@ $(document).ready(function() {
         $('#shipping .inner input, #shipping .inner select').prop('disabled', true);
     }
 
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#scroller').fadeIn();
+        } else {
+            $('#scroller').fadeOut();
+        }
+    });
+    $('#scroller').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
+
 });
 
 //= require_tree .

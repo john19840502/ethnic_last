@@ -1,0 +1,2 @@
+<!-- insert_after "div.products-wrapper" -->
+<div id="scroller"></div>
