@@ -26,7 +26,7 @@ $.expr[':'].paused = function(el) {
 
 
 // the options arg can be...
-//   a number  - indicates an immediate transition should occur to the given slide index
+//   a number  - indicates an immediate transition should occur to the given slide show
 //   a string  - 'pause', 'resume', 'toggle', 'next', 'prev', 'stop', 'destroy' or the name of a transition effect (ie, 'fade', 'zoom', etc)
 //   an object - properties to control the slideshow
 //
@@ -276,7 +276,7 @@ function buildOptions($cont, $slides, els, options, o) {
             opts.randomMap.push(i);
         opts.randomMap.sort(function(a,b) {return Math.random() - 0.5;});
         if (startingSlideSpecified) {
-            // try to find the specified starting slide and if found set start slide index in the map accordingly
+            // try to find the specified starting slide and if found set start slide show in the map accordingly
             for ( var cnt = 0; cnt < els.length; cnt++ ) {
                 if ( opts.startingSlide == opts.randomMap[cnt] ) {
                     opts.randomIndex = cnt;
@@ -610,7 +610,7 @@ $.fn.cycle.resetState = function(opts, fx) {
         init(opts.$cont, $(opts.elements), opts);
 };
 
-// this is the main engine fn, it handles the timeouts, callbacks and slide index mgmt
+// this is the main engine fn, it handles the timeouts, callbacks and slide show mgmt
 function go(els, opts, manual, fwd) {
     var p = opts.$cont[0], curr = els[opts.currSlide], next = els[opts.nextSlide];
 
@@ -1036,7 +1036,7 @@ $.fn.cycle.defaults = {
     onPagerEvent:     null,     // callback fn for pager events: function(zeroBasedSlideIndex, slideElement)
     onPrevNextEvent:  null,     // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement)
     pager:            null,     // element, jQuery object, or jQuery selector string for the element to use as pager container
-    pagerAnchorBuilder: null,   // callback fn for building anchor links:  function(index, DOMelement)
+    pagerAnchorBuilder: null,   // callback fn for building anchor links:  function(show, DOMelement)
     pagerEvent:       'click.cycle', // name of event which drives the pager navigation
     pause:            0,        // true to enable "pause on hover"
     pauseOnPagerHover: 0,       // true to pause when hovering over pager link
@@ -1054,7 +1054,7 @@ $.fn.cycle.defaults = {
     speed:            1000,     // speed of the transition (any valid fx speed value)
     speedIn:          null,     // speed of the 'in' transition
     speedOut:         null,     // speed of the 'out' transition
-    startingSlide:    undefined,// zero-based index of the first slide to be displayed
+    startingSlide:    undefined,// zero-based show of the first slide to be displayed
     sync:             1,        // true if in/out transitions should occur simultaneously
     timeout:          4000,     // milliseconds between slide transitions (0 to disable auto advance)
     timeoutFn:        null,     // callback for determining per-slide timeout value:  function(currSlideElement, nextSlideElement, options, forwardFlag)
