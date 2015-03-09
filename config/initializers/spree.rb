@@ -14,6 +14,9 @@ Spree.config do |config|
   config.currency = 'EUR'
   config.admin_products_per_page = 50
   config.track_inventory_levels = false
+
+  nl_id = Spree::Country.where(iso: 'NL').try(:first).try(:id)
+  config.default_country_id = nl_id unless nl_id.nil?
 end
 
 
@@ -61,6 +64,5 @@ if Rails.env == 'production'
 else
   Spree::Slider.attachment_definitions[:image][:path]= "#{Rails.root}/public/spree/sliders/:id/:style/:basename.:extension"
   Spree::Slider.attachment_definitions[:image][:url] = '/spree/sliders/:id/:style/:basename.:extension'
-
 end
           

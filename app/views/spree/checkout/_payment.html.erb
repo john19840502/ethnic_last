@@ -9,9 +9,9 @@
         <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
     <% end %>
     <% if @order.all_adjustments.present? %>
-        <% @order.all_adjustments.keys.each do |key| %>
-            <dt> <%= key %> </dt>
-            <dd><%= money @order.all_adjustments[key].amount %></dd>
+        <% @order.all_adjustments.each do |adjustment| %>
+            <dt> <%= adjustment.label %> </dt>
+            <dd><%= money adjustment.amount %></dd>
         <% end %>
     <% end %>
     <dt><%= Spree.t(:subtotal) %></dt>

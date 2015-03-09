@@ -13,6 +13,10 @@ task :migrate_old_data => :environment do
   BrandsMigration.new.migrate
   puts 'Finished BrandsMigration'
 
+  puts 'Started Calculator Preferences'
+  CalculatorPreferencesMigration.new.migrate
+  puts 'Finished Calculator Preferences'
+
   #recreate right schema_migrations from dump
   ActiveRecord::Base.connection.execute("
 DELETE FROM schema_migrations;

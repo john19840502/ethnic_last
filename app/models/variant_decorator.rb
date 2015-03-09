@@ -25,4 +25,8 @@ Spree::Variant.class_eval do
     end
   end
 
+  def weight
+    self[:weight].to_f
+  end
+
 end

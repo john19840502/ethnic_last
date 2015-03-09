@@ -19,13 +19,13 @@ class Spree::Calculator::UpsExpressSaver < Spree::ShippingCalculator
     factor = (delta_grams/1000.0).ceil
 
     if preferred_min_purchase_amount_for_free_shipping!=nil and preferred_min_purchase_amount_for_free_shipping!=0.0
-	    if object.has_attribute?("total")
+	    if object.try("total")
 	      if object.total>=preferred_min_purchase_amount_for_free_shipping
 		      return 0
 		    else
           return preferred_starting_price + (factor * preferred_price_per_kg)
         end
-      elsif object.order.has_attribute?("total")
+      elsif object.order.try("total")
 	      if object.order.total>=preferred_min_purchase_amount_for_free_shipping
 		      return 0
 		    else
