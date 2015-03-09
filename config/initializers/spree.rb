@@ -17,13 +17,12 @@ end
 
 Spree.user_class = 'Spree::User'
 
-config = YAML.load(File.read("#{Rails.root}/config/config_s3.yml"))
 attachment_config = {
 
     s3_credentials: {
-        access_key_id:     config['aws_access_key_id'],
-        secret_access_key: config['aws_secret_access_key'],
-        bucket:            config['aws_bucket_name']
+        access_key_id:     ENV['AWS_ACCESS_KEY'],
+        secret_access_key: ENV['AWS_SECRET'],
+        bucket:            ENV['AWS_BUCKET']
     },
 
     storage:        :s3,
