@@ -1,22 +1,106 @@
-<footer>
-    <span></span>
-    <strong><a href="#" title="#TITLE">Ethnic Chic</a></strong>
-    <span></span>
-    <ul class="nav footer_nav">
-      <li><a rel="external" href="http://facebook.com/ethnicchic" title="Ethnic Chic Facebook">Facebook</a></li>
-      <li><a href="/contact-us" title="Contact Ethnic Chic">Contact</a></li>
-      <li><a href="/terms" title="Terms &amp; conditions">Terms</a></li>
-    </ul>
+<!--<footer>-->
+    <!--<span></span>-->
+    <!--<strong><a href="#" title="#TITLE">Ethnic Chic</a></strong>-->
+    <!--<span></span>-->
+    <!--<ul class="nav footer_nav">-->
+      <!--<li><a rel="external" href="http://facebook.com/ethnicchic" title="Ethnic Chic Facebook">Facebook</a></li>-->
+      <!--<li><a href="/contact-us" title="Contact Ethnic Chic">Contact</a></li>-->
+      <!--<li><a href="/terms" title="Terms &amp; conditions">Terms</a></li>-->
+    <!--</ul>-->
+<!--</footer>-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="foot_blocks col-md-3">
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="http://blog.ethnicchic.com/category/interiors-we-love/">Interiors we love</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/">what we love</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/fabrics/">fabrics</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/wallpapers/">wallpapers</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/furniture/">furniture</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/lighting/">lighting</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/what-we-love/accessories/">accessories</a></li>
+          <li><a href="http://blog.ethnicchic.com/category/art-travel/">art &amp; travel</a></li>
+        </ul>
+      </div>
+
+
+      <div class="foot_blocks col-md-3">
+        <h3>Ethnic Chic</h3>
+        <ul>
+          <li><a href="http://ethnicchic.com/" target="_blank">Homepage</a></li>
+          <li><a href="http://ethnicchic.com/impressions" target="_blank">Impressions</a></li>
+          <li><a href="http://ethnicchic.com/collection" target="_blank">online shop</a></li>
+          <li><a href="http://blog.ethnicchic.com/">Blog</a></li>
+          <li><a href="http://ethnicchic.com/about" target="_blank">About</a></li>
+          <li><a href="http://ethnicchic.com/contact-us" target="_blank">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="foot_blocks col-md-3">
+        <h3>Let's Connect</h3>
+        <ul>
+          <li><a href="https://www.facebook.com/ethnicchic" target="_blank">Facebook</a></li>
+          <li><a href="https://plus.google.com/112137378718350948020/posts" target="_blank">Google Plus</a></li>
+          <li><a href="https://www.linkedin.com/company/ethnic-chic" target="_blank">Linked In</a></li>
+          <li><a href="https://nl.pinterest.com/echomecouture" target="_blank">Pinterest</a></li>
+          <li><a href="http://instagram.com/ethnicchichome" target="_blank">Instagram</a></li>
+          <li><a href="http://blog.ethnicchic.com/feed/" target="_blank">Rss</a></li>
+        </ul>
+      </div>
+
+      <div class="foot_blocks col-md-4">
+        <h3>Subscribe our newsletter</h3>
+        <div id="mc4wp-form-1" class="form mc4wp-form mc4wp-form-submitted">
+          <form method="post" action="http://blog.ethnicchic.com/">
+            <input type="email" id="mc4wp_email" name="EMAIL" placeholder="Email Address" required="">
+            <input type="submit" value="SUBSCRIBE">
+            <textarea name="_mc4wp_required_but_not_really" style="display: none !important;"></textarea>
+            <input type="hidden" name="_mc4wp_form_submit" value="1">
+            <input type="hidden" name="_mc4wp_form_instance" value="1">
+            <input type="hidden" name="_mc4wp_form_nonce" value="3b0eacab31">
+          </form>
+        </div>
+
+        <h3 class="follow-form">Follow blog via email</h3>
+        <div id="mc4wp-form-1" class="form mc4wp-form mc4wp-form-submitted">
+          <form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+              <input type="email" name="email" value="" id="subscribe-field" placeholder="Email Address" required="required">
+              <input type="hidden" name="action" value="subscribe">
+              <input type="hidden" name="source" value="http://blog.ethnicchic.com/">
+              <input type="hidden" name="sub-type" value="widget">
+              <input type="hidden" name="redirect_fragment" value="blog_subscription-2">
+              <input type="hidden" id="_wpnonce" name="_wpnonce" value="da5caaad8e">
+              <input type="submit" value="Subscribe" name="jetpack_subscriptions_widget">
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-widgets clearfix footer-columns-4">
+        <div class="footer-widget footer-widget-1">
+        </div>
+        <div class="footer-widget footer-widget-2">
+        </div>
+        <div class="footer-widget footer-widget-3">
+        </div>
+        <div class="footer-widget footer-widget-4 last">
+        </div>
+      </div><!-- .footer-widgets -->
+    </div>
+  </div><!-- .container -->
 </footer>
 
 <%= render :partial => "/shared/countries_modal" %>
 
 <%if(session[:country_id] and country = Spree::Country.find(session[:country_id])) %>
-  <% if Spree::Zone.default_tax && !Spree::Zone.default_tax.contains_country?(country) %>
-    <input type="hidden" value="1" id="show_price_ex_vat"></input>
-  <% else %>
-    <input type="hidden" value="0" id="show_price_ex_vat"></input>
-  <% end %>
+    <% if Spree::Zone.default_tax && !Spree::Zone.default_tax.contains_country?(country) %>
+        <input type="hidden" value="1" id="show_price_ex_vat"/>
+    <% else %>
+        <input type="hidden" value="0" id="show_price_ex_vat"/>
+    <% end %>
 <%else%>
-  <input type="hidden" value="0" id="show_price_ex_vat"></input>
+    <input type="hidden" value="0" id="show_price_ex_vat"/>
 <%end%>
