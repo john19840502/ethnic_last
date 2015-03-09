@@ -28,7 +28,7 @@ attachment_config = {
     storage:        :s3,
     s3_headers:     { 'Cache-Control' => 'max-age=31557600' },
     s3_protocol:    'https',
-    bucket:         config['aws_bucket_name'],
+    bucket:         ENV['AWS_BUCKET'],
     url:            ':s3_domain_url',
 
     path:           '/spree/:class/:id/:style/:basename.:extension',
