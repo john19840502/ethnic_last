@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225080010) do
+ActiveRecord::Schema.define(version: 20150225080012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -505,6 +505,7 @@ ActiveRecord::Schema.define(version: 20150225080010) do
     t.datetime "pdf_file_updated_at"
     t.boolean  "promotionable",                     default: true
     t.string   "meta_title"
+    t.string   "subtitle"
   end
 
   add_index "spree_products", ["available_on"], name: "idx_spree_products_index_spree_products_on_available_on", using: :btree
@@ -1085,6 +1086,7 @@ ActiveRecord::Schema.define(version: 20150225080010) do
     t.integer  "tax_category_id"
     t.datetime "updated_at"
     t.integer  "stock_items_count",                                     default: 0,     null: false
+    t.integer  "repeat"
   end
 
   add_index "spree_variants", ["deleted_at"], name: "index_spree_variants_on_deleted_at", using: :btree
@@ -1114,6 +1116,7 @@ ActiveRecord::Schema.define(version: 20150225080010) do
     t.boolean  "default_tax",                    default: false
     t.integer  "zone_members_count",             default: 0
     t.string   "kind"
+    t.boolean  "for_popup",                      default: false
   end
 
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree
