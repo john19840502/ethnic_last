@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include Spree::Core::ControllerHelpers::Order
   self.responder = ApplicationResponder
   respond_to :html
 
