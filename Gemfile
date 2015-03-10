@@ -70,6 +70,8 @@ gem 'geoip'
 
 gem 'aws-sdk', '~> 1.61.0'
 
+gem 'rails-observers'
+
 gem 'spree', github: 'spree/spree', branch: '3-0-stable'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
 gem 'spree_contact_us', github: 'jdutil/spree_contact_us'

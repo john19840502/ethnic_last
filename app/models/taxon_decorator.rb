@@ -1,10 +1,6 @@
 Spree::Taxon.class_eval do
-  # Spree::Taxon.attachment_definitions[:icon][:path] = '/spree/taxons/:id/:style/:basename.:extension' if Spree::Config[:use_s3]
-  # Spree::Taxon.attachment_definitions[:icon][:url] = ':s3_eu_url' if Spree::Config[:use_s3]
-  
   def fetch_uniq_product_brands
-	#Spree::Brand.where("id in (?)", self.products.map(&:brand_id).uniq).sort_by(&:name)
-	Spree::Taxon.where('name= ?',self.name).active.uniq.sort_by(&:name)
+  	Spree::Taxon.where('name= ?',self.name).active.uniq.sort_by(&:name)
   end
   
   def to_filter_params(params = {})
@@ -20,5 +16,4 @@ Spree::Taxon.class_eval do
   def self.active
     where(enabled: true)
   end
-  
 end
