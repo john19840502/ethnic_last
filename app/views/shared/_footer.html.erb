@@ -12,11 +12,11 @@
 <%= render :partial => "/shared/countries_modal" %>
 
 <%if(session[:country_id] and country = Spree::Country.find(session[:country_id])) %>
-  <% if Spree::Zone.default_tax && !Spree::Zone.default_tax.contains_country?(country) %>
-    <input type="hidden" value="1" id="show_price_ex_vat"></input>
-  <% else %>
-    <input type="hidden" value="0" id="show_price_ex_vat"></input>
-  <% end %>
+    <% if Spree::Zone.default_tax && !Spree::Zone.default_tax.contains_country?(country) %>
+        <input type="hidden" value="1" id="show_price_ex_vat"/>
+    <% else %>
+        <input type="hidden" value="0" id="show_price_ex_vat"/>
+    <% end %>
 <%else%>
-  <input type="hidden" value="0" id="show_price_ex_vat"></input>
+    <input type="hidden" value="0" id="show_price_ex_vat"/>
 <%end%>
