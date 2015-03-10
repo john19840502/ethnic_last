@@ -38,6 +38,22 @@ $(document).ready(function() {
         $('#shipping .inner input, #shipping .inner select').prop('disabled', true);
     }
 
+    var offset = 220;
+    var duration = 500;
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('#scroller').fadeIn(duration);
+        } else {
+            $('#scroller').fadeOut(duration);
+        }
+    });
+
+    $('#scroller').click(function(event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+
 });
 
 //= require_tree .

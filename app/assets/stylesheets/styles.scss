@@ -694,7 +694,31 @@ h1 {
     padding: 1em 1em 1.25em 1em !important;
   }
 }
+#scroller{
+  position: fixed;
+  bottom: -50px;
+  left: 240px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+  background-color: rgba(235, 235, 235, 0.80);
+  font-size: 12px;
+  padding: 5px 11px;
+  display: none;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  -webkit-transition: background 0.25s linear;
+  -moz-transition: background 0.25s linear;
+  transition: background 0.25s linear;
 
+  &:hover {
+    background-color: rgba(109, 109, 109, 0.80);
+
+  }
+}
 footer.footer {
   background: transparent;
   border-top: none !important;
