@@ -13,7 +13,7 @@ bundle exec rake db:seed
 ## Reset the local database
 
 ```
-bundle exec rake db:drop db:create db:migrate db:seed
+bundle exec rake db:reset
 ```
 
 ```

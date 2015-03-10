@@ -41,13 +41,6 @@ attachment_config = {
     default_style:  'product'
 }
 
-# Spree::Image.attachment_definitions[:image][:styles] = {
-#   mini:     "48x48>",
-#   small:    "100x100>",
-#   product:  "240x240>",
-#   large:    "600x600>"
-# }
-
 Spree::Taxon.attachment_definitions[:icon][:styles] = { small: '100x100>' }
 Spree::Background.attachment_definitions[:image][:styles] = { thumb: "100x100>" }
 Spree::Slider.attachment_definitions[:image][:styles] = {
