@@ -23,7 +23,7 @@
 
 <header>
   <ul class="options">
-    <li><a href="/products" title="Back to collection" class="ss-left">Back to collection</a></li>
+    <li><%= link_to 'Back to collection', :back, title: 'Back to collection', class: 'ss-left' %></li>
     <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=accurate_title%>" class="ss-like" id="facebook-share">Like</a></li>
     <li><%= link_to "Mail", email_to_friend_path("product", @product), :class => "ss-mail"%></li>
   </ul>
