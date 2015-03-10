@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322222099) do
+ActiveRecord::Schema.define(version: 20150310182124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,19 @@ ActiveRecord::Schema.define(version: 20150322222099) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "spree_favorites", force: :cascade do |t|
+    t.integer  "favorable_id"
+    t.string   "favorable_type"
+    t.integer  "user_id"
+    t.string   "guest_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_favorites", ["favorable_id", "favorable_type"], name: "index_spree_favorites_on_favorable_id_and_favorable_type", using: :btree
+  add_index "spree_favorites", ["guest_token"], name: "index_spree_favorites_on_guest_token", using: :btree
+  add_index "spree_favorites", ["user_id"], name: "index_spree_favorites_on_user_id", using: :btree
 
   create_table "spree_gateways", force: :cascade do |t|
     t.string   "type",        limit: 255
@@ -488,24 +501,25 @@ ActiveRecord::Schema.define(version: 20150322222099) do
   add_index "spree_product_properties", ["property_id"], name: "idx_spree_product_properties_index_spree_product_properties_25", using: :btree
 
   create_table "spree_products", force: :cascade do |t|
-    t.string   "name",                  limit: 255, default: "",   null: false
+    t.string   "name",                   limit: 255, default: "",   null: false
     t.text     "description"
     t.datetime "available_on"
     t.datetime "deleted_at"
-    t.string   "slug",                  limit: 255
+    t.string   "slug",                   limit: 255
     t.text     "meta_description"
-    t.string   "meta_keywords",         limit: 255
+    t.string   "meta_keywords",          limit: 255
     t.integer  "tax_category_id"
     t.integer  "shipping_category_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.string   "pdf_file_file_name",    limit: 255
-    t.string   "pdf_file_content_type", limit: 255
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "pdf_file_file_name",     limit: 255
+    t.string   "pdf_file_content_type",  limit: 255
     t.integer  "pdf_file_file_size"
     t.datetime "pdf_file_updated_at"
-    t.boolean  "promotionable",                     default: true
+    t.boolean  "promotionable",                      default: true
     t.string   "meta_title"
     t.string   "subtitle"
+    t.integer  "cached_favorites_count"
   end
 
   add_index "spree_products", ["available_on"], name: "idx_spree_products_index_spree_products_on_available_on", using: :btree
@@ -1061,6 +1075,7 @@ ActiveRecord::Schema.define(version: 20150322222099) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer  "cached_favorites_count"
   end
 
   add_index "spree_users", ["bill_address_id"], name: "idx_spree_users_index_spree_users_on_bill_address_id", using: :btree

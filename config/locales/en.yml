@@ -26,6 +26,8 @@ en:
     warnings:
       option_variants:
         choose_previous: You have to choose option from previous group first.
+    add_favorite: Add to favorites!
+    remove_favorite: Remove from favorites!
   order_state:
     address: address
     adjustments: adjustments

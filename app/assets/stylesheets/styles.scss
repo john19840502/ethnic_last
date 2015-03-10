@@ -354,6 +354,16 @@ section.content {
                 padding: 0;
             }
         }
+        div.favorite {
+          overflow: auto;
+          a {
+            font-size: 0.3em;
+            float: right;
+            text-transform: none;
+            background: none;
+            line-height: 0.1em;
+          }
+        }
     }
     h2 {
         border-bottom: 1px solid rgba(#ffffff, 0.15);
