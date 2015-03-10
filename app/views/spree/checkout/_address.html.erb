@@ -46,7 +46,7 @@
           <%= bill_form.text_field :city, :class => 'required' %>
         </div>
       </li>
-      <li>
+      <li id="bcountry">
         <%= bill_form.label :country_id, t(:country) %>
         <div>
           <% if session[:country_id] %>
@@ -56,7 +56,7 @@
           <% end %>
         </div>
       </li>
-      <li>
+      <li id="bstate">
         <% have_states = !@order.bill_address.country.states.empty? %>
         <%= bill_form.label :state, t(:state) %>
         <% state_elements = [
@@ -141,15 +141,15 @@
           <%= ship_form.text_field :city, :class => 'required' %>
         </div>
       </li>
-      <li>
+      <li id="scountry">
         <%= ship_form.label :country_id, t(:country) %>
         <div>
           <%= ship_form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required'} %>
         </div>
       </li>
-      <li>
+      <li id="sstate">
         <% have_states = !@order.ship_address.country.states.empty? %>
-        <%= ship_form.label :state, t(:state) %>
+        <%= ship_form.label :state, Spree.t(:state) %>
         <% state_elements = [
            ship_form.collection_select(:state_id, @order.ship_address.country.states,
                               :id, :name,
@@ -176,7 +176,11 @@
       </li>
     </ul>
   <% end %>
+  <div id="shipping_rates">
+  </div>
 </section>
+
+
 
 <div class="buttons">
   <%= submit_tag t(:save_and_continue), :class => 'continue button primary right' %>

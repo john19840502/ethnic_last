@@ -102,10 +102,13 @@ div.buy {
                 position: relative;
                 z-index: 100;
                 //top: -2px;
-                box-sizing: padding-box;
+                //box-sizing: padding-box;
                 border: 3px solid white;
                 box-shadow: 0px 0px 8px -1px rgba(white, 0.8);
             }
+          &:not(.selected) {
+            border: 3px solid rgba(255, 255, 255, 0);
+          }
         }
     }
 
@@ -144,7 +147,7 @@ div.buy {
         }
     }
 
-    div.popout {
+    div.popout, div.locked-popout {
         @include border-radius(2px);
         position: absolute;
         display: none;
@@ -184,9 +187,12 @@ div.buy {
             max-width: 100%;
         }
         small {
-            margin-top: 0.5em;
-            display: block;
-            color: rgba(#000, 0.5);
+          margin-top: 0.5em;
+          display: block;
+          color: rgba(#000, 0.5);
+        }
+        p.warning {
+            color: rgb(0,0,0);
         }
     }
 

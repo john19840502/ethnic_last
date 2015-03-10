@@ -48,7 +48,7 @@
       <tr data-hook="order_details_line_item_row" class="<%= cycle('', 'alt') %>">
         <td class="name">
           <%= item.variant.product.name %>
-          <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %>
+          <%= "(" + item.variant.options_text + ")" unless item.variant .option_values.empty? %>
         </td>
         <td class="price number"><%= money(item.price) %></td>
         <td class="qty number"><%= item.quantity %></td>

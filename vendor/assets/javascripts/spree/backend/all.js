@@ -14,3 +14,4 @@
 //= require spree/backend/spree_image_cropper
 //= require spree/backend/spree_impressions
 //= require spree/backend/spree_variant_options
+//= require spree/backend/spree_mollie

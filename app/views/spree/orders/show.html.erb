@@ -12,15 +12,20 @@
         <dt><%= t(:billing_address) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dt>
         <dd><%= @order.bill_address %></dd>
         <% if @order.has_step?("delivery") %>
-          <dt><%= t(:shipping_method) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dt>
-          <dd><%= @order.shipping_method.name %></dd>
+            <% @order.shipments.each do |shipment| %>
+              <dt><%= t(:shipping_method) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dt>
+              <dd><%= Spree.t(:shipment_details, stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name) %></dd>
+            <% end %>
         <% end %>
-        <dt><%= t(:payment_information) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></dt>
-        <dd><%= @order.payment_method.name %></dd>
-        <% if @order.price_adjustment_totals.present? %>
-            <% @order.price_adjustment_totals.keys.each do |key| %>
+        <% @order.payments.valid.each do |payment| %>
+            <dt><%= t(:payment_information) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></dt>
+            <dd><%= payment.payment_method.name %></dd>
+        <% end %>
+
+        <% if @order.adjustments.present? %>
+            <% @order.adjustments.keys.each do |key| %>
               <dt> <%= key %> </dt>
-              <dd><%= money @order.price_adjustment_totals[key] %></dd>
+              <dd><%= money @order.adjustments[key] %></dd>
             <% end %>
         <% end %>
         <dt><%= t(:subtotal) %></dt>
@@ -64,10 +69,10 @@
   </ul>
 
   <div class="buttons">
-    <%= button_to t(:back_to_store), spree.root_path, :class => "soft" %>
+    <%= button_to Spree.t(:back_to_store), spree.root_path, :class => "soft", method: "get" %>
     <% unless params.has_key? :checkout_complete %>
       <% if try_spree_current_user && respond_to?(:spree_account_path) %>
-        <%= button_to t(:my_account), spree_account_path %>
+        <%= button_to Spree.t(:my_account), spree_account_path, method: "get" %>
       <% end %>
     <% end %>
   </div>

@@ -12,10 +12,13 @@ Rails.application.routes.draw do
     get 'new_information_requests', to: 'information_requests#new', as: 'new_information_request'
     get 'create_information_requests', to: 'information_requests#create', as: 'create_information_request'
     get '/about', to: 'about_us#show', as: 'about'
+
+    namespace :api, defaults: { format: 'json' } do
+      resources :shipping_rates, only: [:index]
+    end
   end
 
   get '/404_custom', to: 'errors#not_found'
-  
 end
 
 Spree::Core::Engine.routes.draw do

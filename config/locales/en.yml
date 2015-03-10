@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  spree:
+    order_state:
+      payment: Confirm and Pay
+    warnings:
+      option_variants:
+        choose_previous: You have to choose option from previous group first.
   order_state:
     address: address
     adjustments: adjustments
@@ -29,6 +35,7 @@ en:
     complete: complete
     confirm: Confirm and pay
     delivery: delivery
+    delivery_quote: Delivery Quote
     payment: payment
     resumed: resumed
     returned: returned
@@ -49,4 +56,7 @@ en:
   search: Search
   create: Create
   reset_password: Reset Password
+  save_and_continue: Save and Continue
+  email: Email
+  continue: Continue
 

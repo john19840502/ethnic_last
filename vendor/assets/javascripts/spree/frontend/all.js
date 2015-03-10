@@ -13,3 +13,4 @@
 //= require spree/frontend/spree_taxon_backgrounds
 //= require spree/frontend/spree_impressions
 //= require spree/frontend/spree_variant_options
+//= require spree/frontend/spree_mollie

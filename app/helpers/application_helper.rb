@@ -118,7 +118,7 @@ module ApplicationHelper
               "<span></span>Back to #{current_taxon.parent.name}".html_safe
             end
           else
-            if current_taxon.children.empty? && current_taxon.parent.parent.id == root_taxon.id
+            if current_taxon.children.empty? && current_taxon.parent.parent && current_taxon.parent.parent.id == root_taxon.id
               link_to "/collection" do
                 "<span></span>Back to #{current_taxon.parent.parent.name}".html_safe
               end
@@ -210,6 +210,10 @@ module ApplicationHelper
   
   def get_small_images_block2
     @small_imgs = CollectionImage.where(small: true).limit(4).offset(4)
+  end
+
+  def money(count)
+    Spree::Money.new(count).to_html
   end
   
 end
