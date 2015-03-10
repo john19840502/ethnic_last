@@ -23,8 +23,8 @@ default: &default
 
 development:
   <<: *default
-  #database: ethnicchic2_development
-  database: spree_ethnicchic2_old_2
+  database: ethnicchic2_development
+  #database: spree_ethnicchic2_old_2
   #database: ethnicchic_devel
 
   # The specified database role being used to connect to postgres.
