@@ -37,6 +37,7 @@
   </style>
 <% end %>
 <%= yield :head %>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js" data-pin-hover="true"></script>
 <script>
 var _prum = [['id', '52782bf0abe53d1870000000'],
              ['mark', 'firstbyte', (new Date()).getTime()]];
