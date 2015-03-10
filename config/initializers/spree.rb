@@ -41,6 +41,12 @@ attachment_config = {
     default_style:  'product'
 }
 
+Spree::Image.attachment_definitions[:image][:styles] = {
+  mini:     "48x48>",
+  small:    "100x100>",
+  product:  "240x240>",
+  large:    "600x600>"
+}
 
 Spree::Taxon.attachment_definitions[:icon][:styles] = { small: '100x100>' }
 Spree::Background.attachment_definitions[:image][:styles] = { thumb: "100x100>" }
@@ -57,6 +63,7 @@ if Rails.env == 'production'
     Spree::Slider.attachment_definitions[:image][key.to_sym] = value
     Spree::Taxon.attachment_definitions[:icon][key.to_sym] = value
     Spree::Background.attachment_definitions[:image][key.to_sym] = value
+    Spree::Image.attachment_definitions[:attachment][key.to_sym] = value
 
     #Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
   end
