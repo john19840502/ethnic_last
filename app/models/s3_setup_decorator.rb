@@ -13,8 +13,8 @@ if Rails.env == 'production'
       bucket:         ENV['AWS_BUCKET'],
       url:            ':s3_domain_url',
 
-      path:           '/spree/:class/:id/:style/:basename.:extension',
-      default_url:    '/spree/:class/:id/:style/:basename.:extension',
+      path:           '/:class/:id/:style/:basename.:extension',
+      default_url:    '/:class/:id/:style/:basename.:extension',
       default_style:  'product'
   }
 
