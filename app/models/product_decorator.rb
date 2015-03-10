@@ -1,7 +1,23 @@
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
   after_create :generate_meta_tags
-  
+
+  scope :brand_search, -> (keywords) {
+    joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and spree_taxons.name like ?', TAXONOMY_BRAND, "%#{keywords}%"])
+  }
+
+  def self.search_like_any(fields, values)
+    where fields.map { |field|
+            values.map { |value|
+              if field.split('.').size == 2
+                Arel::Table.new(field.split('.').first, arel_engine)[field.split('.').last]
+              else
+                arel_table[field]
+              end.matches("%#{value}%")
+            }.inject(:or)
+          }.inject(:or)
+  end
+
   def combined_properties
     props = []
     product_properties.each do |product_property|
