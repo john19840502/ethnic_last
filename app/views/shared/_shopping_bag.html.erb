@@ -1,9 +1,7 @@
 <ul class="bag">
-  <% unless spree_current_user.nil? %>
-      <li>
-        <%= link_to raw("#{Spree.t(:favorites)}<small>#{spree_current_user.cached_favorites_count}</small>"), favorites_path, id: "favorites" %>
-      </li>
-  <% end %>
+    <li>
+      <%= link_to raw("<span class=\"glyphicon glyphicon-heart #{ @product && has_favorite?(@product) ? 'red' : ''}\" aria-hidden=\"true\"></span><small>#{favorite_count}</small>"), favorites_path, id: "favorites", remote: true %>
+    </li>
   <li>
     <%
       country_val = session[:country_name]

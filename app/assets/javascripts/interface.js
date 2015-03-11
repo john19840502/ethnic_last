@@ -51,7 +51,6 @@ $(function() {
 
 });
 
-
 function brandToggle() {
     var $more = $('#brands-more');
     var $less = $('#brands-less');
@@ -261,4 +260,13 @@ function add_popup_click(){
         })
 
     });
+}
+
+function update_favorites(count, is_added){
+    if(is_added){
+        $("#favorites span.glyphicon").addClass('red');
+    } else {
+        $("#favorites span.glyphicon").removeClass('red');
+    }
+    $("#favorites small").html(count);
 }

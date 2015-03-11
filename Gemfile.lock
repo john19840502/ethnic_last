@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/fesstor/spree_favorites.git
-  revision: 0d8bdc6a3a0ac458364643c8cdc02d914ac6bb0c
+  revision: 3651bba85c8551f1b7d6140ebdc4415f80442b7d
   branch: add-spree-3-0-stable
   specs:
     spree_favorites (3.0.0)
@@ -434,7 +434,7 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
