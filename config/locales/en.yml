@@ -29,6 +29,8 @@ en:
     add_favorite: Add to favorites!
     remove_favorite: Remove from favorites!
     my_favorites: Favorites
+    favorites_mail_title: Favorites from ethnicchic.com
+    send: Send
   order_state:
     address: address
     adjustments: adjustments
