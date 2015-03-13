@@ -1,5 +1,5 @@
 
-Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
+#Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
 
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
