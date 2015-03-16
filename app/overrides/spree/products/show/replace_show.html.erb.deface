@@ -62,7 +62,7 @@
       <h1>
         <%= @product.name %>
         <span class="product-brand">
-          <%= link_to(image_tag(@product.brand.icon(:normal), :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
+          <%= link_to(image_tag(@product.brand.icon(:original), :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
         </span>
       </h1>
 
