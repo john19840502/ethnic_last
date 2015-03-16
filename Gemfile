@@ -91,3 +91,5 @@ gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
 gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'
 gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'
+
+gem 'appsignal'
