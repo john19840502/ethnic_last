@@ -15,8 +15,8 @@
 
 <div class="brands">
     <ul id="brand-list" data-display="10">
-        <% for taxon in Spree::Taxon.active %>
-            <li><%= link_to(image_tag(taxon.icon), nested_taxons_url(taxon))%></li>
+        <% for taxon in @brands %>
+            <li><%= link_to(image_tag(taxon.icon(:original)), nested_taxons_url(taxon))%></li>
         <% end %>
     </ul>
     <a class="more-brands" id="brands-more">More brands</a>
