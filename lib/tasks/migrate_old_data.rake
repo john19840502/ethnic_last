@@ -13,6 +13,10 @@ task :migrate_old_data => :environment do
   BrandsMigration.new.migrate
   puts 'Finished BrandsMigration'
 
+  puts 'Started BackgroundsMigration'
+  BackgroundsMigration.new.migrate
+  puts 'Finished BackgroundsMigration'
+
   puts 'Started Calculator Preferences'
   CalculatorPreferencesMigration.new.migrate
   puts 'Finished Calculator Preferences'
