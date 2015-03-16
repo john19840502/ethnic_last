@@ -177,7 +177,7 @@ module ApplicationHelper
   end
   
   def get_background_image(taxon)
-    Spree::Background.find(taxon_id: taxon.id)
+    Spree::Background.find_by_taxon_id(taxon.id)
   end
   
   def all_taxon_filters(taxon)
