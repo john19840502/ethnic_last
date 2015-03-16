@@ -44,9 +44,10 @@
       <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
       <% else %>
-        <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon } %>
       <% end %>
     </ul>
+    <%= paginate @products, theme: 'twitter-bootstrap-3' %>
   </div>
 </section>
 

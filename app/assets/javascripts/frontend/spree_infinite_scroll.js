@@ -1,8 +1,8 @@
 $(function() {
-  $('nav.pagination').hide();
+  $('ul.pagination').hide();
   $('#products').infinitescroll({
-    navSelector: "nav.pagination",
-    nextSelector: "nav.pagination a[rel=next]",
+    navSelector: "ul.pagination",
+    nextSelector: "ul.pagination a[rel=next]",
     itemSelector: "li.product",
     loading: {
       msgText  : "Loading...",
