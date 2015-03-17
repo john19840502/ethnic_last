@@ -67,37 +67,6 @@ module ApplicationHelper
       end.join('').html_safe
     end
   end
-  
-  def brands_nav_filters(brands, max_level = 1)
-    other_filters = get_filters_for_category
-    other_filters='' if other_filters==nil
-    content_tag :ul, class: 'categories filter', id: 'filter_00' do
-      brands.map do |brand|
-        css_class = nil
-        if(params && params['brands'] && params['brands'].include?("#{brand.name.strip}"))
-          css_class = 'selected'
-        end
-        
-        brand_filter_url = request.path + '?' + brand.to_filter_params(params) + other_filters
-        if css_class == 'selected'
-          content_tag :li, class: css_class do
-            link_to brand_filter_url do
-              brand.name.html_safe +
-              "<span class='remove_filter'>Remove filter</span>".html_safe +
-              content_tag(:span, class: 'ss-icon filter-close') do
-                '&#x2421'.html_safe
-              end
-            end
-          end
-
-        else
-          content_tag :li, class: css_class do
-            link_to(brand.name, brand_filter_url)
-          end
-        end
-      end.join('').html_safe
-    end
-  end
 
   def taxons_nav(root_taxon, current_taxon, max_level = 1)
     html = ''

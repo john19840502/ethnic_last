@@ -29,8 +29,12 @@ Spree::Taxon.class_eval do
     where(enabled: true)
   end
 
+  def self.brands_root
+    find_by_permalink('brands')
+  end
+
   def self.brands
-    Spree::Taxon.find_by_permalink('brands').children.active
+    brands_root.children.active
   end
 
   def brand?
