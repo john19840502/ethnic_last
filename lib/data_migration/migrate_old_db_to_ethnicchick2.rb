@@ -264,7 +264,8 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
 
       t.remove "count_on_hand"
       t.remove "brand_id"
-      t.remove "subtitle"
+      # Added in 20150225080011_add_subtitle_to_spree_products.rb
+      # t.remove "subtitle"
 
       t.boolean  "promotionable",         default: true
       t.string   "meta_title"

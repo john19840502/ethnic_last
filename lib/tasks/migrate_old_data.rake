@@ -255,7 +255,8 @@ INSERT INTO schema_migrations (version) VALUES
 ('20150225080007'),
 ('20150225080008'),
 ('20150225080009'),
-('20150225080010');"
+('20150225080010')
+('20150225080011');"
 )
 
   puts 'Schema migrations recreated!'
