@@ -15,4 +15,6 @@ class BackgroundsMigration < ::Migration
     end
 
   end
+
+
 end
