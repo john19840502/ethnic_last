@@ -95,7 +95,7 @@ module ApplicationHelper
             link_to(brand.name, brand_filter_url)
           end
         end
-      end.join('\n').html_safe
+      end.join('').html_safe
     end
   end
 
@@ -103,7 +103,7 @@ module ApplicationHelper
     html = ''
     return '' if max_level < 1 || root_taxon.children.empty?
     content_tag :ul, class: 'categories' do
-      if current_taxon
+      if current_taxon && !current_taxon.brand?
         if current_taxon.children.empty? and current_taxon.parent.root?
           child_taxons = [current_taxon]
         elsif current_taxon.children.empty?

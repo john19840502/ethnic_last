@@ -1,5 +1,5 @@
 <% Spree::Taxonomy.without_filters.each do |taxonomy| %>
-  <% if @taxon %>
+  <% if @taxon && !@taxon.brand? %>
     <h2><%=@taxon.name%></h2>
   <% else %>
     <h2><%= taxonomy.name %></h2>
