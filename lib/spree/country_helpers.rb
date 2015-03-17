@@ -9,7 +9,7 @@ module Spree
         @geoip ||= GeoIP.new("#{Rails.root.to_s}/db/GeoIP.dat")
         country_by_ip = @geoip.country(request.remote_ip)
         begin
-          country = Spree::Country.find(:first, :conditions => ["iso = ? OR iso3 = ?", country_by_ip.country_code2, country_by_ip.country_code3 ])
+          country = Spree::Country.where( "iso = ? OR iso3 = ?", country_by_ip.country_code2, country_by_ip.country_code3 ).first
         rescue
         end
         if country && !session[:country_id]
