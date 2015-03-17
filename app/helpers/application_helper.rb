@@ -38,8 +38,7 @@ module ApplicationHelper
   end
 
   def taxons_nav_filters(root_taxon, current_taxon, max_level = 1)
-    other_filters = get_brands_for_category
-    other_filters='' if other_filters==nil
+    other_filters=''
     return '' if max_level < 1 || root_taxon.children.empty?
     content_tag :ul, class: 'categories filter', id: "filter_#{root_taxon.id}" do
       root_taxon.children.map do |taxon|
@@ -56,6 +55,35 @@ module ApplicationHelper
               content_tag(:span, class: 'ss-icon filter-close') do
                 '&#x2421'.html_safe
               end
+            end
+          end
+
+        else
+          content_tag :li, class: css_class do
+            link_to(taxon.name, taxon_filter_url)
+          end
+        end
+      end.join('').html_safe
+    end
+  end
+
+  def brands_nav_filters(brands, max_level = 1)
+    other_filters=''
+    content_tag :ul, class: 'categories filter', id: 'filter_00' do
+      brands.map do |taxon|
+        css_class = nil
+        if(params && params['filters'] && params['filters'].include?(taxon.name.strip))
+          css_class = 'selected'
+        end
+        taxon_filter_url = request.path + '?' + taxon.to_filter_params(params) + other_filters
+        if css_class == 'selected'
+          content_tag :li, class: css_class do
+            link_to taxon_filter_url do
+              taxon.name.html_safe +
+                  "<span class='remove_filter'>Remove filter</span>".html_safe +
+                  content_tag(:span, class: 'ss-icon filter-close') do
+                    '&#x2421'.html_safe
+                  end
             end
           end
 
@@ -114,30 +142,6 @@ module ApplicationHelper
         end
       end
       html.html_safe
-    end
-  end
-  
-  def get_filters_for_category
-    return_val='';
-    if params[:filters].present?
-      params[:filters].each do |filter|
-        return_val = return_val + '&filters[]='+filter
-      end
-      return return_val;
-    else
-      return nil;
-    end
-  end
-  
-  def get_brands_for_category
-    return_val='';
-    if params[:brands].present?
-      params[:brands].each do |brand|
-        return_val = return_val + '&brands[]='+brand
-      end
-      return return_val;
-    else
-      return nil;
     end
   end
   
