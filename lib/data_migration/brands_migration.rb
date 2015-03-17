@@ -8,7 +8,7 @@ class BrandsMigration < ::Migration
 
     brands = connection.execute("select * from spree_brands;")
 
-    taxonomy = Spree::Taxonomy.create(name: 'Brands')
+    taxonomy = Spree::Taxonomy.create(name: 'Brands', is_a_filter: true)
     parent_id = taxonomy.root.id
 
     ActiveRecord::Base.no_touching do

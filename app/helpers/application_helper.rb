@@ -52,7 +52,7 @@ module ApplicationHelper
           content_tag :li, class: css_class do
             link_to taxon_filter_url do
               taxon.name.html_safe +
-              "'<span class='remove_filter'>Remove filter</span>'".html_safe +
+              "<span class='remove_filter'>Remove filter</span>".html_safe +
               content_tag(:span, class: 'ss-icon filter-close') do
                 '&#x2421'.html_safe
               end
@@ -64,7 +64,7 @@ module ApplicationHelper
             link_to(taxon.name, taxon_filter_url)
           end
         end
-      end.join('\n').html_safe
+      end.join('').html_safe
     end
   end
   
