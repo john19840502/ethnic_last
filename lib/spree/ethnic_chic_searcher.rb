@@ -19,16 +19,21 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 		if params[:price_range].present?
 			@properties[:price_range] = params[:price_range]
 		end
+		if params[:currency].present?
+			@properties[:currency] = params[:currency]
+		end
   end
 
   def get_base_scope
     base_scope = super
-    if @properties[:brand_id].present?
-		base_scope = base_scope.by_brand(@properties[:brand_id])
-		end
+    # if @properties[:brand_id].present?
+		# base_scope = base_scope.by_brand(@properties[:brand_id])
+		# end
 		if @properties[:price_range].present? and base_scope.present?
 			price_range = @properties[:price_range].split(" - ")
-			base_scope = base_scope.joins(:master).where("spree_variants.price>=? and spree_variants.price<=?",price_range[0], price_range[1]) if price_range[1].to_i != 0
+			currency = @properties[:currency]
+			base_scope = base_scope.joins(master: :prices).where('spree_prices.currency = ?', currency).
+					where("spree_prices.amount>=? and spree_prices.amount<=? and spree_prices.amount is not null",price_range[0], price_range[1]) if price_range[1].to_i != 0
 		end
 		base_scope = base_scope.available_to(current_user).order(:name)
   end
