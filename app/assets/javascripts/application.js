@@ -38,7 +38,7 @@ $(document).ready(function() {
         $('#shipping .inner input, #shipping .inner select').prop('disabled', true);
     }
 
-    var offset = 220;
+    var offset = 500;
     var duration = 500;
     $(window).scroll(function() {
         if ($(this).scrollTop() > offset) {

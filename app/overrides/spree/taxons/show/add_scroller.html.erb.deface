@@ -1,4 +1,4 @@
-<!-- insert_after "div.products-wrapper" -->
+<!-- insert_after "section" -->
 <div id="scroller">
     <i class="glyphicon glyphicon-chevron-up"></i>
 </div>
