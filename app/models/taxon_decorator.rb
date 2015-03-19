@@ -16,13 +16,14 @@ Spree::Taxon.class_eval do
   end
 
   def to_filter_params(params = {})
-    filter_params = params['filters'].try(:dup) || []
+    type = brand? ? 'brands' : 'filters'
+    filter_params = params[type].try(:dup) || []
     if(filter_params.include?(name.strip))
       filter_params.delete(name.strip)
     else
       filter_params << (Spree::Taxon.find(taxon_filter).name.strip)
     end
-    filter_params.map {|f| "filters[]=#{f}"}.join('&')
+    filter_params.map {|f| "#{type}[]=#{f}"}.join('&')
   end
 
   def self.active

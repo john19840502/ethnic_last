@@ -9,6 +9,11 @@ Spree::Product.class_eval do
     joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and spree_taxons.name like ?', TAXONOMY_BRAND, "%#{keywords}%"])
   }
 
+  scope :by_brands, -> (brands) {
+    joins('INNER JOIN spree_products_taxons as spree_brands_taxons on spree_brands_taxons.product_id = spree_products.id')
+        .where('spree_brands_taxons.taxon_id in (?)', brands)
+  }
+
   def self.search_like_any(fields, values)
     where fields.map { |field|
             values.map { |value|

@@ -9,12 +9,13 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
   
   def initialize(params)
     super
-    # if params[:brand_id].present?
-		# 	@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brand_id]).map(&:id)
-		# else
-		# 	@properties[:brand_id] = Spree::Brand.where("name in (?)", params[:brands]).map(&:id)
-		# end
-		@taxon_filters = params["filters"].present? ? Spree::Taxon.where("name in (?)", params["filters"]).map(&:id) : []
+		@properties[:brands] = Spree::Taxon.where("name in (?)", params[:brands]).map(&:id)
+		if params["filters"].present?
+			brands_root_id = Spree::Taxon.find_by_permalink('brands').try(:id)
+			@taxon_filters = Spree::Taxon.where("name in (?) and parent_id != ?", params["filters"], brands_root_id).map(&:id)
+		else
+			@taxon_filters = []
+		end
 		@properties[:taxon_filters] =  @taxon_filters
 		if params[:price_range].present?
 			@properties[:price_range] = params[:price_range]
@@ -26,9 +27,9 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 
   def get_base_scope
     base_scope = super
-    # if @properties[:brand_id].present?
-		# base_scope = base_scope.by_brand(@properties[:brand_id])
-		# end
+    if @properties[:brands].present?
+			base_scope = base_scope.by_brands(@properties[:brands])
+		end
 		if @properties[:price_range].present? and base_scope.present?
 			price_range = @properties[:price_range].split(" - ")
 			currency = @properties[:currency]
