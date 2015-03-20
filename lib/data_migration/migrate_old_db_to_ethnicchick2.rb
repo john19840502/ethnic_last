@@ -686,7 +686,9 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
       t.remove "price"
       t.remove  "count_on_hand"
       t.remove  "lock_version"
-      t.remove  "repeat"
+
+      # Added in 20150225080012_add_repeat_to_spree_variants.rb
+      # t.remove  "repeat"
 
       t.string   "cost_currency"
       t.boolean  "track_inventory",                            default: true

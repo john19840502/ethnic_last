@@ -14,6 +14,9 @@
 		<% elsif property[0]=="Height (cm)" && !property[1].blank? %>
 		  <td><strong><%= "Height (inches)" %></strong></td>
           <td><%= (property[1].to_f/2.5).to_s %></td>
+        <% elsif property[0]=="Repeat (cm)" && !property[1].blank? %>
+            <td><strong><%= "Repeat (inches)" %></strong></td>
+            <td><%= (property[1].to_f/2.5).to_s %></td>
         <% end %>
       <% end %>
     </tbody>
