@@ -44,7 +44,7 @@
       <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
       <% else %>
-          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon } %>
+          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page } %>
       <% end %>
     </ul>
     <%= paginate @products, theme: 'twitter-bootstrap-3' %>
@@ -54,6 +54,7 @@
 
 <script>
 	$('document').ready(function(){
+
 		$('ul.categories.filter:has( > li.selected)').css('display','block');
 		
 		var currency = $("a[title='Currency selection'] small").text();
@@ -65,7 +66,7 @@
 	});
 
 	$("#slider-range").mouseup(function() {
-		var full_url = window.location.pathname + window.location.search;
+		var full_url = url_with_page(1);
 		var price_range = $('#amount').val();
 		var currency_type;
 		var currency = $("a[title='Currency selection'] small").text();

@@ -262,3 +262,21 @@ function add_popup_click(){
 
     });
 }
+
+function set_current_page(page){
+    var href = url_with_page(page);
+    window.history.replaceState("", "", href);
+}
+
+function url_with_page(page){
+    var href = window.location.href;
+    if( href.search('page') == -1 ){
+        var connector = href.search('\\?') == -1 ? '?' : '&';
+        href += connector + 'page=' + page;
+    } else {
+        href = href.replace(/(&|\?)(page=)([0-9]+)/, '$1$2' + page );
+    }
+    return href;
+}
+
+
