@@ -263,20 +263,22 @@ function add_popup_click(){
     });
 }
 
-function set_current_page(page){
-    var href = url_with_page(page);
+function set_current(param, value){
+    var href = url_with_param(param, value);
     window.history.replaceState("", "", href);
-}
-
-function url_with_page(page){
-    var href = window.location.href;
-    if( href.search('page') == -1 ){
-        var connector = href.search('\\?') == -1 ? '?' : '&';
-        href += connector + 'page=' + page;
-    } else {
-        href = href.replace(/(&|\?)(page=)([0-9]+)/, '$1$2' + page );
-    }
     return href;
 }
 
-
+function url_with_param(param, value){
+    var href = window.location.href;
+    var params = {};
+    params[param] = value;
+    if( href.search(param) == -1 ){
+        var connector = href.search('\\?') == -1 ? '?' : '&';
+        href += connector + $.param(params);
+    } else {
+        var re = new RegExp("(&|\\?)(" + param + "=)([\\w,+,-]+)(&.*)?");
+        href = href.replace(re, '$1' + $.param(params) + '$4' );
+    }
+    return href;
+}

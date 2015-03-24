@@ -1,7 +1,7 @@
 <% products.each do |product| %>
 	<% if product.available? %>
 	  <li class="product" id="product_<%= product.id %>" itemscope itemtype="http://schema.org/Product">
-		  <%= link_to product, class: 'info', itemprop: "name", title: product.name, onClick: "set_current_page(#{page.to_s}); return true;" do %>
+		  <%= link_to product, class: 'info', itemprop: "name", title: product.name, onClick: "set_current('page',#{page.to_s}); return true;" do %>
 			<%= product_image(product, itemprop: "image") %>
 			<div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
 			<% if product.brand %>
@@ -10,4 +10,10 @@
 		  <% end %>
 	  </li>
 	<% end %>
+<% end %>
+
+<% if to_paginate %>
+<temp>
+  <%= paginate @products, theme: 'twitter-bootstrap-3' %>
+</temp>
 <% end %>

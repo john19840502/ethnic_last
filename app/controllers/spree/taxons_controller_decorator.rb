@@ -12,7 +12,8 @@ Spree::TaxonsController.class_eval do
     @brands = @taxon.fetch_uniq_product_brands
 
     if request.xhr?
-      render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page }
+      to_paginate = ( @page.to_i == 1 && params[:price_filter_req] )
+      render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: to_paginate }
     else
       respond_with(@taxon)
     end
