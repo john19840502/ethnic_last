@@ -1,4 +1,0 @@
-<!-- insert_after "div.products-wrapper" -->
-<div id="scroller">
-    <i class="glyphicon glyphicon-chevron-up"></i>
-</div>

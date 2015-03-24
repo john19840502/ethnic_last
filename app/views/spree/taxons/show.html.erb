@@ -4,20 +4,19 @@
 	<%= javascript_include_tag "price_range_selector" %>
 </head>
 <%= render :partial => 'shared/header' %>
-<% @brand = get_taxon(params[:taxon_id]) %>
-<% if @brand %>
-<%= content_for :head do %>
-  <% bg = get_background_image(@brand) %>
-  <% if bg %>
-  <style type="text/css">
-    html{
-      background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>
-  <% end %>
-<% end %>
+<% if @taxon %>
+    <%= content_for :head do %>
+        <% bg = get_background_image(@taxon) %>
+        <% if bg %>
+          <style type="text/css">
+            html{
+              background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+          </style>
+        <% end %>
+    <% end %>
 <% end %>
 
 <section class="content">
@@ -45,9 +44,10 @@
       <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
       <% else %>
-        <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon } %>
       <% end %>
     </ul>
+    <%= paginate @products, theme: 'twitter-bootstrap-3' %>
   </div>
 </section>
 

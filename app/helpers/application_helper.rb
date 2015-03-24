@@ -52,7 +52,7 @@ module ApplicationHelper
           content_tag :li, class: css_class do
             link_to taxon_filter_url do
               taxon.name.html_safe +
-              "'<span class='remove_filter'>Remove filter</span>'".html_safe +
+              "<span class='remove_filter'>Remove filter</span>".html_safe +
               content_tag(:span, class: 'ss-icon filter-close') do
                 '&#x2421'.html_safe
               end
@@ -64,29 +64,28 @@ module ApplicationHelper
             link_to(taxon.name, taxon_filter_url)
           end
         end
-      end.join('\n').html_safe
+      end.join('').html_safe
     end
   end
-  
+
   def brands_nav_filters(brands, max_level = 1)
     other_filters = get_filters_for_category
     other_filters='' if other_filters==nil
     content_tag :ul, class: 'categories filter', id: 'filter_00' do
       brands.map do |brand|
         css_class = nil
-        if(params && params['brands'] && params['brands'].include?("#{brand.name.strip}"))
-          css_class = 'selected'
+        if(params && params["brands"] && params["brands"].include?("#{brand.name.strip}"))
+          css_class = "selected"
         end
-        
-        brand_filter_url = request.path + '?' + brand.to_filter_params(params) + other_filters
+        brand_filter_url = request.path + "?" + brand.to_filter_params(params) + other_filters
         if css_class == 'selected'
           content_tag :li, class: css_class do
             link_to brand_filter_url do
               brand.name.html_safe +
-              "<span class='remove_filter'>Remove filter</span>".html_safe +
-              content_tag(:span, class: 'ss-icon filter-close') do
-                '&#x2421'.html_safe
-              end
+                  "<span class='remove_filter'>Remove filter</span>".html_safe +
+                  content_tag(:span, class: 'ss-icon filter-close') do
+                    '&#x2421'.html_safe
+                  end
             end
           end
 
@@ -95,7 +94,7 @@ module ApplicationHelper
             link_to(brand.name, brand_filter_url)
           end
         end
-      end.join('\n').html_safe
+      end.join('').html_safe
     end
   end
 
@@ -103,7 +102,7 @@ module ApplicationHelper
     html = ''
     return '' if max_level < 1 || root_taxon.children.empty?
     content_tag :ul, class: 'categories' do
-      if current_taxon
+      if current_taxon && !current_taxon.brand?
         if current_taxon.children.empty? and current_taxon.parent.root?
           child_taxons = [current_taxon]
         elsif current_taxon.children.empty?
@@ -147,24 +146,24 @@ module ApplicationHelper
       html.html_safe
     end
   end
-  
+
   def get_filters_for_category
     return_val='';
     if params[:filters].present?
       params[:filters].each do |filter|
-        return_val = return_val + '&filters[]='+filter
+        return_val = return_val + "&filters[]="+filter
       end
       return return_val;
     else
       return nil;
     end
   end
-  
+
   def get_brands_for_category
     return_val='';
     if params[:brands].present?
       params[:brands].each do |brand|
-        return_val = return_val + '&brands[]='+brand
+        return_val = return_val + "&brands[]="+brand
       end
       return return_val;
     else
@@ -177,7 +176,7 @@ module ApplicationHelper
   end
   
   def get_background_image(taxon)
-    Spree::Background.find(taxon_id: taxon.id)
+    Spree::Background.find_by_taxon_id(taxon.id)
   end
   
   def all_taxon_filters(taxon)

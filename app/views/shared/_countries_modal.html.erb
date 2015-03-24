@@ -10,7 +10,7 @@
       <div class="<%= zone.members.count > 10 ? 'two-third' : 'one-third' %>">
         <h3><%=zone.name%></h3>
         <ul class="countries">
-          <% zone.zoneables.each do |country| %>
+          <% zone.zoneables.reverse.each do |country| %>
             <%=country_select_link country.name,country.id%>
           <% end %>
         </ul>

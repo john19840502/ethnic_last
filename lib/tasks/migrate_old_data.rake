@@ -1,21 +1,13 @@
 task :migrate_old_data => :environment do
   desc 'Migrate old data from ethnicchic'
 
-  puts 'Started migration'
   MigrateOldDbToEthnicchick2.new.exec_migration(ActiveRecord::Base.connection, :up)
-  puts 'Migrated successfully!'
 
-  puts 'Started VariantPricesMigration'
-  VariantPricesMigration.new.migrate
-  puts 'Finished VariantPricesMigration'
-
-  puts 'Started BrandsMigration'
-  BrandsMigration.new.migrate
-  puts 'Finished BrandsMigration'
-
-  puts 'Started Calculator Preferences'
-  CalculatorPreferencesMigration.new.migrate
-  puts 'Finished Calculator Preferences'
+  VariantPricesMigration.new.migrate_with_log
+  BrandsMigration.new.migrate_with_log
+  BackgroundsMigration.new.migrate_with_log
+  CalculatorPreferencesMigration.new.migrate_with_log
+  SpreeZonesForPopupMigration.new.migrate_with_log
 
   #recreate right schema_migrations from dump
   ActiveRecord::Base.connection.execute("
@@ -263,7 +255,9 @@ INSERT INTO schema_migrations (version) VALUES
 ('20150225080007'),
 ('20150225080008'),
 ('20150225080009'),
-('20150225080010');"
+('20150225080010'),
+('20150225080011'),
+('20150225080012');"
 )
 
   puts 'Schema migrations recreated!'

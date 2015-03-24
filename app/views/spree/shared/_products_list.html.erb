@@ -4,10 +4,8 @@
 		  <%= link_to product, class: 'info', itemprop: "name", title: product.name do %>
 			<%= product_image(product, itemprop: "image") %>
 			<div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
-			<% if product.taxons %>
-                <%- product.taxons.each do |taxon| %>
-                    <span class="product-brand" style="background-image: url('<%= taxon.icon %>');"></span>
-                <% end %>
+			<% if product.brand %>
+                <span class="product-brand" style="background-image: url('<%= product.brand.icon(:original) %>');"></span>
             <% end %>
 		  <% end %>
 	  </li>

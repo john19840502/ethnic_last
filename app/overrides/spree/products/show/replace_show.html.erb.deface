@@ -23,7 +23,7 @@
 
 <header>
   <ul class="options">
-    <li><%= link_to 'Back to collection', :back, title: 'Back to collection', class: 'ss-left' %></li>
+    <li><%= link_to 'Back to collection', :back, onclick: 'history.back();return false;', title: 'Back to collection', class: 'ss-left' %></li>
     <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=accurate_title%>" class="ss-like" id="facebook-share">Like</a></li>
     <li><%= link_to "Mail", email_to_friend_path("product", @product), :class => "ss-mail"%></li>
     <li>
@@ -62,7 +62,7 @@
       <h1>
         <%= @product.name %>
         <span class="product-brand">
-          <%= link_to(image_tag(@product.brand.icon(:normal), :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
+          <%= link_to(image_tag(@product.brand.icon(:original), :alt => @product.brand.name), nested_taxons_url(@product.brand)) if @product.brand.present? %>
         </span>
         <div class="favorite">
 

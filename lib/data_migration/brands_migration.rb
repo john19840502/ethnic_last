@@ -8,12 +8,11 @@ class BrandsMigration < ::Migration
 
     brands = connection.execute("select * from spree_brands;")
 
-    taxonomy = Spree::Taxonomy.create(name: 'Brands')
+    taxonomy = Spree::Taxonomy.create(name: 'Brands', is_a_filter: true)
     parent_id = taxonomy.root.id
 
     ActiveRecord::Base.no_touching do
       Spree::Product.skip_callback(:create)
-
       brands.each_with_index do |brand, index|
         taxon = taxonomy.taxons.create!(
             name: brand[1],
@@ -29,9 +28,12 @@ class BrandsMigration < ::Migration
         end
         product_ids = connection.execute("select id from spree_products where brand_id=#{brand[0]};")
         product_ids.each do |product_id|
-          pr = Spree::Product.unscoped.find(product_id).first
-          pr.taxons << taxon
-          pr.save!(:validate => false)
+          begin
+            pr = Spree::Product.unscoped.find(product_id).first
+            pr.taxons << taxon
+            pr.save!(:validate => false)
+          rescue ActiveRecord::RecordNotFound
+          end
         end
       end
       Spree::Product.set_callback(:create)

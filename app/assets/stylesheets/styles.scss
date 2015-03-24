@@ -194,7 +194,10 @@ div.container {
     min-width: 768px;
     margin: auto;
     padding: 2.5em; /* TEMP */
-    &.large { max-width: 1440px; }
+    &.large {
+      max-width: 1440px;
+      width: 100%;
+    }
 }
 
 
@@ -722,8 +725,8 @@ h1 {
 }
 #scroller{
   position: fixed;
-  bottom: -50px;
-  left: 240px;
+  bottom: 50px;
+  right: 50px;
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -739,6 +742,7 @@ h1 {
   -webkit-transition: background 0.25s linear;
   -moz-transition: background 0.25s linear;
   transition: background 0.25s linear;
+  z-index: 1000;
 
   &:hover {
     background-color: rgba(109, 109, 109, 0.80);
@@ -805,6 +809,11 @@ footer.footer {
   color: #fff;
 }
 
+/* ========================= Fixes =================================== */
+
+#products.row .product{
+  padding: 0;
+}
 
 /* ========================= Includes =================================== */
 
