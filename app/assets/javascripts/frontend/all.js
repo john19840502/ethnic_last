@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.printthis
 
 //= require spree/frontend
 // require store/spree_promo

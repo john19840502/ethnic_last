@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/fesstor/spree_favorites.git
+  revision: 3651bba85c8551f1b7d6140ebdc4415f80442b7d
+  branch: add-spree-3-0-stable
+  specs:
+    spree_favorites (3.0.0)
+      spree_core (>= 3.0.0.rc2)
+
+GIT
   remote: git://github.com/jdutil/spree_contact_us.git
   revision: a55281239b0e73a493a4e488b28ac3f56fa52d17
   specs:
@@ -435,7 +443,7 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
@@ -576,6 +584,7 @@ DEPENDENCIES
   spree_brands_on_taxons!
   spree_contact_us!
   spree_email_to_friend!
+  spree_favorites!
   spree_html_email!
   spree_image_cropper!
   spree_impressions!

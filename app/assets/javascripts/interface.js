@@ -48,9 +48,7 @@ $(function() {
         $(target).toggle();
         event.preventDefault();
     });
-
 });
-
 
 function brandToggle() {
     var $more = $('#brands-more');
@@ -260,5 +258,31 @@ function add_popup_click(){
           'left': dropdownLeft
         })
 
+    });
+}
+
+function update_favorites(count, is_added){
+    if(is_added){
+        $("#favorites span.glyphicon").addClass('red');
+    } else {
+        $("#favorites span.glyphicon").removeClass('red');
+    }
+    $("#favorites small").html(count);
+}
+
+function bind_click_on_favorites(){
+    $("a#print-favorites").click(function(event){
+        event.preventDefault();
+        $("#favorites-index .modal-content #favorites-list").printThis({
+            debug: false,
+            importCSS: false,
+            importStyle: false,
+            printContainer: true,
+            pageTitle: "Favorites",
+            removeInline: false,
+            printDelay: 700,
+            header: null,
+            formValues: true, loadCSS: "css/print-favorites.css"
+        });
     });
 }

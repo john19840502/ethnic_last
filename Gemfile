@@ -84,6 +84,7 @@ gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 
 gem 'spree_email_to_friend', github: 'spree-contrib/spree_email_to_friend', branch: '3-0-stable'
 gem 'spree_taxon_filters', github: 'pero-ict-solutions/spree_taxon_filters'
 gem 'spree_mollie', github: 'pero-ict-solutions/spree_mollie', branch: '3-0-stable'
+gem 'spree_favorites', github: 'fesstor/spree_favorites', branch: 'add-spree-3-0-stable'
 
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'
