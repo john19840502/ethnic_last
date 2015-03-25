@@ -7,8 +7,8 @@ Spree::ProductsController.class_eval do
   end
   
   def index
-    # @searcher = Spree::Config.searcher_class.new(params.merge(search: [[:brand_search, params[:keywords]]]))
-    @searcher = Search.new(params.merge(search: [[:brand_search, params[:keywords]]]))
+    @searcher = Spree::Config.searcher_class.new(params.merge(search: [[:brand_search, params[:keywords]]], currency: current_currency))
+    # @searcher = Search.new(params.merge(search: [[:brand_search, params[:keywords]]]))
     @searcher.current_user = try_spree_current_user
     @products = @searcher.retrieve_products
     @taxonomies = Spree::Taxonomy.includes(root: :children)

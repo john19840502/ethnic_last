@@ -4,6 +4,8 @@
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
   after_create :generate_meta_tags
+  after_save :add_index
+  before_destroy :remove_index
 
   scope :brand_search, -> (keywords) {
     joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and spree_taxons.name like ?', TAXONOMY_BRAND, "%#{keywords}%"])
@@ -13,6 +15,35 @@ Spree::Product.class_eval do
     joins('INNER JOIN spree_products_taxons as spree_brands_taxons on spree_brands_taxons.product_id = spree_products.id')
         .where('spree_brands_taxons.taxon_id in (?)', brands)
   }
+
+  include AlgoliaSearch
+  algoliasearch synchronous: true do
+    attribute :name, :description
+    attribute :spree_taxons do
+      taxons.map do |t|
+        {
+            taxon_name: t.name,
+        }
+      end
+    end
+    attribute :spree_variants do
+      variants.limit(250).map do |v|
+        {
+          sku: v.sku,
+          spree_option_values: v.option_values.map do |ov|
+            {
+                option_value_name: ov.name,
+            }
+          end,
+          spree_price:  v.prices.map do |p|
+            {
+                amount: p.amount
+            }
+          end
+        }
+      end
+    end
+  end
 
   def self.search_like_any(fields, values)
     where fields.map { |field|
@@ -86,5 +117,14 @@ Spree::Product.class_eval do
     meta_description << taxons_name
     self.meta_description = meta_description.flatten.join(",")
     self.save!
+  end
+
+  private
+  def add_index
+    self.index!
+  end
+
+  def remove_index
+    self.remove_from_index!
   end
 end

@@ -1,5 +1,9 @@
 Spree::Variant.class_eval do
   # attr_accessible :repeat
+  include AlgoliaSearch
+  algoliasearch synchronous: false do
+
+  end
 
   def total_on_hand
     #(1.0/0) #Infity

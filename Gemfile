@@ -93,3 +93,5 @@ gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'
 
 gem 'appsignal'
+
+gem 'algoliasearch-rails'

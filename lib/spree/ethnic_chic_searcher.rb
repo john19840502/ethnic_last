@@ -26,9 +26,13 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
   end
 
   def get_base_scope
-    base_scope = super
+		keywords_algolia = !keywords.nil? ? keywords : ''
+		base_scope = Spree::Product.algolia_search(keywords_algolia)
+
+
     if @properties[:brands].present?
-			base_scope = base_scope.by_brands(@properties[:brands])
+			# base_scope = base_scope.by_brands(@properties[:brands])
+			base_scope = Spree::Product.algolia_search(keywords_algolia, facets: 'taxon_name', "facetFilters" => ["taxon_name:#{@properties[:brands].join(' & ')}",] )
 		end
 		if @properties[:price_range].present? and base_scope.present?
 			price_range = @properties[:price_range].split(" - ")
@@ -36,7 +40,7 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 			base_scope = base_scope.joins(master: :prices).where('spree_prices.currency = ?', currency).
 					where("spree_prices.amount>=? and spree_prices.amount<=? and spree_prices.amount is not null",price_range[0], price_range[1]) if price_range[1].to_i != 0
 		end
-		base_scope = base_scope.available_to(current_user).order(:name)
+		base_scope# = base_scope.available_to(current_user).order(:name)
   end
   
 	# method should return new scope based on base_scope
