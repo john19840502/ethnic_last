@@ -26,4 +26,9 @@ Spree::Core::Engine.routes.draw do
     resources :information_requests
     resources :collection_images
   end
+  resources :favorites, only: [] do
+    collection do
+      post :send_email
+    end
+  end
 end

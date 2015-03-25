@@ -101,6 +101,13 @@ header {
                     margin-left: 0.7em;
                     display: inline-block;
                     font-size: 0.5em;
+                    &.glyphicon {
+                      margin-right: 0.8em;
+                      font-size: 1.4em;
+                      &.red {
+                        color: #f00;
+                      }
+                    }
                 }
             }
         }

@@ -41,7 +41,11 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'factory_girl', '~> 4.5'
+  gem 'ffaker'
+  gem 'capybara-webkit'
 end
 
 group :test do
@@ -80,6 +84,7 @@ gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: 
 gem 'spree_email_to_friend', github: 'spree-contrib/spree_email_to_friend', branch: '3-0-stable'
 gem 'spree_taxon_filters', github: 'pero-ict-solutions/spree_taxon_filters'
 gem 'spree_mollie', github: 'pero-ict-solutions/spree_mollie', branch: '3-0-stable'
+gem 'spree_favorites', github: 'fesstor/spree_favorites', branch: 'add-spree-3-0-stable'
 
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'

@@ -14,3 +14,5 @@
 //= require spree/frontend/spree_impressions
 //= require spree/frontend/spree_variant_options
 //= require spree/frontend/spree_mollie
+
+//= require spree/frontend/spree_favorites

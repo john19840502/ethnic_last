@@ -44,7 +44,7 @@
       <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
       <% else %>
-          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon } %>
+          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: false } %>
       <% end %>
     </ul>
     <%= paginate @products, theme: 'twitter-bootstrap-3' %>
@@ -54,18 +54,14 @@
 
 <script>
 	$('document').ready(function(){
+
 		$('ul.categories.filter:has( > li.selected)').css('display','block');
 		
 		var currency = $("a[title='Currency selection'] small").text();
-		if(currency == "USD")
-			{currency_type = '$';}
-		else
-			{currency_type = '€';}
-		$('#amount').val(currency_type+"25 - Max");
 	});
 
 	$("#slider-range").mouseup(function() {
-		var full_url = window.location.pathname + window.location.search;
+        var full_url = set_current('page', 1);
 		var price_range = $('#amount').val();
 		var currency_type;
 		var currency = $("a[title='Currency selection'] small").text();
@@ -82,7 +78,22 @@
 		  format: 'js',
 		  data: {price_range: price_range, price_filter_req: true},
 		  success: function (data) {
-			$('#products.product-listing').html(data);
+              $('#products').infinitescroll('destroy');
+              $('#products').infinitescroll({
+                  state: {
+                      isDestroyed: false,
+                      isDone: false
+                  }
+              });
+              $('#products').data('infinitescroll', null);
+
+              $('#products.product-listing').html(data);
+              $('.products-wrapper > .pagination').html($('#products > temp > .pagination').html());
+              $('#products > temp').remove();
+              initInfiniteScroll();
+
+              set_current('price_range', price_range);
+              set_current('price_filter_req', true);
 		  }
 		 });
 		
