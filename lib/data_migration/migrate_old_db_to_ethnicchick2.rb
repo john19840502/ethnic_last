@@ -708,7 +708,7 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
     # Zones
 
     change_table "spree_zones" do |t|
-      t.remove "for_popup"
+      #t.remove "for_popup"
 
       t.string   "kind"
     end

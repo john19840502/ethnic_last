@@ -1,4 +1,4 @@
-class CalculatorPreferencesMigration
+class CalculatorPreferencesMigration < ::Migration
   def migrate
 
     Spree::Preference.all.each do |p|

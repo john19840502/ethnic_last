@@ -1,4 +1,7 @@
 <ul class="bag">
+    <li>
+      <%= link_to raw("<span class=\"glyphicon glyphicon-heart #{ @product && has_favorite?(@product) ? 'red' : ''}\" aria-hidden=\"true\"></span><small>#{favorite_count}</small>"), favorites_path, id: "favorites", remote: true %>
+    </li>
   <li>
     <%
       country_val = session[:country_name]

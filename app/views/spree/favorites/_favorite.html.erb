@@ -1,0 +1,15 @@
+<li id="favorite_<%= favorite.id %>">
+  <figure>
+    <%= link_to small_image(favorite.favorable), product_url(favorite.favorable) %>
+  </figure>
+  <div class="variant-description">
+    <h2><%= link_to favorite.favorable.name, product_url(favorite.favorable) %></h2>
+    <p><%= favorite.favorable.brand.name %></p>
+    <p><%= money favorite.favorable.price %> </p>
+  </div>
+  <%= link_to favorite_url(favorite), method: :delete, class: 'delete', remote: true do %>
+      <span class="ss-delete"></span>
+  <% end %>
+  <%= hidden_field_tag "favorites[]", favorite.id %>
+</li>
+<div class="clear"></div>
