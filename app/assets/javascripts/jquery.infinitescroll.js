@@ -260,30 +260,30 @@
             if (!!opts.pathParse) {
 
                 //this._debug('pathParse manual');
-                return opts.pathParse(path, this.options.state.currPage+1);
+                return opts.pathParse(path, this.options.state);
                 
 
-            } else if (path.match(/^(.*?)\b2\b(.*?$)/)) {
-                path = path.match(/^(.*?)\b2\b(.*?$)/).slice(1);
+            } else if (path.match(/^(.*?)\b[0-9]+\b(.*?$)/)) {
+                path = path.match(/^(.*?)\b[0-9]+\b(.*?$)/).slice(1);
 
                 // if there is any 2 in the url at all.    
-            } else if (path.match(/^(.*?)2(.*?$)/)) {
+            } else if (path.match(/^(.*?)[0-9]+(.*?$)/)) {
 
                 // page= is used in django:
                 // http://www.infinite-scroll.com/changelog/comment-page-1/#comment-127
-                if (path.match(/^(.*?page=)2(\/.*|$)/)) {
-                    path = path.match(/^(.*?page=)2(\/.*|$)/).slice(1);
+                if (path.match(/^(.*?page=)[0-9]+(\/.*|$)/)) {
+                    path = path.match(/^(.*?page=)[0-9]+(\/.*|$)/).slice(1);
                     return path;
                 }
 
-                path = path.match(/^(.*?)2(.*?$)/).slice(1);
+                path = path.match(/^(.*?)[0-9]+(.*?$)/).slice(1);
 
             } else {
 
                 // page= is used in drupal too but second page is page=1 not page=2:
                 // thx Jerod Fritz, vladikoff
-                if (path.match(/^(.*?page=)1(\/.*|$)/)) {
-                    path = path.match(/^(.*?page=)1(\/.*|$)/).slice(1);
+                if (path.match(/^(.*?page=)[0-9]+(\/.*|$)/)) {
+                    path = path.match(/^(.*?page=)[0-9]+(\/.*|$)/).slice(1);
                     return path;
                 } else {
                     this._debug('Sorry, we couldn\'t parse your Next (Previous Posts) URL. Verify your the css selector points to the correct A tag. If you still get this error: yell, scream, and kindly ask for help at infinite-scroll.com.');
