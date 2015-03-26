@@ -533,8 +533,34 @@ ul.thumbnails {
     margin-top: -1em;
     &#similar-products{
       position: relative;
-      overflow: hidden;
-      height: 20em;
+
+      .similars-container {
+        overflow: hidden;
+        position: relative;
+        height: 16em;
+      }
+
+      .similar-nav {
+        background: url("http://www.bocadolobo.com/images/slider/bg_direction_nav.png") no-repeat scroll 0px 0px transparent;
+        cursor: pointer;
+        display: block;
+        height: 46px;
+        margin: 0px;
+        position: absolute;
+        text-indent: -9999px;
+        top: 45%;
+        width: 30px;
+        z-index: 100;
+        top: 5em;
+        cursor: pointer;
+        &.previous-similar {
+          right: -12px;
+          background-position: -34px 0;
+        }
+        &.next-similar {
+          left: -12px;
+        }
+      }
     }
     li {
         @include grid(16, 0.5);
