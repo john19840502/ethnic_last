@@ -19,6 +19,12 @@ Spree::Product.class_eval do
   include AlgoliaSearch
   algoliasearch synchronous: true do
     attribute :name, :description
+    attribute :brand do
+      self.brand.name if self.brand
+    end
+    attribute :master_price do
+      master.price.to_i
+    end
     attribute :spree_taxons do
       taxons.map do |t|
         {
@@ -43,6 +49,7 @@ Spree::Product.class_eval do
         }
       end
     end
+    attributesForFaceting [:brand, :master_price]
   end
 
   def self.search_like_any(fields, values)
