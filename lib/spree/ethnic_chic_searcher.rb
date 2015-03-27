@@ -30,7 +30,6 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 		base_scope = Spree::Product.algolia_search(keywords_algolia)
 
     if @properties[:brands].present?
-			# base_scope = base_scope.by_brands(@properties[:brands])
 			brands=[]
 			@properties[:brands].each{|b| brands << "brand:#{b}"}
 			base_scope = Spree::Product.algolia_search(keywords_algolia,
@@ -40,15 +39,12 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 		if @properties[:price_range].present? and base_scope.present?
 			price_range = @properties[:price_range].split(" - ")
 			currency = @properties[:currency]
-			# base_scope = base_scope.joins(master: :prices).where('spree_prices.currency = ?', currency).
-			# 		where("spree_prices.amount>=? and spree_prices.amount<=? and spree_prices.amount is not null",price_range[0], price_range[1]) if price_range[1].to_i != 0
-
 			base_scope = base_scope.select {|product| product.master.prices.first.currency == currency}.
 					select {|prod_with_curr| prod_with_curr.master.prices.first.amount.to_i >= price_range[0].to_i &&
 						prod_with_curr.master.prices.first.amount.to_i <= price_range[1].to_i && !prod_with_curr.master.prices.first.amount.nil?
 			} if price_range[1].to_i !=0
 		end
-		base_scope# = base_scope.available_to(current_user).order(:name)
+		base_scope
   end
   
 	# method should return new scope based on base_scope
