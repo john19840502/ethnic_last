@@ -22,7 +22,7 @@
 <% end %>
 
 <header>
-  <ul class="options">
+  <ul class="options" class>
     <li><%= link_to 'Back to collection', :back, onclick: 'history.back();return false;', title: 'Back to collection', class: 'ss-left' %></li>
     <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=accurate_title%>" class="ss-like" id="facebook-share">Like</a></li>
     <li><%= link_to "Mail", email_to_friend_path("product", @product), :class => "ss-mail"%></li>
@@ -56,6 +56,20 @@
       <% end %>
       </ul>
       <%end %>
+      <h3 class='similars-header'> Similar products: </h3>
+      <ul class="thumbnails" id="similar-products">
+          <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
+          <div class = 'similars-container'>
+            <% @similar.each_with_index do |product, index| %>
+                <% i = product.images.first %>
+                <li class='similar similar-<%= index.to_s %>'>
+                  <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), product_path(product) %></span>
+                  <div> <%= product.name %> </div>
+                </li>
+            <% end %>
+          </div>
+          <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
+      </ul>
     </section>
 
     <section class="halfLarge">
@@ -145,6 +159,8 @@ $(document).ready(function() {
       $(".tabContents").hide(); // hide currently visible tab content div
       $(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
     });
+
+    activateSimilarsSlider();
 
   });
 
