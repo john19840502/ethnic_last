@@ -41,7 +41,7 @@ describe Spree::LineItem, :type => :model do
       it "triggers adjustment total recalculation" do
         expect(line_item).to receive(:update_tax_charge) # Regression test for https://github.com/spree/spree/issues/4671
         expect(line_item).to receive(:recalculate_adjustments)
-        line_item.save
+        line_item.save!
       end
     end
 
@@ -175,7 +175,7 @@ describe Spree::LineItem, :type => :model do
         line_item.quantity -= 1
         line_item.target_shipment = order.shipments.first
 
-        line_item.save
+        line_item.save!
         expect(line_item.errors_on(:quantity).size).to eq(0)
       end
 
