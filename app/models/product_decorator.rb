@@ -25,6 +25,14 @@ Spree::Product.class_eval do
     attribute :master_price do
       master.price.to_i
     end
+    Spree::PaletaColor::COLORS.each do |color|
+      attribute :"color_#{color}" do
+        variant = variants.find do |v|
+          v.dominant_color.present? && v.dominant_color.include?(color.to_s)
+        end
+        variant.present?
+      end
+    end
     attribute :spree_taxons do
       taxons.map do |t|
         {
@@ -38,7 +46,7 @@ Spree::Product.class_eval do
           sku: v.sku,
           spree_option_values: v.option_values.map do |ov|
             {
-                option_value_name: ov.name,
+                option_value_name: ov.name
             }
           end,
           spree_price:  v.prices.map do |p|
@@ -49,7 +57,7 @@ Spree::Product.class_eval do
         }
       end
     end
-    attributesForFaceting [:brand, :master_price]
+    attributesForFaceting [:brand, :master_price] + Spree::PaletaColor::COLORS.map{|color| :"color_#{color}"}
   end
 
   def self.search_like_any(fields, values)

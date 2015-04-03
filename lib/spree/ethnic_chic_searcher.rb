@@ -10,6 +10,7 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
   def initialize(params)
     super
 		@properties[:brands] = params[:brands]
+		@properties[:colors] = params[:colors] if params[:colors]
 		if params["filters"].present?
 			brands_root_id = Spree::Taxon.find_by_permalink('brands').try(:name)
 			@taxon_filters = Spree::Taxon.where("name in (?) and parent_id != ?", params["filters"], brands_root_id).map(&:id)
@@ -29,13 +30,21 @@ class EthnicChicSearcher < Spree::Core::Search::TaxonFilterSearcher
 		keywords_algolia = !keywords.nil? ? keywords : ''
 		base_scope = Spree::Product.algolia_search(keywords_algolia)
 
+		facets = []
     if @properties[:brands].present?
-			brands=[]
-			@properties[:brands].each{|b| brands << "brand:#{b}"}
-			base_scope = Spree::Product.algolia_search(keywords_algolia,
-																								 { facets: 'brand',
-																									 facetFilters: "(#{brands.join(', ')})"})
+			brands = []
+			@properties[:brands].each{|b| facets << "brand:#{b.gsub('?', '')}"}
+			# facets << brands.join(',')
 		end
+		if @properties[:colors].present?
+			colors = []
+			@properties[:colors].each{|c| facets << "color_#{c}:true"}
+			# facets << colors.join(',')
+		end
+		base_scope = Spree::Product.algolia_search(keywords_algolia,
+																							 { facets: '*',
+																								 facetFilters: facets})
+
 		if @properties[:price_range].present? and base_scope.present?
 			price_range = @properties[:price_range].split(" - ")
 			currency = @properties[:currency]

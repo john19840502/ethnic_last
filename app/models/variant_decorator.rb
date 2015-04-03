@@ -1,5 +1,13 @@
+require 'spree/color_analyzer'
 Spree::Variant.class_eval do
-  # attr_accessible :repeat
+  before_save :search_color
+  has_attached_file :dominant_image,
+                    styles: {image: '100x100'},
+                    default_style: :image
+
+  validates_attachment_presence :dominant_image
+  validates_attachment_content_type :dominant_image, content_type: ['image/png', 'image/jpg']
+
   include AlgoliaSearch
   algoliasearch synchronous: false do
 
@@ -33,4 +41,8 @@ Spree::Variant.class_eval do
     self[:weight].to_f
   end
 
+  def search_color
+    image = Spree::ColorAnalyzer.new(self.dominant_image)
+    self.dominant_color = image.palete_similarity.join(',')
+  end
 end

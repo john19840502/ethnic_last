@@ -24,6 +24,7 @@
 //= require fancybox
 //= require jquery.infinitescroll
 //= require spree/frontend/all
+//= require jquery.minicolors
 // require spree/backend/all
 
 $(document).ready(function() {

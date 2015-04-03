@@ -100,3 +100,5 @@ gem 'spree_variant_options', path: 'spree_variant_options'
 gem 'appsignal'
 
 gem 'algoliasearch-rails'
+gem 'miro'
+gem 'paleta'
