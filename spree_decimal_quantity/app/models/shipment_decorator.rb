@@ -18,7 +18,7 @@ Spree::Shipment.class_eval do
       units.group_by(&:line_item_id).map do |line_item_id, units|
 
         states = {}
-        units.group_by(&:state).each { |state, iu| states[state] = iu.count }
+        units.group_by(&:state).each { |state, iu| states[state] = iu.sum(&:quantity) }
 
         line_item = units.first.line_item
         variant = units.first.variant

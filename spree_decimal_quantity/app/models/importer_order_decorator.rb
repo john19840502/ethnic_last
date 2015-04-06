@@ -14,21 +14,34 @@ Spree::Core::Importer::Order.class_eval do
 
         shipment_units.each do |su|
           ensure_variant_id_from_params(su)
+        end
 
+        shipment_units_hash = Hash[shipment_units.group_by { |su| su }.map { |su, sus| [su, sus.length] }]
+
+        shipment_units_hash.each do |shipment_unit_hash|
+          su = shipment_unit_hash.first
+          quantity = shipment_unit_hash.last
           inventory_unit = inventory_units.detect { |iu| iu.variant_id.to_i == su[:variant_id].to_i }
 
           if inventory_unit.present?
-            inventory_unit.shipment = shipment
+            if inventory_unit.quantity > quantity
+              current_iu = inventory_unit.dup
+              current_iu.quantity = quantity
+              inventory_unit.quantity -= quantity
+            else
+              current_iu = inventory_unit
+
+              # Don't assign shipments to this inventory unit more than once
+              inventory_units.delete(inventory_unit)
+            end
+            current_iu.shipment = shipment
 
             if s[:shipped_at].present?
-              inventory_unit.pending = false
-              inventory_unit.state = 'shipped'
+              current_iu.pending = false
+              current_iu.state = 'shipped'
             end
 
-            inventory_unit.save!
-
-            # Don't assign shipments to this inventory unit more than once
-            inventory_units.delete(inventory_unit)
+            current_iu.save!
           end
         end
 

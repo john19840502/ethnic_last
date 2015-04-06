@@ -372,9 +372,9 @@ describe Spree::Shipment, :type => :model do
     end
 
     it 'restocks the items' do
-      allow(shipment).to receive_message_chain(inventory_units: [mock_model(Spree::InventoryUnit, state: "on_hand", line_item: line_item, variant: variant)])
+      allow(shipment).to receive_message_chain(inventory_units: [mock_model(Spree::InventoryUnit, state: "on_hand", line_item: line_item, variant: variant, quantity: 1.99)])
       shipment.stock_location = mock_model(Spree::StockLocation)
-      expect(shipment.stock_location).to receive(:restock).with(variant, 1, shipment)
+      expect(shipment.stock_location).to receive(:restock).with(variant, 1.99, shipment)
       shipment.after_cancel
     end
 
@@ -419,9 +419,9 @@ describe Spree::Shipment, :type => :model do
     end
 
     it 'unstocks them items' do
-      allow(shipment).to receive_message_chain(inventory_units: [mock_model(Spree::InventoryUnit, line_item: line_item, variant: variant)])
+      allow(shipment).to receive_message_chain(inventory_units: [mock_model(Spree::InventoryUnit, line_item: line_item, variant: variant, quantity: 1.99)])
       shipment.stock_location = mock_model(Spree::StockLocation)
-      expect(shipment.stock_location).to receive(:unstock).with(variant, 1, shipment)
+      expect(shipment.stock_location).to receive(:unstock).with(variant, 1.99, shipment)
       shipment.after_resume
     end
 
@@ -670,14 +670,14 @@ describe Spree::Shipment, :type => :model do
     let(:inventory_units) { double }
 
     let(:params) do
-      { variant_id: variant.id, state: 'on_hand', order_id: order.id, line_item_id: line_item.id }
+      { variant_id: variant.id, state: 'on_hand', order_id: order.id, line_item_id: line_item.id, quantity: 1.99 }
     end
 
     before { allow(shipment).to receive_messages inventory_units: inventory_units }
 
     it "associates variant and order" do
       expect(inventory_units).to receive(:create).with(params)
-      unit = shipment.set_up_inventory('on_hand', variant, order, line_item)
+      unit = shipment.set_up_inventory('on_hand', variant, order, line_item, 1.99)
     end
   end
 

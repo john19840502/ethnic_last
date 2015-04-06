@@ -313,9 +313,9 @@ module Spree
         it "allocates inventory units to the correct shipments" do
           order = Importer::Order.import(user, params)
 
-          expect(order.inventory_units.count).to eq 5
-          expect(order.shipments.first.inventory_units.count).to eq 3
-          expect(order.shipments.last.inventory_units.count).to eq 2
+          expect(order.inventory_units.sum(:quantity)).to eq 5
+          expect(order.shipments.first.inventory_units.sum(:quantity)).to eq 3
+          expect(order.shipments.last.inventory_units.sum(:quantity)).to eq 2
         end
 
         it "accepts admin name for stock location" do

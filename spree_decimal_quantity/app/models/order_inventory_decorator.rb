@@ -66,7 +66,7 @@ Spree::OrderInventory.class_eval do
         quantity_to_remove = 0
       else
         quantity_to_remove -= inventory_unit.quantity
-        inventory_unit.destroy!
+        inventory_unit.destroy
       end
     end
     removed_quantity = quantity - quantity_to_remove
