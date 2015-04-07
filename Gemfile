@@ -96,5 +96,6 @@ gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
 gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'
 gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'
+gem 'spree_decimal_quantity', path: 'spree_decimal_quantity'
 
 gem 'appsignal'

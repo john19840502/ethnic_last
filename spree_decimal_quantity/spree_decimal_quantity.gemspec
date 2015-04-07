@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   # s.add_development_dependency 'webmock'
   # s.add_dependency(%q<email_spec>, ["~> 1.6"])
 
-  s.add_dependency 'activemerchant', '~> 1.47.0'
+  s.add_dependency 'activemerchant', '~> 1.46.0'
   s.add_dependency 'acts_as_list', '~> 0.6'
   s.add_dependency 'awesome_nested_set', '~> 3.0.1'
   s.add_dependency 'carmen', '~> 1.0.0'
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'paperclip', '~> 4.2.0'
   s.add_dependency 'paranoia', '~> 2.1.0'
   s.add_dependency 'premailer-rails'
-  s.add_dependency 'rails', '~> 4.2.1'
+  s.add_dependency 'rails', '~> 4.2.0'
   s.add_dependency 'ransack', '~> 1.4.1'
   s.add_dependency 'responders'
   s.add_dependency 'state_machines-activerecord', '~> 0.2'

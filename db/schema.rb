@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310182124) do
+ActiveRecord::Schema.define(version: 20150407075020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -237,11 +237,12 @@ ActiveRecord::Schema.define(version: 20150310182124) do
     t.string   "state",        limit: 255
     t.integer  "variant_id"
     t.integer  "order_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
     t.integer  "shipment_id"
-    t.boolean  "pending",                  default: true
+    t.boolean  "pending",                                           default: true
     t.integer  "line_item_id"
+    t.decimal  "quantity",                 precision: 10, scale: 2, default: 1.0
   end
 
   add_index "spree_inventory_units", ["line_item_id"], name: "index_spree_inventory_units_on_line_item_id", using: :btree
@@ -252,7 +253,7 @@ ActiveRecord::Schema.define(version: 20150310182124) do
   create_table "spree_line_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "variant_id"
-    t.integer  "quantity",                                                    null: false
+    t.decimal  "quantity",             precision: 10, scale: 2, default: 0.0, null: false
     t.decimal  "price",                precision: 8,  scale: 2,               null: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
@@ -349,7 +350,7 @@ ActiveRecord::Schema.define(version: 20150310182124) do
     t.decimal  "promo_total",                        precision: 10, scale: 2, default: 0.0
     t.string   "channel",                                                     default: "spree"
     t.decimal  "included_tax_total",                 precision: 10, scale: 2, default: 0.0,     null: false
-    t.integer  "item_count",                                                  default: 0
+    t.decimal  "item_count",                         precision: 10, scale: 2, default: 0.0
     t.integer  "approver_id"
     t.datetime "approved_at"
     t.boolean  "confirmation_delivered",                                      default: false
@@ -553,7 +554,7 @@ ActiveRecord::Schema.define(version: 20150310182124) do
   create_table "spree_promotion_action_line_items", force: :cascade do |t|
     t.integer "promotion_action_id"
     t.integer "variant_id"
-    t.integer "quantity",            default: 1
+    t.decimal "quantity",            precision: 10, scale: 2, default: 0.0
   end
 
   add_index "spree_promotion_action_line_items", ["promotion_action_id"], name: "idx_spree_promotion_action_line_items_index_spree_promotion_33", using: :btree
@@ -864,10 +865,10 @@ ActiveRecord::Schema.define(version: 20150310182124) do
   create_table "spree_stock_items", force: :cascade do |t|
     t.integer  "stock_location_id"
     t.integer  "variant_id"
-    t.integer  "count_on_hand",     default: 0,     null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "backorderable",     default: false
+    t.decimal  "count_on_hand",     precision: 10, scale: 2, default: 0.0,   null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.boolean  "backorderable",                              default: false
     t.datetime "deleted_at"
   end
 
@@ -904,10 +905,10 @@ ActiveRecord::Schema.define(version: 20150310182124) do
 
   create_table "spree_stock_movements", force: :cascade do |t|
     t.integer  "stock_item_id"
-    t.integer  "quantity",        default: 0
+    t.decimal  "quantity",        precision: 10, scale: 2, default: 0.0
     t.string   "action"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "originator_id"
     t.string   "originator_type"
   end
