@@ -203,7 +203,7 @@ describe Spree::LineItem, :type => :model do
         line_item.target_shipment = order.shipments.first
 
         line_item.save
-        expect(line_item.errors_on(:quantity).size).to eq(0)
+        expect(line_item.reload.errors_on(:quantity).size).to eq(0)
       end
 
       it "doesnt allow to increase quantity over stock availability" do

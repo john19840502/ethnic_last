@@ -22,7 +22,7 @@ module Spree
       it 'should consider existing inventory_units sufficient' do
         allow_any_instance_of(Stock::Quantifier).to receive_messages(can_supply?: false)
         expect(line_item).not_to receive(:errors)
-        allow(line_item).to receive_messages(inventory_units: [double] * 5)
+        allow(line_item).to receive_messages(inventory_units: [double(quantity: 1.0)] * 5)
         subject.validate(line_item)
       end
     end

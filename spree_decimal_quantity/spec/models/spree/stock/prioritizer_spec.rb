@@ -12,7 +12,7 @@ module Spree
       end
 
       def build_inventory_unit
-        mock_model(InventoryUnit, variant: variant).tap do |unit|
+        mock_model(InventoryUnit, variant: variant, quantity: 1.0).tap do |unit|
           inventory_units << unit
         end
       end

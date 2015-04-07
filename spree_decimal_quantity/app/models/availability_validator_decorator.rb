@@ -1,6 +1,6 @@
 Spree::Stock::AvailabilityValidator.class_eval do
   def validate(line_item)
-    unit_count = line_item.inventory_units.sum(:quantity)
+    unit_count = line_item.inventory_units.to_a.sum(&:quantity)
     return if unit_count >= line_item.quantity
     quantity = line_item.quantity - unit_count
 
