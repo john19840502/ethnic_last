@@ -113,7 +113,7 @@ describe "Checkout", js: true do
     FactoryGirl.create(:product_option_type, product: wallpapers1, option_type: option_type)
 
     generate_for_option_values([wallpapers1, wallpapers2, wallpapers3])
-    update_weight_for_all_variants_of([wallpapers1, wallpapers2, wallpapers3], 2)
+    update_weight_for_all_variants_of([wallpapers1, wallpapers2, wallpapers3], 200)
 
     global_zone = FactoryGirl.create(:global_zone)
     calculator_preferences = { min_weight_kg: 0.01, starting_price: 7, price_per_kg: 0.52, min_purchase_amount_for_free_shipping: 350 }
@@ -139,10 +139,8 @@ describe "Checkout", js: true do
 
       it 'can order product by meters' do
         add_wallpapers1_to_cart
-        save_and_open_page
         fill_in 'order_line_items_attributes_0_quantity', with: '1.3'
         click_button 'update-button'
-        save_and_open_page
         expect(page).to have_content(/(\$|€)206\.7/)
         go_to_delivery_step
         expect(page).to have_content(/test shipping method (€|\$)7\.52/)
@@ -152,28 +150,28 @@ describe "Checkout", js: true do
         expect(page).to have_css('dl.advanced dd', text: '1.3')
       end
 
-      # it 'can order product by meters and quantity' do
-      #   add_wallpapers1_to_cart
-      #   fill_in 'order_line_items_attributes_0_quantity', with: '1.5'
-      #   click_button 'update-button'
-      #   add_ruby_on_rails_bag_to_cart(expected_cart_items: 1.5)
-      #   expect(page).to have_content(/(€|\$)261\.49/)
-      #   go_to_delivery_step
-      #   expect(page).to have_content(/test shipping method (€|\$)7\.52/)
-      #   click_link_or_button 'Save and Continue'
-      #   pay_by('PayPal')
-      #   expect(page).to have_css('dl.advanced dt', text: 'Quantity')
-      #   expect(page).to have_css('dl.advanced dd', text: '1.5')
-      # end
-      #
-      # it 'cannot order less then 1 meter' do
-      #   add_wallpapers1_to_cart
-      #   fill_in 'order_line_items_attributes_0_quantity', with: '0.6'
-      #   click_button 'update-button'
-      #   expect( find_field('order_line_items_attributes_0_quantity').value ).to eq('1.0')
-      # end
+      it 'can order product by meters and quantity' do
+        Spree::Config.track_inventory_levels = false
+        add_wallpapers1_to_cart
+        fill_in 'order_line_items_attributes_0_quantity', with: '1.5'
+        click_button 'update-button'
+        add_ruby_on_rails_bag_to_cart(expected_cart_items: 1.5)
 
+        expect(page).to have_content(/(€|\$)261\.49/)
+        go_to_delivery_step
+        expect(page).to have_content(/test shipping method (€|\$)7\.52/)
+        click_link_or_button 'Save and Continue'
+        pay_by('PayPal')
+        expect(page).to have_css('dl.advanced dt', text: 'Quantity')
+        expect(page).to have_css('dl.advanced dd', text: '1.5')
+      end
 
+      it 'cannot order less then 1 meter' do
+        add_wallpapers1_to_cart
+        fill_in 'order_line_items_attributes_0_quantity', with: '0.6'
+        click_button 'update-button'
+        expect( find_field('order_line_items_attributes_0_quantity').value ).to eq('1.0')
+      end
     end
   end
 end
