@@ -4,7 +4,7 @@
 		  <%= link_to product, class: 'info', itemprop: "name", title: product.name, onClick: "set_current('page',#{page.to_s}); return true;" do %>
 			<%= product_image(product, itemprop: "image") %>
 			<div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
-			<% if product.brand %>
+			<% if product.brand && product.brand.icon? %>
                 <span class="product-brand" style="background-image: url('<%= product.brand.icon(:original) %>');"></span>
             <% end %>
 		  <% end %>
