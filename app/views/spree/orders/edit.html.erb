@@ -1,7 +1,7 @@
 <section class="focus">
   <header>
     <h1>Shopping bag</h1>
-    <span class="close"><a href="<%=redirect_back_link%>" title="Close"></a></span>
+    <span class="close"><a href="<%= session[:go_back_to] || redirect_back_link%>" title="Close"></a></span>
   </header>
   <% if @order.line_items.empty? %>
     <section><p>Your shopping bag is empty</p></section>
