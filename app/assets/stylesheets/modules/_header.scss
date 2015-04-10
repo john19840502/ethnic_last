@@ -27,11 +27,25 @@ header {
     }
     ul.options {
         @include grid(36);
+        @include col(23);
+        li {
+
+        }
         @include clearfix;
         margin-bottom: $margin-bottom / 2;
         li {
             float: left;
             margin-right: 0.4em;
+            list-style-type: none;
+            &:last-child {
+              float:none;
+              overflow: hidden;
+              margin-right: 0px;
+            }
+            input#keywords{
+              width: 100%;
+              margin-right: 0px;
+            }
         }
         a {
             display: block;
