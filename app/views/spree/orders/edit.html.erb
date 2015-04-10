@@ -7,7 +7,7 @@
     <section><p>Your shopping bag is empty</p></section>
   <% else %>
     <ul class="shopping-bag">
-    <%= form_for @order, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
+    <%= form_for @order.reload, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
       <%= order_form.fields_for :line_items do |item_form| %>
         <%
           variant = item_form.object.variant
@@ -24,7 +24,7 @@
           <div class="variant-description">
             <h2><%= link_to variant.product.name, product_path(variant.product) %></h2>
             <%= render partial: 'options', locals: { options: variant.sorted_option_values } %>
-            <%= item_form.number_field :quantity, :min => 0, :class => "line_item_quantity", :size => 5 %>
+            <%= item_form.number_field :quantity, :min => 1, :class => "line_item_quantity", :size => 5, step: line_item.step, value: line_item.quantity %>
             <em><strong><%= money_with_currency line_item.price %></strong></em>
           </div>
           <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>

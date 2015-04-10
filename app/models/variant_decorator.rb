@@ -29,4 +29,8 @@ Spree::Variant.class_eval do
     self[:weight].to_f
   end
 
+  def quantity_in_centimeters?
+    self.option_values.map{|v| v.name.strip}.include?('Meter')
+  end
+
 end
