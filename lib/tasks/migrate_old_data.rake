@@ -266,4 +266,19 @@ INSERT INTO schema_migrations (version) VALUES
   Rake::Task["db:schema:dump"].execute
   puts "Schema dumped!"
 
+  Spree::Store.create(name: 'Ethnicchic',
+                      url: 'http://ethnicchic.com/',
+                      meta_description: 'Ethnicchic',
+                      meta_keywords: 'Ethnicchic',
+                      seo_title: 'Ethnicchic',
+                      mail_from_address: 'info@ethnicchic.com',
+                      default_currency: 'EUR',
+                      code: 'ethnicchic',
+                      default: true )
+
+  Spree::Page.all.each do |page|
+    page.stores << Spree::Store.last
+    page.save!
+  end
+
 end
