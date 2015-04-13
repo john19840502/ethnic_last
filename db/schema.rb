@@ -1087,22 +1087,26 @@ ActiveRecord::Schema.define(version: 20150413113953) do
   add_index "spree_users", ["spree_api_key"], name: "index_spree_users_on_spree_api_key", using: :btree
 
   create_table "spree_variants", force: :cascade do |t|
-    t.string   "sku",               limit: 255,                         default: "",    null: false
-    t.decimal  "weight",                        precision: 8, scale: 2
-    t.decimal  "height",                        precision: 8, scale: 2
-    t.decimal  "width",                         precision: 8, scale: 2
-    t.decimal  "depth",                         precision: 8, scale: 2
+    t.string   "sku",                         limit: 255,                         default: "",    null: false
+    t.decimal  "weight",                                  precision: 8, scale: 2
+    t.decimal  "height",                                  precision: 8, scale: 2
+    t.decimal  "width",                                   precision: 8, scale: 2
+    t.decimal  "depth",                                   precision: 8, scale: 2
     t.datetime "deleted_at"
-    t.boolean  "is_master",                                             default: false
+    t.boolean  "is_master",                                                       default: false
     t.integer  "product_id"
-    t.decimal  "cost_price",                    precision: 8, scale: 2
+    t.decimal  "cost_price",                              precision: 8, scale: 2
     t.integer  "position"
     t.string   "cost_currency"
-    t.boolean  "track_inventory",                                       default: true
+    t.boolean  "track_inventory",                                                 default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
-    t.integer  "stock_items_count",                                     default: 0,     null: false
+    t.integer  "stock_items_count",                                               default: 0,     null: false
     t.integer  "repeat"
+    t.string   "dominant_image_file_name"
+    t.string   "dominant_image_file_size"
+    t.string   "dominant_image_content_type"
+    t.string   "dominant_color"
   end
 
   add_index "spree_variants", ["deleted_at"], name: "index_spree_variants_on_deleted_at", using: :btree

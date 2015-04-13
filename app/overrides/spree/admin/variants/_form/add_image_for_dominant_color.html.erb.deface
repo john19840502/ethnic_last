@@ -1,0 +1,16 @@
+<!-- insert_bottom "[data-hook='admin_variant_form_additional_fields']" -->
+<div class="form-group" data-hook="dominant_options">
+    <%= f.field_container :dominant_image do %>
+        <%= f.label :dominant_image %>
+        <%= f.file_field :dominant_image, class: 'form-control' %>
+        <%- if @variant.dominant_image%>
+            <%= image_tag @variant.dominant_image, style: 'height: 38px;position: relative;top: -38px;left: 90%;'%>
+        <% end %>
+    <% end %>
+</div>
+<div class="form-group">
+    <%= f.field_container :dominant_color do %>
+        <%= f.label 'Dominant colors image' %>
+        <%= f.text_field :dominant_color, class: 'form-control' %>
+    <% end %>
+</div>

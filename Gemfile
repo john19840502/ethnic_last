@@ -99,3 +99,7 @@ gem 'spree_variant_options', path: 'spree_variant_options'
 gem 'spree_decimal_quantity', path: 'spree_decimal_quantity'
 
 gem 'appsignal'
+
+gem 'algoliasearch-rails'
+gem 'miro'
+gem 'paleta'

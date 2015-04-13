@@ -13,6 +13,7 @@
  *= require fancybox
  *= require frontend/all
  *= require backend/all
+ *= require jquery.minicolors
  *= require styles
  * require_tree .
 */

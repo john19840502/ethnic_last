@@ -1,6 +1,11 @@
 Spree::Taxon.attachment_definitions[:icon][:styles] = { small: '100x100>' }
 
 Spree::Taxon.class_eval do
+  include AlgoliaSearch
+  algoliasearch synchronous: false do
+
+  end
+
   def fetch_uniq_product_brands
     Rails.cache.fetch("brands-for-taxon-#{id}") do
       root_id = Spree::Taxon.find_by_permalink('brands').try(:id)
