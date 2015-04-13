@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree_mollie.git
-  revision: 61923a1a87bfac11c44cfc6a9b1353b33d50d90f
+  revision: 74244613f173ebd8e87eb464dfbbc64eda288f7a
   branch: 3-0-stable
   specs:
     spree_mollie (3.0.0.beta)
@@ -56,15 +56,15 @@ GIT
 
 GIT
   remote: git://github.com/spree-contrib/spree_mail_settings.git
-  revision: f8824df89530c1da1c8669ec5292ae7a4e6e79b8
+  revision: 13fd1efad2d5242977de2d6be6abac6dc8154dfa
   branch: 3-0-stable
   specs:
     spree_mail_settings (2.2.0)
-      spree_backend (~> 3.0.0.rc2)
+      spree_backend (~> 3.0.0)
 
 GIT
   remote: git://github.com/spree/spree.git
-  revision: 103b54cf0556b500a321a73ee593f1bfcd570177
+  revision: 56ae9ba1dc44df2af6c83446ce805f519cbf19a5
   branch: 3-0-stable
   specs:
     spree (3.0.0)
@@ -89,7 +89,7 @@ GIT
     spree_cmd (3.0.0)
       thor (~> 0.14)
     spree_core (3.0.0)
-      activemerchant (~> 1.46.0)
+      activemerchant (~> 1.47.0)
       acts_as_list (~> 0.6)
       awesome_nested_set (~> 3.0.1)
       cancancan (~> 1.10.1)
@@ -125,7 +125,7 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
-  revision: 07f16255c8e83cf5763f2c3510444ee1b4cdc4dd
+  revision: 347428395b8c06c79c3bfe516404314a1c365839
   branch: 3-0-stable
   specs:
     spree_auth_devise (3.0.0)
@@ -133,7 +133,7 @@ GIT
       devise-encryptable (= 0.1.2)
       json
       multi_json
-      spree_core (~> 3.0.0.beta)
+      spree_core (~> 3.0.0)
 
 PATH
   remote: spree-html-email
@@ -149,6 +149,36 @@ PATH
     spree_brands_on_taxons (3.0.0.rc2)
       aws-sdk (~> 1.61.0)
       spree_core (~> 3.0.0.rc2)
+
+PATH
+  remote: spree_decimal_quantity
+  specs:
+    spree_decimal_quantity (3.0.0)
+      activemerchant (~> 1.47.0)
+      acts_as_list (~> 0.6)
+      awesome_nested_set (~> 3.0.1)
+      cancancan (~> 1.10.1)
+      carmen (~> 1.0.0)
+      deface (~> 1.0.0)
+      ffaker (~> 1.16)
+      font-awesome-rails (~> 4.0)
+      friendly_id (~> 5.1.0)
+      highline (~> 1.6.18)
+      httparty (~> 0.11)
+      json (~> 1.7)
+      kaminari (~> 0.15, >= 0.15.1)
+      monetize (~> 1.1)
+      paperclip (~> 4.2.0)
+      paranoia (~> 2.1.0)
+      premailer-rails
+      rails (~> 4.2.0)
+      ransack (~> 1.4.1)
+      responders
+      spree_core (~> 3.0.0)
+      state_machines-activerecord (~> 0.2)
+      stringex
+      truncate_html (= 0.9.2)
+      twitter_cldr (~> 3.0)
 
 PATH
   remote: spree_impressions
@@ -217,7 +247,7 @@ GEM
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
-    activemerchant (1.46.0)
+    activemerchant (1.47.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
@@ -237,18 +267,18 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.6.0)
       activerecord (>= 3.0)
-    addressable (2.3.7)
-    algoliasearch (1.4.0)
+    addressable (2.3.8)
+    algoliasearch (1.4.1)
       httpclient (~> 2.4)
       json (>= 1.5.1)
-    algoliasearch-rails (1.11.17)
+    algoliasearch-rails (1.11.18)
       algoliasearch (>= 1.2.14)
       json (>= 1.5.1)
     appsignal (0.11.7)
       rack
       thread_safe
     arel (6.0.0)
-    autoprefixer-rails (5.1.7.1)
+    autoprefixer-rails (5.1.8.1)
       execjs
       json
     awesome_nested_set (3.0.2)
@@ -270,12 +300,12 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.2.2)
-    byebug (4.0.3)
+    byebug (4.0.5)
       columnize (= 0.9.0)
     callsite (0.0.11)
     camertron-eprun (1.1.0)
     cancancan (1.10.1)
-    canonical-rails (0.0.8)
+    canonical-rails (0.0.9)
       rails (>= 3.1, < 5.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -283,7 +313,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.4.1)
+    capybara-webkit (1.5.0)
       capybara (>= 2.3.0, < 2.5.0)
       json
     carmen (1.0.2)
@@ -298,10 +328,10 @@ GEM
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     color (1.7.1)
     colorize (0.7.5)
     columnize (0.9.0)
@@ -325,7 +355,7 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    execjs (2.4.0)
+    execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     fancybox2-rails (0.2.8)
@@ -336,10 +366,9 @@ GEM
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     geoip (1.5.0)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     highline (1.6.21)
-    hike (1.2.3)
     htmlentities (4.3.3)
     httparty (0.13.3)
       json (~> 1.8)
@@ -347,7 +376,7 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     interception (0.5)
-    jbuilder (2.2.12)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -385,7 +414,7 @@ GEM
       oily_png
     mollie-ruby (0.2.0)
       httparty
-    monetize (1.1.0)
+    monetize (1.2.0)
       money (~> 6.5.0)
     money (6.5.1)
       i18n (>= 0.6.4, <= 0.7.0)
@@ -406,7 +435,7 @@ GEM
     paranoia (2.1.1)
       activerecord (~> 4.0)
     pg (0.18.1)
-    polyamorous (1.1.0)
+    polyamorous (1.2.0)
       activerecord (>= 3.0)
     polyglot (0.3.5)
     premailer (1.8.4)
@@ -422,7 +451,7 @@ GEM
     pry-byebug (3.1.0)
       byebug (~> 4.0)
       pry (~> 0.10)
-    pry-rails (0.3.3)
+    pry-rails (0.3.4)
       pry (>= 0.9.10)
     pry-rescue (1.4.1)
       interception (>= 0.5)
@@ -473,12 +502,13 @@ GEM
       i18n
       polyamorous (~> 1.1)
     rdoc (4.2.0)
+      json (~> 1.4)
     recaptcha (0.4.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rspec-core (3.2.2)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-mocks (3.2.1)
@@ -494,7 +524,7 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     sass (3.4.13)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -506,11 +536,8 @@ GEM
     select2-rails (3.5.9.1)
       thor (~> 0.14)
     slop (3.6.0)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.0.0)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -598,6 +625,7 @@ DEPENDENCIES
   spree_auth_devise!
   spree_brands_on_taxons!
   spree_contact_us!
+  spree_decimal_quantity!
   spree_email_to_friend!
   spree_favorites!
   spree_html_email!

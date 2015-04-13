@@ -52,7 +52,7 @@
 
 
 <script>
-	$('#submit_values').live("click", function(e){
+	$('#submit_values').on("click", function(e){
 		
 		var need_type = $(".wallpaper_type input[type='radio']:checked").val();
 		var width = parseFloat($('#width').val());

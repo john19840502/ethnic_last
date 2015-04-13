@@ -45,4 +45,9 @@ Spree::Variant.class_eval do
     image = Spree::ColorAnalyzer.new(self.dominant_image)
     self.dominant_color = image.palete_similarity.join(',')
   end
+
+  def quantity_in_centimeters?
+    self.option_values.map{|v| v.name.strip}.include?('Meter')
+  end
+
 end

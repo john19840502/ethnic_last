@@ -15,6 +15,7 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+require 'spree_mollie/factories/payment_method_factory'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -28,6 +29,7 @@ RSpec.configure do |config|
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
+    Rails.cache.clear
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
@@ -57,3 +59,5 @@ Capybara.javascript_driver = ENV['USE_SELENIUM_FOR_CAPYBARA'] ? :selenium : :web
 #     config.hook_into :webmock
 #     config.ignore_localhost = true
 #   end
+
+ENV['MOLLIE_TEST_API_KEY'] ||= 'test_pw5ZHNihuiFKefzBwZVwAdKXt5C4Xe'
