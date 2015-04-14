@@ -36,7 +36,8 @@ Spree::Product.class_eval do
     attribute :spree_taxons do
       taxons.map do |t|
         {
-            taxon_name: t.name,
+            taxonomy: t.taxonomy.name,
+            taxon_name: t.name
         }
       end
     end
