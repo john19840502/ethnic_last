@@ -1,17 +1,11 @@
 require 'spree/color_analyzer'
 Spree::Variant.class_eval do
-  before_save :search_color
   has_attached_file :dominant_image,
                     styles: {image: '100x100'},
                     default_style: :image
 
   validates_attachment_presence :dominant_image
   validates_attachment_content_type :dominant_image, content_type: ['image/png', 'image/jpg']
-
-  include AlgoliaSearch
-  algoliasearch synchronous: false do
-
-  end
 
   def total_on_hand
     #(1.0/0) #Infity
@@ -39,11 +33,6 @@ Spree::Variant.class_eval do
 
   def weight
     self[:weight].to_f
-  end
-
-  def search_color
-    image = Spree::ColorAnalyzer.new(self.dominant_image)
-    self.dominant_color = image.palete_similarity.join(',')
   end
 
   def quantity_in_centimeters?

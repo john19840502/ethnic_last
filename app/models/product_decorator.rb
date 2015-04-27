@@ -1,10 +1,7 @@
-
-#Spree::Product.attachment_definitions[:pdf_file][:path] = '/spree/product_pdf_files/:id/:style/:basename.:extension'
-
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
   after_create :generate_meta_tags
-  after_save :add_index
+  #after_save :add_index
   before_destroy :remove_index
 
   scope :brand_search, -> (keywords) {
@@ -16,49 +13,42 @@ Spree::Product.class_eval do
         .where('spree_brands_taxons.taxon_id in (?)', brands)
   }
 
+  def index_taxons
+    hashes = self.taxons.collect {|t| {t.taxonomy.name.to_sym => t.name}  }
+    {}.tap{ |r| hashes.each{ |h| h.each{ |k,v| (r[k]||=[]) << v } } }
+  end
+
+  def index_taxon_keys
+    index_taxons.keys
+  end
+
+  def brand_enabled?
+    self.brand.try(:enabled)
+  end
+
+
   include AlgoliaSearch
   algoliasearch synchronous: true do
-    attribute :name, :description
-    attribute :brand do
-      self.brand.name if self.brand
+    attribute :name, :description, :sku
+
+    attribute :variant_skus do
+      self.variants.collect(&:sku).compact - [""]
     end
-    attribute :master_price do
-      master.price.to_i
+
+    attribute :prices do
+      self.prices.map(&:price).map(&:to_f).uniq.sort
     end
-    Spree::PaletaColor::COLORS.each do |color|
-      attribute :"color_#{color}" do
-        variant = variants.find do |v|
-          v.dominant_color.present? && v.dominant_color.include?(color.to_s)
-        end
-        variant.present?
-      end
+
+    attribute :taxons do
+      index_taxons
     end
-    attribute :spree_taxons do
-      taxons.map do |t|
-        {
-            taxonomy: t.taxonomy.name,
-            taxon_name: t.name
-        }
-      end
-    end
-    attribute :spree_variants do
-      variants.limit(250).map do |v|
-        {
-          sku: v.sku,
-          spree_option_values: v.option_values.map do |ov|
-            {
-                option_value_name: ov.name
-            }
-          end,
-          spree_price:  v.prices.map do |p|
-            {
-                amount: p.amount
-            }
-          end
-        }
-      end
-    end
-    attributesForFaceting [:brand, :master_price] + Spree::PaletaColor::COLORS.map{|color| :"color_#{color}"}
+
+    # attribute :colors do
+    #   self.variants_colors
+    # end
+    attributesForFaceting [:taxons, :prices]
+
+    # attributesForFaceting [:taxons, :prices, :colors]
   end
 
   def self.search_like_any(fields, values)

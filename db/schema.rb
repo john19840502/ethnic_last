@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413113953) do
+ActiveRecord::Schema.define(version: 20150427214043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,11 +282,12 @@ ActiveRecord::Schema.define(version: 20150413113953) do
   add_index "spree_log_entries", ["source_id", "source_type"], name: "idx_spree_log_entries_index_spree_log_entries_on_source_id__11", using: :btree
 
   create_table "spree_option_types", force: :cascade do |t|
-    t.string   "name",         limit: 100
-    t.string   "presentation", limit: 100
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "position",                 default: 0, null: false
+    t.string   "name",            limit: 100
+    t.string   "presentation",    limit: 100
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "position",                    default: 0,     null: false
+    t.boolean  "as_color_filter",             default: false
   end
 
   add_index "spree_option_types", ["position"], name: "index_spree_option_types_on_position", using: :btree
