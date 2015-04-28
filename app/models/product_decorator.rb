@@ -26,6 +26,20 @@ Spree::Product.class_eval do
     self.brand.try(:enabled)
   end
 
+  def variant_colors
+    self.option_types.where(as_color_filter:true).each do |ot|
+      url = ot.image(:original)
+      colors = Miro::DominantColors.new(url)
+      hex_colors = colors.to_hex
+      percentages = colors.by_percentage
+      dominant_colors = []
+      hex_colors.each_with_index do |c,i|
+        dominant_colors << c if percentages[i] > 0.30
+      end
+      dominant_colors
+    end
+  end
+
 
   include AlgoliaSearch
   algoliasearch synchronous: true do
