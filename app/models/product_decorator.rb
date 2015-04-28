@@ -58,7 +58,7 @@ Spree::Product.class_eval do
     end
 
     attribute :colors do
-      self.variants_colors
+      self.variant_colors
     end
 
     attributesForFaceting [:taxons, :prices, :colors]
