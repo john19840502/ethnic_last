@@ -28,15 +28,17 @@ Spree::Product.class_eval do
 
   def variant_colors
     self.option_types.where(as_color_filter: true).each do |ot|
-      url = ot.image(:original)
-      colors = Miro::DominantColors.new(url)
-      hex_colors = colors.to_hex
-      percentages = colors.by_percentage
       dominant_colors = []
-      hex_colors.each_with_index do |c,i|
-        dominant_colors << c if percentages[i] > 0.30
+      ot.option_values.each do |ov|
+        url = ov.image(:original)
+        colors = Miro::DominantColors.new(url)
+        hex_colors = colors.to_hex
+        percentages = colors.by_percentage
+        hex_colors.each_with_index do |c,i|
+          dominant_colors << c if percentages[i] > 0.30
+        end
       end
-      dominant_colors
+      dominant_colors.uniq
     end
   end
 
