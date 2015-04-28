@@ -1,5 +1,7 @@
 Spree::OptionType.class_eval do
   def dominant_colors
+    return [] unless self.as_color_filter
+
     Miro.options[:resolution] = '250x250'
     Miro.options[:color_count] = 4
     Miro.options[:method] = 'pixel_group'
