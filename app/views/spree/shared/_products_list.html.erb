@@ -5,9 +5,9 @@
 			<%= product_image(product, itemprop: "image") %>
 			<div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
 			<% if product.brand && product.brand.icon? %>
-                <span class="product-brand" style="background-image: url('<%= product.brand.icon(:original) %>');"></span>
-            <% end %>
-		  <% end %>
+				<span class="product-brand" style="background-image: url('<%= product.brand.icon(:original) %>');"></span>
+			<% end %>
+		<% end %>
 	  </li>
 	<% end %>
 <% end %>

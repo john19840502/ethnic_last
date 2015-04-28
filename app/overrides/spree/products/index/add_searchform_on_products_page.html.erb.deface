@@ -11,7 +11,7 @@
     <header class="back-to-products">
 		<ul class="options">
 		  <li>
-			<a class="ss-left" title="Back to collection" href="/products">Back to collection</a>
+			<a class="ss-left" title="Back to collection" href="/collection">Back to collection</a>
 		  </li>
 		</ul>
 	</header>

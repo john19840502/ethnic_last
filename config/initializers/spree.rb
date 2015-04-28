@@ -6,7 +6,7 @@ Spree.config do |config|
   # nl_id = Spree::Country.where(iso: 'NL').try(:first).try(:id)
   # config.default_country_id = nl_id unless nl_id.nil?
 
-  config.searcher_class = EthnicChicSearcher
+  config.searcher_class = Search
 end
 
 Spree.user_class = 'Spree::User'

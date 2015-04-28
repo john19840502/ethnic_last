@@ -1,16 +1,36 @@
-class Search < Spree::Core::Search::Base
+class Search
+  attr_accessor :properties
+  attr_accessor :current_user
+  attr_accessor :current_currency
+
+  def initialize(params)
+    @properties = {}
+    setup_search(params)
+  end
 
   def retrieve_products
-    if keywords
-      @products = Spree::Product.algolia_search(keywords)
-    else
-      @products = Spree::Product.active
-    end
-    # curr_page = page || 1
-
-    # unless Spree::Config.show_products_without_price
-    #   @products = @products.where("spree_prices.amount IS NOT NULL").where("spree_prices.currency" => current_currency)
-    # end
-    # @products = @products.page(curr_page).per(per_page)
+    @products = Spree::Product.algolia_search(keywords, { facets: '*', facetFilters: filters})
   end
+
+  def method_missing(name)
+    if @properties.has_key? name
+      @properties[name]
+    else
+      super
+    end
+  end
+
+  protected
+  def setup_search(params)
+    @properties[:keywords] = params[:keywords] ||= ''
+    filters = []
+    if params[:filters].present?
+      param_filters = params[:filters].split('/')
+      param_filters.each do |f|
+        filters << "taxons.#{f}"
+      end
+    end
+    @properties[:filters] = filters
+  end
+
 end
