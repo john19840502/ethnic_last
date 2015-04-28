@@ -27,8 +27,8 @@ Spree::Product.class_eval do
   end
 
   def variant_colors
+    dominant_colors = []
     self.option_types.where(as_color_filter: true).each do |ot|
-      dominant_colors = []
       ot.option_values.each do |ov|
         url = ov.image(:original)
         colors = Miro::DominantColors.new(url)
@@ -38,8 +38,8 @@ Spree::Product.class_eval do
           dominant_colors << c if percentages[i] > 0.30
         end
       end
-      dominant_colors.uniq
     end
+    dominant_colors.flatten.uniq
   end
 
 
