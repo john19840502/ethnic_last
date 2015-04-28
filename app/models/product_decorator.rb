@@ -27,7 +27,7 @@ Spree::Product.class_eval do
   end
 
   def variant_colors
-    self.option_types.where(as_color_filter:true).each do |ot|
+    self.option_types.where(as_color_filter: true).each do |ot|
       url = ot.image(:original)
       colors = Miro::DominantColors.new(url)
       hex_colors = colors.to_hex
