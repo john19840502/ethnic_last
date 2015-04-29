@@ -59,11 +59,11 @@ Spree::Product.class_eval do
       index_taxons
     end
 
-    attribute :colors do
-      self.variant_colors
-    end
+    # attribute :colors do
+    #   self.variant_colors
+    # end
 
-    attributesForFaceting [:taxons, :prices, :colors]
+    attributesForFaceting [:taxons, :prices]
 
     # attributesForFaceting [:taxons, :prices, :colors]
   end
