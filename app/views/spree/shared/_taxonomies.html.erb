@@ -4,7 +4,13 @@
   <% else %>
     <h2><%= taxonomy.name %></h2>
   <% end %>
-  <%= taxons_nav(taxonomy.root, @taxon, Spree::Config[:max_level_in_taxons_menu] || 1) %>
+  <!-- <%= taxons_nav(taxonomy.root, @taxon, Spree::Config[:max_level_in_taxons_menu] || 1) %> -->
+  <ul class="categories">
+    <% taxonomy.root.children.each do |child| %>
+      <li><a href="/search/<%=taxonomy.name.downcase%>/<%=child.name.downcase%>"><%=child.name%></a></li>
+    <% end %>
+  </ul>
+
 <% end %>
 
 <% if @taxon %>

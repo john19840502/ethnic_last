@@ -49,12 +49,12 @@
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
       <% if @products == nil || @products.empty? %>
-		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
+		 <p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p>
       <% else %>
           <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: false } %>
       <% end %>
     </ul>
-    
+
   </div>
 </section>
 

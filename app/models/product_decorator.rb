@@ -14,7 +14,7 @@ Spree::Product.class_eval do
   }
 
   def index_taxons
-    hashes = self.taxons.collect {|t| {t.taxonomy.name.to_sym => t.name}  }
+    hashes = self.taxons.collect {|t| {t.taxonomy.name.downcase.to_sym => t.name.downcase}  }
     {}.tap{ |r| hashes.each{ |h| h.each{ |k,v| (r[k]||=[]) << v } } }
   end
 
