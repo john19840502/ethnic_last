@@ -1,7 +1,7 @@
 <h2>Brands</h2>
 <ul class="categories" id="brand-list" data-display="5">
  <% for brand in Spree::Taxon.brands %>
-  <li><%=link_to brand.name, "/search/brand/#{brand.name.downcase}", title: "#{brand.name} products" %></li>
+  <li><%=link_to brand.name, "/search/brands/#{brand.name.downcase}", title: "#{brand.name} products" %></li>
  <% end %>
 </ul>
 <a class="more-brands" id="brands-more">More brands</a>
