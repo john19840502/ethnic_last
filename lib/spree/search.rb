@@ -20,14 +20,21 @@ class Search
     end
   end
 
+  def facet_selected(facet)
+
+  end
+
   protected
   def setup_search(params)
     @properties[:keywords] = params[:keywords] ||= ''
     filters = []
     if params[:filters].present?
       param_filters = params[:filters].split('/')
-      param_filters.each do |f|
-        filters << "taxons.#{f}"
+      (0...param_filters.length).step(2).each do |index|
+        facet = param_filters[index]
+        val = param_filters[index+1]
+        filters << ("taxons.#{facet}:#{val}")
+        @properties[:facets] = {facet: facet, value: val }
       end
     end
     @properties[:filters] = filters

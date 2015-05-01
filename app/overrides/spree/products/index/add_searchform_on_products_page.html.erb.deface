@@ -3,7 +3,7 @@
 
 <section class="content">
   <aside>
-    <%= form_tag products_path, :method => :get, :class => "search" do %>
+    <%= form_tag '/search', :method => :get, :class => "search" do %>
       <div>
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>

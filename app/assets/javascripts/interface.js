@@ -2,7 +2,7 @@
 $(function() {
 
     externalLinks();
-    
+
     // Load map if present
     if (elementExists($('#map_canvas'))) {
         initialize_map();
@@ -31,6 +31,10 @@ $(function() {
         brandToggle();
     }
 
+    if (elementExists($('.categories'))) {
+      //filterToggle();
+    }
+
     if(elementExists($('#facebook-share'))) {
         $('#facebook-share').bind('click touchend', function(event) {
             var url = $(this).attr('href');
@@ -50,6 +54,42 @@ $(function() {
     });
 
 });
+
+function filterToggle(){
+  var $more = $('.more');
+  var $less = $('.less');
+  var $listitems = $('.more').parent('.li');
+  var count = $('.more').parent.data('display');
+
+  // Show first 8 brands
+  lessBrands();
+
+  $more.bind('click touchend', function() {
+      more();
+  });
+
+  $less.bind('click touchend', function() {
+      less();
+  });
+
+  function more() {
+      $more.hide();
+      $less.show();
+      $listitems.show();
+  }
+
+  function less() {
+      $more.show();
+      $less.hide();
+      $listitems.each(function(index, item) {
+          if(index >= count) {
+              $(item).hide();
+          } else {
+              $(item).show();
+          }
+      });
+  }
+}
 
 function brandToggle() {
     var $more = $('#brands-more');

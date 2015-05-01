@@ -1,4 +1,4 @@
-if Rails.env == 'production'
+# if Rails.env == 'production'
   Rails.configuration.after_initialize do
 
     attachment_config = {
@@ -41,5 +41,4 @@ if Rails.env == 'production'
     Spree::OptionValue.attachment_definitions[:image][:default_url] = '/spree/option_values/:id/:style/:basename.:extension'
 
   end
-end
-
+# end

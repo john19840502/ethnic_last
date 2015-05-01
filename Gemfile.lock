@@ -354,6 +354,9 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
     execjs (2.5.2)
     factory_girl (4.5.0)
@@ -599,6 +602,7 @@ DEPENDENCIES
   capybara-webkit
   coffee-rails (~> 4.1.0)
   database_cleaner
+  dotenv-rails (= 1.0.2)
   factory_girl (~> 4.5)
   fancybox2-rails
   ffaker

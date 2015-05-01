@@ -103,3 +103,4 @@ gem 'appsignal'
 gem 'algoliasearch-rails'
 gem 'miro'
 gem 'paleta'
+gem 'dotenv-rails', '1.0.2', :groups => [:development, :test]

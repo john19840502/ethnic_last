@@ -1,14 +1,13 @@
 <% @products.facets.keys.each do |facet| %>
   <% next if facet == 'prices' %>
   <h2><%=facet.gsub('taxons.','')%></h2>
-  <ul class="categories">
+  <ul class="categories" data-display="5">
     <% for val in @products.facets[facet] %>
     <%
       name = val[0]
       results = val[1]
     %>
-    <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet.gsub('taxons.','')}:#{name}", title: "#{name} products" %></li>
+    <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet.gsub('taxons.','')}/#{name}", title: "#{name} products" %></li>
     <% end %>
   </ul>
-
 <% end %>
