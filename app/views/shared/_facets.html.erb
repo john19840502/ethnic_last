@@ -1,13 +1,23 @@
 <% @products.facets.keys.each do |facet| %>
-  <% next if facet == 'prices' %>
-  <h2><%=facet.gsub('taxons.','')%></h2>
-  <ul class="categories" data-display="5">
-    <% for val in @products.facets[facet] %>
-    <%
-      name = val[0]
-      results = val[1]
-    %>
-    <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet.gsub('taxons.','')}/#{name}", title: "#{name} products" %></li>
-    <% end %>
-  </ul>
+  <% facet_key = facet %>
+  <% facet = facet.gsub('taxons.','') %>
+
+  <% if @searcher.display_facet?(facet) %>
+    <h2 class="filter"><%=facet%></h2>
+    <div class="use_category">
+      <ul class="categories filter" data-display="5">
+        <% for val in @products.facets[facet_key] %>
+        <%
+          name = val[0]
+          results = val[1]
+        %>
+        <% if @searcher.facet_and_value_selected(facet, name) %>
+          <li class="selected"><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet}/#{name}", title: "#{name} products" %></li>
+        <% else %>
+          <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet}/#{name}", title: "#{name} products" %></li>
+        <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
