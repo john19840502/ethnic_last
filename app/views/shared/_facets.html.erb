@@ -20,7 +20,7 @@
             </a>
           </li>
         <% else %>
-          <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet}/#{name}", title: "#{name} products" %></li>
+          <li><%=link_to "#{name} (#{results})", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products" %></li>
         <% end %>
         <% end %>
       </ul>

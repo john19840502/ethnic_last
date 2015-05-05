@@ -1,3 +1,5 @@
+require 'uri'
+
 module Spree
   class SearchController < BaseController
 
@@ -13,11 +15,12 @@ module Spree
         filter_parts << f["facet"]
         filter_parts << f["value"]
       end
+
+      redirect_uri = "/search/#{filter_parts.join("/")}"
       if keywords.present?
-        redirect_to "/search/#{filter_parts.join("/")}?keywords=#{keywords}"
-      else
-        redirect_to "/search/#{filter_parts.join("/")}"
+        redirect_uri = "/search/#{filter_parts.join("/")}?keywords=#{keywords}"
       end
+      redirect_to URI.escape(redirect_uri)
     end
 
     def result

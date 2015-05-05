@@ -1,3 +1,5 @@
+require 'uri'
+
 class Search
   attr_accessor :properties
   attr_accessor :current_user
@@ -44,6 +46,21 @@ class Search
 
   def json_filters
     hsh = { filters: @properties[:facets] }.to_json
+  end
+
+  def link_for_facet_value(facet, value)
+    link_parts = []
+    @properties[:facets].each do |f|
+      link_parts << f[:facet]
+      link_parts << f[:value]
+    end
+    link_parts << facet
+    link_parts << value
+    link = link_parts.join("/")
+    if @properties[:keywords].present?
+      link += "?keywords=#{keywords}"
+    end
+    URI.escape(link)
   end
 
   protected
