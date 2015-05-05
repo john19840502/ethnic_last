@@ -31,6 +31,7 @@
 		<h2 class="filter">Current selected filters</h2>
 		<div class="use_category">
       <ul class="categories filter">
+				<li class="back"><a href="/collection"><span></span>Back to Categories</a></li>
 				<% for val in @searcher.properties[:facets] %>
 					<li class="selected">
 						<a href="#", onclick="remove_filter('<%=val[:facet]%>','<%=val[:value]%>');">
