@@ -10,3 +10,4 @@ Spree.config do |config|
 end
 
 Spree.user_class = 'Spree::User'
+Money.add_rate("EUR", "USD", 1.10956)
