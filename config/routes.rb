@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/collection', to: 'products#index', as: 'collection'
     # search
     get '/search', to: 'search#result', as: 'product_search'
+    post '/do_search', to: 'search#do_search'
     get '/search/*filters', to: 'search#result', as: 'product_search_filtered'
 
     get '/country/set', to: 'country#set', as: 'set_country'

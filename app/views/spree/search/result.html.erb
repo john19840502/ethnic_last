@@ -21,7 +21,9 @@
 
 <section class="content">
   <aside>
-    <%= form_tag "/search", :method => :get, :class => "search" do %>
+    <%= form_tag "/do_search", :method => :post, :class => "search", :id => "search" do %>
+			<input type="hidden" id="filters" name="filters" value='<%=@searcher.json_filters%>' />
+			<input type="hidden" id="remove_filter" name="remove_filter" value='' />
       <div>
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>
@@ -58,10 +60,14 @@
   </div>
 </section>
 
+<script type="text/javascript">
 
-<script>
+	function remove_filter(facet, value){
+		$("#remove_filter").val('{"facet": "'+facet+'", "value": "'+value+'"}');
+		$("#search").submit();
+	}
+
 	$('document').ready(function(){
-
 		$('ul.categories.filter:has( > li.selected)').css('display','block');
 
 		var currency = $("a[title='Currency selection'] small").text();

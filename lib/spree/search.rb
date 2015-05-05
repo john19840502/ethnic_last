@@ -42,6 +42,10 @@ class Search
     false
   end
 
+  def json_filters
+    hsh = { filters: @properties[:facets] }.to_json
+  end
+
   protected
   def setup_search(params)
     @properties[:facets] = []

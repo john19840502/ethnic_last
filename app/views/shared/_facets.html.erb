@@ -1,7 +1,6 @@
 <% @products.facets.keys.each do |facet| %>
   <% facet_key = facet %>
   <% facet = facet.gsub('taxons.','') %>
-
   <% if @searcher.display_facet?(facet) %>
     <h2 class="filter"><%=facet%></h2>
     <div class="use_category">
@@ -12,7 +11,14 @@
           results = val[1]
         %>
         <% if @searcher.facet_and_value_selected(facet, name) %>
-          <li class="selected"><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet}/#{name}", title: "#{name} products" %></li>
+          <% link= "#{request.fullpath}/#{facet}/#{name}"%>
+          <li class="selected">
+            <a href="#", onclick="remove_filter('<%=facet%>','<%=name%>');">
+              <%= name %> (<%=results%>)
+              <span class="remove_filter">Remove filter</span>
+              <span class="ss-icon filter-close">␡</span>
+            </a>
+          </li>
         <% else %>
           <li><%=link_to "#{name} (#{results})", "#{request.fullpath}/#{facet}/#{name}", title: "#{name} products" %></li>
         <% end %>
