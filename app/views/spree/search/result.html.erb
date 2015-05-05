@@ -28,6 +28,20 @@
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>
     <% end %>
+		<h2 class="filter">Current selected filters</h2>
+		<div class="use_category">
+      <ul class="categories filter">
+				<% for val in @searcher.properties[:facets] %>
+					<li class="selected">
+						<a href="#", onclick="remove_filter('<%=val[:facet]%>','<%=val[:value]%>');">
+							<%= val[:facet] %> : <%= val[:value] %>
+							<span class="remove_filter">Remove filter</span>
+							<span class="ss-icon filter-close">␡</span>
+						</a>
+					</li>
+				<% end %>
+      </ul>
+
     <%= render :partial => '/shared/facets'%>
 
     <h2 class="filter">
