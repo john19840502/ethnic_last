@@ -64,7 +64,7 @@ Spree::Product.class_eval do
     # end
 
     attributesForFaceting [:taxons, :prices]
-
+    customRanking ['asc(name)']
     # attributesForFaceting [:taxons, :prices, :colors]
   end
 
