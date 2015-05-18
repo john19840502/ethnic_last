@@ -56,12 +56,12 @@
             <%= link_to '', '#', title: "Color ##{color}", id: "#{color}", style: "background: ##{color}" %>
           <% end %>
       <% end %>
-    </div>
-    <p>
+    </div> -->
+  <p>
 		<label for="amount">PRICE RANGE:</label>
 		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
 	</p>
-	<div id="slider-range"></div> -->
+	<div id="slider-range"></div>
   </aside>
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
@@ -119,7 +119,7 @@
 		  type: 'get',
 		  url: full_url,
 		  format: 'js',
-		  data: {price_range: price_range, price_filter_req: true},
+		  data: {price_range: price_range},
 		  success: function (data) {
               $('#products').infinitescroll('destroy');
               $('#products').infinitescroll({
@@ -136,7 +136,7 @@
               initInfiniteScroll();
 
               set_current('price_range', price_range);
-              set_current('price_filter_req', true);
+              // set_current('price_filter_req', true);
 		  }
 		 });
 	});

@@ -13,7 +13,7 @@ class Search
 
   def retrieve_products
     @products = Spree::Product.algolia_search(keywords,
-      { facets: '*', facetFilters: filters, page: @properties[:page] }
+      { facets: '*', facetFilters: filters, numericFilters: price_range, page: @properties[:page] }
     )
   end
 
@@ -22,6 +22,14 @@ class Search
       @properties[name]
     else
       super
+    end
+  end
+
+  def price_range
+    if @properties[:price_range].present?
+      "prices: #{@properties[:price_range]}"
+    else
+      ''
     end
   end
 
@@ -82,6 +90,11 @@ class Search
     end
     @properties[:filters] = filters
     @properties[:page] = params[:page] || 0
+
+    if params[:price_range].present?
+      range = params[:price_range].split('-')
+      @properties[:price_range] = range.join(' to ')
+    end
   end
 
 end
