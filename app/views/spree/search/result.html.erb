@@ -45,7 +45,7 @@
 
     <%= render :partial => '/shared/facets'%>
 
-    <h2 class="filter">
+    <!-- <h2 class="filter">
       <a href="#" title="Show filter for color" class="toggle_filter" data-target="10">Color<span></span></a>
     </h2>
     <div class="" id="color-picker">
@@ -61,17 +61,17 @@
 		<label for="amount">PRICE RANGE:</label>
 		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
 	</p>
-	<div id="slider-range"></div>
+	<div id="slider-range"></div> -->
   </aside>
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
-      <% if @products == nil || @products.empty? %>
+    <% if @products == nil || @products.empty? %>
 		 <p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p>
-      <% else %>
-          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: false } %>
-      <% end %>
+    <% else %>
+			<%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, page: @page } %>
+    <% end %>
     </ul>
-
+		<%= paginate @products, theme: 'twitter-bootstrap-3' %>
   </div>
 </section>
 
@@ -83,6 +83,9 @@
 	}
 
 	$('document').ready(function(){
+
+		initInfiniteScroll();
+
 		$('ul.categories.filter:has( > li.selected)').css('display','block');
 
 		var currency = $("a[title='Currency selection'] small").text();
@@ -101,7 +104,7 @@
     });
 
 	$("#slider-range").mouseup(function() {
-        var full_url = set_current('page', 1);
+    var full_url = set_current('page', 1);
 		var price_range = $('#amount').val();
 		var currency_type;
 		var currency = $("a[title='Currency selection'] small").text();

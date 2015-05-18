@@ -4,6 +4,7 @@ class Search
   attr_accessor :properties
   attr_accessor :current_user
   attr_accessor :current_currency
+  attr_accessor :page
 
   def initialize(params)
     @properties = {}
@@ -11,7 +12,9 @@ class Search
   end
 
   def retrieve_products
-    @products = Spree::Product.algolia_search(keywords, { facets: '*', facetFilters: filters})
+    @products = Spree::Product.algolia_search(keywords,
+      { facets: '*', facetFilters: filters, page: @properties[:page] }
+    )
   end
 
   def method_missing(name)
@@ -78,6 +81,7 @@ class Search
       end
     end
     @properties[:filters] = filters
+    @properties[:page] = params[:page] || 0
   end
 
 end

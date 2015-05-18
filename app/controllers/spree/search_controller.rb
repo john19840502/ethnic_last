@@ -20,6 +20,8 @@ module Spree
       if keywords.present?
         redirect_uri = "/search/#{filter_parts.join("/")}?keywords=#{keywords}"
       end
+      page = params[:page] || 0
+      redirect_uri << "?page=#{page}"
       redirect_to URI.escape(redirect_uri)
     end
 
@@ -27,6 +29,13 @@ module Spree
       @searcher = Spree::Config.searcher_class.new(params.merge(currency: current_currency))
       @searcher.current_user = try_spree_current_user
       @products = @searcher.retrieve_products
+      @page = @searcher.properties[:page]
+
+      if request.xhr?
+        to_paginate = @page.to_i == 0
+        render :partial => 'spree/shared/products_list', :locals => { products: @products, page: @page, to_paginate: to_paginate }
+      end
+
     end
 
   end
