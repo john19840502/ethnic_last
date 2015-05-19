@@ -10,8 +10,6 @@ Rails.application.routes.draw do
     # search
     get '/search', to: 'search#result', as: 'product_search'
     post '/do_search', to: 'search#do_search'
-    #get '/search/*filters', to: 'search#result', as: 'product_search_filtered'
-
     get '/country/set', to: 'country#set', as: 'set_country'
     get '/country/set_currency', to: 'country#set_currency', as: 'set_currency'
     get 'new_information_requests', to: 'information_requests#new', as: 'new_information_request'
