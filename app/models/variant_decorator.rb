@@ -4,8 +4,8 @@ Spree::Variant.class_eval do
                     styles: {image: '100x100'},
                     default_style: :image
 
-  validates_attachment_presence :dominant_image
-  validates_attachment_content_type :dominant_image, content_type: ['image/png', 'image/jpg']
+  # validates_attachment_presence :dominant_image
+  # validates_attachment_content_type :dominant_image, content_type: ['image/png', 'image/jpg']
 
   def total_on_hand
     #(1.0/0) #Infity

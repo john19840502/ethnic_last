@@ -97,6 +97,8 @@ gem 'spree_taxon_backgrounds', path: 'spree_taxon_backgrounds'
 gem 'spree_impressions', path: 'spree_impressions'
 gem 'spree_variant_options', path: 'spree_variant_options'
 gem 'spree_decimal_quantity', path: 'spree_decimal_quantity'
+gem 'spree_dedicated_admin_option_types', path: 'spree_dedicated_admin_option_types'
+
 
 gem 'appsignal'
 

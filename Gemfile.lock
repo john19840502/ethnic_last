@@ -181,6 +181,12 @@ PATH
       twitter_cldr (~> 3.0)
 
 PATH
+  remote: spree_dedicated_admin_option_types
+  specs:
+    spree_dedicated_admin_option_types (3.0.2.beta)
+      spree_core (~> 3.0.2.beta)
+
+PATH
   remote: spree_impressions
   specs:
     spree_impressions (3.0.0)
@@ -630,6 +636,7 @@ DEPENDENCIES
   spree_brands_on_taxons!
   spree_contact_us!
   spree_decimal_quantity!
+  spree_dedicated_admin_option_types!
   spree_email_to_friend!
   spree_favorites!
   spree_html_email!
