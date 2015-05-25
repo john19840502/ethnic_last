@@ -9,7 +9,7 @@ task :migrate_old_data => :environment do
   CalculatorPreferencesMigration.new.migrate_with_log
   SpreeZonesForPopupMigration.new.migrate_with_log
   StockLocationMigration.new.migrate_with_log
-  
+
   #recreate right schema_migrations from dump
   ActiveRecord::Base.connection.execute("
 DELETE FROM schema_migrations;
@@ -282,4 +282,13 @@ INSERT INTO schema_migrations (version) VALUES
     page.save!
   end
 
+  Spree::InventoryUnit.where(line_item_id: nil).each do |inventory_unit|
+    variant_id = inventory_unit.variant_id
+    order_id = inventory_unit.order_id
+    order = Spree::Order.find_by_id(order_id)
+    if order
+      li = order.line_items.where(variant_id: variant_id).first
+      inventory_unit.update_attribute(:line_item_id,li.id)
+    end
+  end
 end
