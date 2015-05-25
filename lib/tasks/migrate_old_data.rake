@@ -291,4 +291,7 @@ INSERT INTO schema_migrations (version) VALUES
       inventory_unit.update_attribute(:line_item_id,li.id)
     end
   end
+
+  ActiveRecord::Base.connection.execute("DELETE FROM spree_payment_methods;")
+
 end

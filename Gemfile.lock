@@ -21,51 +21,9 @@ GIT
       spree_core (~> 3.0.0.beta)
 
 GIT
-  remote: git://github.com/pero-ict-solutions/spree_image_cropper.git
-  revision: fd0e79a2bfaf3f3584198d4852bef1a20112f675
-  specs:
-    spree_image_cropper (1.3.0)
-      coffee-rails
-      sass-rails
-      spree_core (~> 3.0.0.rc2)
-
-GIT
-  remote: git://github.com/pero-ict-solutions/spree_mollie.git
-  revision: 74244613f173ebd8e87eb464dfbbc64eda288f7a
-  branch: 3-0-stable
-  specs:
-    spree_mollie (3.0.0.beta)
-      mollie-ruby (= 0.2.0)
-      spree_core (~> 3.0.0.beta)
-
-GIT
-  remote: git://github.com/pero-ict-solutions/spree_taxon_filters.git
-  revision: 3324db846b939c8527e6cfa841174656ff56c8b6
-  specs:
-    spree_taxon_filters (3.0.0)
-      spree_core (~> 3.0.0.rc2)
-
-GIT
-  remote: git://github.com/spree-contrib/spree_email_to_friend.git
-  revision: bada2e955ed63704867a186d3dd0e469ff8b8004
-  branch: 3-0-stable
-  specs:
-    spree_email_to_friend (1.3.0)
-      recaptcha (>= 0.3.1)
-      spree_core (~> 3.0.0.rc2)
-
-GIT
-  remote: git://github.com/spree-contrib/spree_mail_settings.git
-  revision: 9c0ffd29dc869d14d4d308fd0077bbac37c288e8
-  branch: 3-0-stable
-  specs:
-    spree_mail_settings (2.2.0)
-      spree_backend (~> 3.0.0)
-
-GIT
-  remote: git://github.com/spree/spree.git
-  revision: 4691e649be4cbc3bd733c1c3b3b4088941a70f4f
-  branch: 3-0-stable
+  remote: git://github.com/pero-ict-solutions/spree.git
+  revision: bd4a99afed6916df246a5aab101527dd6a0ab476
+  branch: 3-0-stable-pero
   specs:
     spree (3.0.2.beta)
       spree_api (= 3.0.2.beta)
@@ -122,6 +80,48 @@ GIT
       sprockets-rails (~> 2.2)
     spree_sample (3.0.2.beta)
       spree_core (= 3.0.2.beta)
+
+GIT
+  remote: git://github.com/pero-ict-solutions/spree_image_cropper.git
+  revision: fd0e79a2bfaf3f3584198d4852bef1a20112f675
+  specs:
+    spree_image_cropper (1.3.0)
+      coffee-rails
+      sass-rails
+      spree_core (~> 3.0.0.rc2)
+
+GIT
+  remote: git://github.com/pero-ict-solutions/spree_mollie.git
+  revision: 74244613f173ebd8e87eb464dfbbc64eda288f7a
+  branch: 3-0-stable
+  specs:
+    spree_mollie (3.0.0.beta)
+      mollie-ruby (= 0.2.0)
+      spree_core (~> 3.0.0.beta)
+
+GIT
+  remote: git://github.com/pero-ict-solutions/spree_taxon_filters.git
+  revision: 3324db846b939c8527e6cfa841174656ff56c8b6
+  specs:
+    spree_taxon_filters (3.0.0)
+      spree_core (~> 3.0.0.rc2)
+
+GIT
+  remote: git://github.com/spree-contrib/spree_email_to_friend.git
+  revision: bada2e955ed63704867a186d3dd0e469ff8b8004
+  branch: 3-0-stable
+  specs:
+    spree_email_to_friend (1.3.0)
+      recaptcha (>= 0.3.1)
+      spree_core (~> 3.0.0.rc2)
+
+GIT
+  remote: git://github.com/spree-contrib/spree_mail_settings.git
+  revision: 9c0ffd29dc869d14d4d308fd0077bbac37c288e8
+  branch: 3-0-stable
+  specs:
+    spree_mail_settings (2.2.0)
+      spree_backend (~> 3.0.0)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
@@ -271,7 +271,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts_as_list (0.7.0)
+    acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.3.8)
     algoliasearch (1.4.2)
@@ -379,7 +379,7 @@ GEM
       activesupport (>= 4.1.0)
     highline (1.6.21)
     htmlentities (4.3.3)
-    httparty (0.13.3)
+    httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
@@ -392,7 +392,7 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.3)
+    jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.2)
     kaminari (0.16.3)
@@ -405,7 +405,7 @@ GEM
     letter_opener_web (1.2.3)
       letter_opener (~> 1.0)
       rails (>= 3.2)
-    loofah (2.0.1)
+    loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -414,7 +414,7 @@ GEM
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
-    mime-types (2.5)
+    mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.6.1)
     miro (0.3.0)
@@ -450,7 +450,7 @@ GEM
     premailer (1.8.4)
       css_parser (>= 1.3.6)
       htmlentities (>= 4.0.0)
-    premailer-rails (1.8.0)
+    premailer-rails (1.8.2)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
     pry (0.10.1)
@@ -472,7 +472,7 @@ GEM
       railties (>= 3.1, < 5.0)
     rabl (0.9.4.pre1)
       activesupport (>= 2.3.14)
-    rack (1.6.0)
+    rack (1.6.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-test (0.6.3)
@@ -532,7 +532,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    sass (3.4.13)
+    sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -545,9 +545,9 @@ GEM
     select2-rails (3.5.9.1)
       thor (~> 0.14)
     slop (3.6.0)
-    sprockets (3.0.3)
+    sprockets (3.1.0)
       rack (~> 1.0)
-    sprockets-rails (2.2.4)
+    sprockets-rails (2.3.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)

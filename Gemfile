@@ -76,7 +76,8 @@ gem 'aws-sdk', '~> 1.61.0'
 
 gem 'rails-observers'
 
-gem 'spree', github: 'spree/spree', branch: '3-0-stable'
+gem 'spree', github: 'pero-ict-solutions/spree', branch: '3-0-stable-pero'
+#gem 'spree', path: "/Users/peterberkenbosch/code/github/pero-ict-solutions/spree"
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
 gem 'spree_contact_us', github: 'jdutil/spree_contact_us'
 gem 'spree_static_content', github: 'pero-ict-solutions/spree-static-content'
