@@ -58,10 +58,13 @@ en:
   discount_per_item_quantity: Discount per Item Quantity
 
   login: Login
+  logout: Logout
+  my_account: My Account
   search: Search
   create: Create
   reset_password: Reset Password
   save_and_continue: Save and Continue
   email: Email
   continue: Continue
-
+  complete: Complete
+  locale_changed: Succesfully changed country

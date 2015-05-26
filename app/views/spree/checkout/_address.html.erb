@@ -1,3 +1,8 @@
+<%
+@order.bill_address ||= Spree::Address.build_default
+@order.ship_address ||= Spree::Address.build_default if @order.checkout_steps.include?('delivery')
+%>
+
 <section data-hook="billing_fieldset_wrapper">
   <%= form.fields_for :bill_address do |bill_form| %>
     <h2><%= t(:billing_address) %></h2>

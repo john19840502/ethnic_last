@@ -1,5 +1,7 @@
 Spree::Order.class_eval do
 
+  insert_checkout_step :before_address, before: :address
+
   def delivery_quote_needed?
     Spree::ShippingMethod.available_on_frontend.empty?
   end

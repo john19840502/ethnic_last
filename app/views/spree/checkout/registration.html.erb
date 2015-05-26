@@ -1,13 +1,19 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
 <div id="registration" data-hook>
   <div id="account" class="columns alpha eight">
-    <!-- TODO: add partial with registration form -->
+    <section class="focus">
+      <header>
+        <h1>Login to your account</h1>
+        <span class="close"><a href="<%=redirect_back_link%>" title="go back"></a></span>
+      </header>
+      <%= render :partial => 'spree/shared/login' %>
+    </section>
   </div>
   <% if Spree::Config[:allow_guest_checkout] %>
     <section class="focus">
       <div id="guest_checkout focus" data-hook class="columns omega eight">
         <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
-        <header><h1><%= t(:guest_user_account) %></h1></header>
+        <header><h1>Checkout as guest</h1></header>
         <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
           <section>
             <ul>
