@@ -9,7 +9,8 @@ task :migrate_old_data => :environment do
   CalculatorPreferencesMigration.new.migrate_with_log
   SpreeZonesForPopupMigration.new.migrate_with_log
   StockLocationMigration.new.migrate_with_log
-
+  ShippingMethodZonesMigration.new.migrate_with_log
+  
   #recreate right schema_migrations from dump
   ActiveRecord::Base.connection.execute("
 DELETE FROM schema_migrations;
