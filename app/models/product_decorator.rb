@@ -142,6 +142,10 @@ Spree::Product.class_eval do
     self.save!
   end
 
+  def brand_name
+    self.brand.try(:name)
+  end
+
   private
   def add_index
     self.index!
@@ -149,5 +153,12 @@ Spree::Product.class_eval do
 
   def remove_index
     self.remove_from_index!
+  end
+
+  def slug_candidates
+      [
+        [:name, :brand_name],
+        :name,
+      ]
   end
 end
