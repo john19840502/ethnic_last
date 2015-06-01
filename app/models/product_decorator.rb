@@ -161,4 +161,8 @@ Spree::Product.class_eval do
         :name,
       ]
   end
+
+  def self.ransackable_scopes(auth_object = nil)
+    %i(brand_search)
+  end
 end
