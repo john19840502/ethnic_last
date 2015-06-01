@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428234002) do
+ActiveRecord::Schema.define(version: 20150601080637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 20150428234002) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.datetime "deleted_at"
   end
 
+  add_index "friendly_id_slugs", ["deleted_at"], name: "index_friendly_id_slugs_on_deleted_at", using: :btree
   add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
@@ -518,9 +520,9 @@ ActiveRecord::Schema.define(version: 20150428234002) do
     t.string   "pdf_file_content_type",  limit: 255
     t.integer  "pdf_file_file_size"
     t.datetime "pdf_file_updated_at"
+    t.string   "subtitle",               limit: 255
     t.boolean  "promotionable",                      default: true
     t.string   "meta_title"
-    t.string   "subtitle"
     t.integer  "cached_favorites_count"
   end
 
@@ -1098,12 +1100,12 @@ ActiveRecord::Schema.define(version: 20150428234002) do
     t.integer  "product_id"
     t.decimal  "cost_price",                              precision: 8, scale: 2
     t.integer  "position"
+    t.integer  "repeat"
     t.string   "cost_currency"
     t.boolean  "track_inventory",                                                 default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
     t.integer  "stock_items_count",                                               default: 0,     null: false
-    t.integer  "repeat"
     t.string   "dominant_image_file_name"
     t.string   "dominant_image_file_size"
     t.string   "dominant_image_content_type"
@@ -1136,8 +1138,8 @@ ActiveRecord::Schema.define(version: 20150428234002) do
     t.datetime "updated_at",                                     null: false
     t.boolean  "default_tax",                    default: false
     t.integer  "zone_members_count",             default: 0
-    t.string   "kind"
     t.boolean  "for_popup",                      default: false
+    t.string   "kind"
   end
 
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree
