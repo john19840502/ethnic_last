@@ -33,10 +33,11 @@ Spree::ProductsController.class_eval do
   end
 
   def set_similar_products
-    category = @product.taxons.where(parent: Spree::Taxon.find_by_permalink('categories')).first
-    products = Spree::Product.by_brands(@product.brand)
-    products = products.filter_by(category.id) if category
-    products = products.sample(6)
+    similar = @product.taxons.collect { |t| "taxons.#{t.taxonomy.name.downcase}:#{t.name.downcase}" }
+    similar.delete_if {|t| t.match /taxons.brands/}
+    products = Spree::Product.algolia_search('', { facets: '*', facetFilters: similar, hitsPerPage: 7 })
+
+    products.delete_if {|prod| prod.id == @product.id}
 
     @similar = products.select{ |prod| prod.images.first }
   end
