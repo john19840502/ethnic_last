@@ -3,11 +3,11 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_brands_on_taxons'
   s.version     = '3.0.0.rc2'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Brands as taxons'
+  s.description = s.summary
   s.required_ruby_version = '>= 2.0.0'
 
-  # s.author    = 'You'
+  s.author    = 'PeRo ICT Solutions'
   # s.email     = 'you@example.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 

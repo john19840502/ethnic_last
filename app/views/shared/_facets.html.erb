@@ -14,13 +14,13 @@
           <% link= "#{request.fullpath}/#{facet}/#{name}"%>
           <li class="selected">
             <a href="#", onclick="remove_filter('<%=facet%>','<%=name%>');">
-              <%= name %> (<%=results%>)
+              <%= name.titleize %> (<%=results%>)
               <span class="remove_filter">Remove filter</span>
               <span class="ss-icon filter-close">␡</span>
             </a>
           </li>
         <% else %>
-          <li><%=link_to "#{name} (#{results})", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products" %></li>
+          <li><%=link_to "#{name.titleize} (#{results})", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products" %></li>
         <% end %>
         <% end %>
       </ul>

@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = 'UPS Express Saver shipping EC'
   s.required_ruby_version = '>= 1.8.7'
 
-  # s.author    = 'You'
+  s.author    = 'PeRo ICT Solutions'
   # s.email     = 'you@example.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
