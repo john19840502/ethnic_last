@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree.git
-  revision: bd4a99afed6916df246a5aab101527dd6a0ab476
+  revision: 3c401f1aa0dd4cda77c40c29f2053ca32ad197d2
   branch: 3-0-stable-pero
   specs:
     spree (3.0.2.beta)
@@ -284,7 +284,7 @@ GEM
       rack
       thread_safe
     arel (6.0.0)
-    autoprefixer-rails (5.1.11)
+    autoprefixer-rails (5.2.0)
       execjs
       json
     awesome_nested_set (3.0.2)
@@ -416,7 +416,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.6.1)
+    minitest (5.7.0)
     miro (0.3.0)
       cocaine
       color
