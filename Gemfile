@@ -79,7 +79,7 @@ gem 'rails-observers'
 gem 'spree', github: 'pero-ict-solutions/spree', branch: '3-0-stable-pero'
 #gem 'spree', path: "/Users/peterberkenbosch/code/github/pero-ict-solutions/spree"
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
-gem 'spree_contact_us', github: 'jdutil/spree_contact_us'
+gem 'spree_contact_us', github: 'jdutil/spree_contact_us', branch: '3-0-stable'
 gem 'spree_static_content', github: 'pero-ict-solutions/spree-static-content'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: '3-0-stable'
 gem 'spree_email_to_friend', github: 'spree-contrib/spree_email_to_friend', branch: '3-0-stable'

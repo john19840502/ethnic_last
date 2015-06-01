@@ -14,13 +14,15 @@
 </header>
 
 <div class="brands">
-    <ul id="brand-list" data-display="10">
-        <% for taxon in @brands %>
-            <li><%= link_to(image_tag(taxon.icon(:original)), nested_taxons_url(taxon))%></li>
-        <% end %>
-    </ul>
-    <a class="more-brands" id="brands-more">More brands</a>
-    <a class="more-brands" id="brands-less">Less brands</a>
+  <ul id="brand-list" data-display="10">
+    <% for taxon in @brands %>
+      <% if taxon.icon.present? %>
+        <li><%= link_to(image_tag(taxon.icon(:original)), "/search/brands/#{taxon.name.downcase}")%></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <a class="more-brands" id="brands-more">More brands</a>
+  <a class="more-brands" id="brands-less">Less brands</a>
 </div>
 
 <section class="content small">
