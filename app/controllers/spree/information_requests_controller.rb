@@ -10,7 +10,7 @@ module Spree
 			@information_req = InformationRequest.new(information_request_params)
 			if @information_req.save
 				Spree::InformationRequestMailer.information_request_email(@information_req).deliver
-				respond_with(@information_req) { |format| format.html { redirect_to @information_req.product_url } }
+				respond_with(@information_req) { |format| format.html { redirect_to @information_req.product_url, notice: "Thank you for request for information, we will respond to you shortly" } }
 			else
 				@information_req
 				render :new
