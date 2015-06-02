@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get '/country/set', to: 'country#set', as: 'set_country'
     get '/country/set_currency', to: 'country#set_currency', as: 'set_currency'
     get 'new_information_requests', to: 'information_requests#new', as: 'new_information_request'
-    get 'create_information_requests', to: 'information_requests#create', as: 'create_information_request'
+    post 'create_information_requests', to: 'information_requests#create', as: 'create_information_request'
     get '/about', to: 'about_us#show', as: 'about'
 
     namespace :api, defaults: { format: 'json' } do
