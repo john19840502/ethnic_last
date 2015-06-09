@@ -12,6 +12,7 @@ table {
     margin-bottom: $margin-bottom;
     width: 100%;
     font-size: 0.9em;
+    color: #fff;
     thead th {
         font-weight: bold;
         padding: 0.75em $grid-column;
@@ -24,12 +25,16 @@ table {
         padding: 0.75em $grid-column;
         /*&:first-child { border-left: 0; }*/
         strong { display: block; }
+        color: #fff !important;
+        input, label {
+          color: #fff !important;
+        }
     }
-    
+
     &.shopping-bag {
         border: 0;
         tr { border: 1px solid red; }
         td { border: 0; }
-        
+
     }
 }

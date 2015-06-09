@@ -42,14 +42,17 @@ Spree::FrontendHelper.class_eval do
 
   def flash_messages(opts = {})
     ignore_types = ["order_completed"].concat(Array(opts[:ignore_types]).map(&:to_s) || [])
-
-    items = []
+    msgs = []
     flash.each do |msg_type, text|
       unless ignore_types.include?(msg_type)
-        items << content_tag('li', text, class: "#{msg_type}")
+        msgs << content_tag('li', text, class: "#{msg_type}")
       end
     end
-    concat(content_tag('ul', raw(items.join("\n")), class: 'messages'))
+    if msgs.present?
+      concat(content_tag('ul', raw(msgs.join("\n")), class: 'messages'))
+    else
+      nil
+    end
   end
 
   private
