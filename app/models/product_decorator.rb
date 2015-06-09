@@ -114,7 +114,7 @@ Spree::Product.class_eval do
     heights = measurements.collect(&:height).uniq.compact
     measurements_props << ['Height (cm)', heights.join(', ')] unless heights.empty?
 
-    weights = measurements.collect(&:weight).uniq.compact
+    weights = measurements.collect(&:weight).uniq.compact.reject {|v| v == 0.0}
     measurements_props << ['Weight (g)', weights.join(', ')] unless weights.empty?
 
     repeats = measurements.collect(&:repeat).uniq.compact
