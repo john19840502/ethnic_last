@@ -1,8 +1,8 @@
 <!-- replace "body" -->
 <body>
   <div class="container large">
-    <%= render :partial => 'shared/header_menu' %>
     <%= flash_messages %>
+    <%= render :partial => 'shared/header_menu' %>
     <%= yield %>
     <div id="scroller">
           <i class="glyphicon glyphicon-chevron-up"></i>
