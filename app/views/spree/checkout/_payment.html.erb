@@ -8,12 +8,8 @@
         <dt><%= Spree.t(:shipping_method) %></dt>
         <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
     <% end %>
-    <% if @order.all_adjustments.present? %>
-        <% @order.all_adjustments.each do |adjustment| %>
-            <dt> <%= adjustment.label %> </dt>
-            <dd><%= money adjustment.amount %></dd>
-        <% end %>
-    <% end %>
+    <dt>VAT</dt>
+    <dd><%= money @order.tax_total %></dd>
     <dt><%= Spree.t(:subtotal) %></dt>
     <dd><%= money @order.item_total %></dd>
     <% @order.adjustments.eligible.each do |adjustment| %>
@@ -40,7 +36,6 @@
         </figure>
         <div>
           <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
-          <p><%= line_item_description_text(item.variant.product.description) %></p>
           <p><%= item.variant.options_text %></p>
           <dl class="advanced">
             <dt>Price</dt>

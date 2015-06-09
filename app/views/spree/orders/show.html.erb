@@ -21,13 +21,8 @@
             <dt><%= t(:payment_information) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></dt>
             <dd><%= payment.payment_method.name %></dd>
         <% end %>
-
-        <% if @order.adjustments.present? %>
-            <% @order.adjustments.keys.each do |key| %>
-              <dt> <%= key %> </dt>
-              <dd><%= money @order.adjustments[key] %></dd>
-            <% end %>
-        <% end %>
+        <dt>VAT</dt>
+        <dd><%= money @order.tax_total %></dd>
         <dt><%= t(:subtotal) %></dt>
         <dd><%= money @order.item_total %></dd>
         <% @order.adjustments.eligible.each do |adjustment| %>
@@ -53,7 +48,6 @@
         </figure>
         <div>
             <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
-            <p><%= line_item_description(item.variant) %></p>
             <p><%= item.variant.options_text %></p>
             <dl class="advanced">
               <dt>Price</dt>
