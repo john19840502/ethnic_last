@@ -40,6 +40,18 @@ Spree::FrontendHelper.class_eval do
     content_tag('ul', raw(items.join("\n")), class: 'steps', id: "checkout-step-#{@order.state}")
   end
 
+  def flash_messages(opts = {})
+    ignore_types = ["order_completed"].concat(Array(opts[:ignore_types]).map(&:to_s) || [])
+
+    items = []
+    flash.each do |msg_type, text|
+      unless ignore_types.include?(msg_type)
+        items << content_tag('li', text, class: "#{msg_type}")
+      end
+    end
+    concat(content_tag('ul', raw(items.join("\n")), class: 'messages'))
+  end
+
   private
   def state_required?
     Spree::Config[:address_requires_state]
