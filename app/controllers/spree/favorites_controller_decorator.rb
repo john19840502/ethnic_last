@@ -9,7 +9,7 @@ Spree::FavoritesController.class_eval do
         params[:email_to],
         params[:email_from],
         params[:message],
-        @favorites.to_a
+        @favorites
     ).deliver
   end
 
