@@ -38,7 +38,10 @@
         <small class="transfer-costs"><%= adjustment.label %> <strong><%= money_with_currency(adjustment.amount) %></strong>.</small>
       <% end %>
     <% end %>
-	<div class="cart_page_free_shipping_text">Free shipping for purchase: <br/> +€350 within Europe <br/> +€500 worldwide</div>
+  	<div class="cart_page_free_shipping_text">
+      <div id="shipping_rates" data-country="<%=session[:country_id]%>"></div>
+      Free shipping for purchase: <br/> +€350 within Europe <br/> +€500 worldwide
+    </div>
     <div class="buttons">
       <p class="left">
         <%= link_to empty_cart_path, :class => 'button soft small', :id => 'empty-button', :method => :put do %>
