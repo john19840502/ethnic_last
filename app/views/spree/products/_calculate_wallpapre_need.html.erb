@@ -29,7 +29,7 @@
 				<input type="number" id="width">
 			</td>
 			<td>
-				<label>Heigh :</label>
+				<label>Height :</label>
 				<input type="number" id="height">
 			</td>
 		</tr>
@@ -53,7 +53,7 @@
 
 <script>
 	$('#submit_values').on("click", function(e){
-		
+
 		var need_type = $(".wallpaper_type input[type='radio']:checked").val();
 		var width = parseFloat($('#width').val());
 		var height = parseFloat($('#height').val());
@@ -61,16 +61,16 @@
 		var wallpaper_repeat = parseFloat($('#wallpaper_repeat').val());
 		var need;
 		var check_need_value;
-		
+
 		var total_cuts = width/wallpaper_width;
 		var cuts_after_round = Math.round(total_cuts);
 		if(cuts_after_round < total_cuts)
 			{total_cuts = cuts_after_round+1;}
 		else
 			{total_cuts = cuts_after_round;}
-		
+
 		//-----------calculation on the basis of need type 'wallpaper by meter/roll'------------
-		
+
 		if(need_type == "meter")
 			{
 				need = (height + 15 + (wallpaper_repeat/2))*total_cuts;
@@ -89,7 +89,7 @@
 				else
 					{need = need + " rolls!";}
 			}
-			
+
 		//------------------------------------------------------------------------------------
 
 		if($.trim(check_need_value)=="NaN")
