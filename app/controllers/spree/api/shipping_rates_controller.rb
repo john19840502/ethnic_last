@@ -8,6 +8,9 @@ module Spree
       before_action :load_order_with_lock
 
       def index
+
+        @order.shipping_address = Spree::Address.build_default unless @order.shipping_address.present?
+
         @order.shipping_address.country = Spree::Country.find(params[:country_id])
         @order.shipping_address.save(validate: false)
 
