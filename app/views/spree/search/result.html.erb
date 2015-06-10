@@ -24,6 +24,7 @@
     <%= form_tag "/do_search", :method => :post, :class => "search", :id => "search" do %>
 			<input type="hidden" id="filters" name="filters" value='<%=@searcher.json_filters%>' />
 			<input type="hidden" id="remove_filter" name="remove_filter" value='' />
+			<%= hidden_field_tag :previous_keywords, params[:keywords] %>
       <div>
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>

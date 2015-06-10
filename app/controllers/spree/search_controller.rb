@@ -9,6 +9,8 @@ module Spree
       keywords = params[:keywords] if params[:keywords].present?
       remove_filter = JSON.parse(params[:remove_filter]) if params[:remove_filter].present?
 
+      previous_keywords = params[:previous_keywords] if params[:previous_keywords].present?
+
       filter_parts = []
       filters["filters"].each do |f|
         next if f == remove_filter
@@ -22,6 +24,9 @@ module Spree
       end
       page = params[:page] || 0
       redirect_uri << "?page=#{page}"
+      if( (keywords and previous_keywords) and keywords != previous_keywords)
+        redirect_uri = "/search?keywords=#{keywords}"
+      end
       redirect_to URI.escape(redirect_uri)
     end
 

@@ -6,6 +6,7 @@
     <%= form_tag '/search', :method => :get, :class => "search" do %>
       <div>
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+        <%= hidden_field_tag :previous_keywords, params[:keywords] %>
       </div>
     <% end %>
     <header class="back-to-products">
