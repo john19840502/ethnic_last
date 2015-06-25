@@ -63,9 +63,8 @@ Spree::Product.class_eval do
       self.variant_colors
     end
 
-    attributesForFaceting [:taxons, :prices]
+    attributesForFaceting [:taxons, :prices, :colors]
     customRanking ['asc(name)']
-    # attributesForFaceting [:taxons, :prices, :colors]
   end
 
   def self.search_like_any(fields, values)

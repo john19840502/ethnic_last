@@ -36,7 +36,7 @@ class Search
   def display_facet?(facet)
     return false if facet == "prices"
     return false if facet == "color"
-    return false if facet == "brands" && facet_selected(facet)
+    return false if facet == "brands"
     return false if facet == "categories" && facet_selected(facet)
     true
   end
