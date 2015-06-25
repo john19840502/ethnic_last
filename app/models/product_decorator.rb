@@ -30,12 +30,16 @@ Spree::Product.class_eval do
     dominant_colors = []
     self.option_types.where(as_color_filter: true).each do |ot|
       ot.option_values.each do |ov|
-        url = ov.image(:original)
-        colors = Miro::DominantColors.new(url)
-        hex_colors = colors.to_hex
-        percentages = colors.by_percentage
-        hex_colors.each_with_index do |c,i|
-          dominant_colors << c if percentages[i] > 0.30
+        begin
+          url = ov.image(:original)
+          colors = Miro::DominantColors.new(url)
+          hex_colors = colors.to_hex
+          percentages = colors.by_percentage
+          hex_colors.each_with_index do |c,i|
+            dominant_colors << c if percentages[i] > 0.30
+          end
+        rescue
+          # TODO catch 404 error on images.
         end
       end
     end
