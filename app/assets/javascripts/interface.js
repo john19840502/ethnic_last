@@ -48,7 +48,7 @@ $(function() {
     }
 
     $(".toggle_filter").bind('click touchend', function(event){
-        target = '#filter_' + $(this).data("target");
+        target = '#'+$(this).data("target");
         $(target).toggle();
         event.preventDefault();
     });

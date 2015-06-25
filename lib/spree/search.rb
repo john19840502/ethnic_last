@@ -41,6 +41,12 @@ class Search
     true
   end
 
+  def brands_facets
+    @properties[:facets].each do |f|
+      return f[:facet] if f[:facet] == "brands"
+    end
+  end
+
   def facet_and_value_selected(facet, value)
     @properties[:facets].each do |f|
       return true if f[:facet] == facet && f[:value] == value
