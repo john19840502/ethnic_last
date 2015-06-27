@@ -37,7 +37,7 @@ Spree::Product.class_eval do
           data_entry[:variant_id] = variant.id
           begin
             url = ov.image(:original)
-            data_entry[:option_value_image_url] = url
+            data_entry[:option_value_id] = ov.id
             data_entry[:colors] = []
             colors = Miro::DominantColors.new(url)
             hex_colors = colors.to_hex
@@ -57,15 +57,15 @@ Spree::Product.class_eval do
     data
   end
 
-  def reset_store_variant_colors
+  def reset_variant_colors
     Spree::Product.connection.execute("delete from product_variant_colors where product_id = #{self.id}")
     data = variants_colors_hash
     data.each do |record|
       variant_id = record[:variant_id]
-      ov_img_url = record[:option_value_image_url]
+      option_value_id = record[:option_value_id]
       colors = record[:colors]
 
-      sql = "insert into product_variant_colors values(#{self.id}, #{variant_id}, '{#{colors.join(",")}}', '#{ov_img_url}')"
+      sql = "insert into product_variant_colors values(#{self.id}, #{variant_id}, '{#{colors.join(",")}}', #{option_value_id})"
       Spree::Product.connection.execute(sql)
     end
   end
