@@ -12,3 +12,10 @@ task :reindex_products => :environment do
     product.index! if product.brand_enabled?
   end
 end
+
+desc 'Reindex Products to Algolia'
+task :reset_product_variant_colors => :environment do
+  Spree::Product.available.find_each do |product|
+    product.reset_variant_colors
+  end
+end
