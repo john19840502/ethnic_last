@@ -3,6 +3,7 @@ Spree::Product.class_eval do
   after_create :generate_meta_tags
   #after_save :add_index
   before_destroy :remove_index
+  has_many :product_variant_colors
 
   scope :brand_search, -> (keywords) {
     joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and spree_taxons.name like ?', TAXONOMY_BRAND, "%#{keywords}%"])
@@ -24,6 +25,49 @@ Spree::Product.class_eval do
 
   def brand_enabled?
     self.brand.try(:enabled)
+  end
+
+  def variants_colors_hash
+    data = []
+    self.option_types.where(as_color_filter: true).each do |ot|
+      ot.option_values.each do |ov|
+        variant = ov.variants.where(product_id: self.id).first
+        if variant
+          data_entry = {}
+          data_entry[:variant_id] = variant.id
+          begin
+            url = ov.image(:original)
+            data_entry[:option_value_image_url] = url
+            data_entry[:colors] = []
+            colors = Miro::DominantColors.new(url)
+            hex_colors = colors.to_hex
+            percentages = colors.by_percentage
+            hex_colors.each_with_index do |c,i|
+              if percentages[i] > 0.30
+                data_entry[:colors] << c
+              end
+            end
+            data << data_entry
+          rescue
+            # TODO catch 404 error on images.
+          end
+        end
+      end
+    end
+    data
+  end
+
+  def reset_store_variant_colors
+    Spree::Product.connection.execute("delete from product_variant_colors where product_id = #{self.id}")
+    data = variants_colors_hash
+    data.each do |record|
+      variant_id = record[:variant_id]
+      ov_img_url = record[:option_value_image_url]
+      colors = record[:colors]
+
+      sql = "insert into product_variant_colors values(#{self.id}, #{variant_id}, '{#{colors.join(",")}}', '#{ov_img_url}')"
+      Spree::Product.connection.execute(sql)
+    end
   end
 
   def variant_colors
