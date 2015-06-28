@@ -35,7 +35,7 @@ class Search
 
   def display_facet?(facet)
     return false if facet == "prices"
-    return false if facet == "color"
+    return false if facet == "colors"
     return false if facet == "brands"
     return false if facet == "categories" && facet_selected(facet)
     true
@@ -44,6 +44,12 @@ class Search
   def brands_facets
     @properties[:facets].each do |f|
       return f[:facet] if f[:facet] == "brands"
+    end
+  end
+
+  def colors_facets
+    @properties[:facets].each do |f|
+      return f[:facet] if f[:facet] == "colors"
     end
   end
 

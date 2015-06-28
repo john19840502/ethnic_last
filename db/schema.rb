@@ -527,9 +527,9 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.string   "pdf_file_content_type",  limit: 255
     t.integer  "pdf_file_file_size"
     t.datetime "pdf_file_updated_at"
-    t.string   "subtitle",               limit: 255
     t.boolean  "promotionable",                      default: true
     t.string   "meta_title"
+    t.string   "subtitle"
     t.integer  "cached_favorites_count"
   end
 
@@ -1107,12 +1107,12 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.integer  "product_id"
     t.decimal  "cost_price",                              precision: 8, scale: 2
     t.integer  "position"
-    t.integer  "repeat"
     t.string   "cost_currency"
     t.boolean  "track_inventory",                                                 default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
     t.integer  "stock_items_count",                                               default: 0,     null: false
+    t.integer  "repeat"
     t.string   "dominant_image_file_name"
     t.string   "dominant_image_file_size"
     t.string   "dominant_image_content_type"
@@ -1145,8 +1145,8 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.datetime "updated_at",                                     null: false
     t.boolean  "default_tax",                    default: false
     t.integer  "zone_members_count",             default: 0
-    t.boolean  "for_popup",                      default: false
     t.string   "kind"
+    t.boolean  "for_popup",                      default: false
   end
 
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree

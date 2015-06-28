@@ -46,18 +46,6 @@
 
     <%= render :partial => '/shared/facets'%>
 
-    <h2 class="filter">
-      <a href="#" title="Show filter for color" class="toggle_filter" data-target="color-picker">Color<span></span></a>
-    </h2>
-    <div class="" id="color-picker">
-      <%- Spree::PaletaColor::COLORS.each do |color|%>
-          <%- if params[:colors].present? && params[:colors].include?("#{color}") %>
-            <%= link_to '', '#', title: "Color ##{color}", id: "#{color}", style: "background: ##{color}", class: 'activated' %>
-          <%- else %>
-            <%= link_to '', '#', title: "Color ##{color}", id: "#{color}", style: "background: ##{color}" %>
-          <% end %>
-      <% end %>
-    </div>
   <p>
 		<label for="amount">PRICE RANGE:</label>
 		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
@@ -93,17 +81,6 @@
 
 		var currency = $("a[title='Currency selection'] small").text();
 
-        $('#color-picker a').each(function(){
-            var url = window.location.href;
-            $(this).attr('href', url + '?&colors[]=' + $(this).attr('id'));
-            $(this).click(function(){
-                if($(this).hasClass('activated')){
-                    $(this).removeClass('activated').attr('href', url + '?&colors[]=' + $(this).attr('id'));
-                } else {
-                    $(this).addClass('activated').attr('href', '#' + $(this).attr('id'));
-                }
-            });
-        });
     });
 
 	$("#slider-range").mouseup(function() {
