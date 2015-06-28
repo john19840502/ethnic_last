@@ -90,7 +90,11 @@ class Search
       (0...param_filters.length).step(2).each do |index|
         facet = param_filters[index]
         val = param_filters[index+1]
-        filters << ("taxons.#{facet}:#{val}")
+        if facet == 'colors'
+          filters << ("#{facet}:#{val}")
+        else
+          filters << ("taxons.#{facet}:#{val}")
+        end
         @properties[:facets].push({ facet: facet, value: val })
       end
     end
