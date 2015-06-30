@@ -33,12 +33,14 @@ Spree::ProductsController.class_eval do
   end
 
   def set_similar_products
-    similar = @product.taxons.collect { |t| "taxons.#{t.taxonomy.name.downcase}:#{t.name.downcase}" }
-    similar.delete_if {|t| t.match /taxons.brands/}
-    products = Spree::Product.algolia_search('', { facets: '*', facetFilters: similar, hitsPerPage: 7 })
-
+    taxons = []
+    @product.taxons.each do |t|
+      if t.taxonomy.name.downcase == "use" or t.taxonomy.name.downcase == "design"
+        taxons << "taxons.#{t.taxonomy.name.downcase}:#{t.name.downcase}"
+      end
+    end
+    products = Spree::Product.algolia_search('', { facets: '*', facetFilters: taxons, hitsPerPage: 7 })
     products.delete_if {|prod| prod.id == @product.id}
-
     @similar = products.select{ |prod| prod.images.first }
   end
 end
