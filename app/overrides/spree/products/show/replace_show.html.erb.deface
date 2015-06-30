@@ -48,32 +48,32 @@
         <%= large_image(@product, :itemprop => "image") %>
       </figure>
       <% if @product.images.where(:search_result_asset => false).size > 1 %>
-      <ul class="thumbnails">
-      <% @product.images.where(:search_result_asset => false).each do |i| %>
-        <li>
-          <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), i.attachment.url(:large), :class=> "fancybox", :rel=> "gallery" %></span>
-        </li>
-      <% end %>
-      </ul>
+        <ul class="thumbnails">
+        <% @product.images.where(:search_result_asset => false).each do |i| %>
+          <li>
+            <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), i.attachment.url(:large), :class=> "fancybox", :rel=> "gallery" %></span>
+          </li>
+        <% end %>
+        </ul>
       <%end %>
       <% if @similar.present? %>
-      <h3 class='similars-header'> You may also like: </h3>
-      <ul class="thumbnails" id="similar-products">
-          <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
-          <div class = 'similars-container'>
-            <% @similar.each_with_index do |product, index| %>
-                <% i = product.images.first %>
-                <li class='similar similar-<%= index.to_s %>'>
-                  <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), product_path(product) %></span>
-                  <div> <%= product.name %> </div>
-                </li>
-            <% end %>
-          </div>
-          <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
-      </ul>
+        <h3 class='similars-header'> You may also like: </h3>
+        <ul class="thumbnails" id="similar-products">
+            <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
+            <div class = 'similars-container'>
+              <% @similar.each_with_index do |product, index| %>
+                  <% i = product.images.first %>
+                  <li class='similar similar-<%= index.to_s %>'>
+                    <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), product_path(product) %></span>
+                    <div> <%= product.name %> </div>
+                  </li>
+              <% end %>
+            </div>
+            <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
+        </ul>
+      <%end%>
     </section>
-    <%end%>
-
+    
     <section class="halfLarge">
       <h1>
         <%= @product.name %>
