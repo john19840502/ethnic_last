@@ -8,6 +8,7 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
       t.string   "sluggable_type", limit: 50
       t.string   "scope"
       t.datetime "created_at"
+      t.datetime "deleted_at"
     end
 
     add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
