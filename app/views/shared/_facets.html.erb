@@ -63,28 +63,3 @@
   </div>
 </div>
 <% end %>
-
-<% facet_key = "colors" %>
-<% facet = "colors" %>
-<h2 class="filter">
-  <a href="#" title="Show filter for <%=facet%>" class="toggle_filter" data-target="<%=facet_key.gsub('.','_').gsub(' ', '_')%>"><%=facet%><span></span></a>
-</h2>
-<div class="use_category">
-  <div id="color-picker">
-    <% for val in @products.facets[facet_key] %>
-      <%
-        name = val[0]
-        results = val[1]
-      %>
-      <% if @searcher.facet_and_value_selected(facet, name) %>
-        <% link= "#{request.fullpath}/#{facet}/#{name}"%>
-        <a href="#", onclick="remove_filter('<%=facet%>','<%=name%>');" style="background:<%=name%>" class="activated">
-          <span class="remove_filter">Remove filter</span>
-          <span class="ss-icon filter-close">␡</span>
-        </a>
-      <% else %>
-        <%=link_to "", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products", style: "background: #{name}" %>
-      <% end %>
-    <% end %>
-  </div>
-</div>

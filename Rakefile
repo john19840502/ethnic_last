@@ -13,7 +13,7 @@ task :reindex_products => :environment do
   end
 end
 
-desc 'Reindex Products to Algolia'
+desc 'Reset Variant Colors'
 task :reset_product_variant_colors => :environment do
   Spree::Product.available.find_each do |product|
     product.reset_variant_colors
