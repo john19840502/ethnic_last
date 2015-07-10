@@ -11,11 +11,18 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
       t.datetime "deleted_at"
     end
 
+    add_index :friendly_id_slugs, :deleted_at
     add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
     add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
     add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
     add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+    create_table :product_variant_colors, id: false do |t|
+      t.integer :product_id
+      t.integer :variant_id
+      t.text    :colors, array:true, default: []
+      t.integer :option_value_id
+    end
 
     # Adjustments
 
@@ -716,6 +723,28 @@ class MigrateOldDbToEthnicchick2 < ActiveRecord::Migration
 
     add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree
     add_index "spree_zones", ["kind"], name: "index_spree_zones_on_kind", using: :btree
+
+    create_table :spree_favorites do |t|
+      t.belongs_to :favorable, polymorphic: true
+      t.belongs_to :user
+      t.string :guest_token
+      t.timestamps
+    end
+    add_index :spree_favorites, [:favorable_id, :favorable_type]
+    add_index :spree_favorites, :user_id
+    add_index :spree_favorites, :guest_token
+
+    add_column :spree_products, :cached_favorites_count, :integer
+    add_column :spree_users,  :cached_favorites_count, :integer
+
+    change_column :spree_line_items, :quantity, :decimal, precision: 10, scale: 2, default: 0.0
+    change_column :spree_promotion_action_line_items, :quantity, :decimal, precision: 10, scale: 2, default: 0.0
+    change_column :spree_stock_movements, :quantity, :decimal, precision: 10, scale: 2, default: 0.0
+    change_column :spree_orders, :item_count, :decimal, precision: 10, scale: 2, default: 0.0
+    change_column :spree_stock_items, :count_on_hand, :decimal, precision: 10, scale: 2, defaul: 0.0, null: false
+    add_column :spree_inventory_units, :quantity, :decimal, precision: 10, scale: 2, default: 1.0
+
+    add_column :spree_option_types, :as_color_filter, :boolean, default: false
 
     # Taggings, Tags
 

@@ -10,7 +10,7 @@ task :migrate_old_data => :environment do
   SpreeZonesForPopupMigration.new.migrate_with_log
   StockLocationMigration.new.migrate_with_log
   ShippingMethodZonesMigration.new.migrate_with_log
-  
+
   #recreate right schema_migrations from dump
   ActiveRecord::Base.connection.execute("
 DELETE FROM schema_migrations;
@@ -259,7 +259,18 @@ INSERT INTO schema_migrations (version) VALUES
 ('20150225080009'),
 ('20150225080010'),
 ('20150225080011'),
-('20150225080012');"
+('20150225080012'),
+('20150310164232'),
+('20150310182124'),
+('20150407075020'),
+('20150413113953'),
+('20150427214043'),
+('20150428231905'),
+('20150428234002'),
+('20150601080637'),
+('20150626125103'),
+('20150626140030'),
+('20150627100513');"
 )
 
   puts 'Schema migrations recreated!'
@@ -292,6 +303,18 @@ INSERT INTO schema_migrations (version) VALUES
       inventory_unit.update_attribute(:line_item_id,li.id)
     end
   end
+
+  Spree::Payment.where(number: nil).find_each do |payment|
+    payment.generate_number
+    begin
+      payment.save
+    rescue
+      puts "Skipping invalid payment #{payment.id}"
+    end
+  end
+
+  Spree::OptionType.where('LOWER(presentation) LIKE ?', '_olor option_').update_all(as_color_filter: true)
+
 
   ActiveRecord::Base.connection.execute("DELETE FROM spree_payment_methods;")
 

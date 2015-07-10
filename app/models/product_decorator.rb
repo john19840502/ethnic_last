@@ -90,30 +90,29 @@ Spree::Product.class_eval do
     dominant_colors.flatten.uniq
   end
 
-
-  include AlgoliaSearch
-  algoliasearch synchronous: true do
-    attribute :name, :description, :sku
-
-    attribute :variant_skus do
-      self.variants.collect(&:sku).compact - [""]
-    end
-
-    attribute :prices do
-      self.prices.map(&:price).map(&:to_f).uniq.sort
-    end
-
-    attribute :taxons do
-      index_taxons
-    end
-
-    attribute :colors do
-      self.variant_colors
-    end
-
-    attributesForFaceting [:taxons, :prices, :colors]
-    customRanking ['asc(name)']
-  end
+  # include AlgoliaSearch
+  # algoliasearch synchronous: true do
+  #   attribute :name, :description, :sku
+  #
+  #   attribute :variant_skus do
+  #     self.variants.collect(&:sku).compact - [""]
+  #   end
+  #
+  #   attribute :prices do
+  #     self.prices.map(&:price).map(&:to_f).uniq.sort
+  #   end
+  #
+  #   attribute :taxons do
+  #     index_taxons
+  #   end
+  #
+  #   attribute :colors do
+  #     self.variant_colors
+  #   end
+  #
+  #   attributesForFaceting [:taxons, :prices, :colors]
+  #   customRanking ['asc(name)']
+  # end
 
   def self.search_like_any(fields, values)
     where fields.map { |field|
