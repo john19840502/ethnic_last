@@ -29,11 +29,27 @@
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>
     <% end %>
-		<h2 class="filter">Current selected filters</h2>
-		<div class="use_category">
-      <ul class="categories filter">
+
+		<%
+			title = @searcher.selected_category
+			title = @searcher.selected_brand unless title
+			title = "" unless title
+		%>
+		<h2><%=title%></h2>
+		<ul class="categories">
+			<% if @searcher.selected_category %>
 				<li class="back"><a href="/collection"><span></span>Back to Categories</a></li>
-				<% for val in @searcher.properties[:facets] %>
+				<li class="selected"><a href="/search/categories/<%=title%>/">All <%=title%></a></li>
+			<% elsif @searcher.selected_brand %>
+				<li class="back"><a href="/collection"><span></span>Back to Brands</a></li>
+				<li class="selected"><a href="/search/brands/<%=title%>/">All <%=title%></a></li>
+			<% end %>
+
+		</ul>
+
+		<div class="use_category">
+      <ul class="categories">
+				<!-- <% for val in @searcher.properties[:facets] %>
 					<li class="selected">
 						<a href="#", onclick="remove_filter('<%=val[:facet]%>','<%=val[:value]%>');">
 							<%= val[:facet] %> : <%= val[:value] %>
@@ -41,11 +57,9 @@
 							<span class="ss-icon filter-close">␡</span>
 						</a>
 					</li>
-				<% end %>
+				<% end %> -->
       </ul>
-
-    <%= render :partial => '/shared/facets'%>
-
+    <%= render :partial => '/shared/facets' %>
   <p>
 		<label for="amount">PRICE RANGE:</label>
 		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">

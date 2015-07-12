@@ -47,6 +47,20 @@ class Search
     end
   end
 
+  def selected_category
+    @properties[:facets].each do |f|
+      return f[:value] if f[:facet] == "categories"
+    end
+    nil
+  end
+
+  def selected_brand
+    @properties[:facets].each do |f|
+      return f[:value] if f[:facet] == "brands"
+    end
+    nil
+  end
+
   def colors_facets
     @properties[:facets].each do |f|
       return f[:facet] if f[:facet] == "colors"
