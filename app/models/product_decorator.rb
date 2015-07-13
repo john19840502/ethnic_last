@@ -1,7 +1,7 @@
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
-  after_create :generate_meta_tags
-  #after_save :add_index
+  #after_create :generate_meta_tags
+  after_save :generate_meta_tags
   before_destroy :remove_index
   has_many :product_variant_colors
 
