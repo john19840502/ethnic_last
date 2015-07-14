@@ -15,7 +15,7 @@ Spree::Product.class_eval do
   }
 
   def index_taxons
-    hashes = self.taxons.collect {|t| {t.taxonomy.name.downcase.to_sym => t.name.downcase}  }
+    hashes = self.taxons.collect {|t| {t.taxonomy.name.downcase.to_sym => t.name.downcase.strip}}
     {}.tap{ |r| hashes.each{ |h| h.each{ |k,v| (r[k]||=[]) << v } } }
   end
 
@@ -174,7 +174,7 @@ Spree::Product.class_eval do
     # Set meta keywords value
     meta_keywords = []
     meta_keywords << self.name
-    meta_keywords << self.brand.try(:name)
+    meta_keywords << self.brand_name
     meta_keywords << self.taxons.map(&:name)
     meta_keywords = meta_keywords.flatten
     self.meta_keywords = meta_keywords.join(",")
@@ -190,7 +190,7 @@ Spree::Product.class_eval do
   end
 
   def brand_name
-    self.brand.try(:name)
+    self.brand.try(:name).try(:strip)
   end
 
   private

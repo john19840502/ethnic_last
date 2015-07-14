@@ -163,7 +163,7 @@ function activateSimilarsSlider(){
     };
     left_similar_bound = 1;
     right_similar_bound = 3;
-    $('.next-similar').click(function(e){
+    $('.previous-similar').click(function(e){
         if(right_similar_bound < products_count){
             right_similar_bound++;
             left_similar_bound++;
@@ -176,7 +176,7 @@ function activateSimilarsSlider(){
         e.preventDefault();
         return false;
     });
-    $('.previous-similar').click(function(e){
+    $('.next-similar').click(function(e){
         if(left_similar_bound > 1){
             right_similar_bound--;
             left_similar_bound--;
