@@ -6,7 +6,7 @@ Spree::Product.class_eval do
   has_many :product_variant_colors
 
   scope :brand_search, -> (keywords) {
-    joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and spree_taxons.name like ?', TAXONOMY_BRAND, "%#{keywords}%"])
+    joins(taxons: :taxonomy).where(['spree_taxonomies.name = ? and lower(spree_taxons.name) ILIKE ?', TAXONOMY_BRAND, "%#{keywords.downcase}%"])
   }
 
   scope :by_brands, -> (brands) {
