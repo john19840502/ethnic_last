@@ -11,3 +11,7 @@ end
 
 Spree.user_class = 'Spree::User'
 Money.add_rate("EUR", "USD", 1.10956)
+
+ActionView::Base.field_error_proc = Proc.new do |html_tag, instance_tag|
+  html_tag
+end
