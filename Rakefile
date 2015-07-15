@@ -25,7 +25,10 @@ task :reset_slugs => :environment do
   Spree::Product.available.find_each do |product|
     if product.brand_enabled?
       product.slug = nil
-      product.save!
+      begin
+        product.save!
+      rescue
+      end
     end
   end
 end
