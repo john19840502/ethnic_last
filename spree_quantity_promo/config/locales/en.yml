@@ -1,0 +1,8 @@
+en:
+  spree:
+    promotion_rule_types:
+      quantity:
+        name: Quantity discount
+        description: Quantity based discount
+        min: minimal line item count
+        max: max line item count
