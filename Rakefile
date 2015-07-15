@@ -19,3 +19,13 @@ task :reset_product_variant_colors => :environment do
     product.reset_variant_colors
   end
 end
+
+desc 'reset product slug'
+task :reset_slugs => :environment do
+  Spree::Product.available.find_each do |product|
+    if product.brand_enabled?
+      product.slug = nil
+      product.save!
+    end
+  end
+end
