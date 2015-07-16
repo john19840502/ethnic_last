@@ -5,8 +5,8 @@
     <%= render :partial => 'shared/header_menu' %>
     <%= yield %>
     <div id="scroller">
-          <i class="glyphicon glyphicon-chevron-up"></i>
-        </div>
+      <i class="glyphicon glyphicon-chevron-up"></i>
+    </div>
     <%= render :partial => 'shared/footer' %>
     <%= render :partial => 'spree/shared/google_analytics' %>
   </div>
