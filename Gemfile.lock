@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree.git
-  revision: 7461401b0e9ae19f92118d265c92ca031b065145
+  revision: 027905433b79aaef187f4840c67ab76da7ee818c
   branch: 3-0-stable-pero
   specs:
     spree (3.0.3.beta)
@@ -109,7 +109,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 4e115bfab7592843f431ff605e93df47ba2a6270
+  revision: 5b84d8a67dc5f8799c5e5f6a2b3e243a3a9eb9bd
   branch: 4-2-stable
   specs:
     actionmailer (4.2.3)
