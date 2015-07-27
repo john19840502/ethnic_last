@@ -11,11 +11,12 @@ Spree::OrderUpdater.class_eval do
                         shipments.sum(:promo_total) +
                         adjustments.promotion.eligible.sum(:amount)
 
+    promo_incl_tax = order.promo_total
     # fix tax on promo_total
-    if order.promo_total > 0
-      promo_incl_tax = order.promo_total
+    if promo_incl_tax > 0
       pre_tax_on_promo_amount = promo_incl_tax / (1.21)
       tax_promo_amount = promo_incl_tax - pre_tax_on_promo_amount
+      # since the tax_promo_amount is a negative number we need to add it.
       order.included_tax_total = order.included_tax_total + tax_promo_amount
     end
 
