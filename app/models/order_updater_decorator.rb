@@ -12,15 +12,13 @@ Spree::OrderUpdater.class_eval do
                         adjustments.promotion.eligible.sum(:amount)
 
     # fix tax on promo_total
+    if order.promo_total > 0
+      promo_incl_tax = order.promo_total
+      pre_tax_on_promo_amount = promo_incl_tax / (1.21)
+      tax_promo_amount = promo_incl_tax - pre_tax_on_promo_amount
+      order.included_tax_total = order.included_tax_total + tax_promo_amount
+    end
 
-    promo_incl_tax = order.promo_total
-
-    pre_tax_on_promo_amount = promo_incl_tax / (1.21)
-    tax_promo_amount = promo_incl_tax - pre_tax_on_promo_amount
-    #pre_tax_promo_amount = BigDecimal.new(amount.to_s).round(2, BigDecimal::ROUND_HALF_UP)
-    order.included_tax_total = order.included_tax_total + tax_promo_amount
-    #round_to_two_places(line_items_total - ( line_items_total / (1 + rate.amount) ) )
-    #BigDecimal.new(amount.to_s).round(2, BigDecimal::ROUND_HALF_UP)
     update_order_total
   end
 end
