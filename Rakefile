@@ -36,6 +36,9 @@ end
 desc 'generate meta content for products'
 task :generate_meta_data => :environment do
   Spree::Product.find_each do |product|
-    product.generate_meta_tags
+    begin
+      product.generate_meta_tags
+    rescue
+    end
   end
 end
