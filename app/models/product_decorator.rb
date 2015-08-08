@@ -171,21 +171,23 @@ Spree::Product.class_eval do
   end
 
   def generate_meta_tags
+
+    taxons_names = self.taxons.map(&:name)
+
     # Set meta keywords value
     meta_keywords = []
     meta_keywords << self.name
     meta_keywords << self.brand_name
-    meta_keywords << self.taxons.map(&:name)
+    meta_keywords << taxons_names
     meta_keywords = meta_keywords.flatten
-    self.meta_keywords = meta_keywords.join(",")
+    self.meta_keywords = meta_keywords.join(", ")
 
     # Set meta description value
     meta_description = []
-    meta_description << "#{self.brand.try(:name)} online shop #{self.name} #{self.tax_category.name}"
-    taxons_name = self.taxons.map(&:name)
-    taxons_name[taxons_name.index(taxons_name.last)] = "#{taxons_name.last} - worldwide shipping" if taxons_name.present?
-    meta_description << taxons_name
-    self.meta_description = meta_description.flatten.join(",")
+    meta_description << "#{self.brand_name} online shop #{self.name}"
+    taxons_names[taxons_names.index(taxons_names.last)] = "#{taxons_names.last} - worldwide shipping" if taxons_names.present?
+    meta_description << taxons_names
+    self.meta_description = meta_description.flatten.join(", ")
     self.save!
   end
 
