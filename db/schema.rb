@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627100513) do
+ActiveRecord::Schema.define(version: 20150710101139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,9 +151,11 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.text     "preferences"
+    t.datetime "deleted_at"
   end
 
   add_index "spree_calculators", ["calculable_id", "calculable_type"], name: "idx_spree_calculators_index_spree_calculators_on_calculable_6", using: :btree
+  add_index "spree_calculators", ["deleted_at"], name: "index_spree_calculators_on_deleted_at", using: :btree
   add_index "spree_calculators", ["id", "type"], name: "idx_spree_calculators_index_spree_calculators_on_id_and_type", using: :btree
 
   create_table "spree_countries", force: :cascade do |t|
@@ -273,7 +275,7 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",       precision: 8,  scale: 2, default: 0.0
+    t.decimal  "pre_tax_amount",       precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_line_items", ["order_id"], name: "idx_spree_line_items_index_spree_line_items_on_order_id", using: :btree
@@ -779,7 +781,7 @@ ActiveRecord::Schema.define(version: 20150627100513) do
     t.decimal  "additional_tax_total",             precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",                      precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",               precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",                   precision: 8,  scale: 2, default: 0.0
+    t.decimal  "pre_tax_amount",                   precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_shipments", ["address_id"], name: "idx_spree_shipments_index_spree_shipments_on_address_id", using: :btree
