@@ -49,7 +49,10 @@ module Spree
       taxon = Spree::Taxon.find_by_permalink(permalink)
       if taxon
         return redirect_to URI.escape("/search/brands/#{taxon.name}"), :status => :moved_permanently
+      else
+        return redirect_to URI.escape("/search?keywords=#{brand.gsub('-',' ')}")
       end
+
     end
 
 
