@@ -27,7 +27,9 @@ class Search
 
   def price_range
     if @properties[:price_range].present?
-      "prices: #{@properties[:price_range]}"
+      price_range = @properties[:price_range].gsub("€","")
+      price_range = price_range.gsub("$","")
+      "prices: #{price_range}"
     else
       ''
     end
