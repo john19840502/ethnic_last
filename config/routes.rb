@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/'
 
   scope module: 'spree' do
+    get '/brands/:brand_name/*filter', to: "search#brands_redirect", as: 'brand_redirector'
     get '/collection', to: 'products#index', as: 'collection'
     post '/do_search', to: 'search#do_search'
     get '/country/set', to: 'country#set', as: 'set_country'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   get '/404_custom', to: 'errors#not_found'
+
 end
 
 Spree::Core::Engine.routes.draw do

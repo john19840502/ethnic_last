@@ -43,5 +43,15 @@ module Spree
 
     end
 
+    def brands_redirect
+      brand = params[:brand_name]
+      permalink = "brands/#{brand}"
+      taxon = Spree::Taxon.find_by_permalink(permalink)
+      if taxon
+        return redirect_to URI.escape("/search/brands/#{taxon.name}"), :status => :moved_permanently
+      end
+    end
+
+
   end
 end
