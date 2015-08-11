@@ -93,7 +93,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree_mollie.git
-  revision: 74244613f173ebd8e87eb464dfbbc64eda288f7a
+  revision: b8b43e644e9bcb4317fb4d628d264e90dd241131
   branch: 3-0-stable
   specs:
     spree_mollie (3.0.0.beta)
@@ -109,7 +109,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 2de361177f934ffb63bbaa04b7f0637a9a14eea2
+  revision: d2fa0abcf2a19b38cc4b430ce672dd884e9bd5a1
   branch: 4-2-stable
   specs:
     actionmailer (4.2.3)
