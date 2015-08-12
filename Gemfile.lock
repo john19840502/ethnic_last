@@ -84,7 +84,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree_image_cropper.git
-  revision: 07f9bd9416170a2bb37cc801679a707db9dbcd17
+  revision: c65945e0ad2917bf342bd8400303ceebce4f78b3
   specs:
     spree_image_cropper (1.3.0)
       coffee-rails
