@@ -89,7 +89,7 @@ gem 'spree_favorites', github: 'fesstor/spree_favorites', branch: 'add-spree-3-0
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'
 gem 'spree_product_pdf', path: 'spree_product_pdf'
-gem 'spree_image_cropper', github: 'pero-ict-solutions/spree_image_cropper'
+#gem 'spree_image_cropper', github: 'pero-ict-solutions/spree_image_cropper'
 
 gem 'spree_ups_express_saver', path: 'spree_ups_express_saver'
 gem 'spree_brands_on_taxons', path: 'spree_brands_on_taxons'
