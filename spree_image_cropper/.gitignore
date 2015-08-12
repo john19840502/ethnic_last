@@ -1,0 +1,15 @@
+\#*
+*~
+.#*
+.DS_Store
+.idea
+.idea/*
+.project
+coverage
+Gemfile.lock
+tmp
+nbproject
+pkg
+*.swp
+spec/dummy
+config/*.yml
