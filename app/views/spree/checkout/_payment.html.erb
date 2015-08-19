@@ -4,7 +4,7 @@
     <dd><%= @order.ship_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
     <dt><%= Spree.t(:billing_address) %></dt>
     <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
-    <% if @order.has_step?("delivery") and @order.shipments.present? %>
+    <% if @order.has_step?("delivery") %>
         <dt><%= Spree.t(:shipping_method) %></dt>
         <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
     <% end %>
