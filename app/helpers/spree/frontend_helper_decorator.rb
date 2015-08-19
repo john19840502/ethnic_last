@@ -1,6 +1,6 @@
 Spree::FrontendHelper.class_eval do
   def checkout_states
-    @order.reload.checkout_steps
+    @order.checkout_steps
   end
 
   def state_required_class

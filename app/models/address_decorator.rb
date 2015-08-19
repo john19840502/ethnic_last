@@ -1,6 +1,7 @@
 Spree::Address.class_eval do
-  def self.default
-    country = Spree::Country.find(session[:country_id]) rescue Spree::Country.first
+
+  def self.build_default
+    country = Spree::Country.find(session[:country_id]) rescue Spree::Country.default
     new({country: country}, without_protection: true)
   end
 
