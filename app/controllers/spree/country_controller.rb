@@ -8,13 +8,19 @@ module Spree
       if params[:country_id]
         country = Spree::Country.find(params[:country_id])
         if country
+
+          session.delete(:country_id)
+          session.delete(:country_name)
+
           session[:country_id] = country.id
           session[:country_name] = country.name
+
           flash.notice = t(:locale_changed)
         end
       else
         flash[:error] = t(:locale_not_changed)
       end
+
       redirect_back_or_default(root_path)
     end
 

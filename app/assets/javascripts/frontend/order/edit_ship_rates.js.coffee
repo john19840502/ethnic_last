@@ -16,7 +16,7 @@ Spree.ready ($) ->
 
   Spree.show_rates = (rates) ->
     if rates["rates"].length == 0
-      ($ '#shipping_rates').html("No shipping rates for your location.")
+      ($ '#shipping_rates').html("Please proceed to checkout for the shipping rate on this order.")
     else
       cost = rates["rates"][0]["cost"]
       currency = Spree.currency_sign(rates["currency"])
