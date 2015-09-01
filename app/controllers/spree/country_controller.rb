@@ -10,8 +10,8 @@ module Spree
         if country
           session[:country_id] = country.id
           session[:country_name] = country.name
+          flash.notice = t(:locale_changed)
         end
-        flash.notice = t(:locale_changed)
       else
         flash[:error] = t(:locale_not_changed)
       end
