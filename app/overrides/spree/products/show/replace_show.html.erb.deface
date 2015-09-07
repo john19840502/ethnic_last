@@ -45,7 +45,7 @@
   <% else %>
     <section class="halfLarge first" data-hook="product_images">
       <figure data-hook="main-image">
-        <%= large_image(@product, :itemprop => "image") rescue "" %>
+        <%= large_image(@product, :itemprop => "image")%>
       </figure>
       <% if @product.images.where(:search_result_asset => false).size > 1 %>
         <ul class="thumbnails">
