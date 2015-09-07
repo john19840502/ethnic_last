@@ -77,9 +77,11 @@
     <section class="halfLarge">
       <h1>
         <%= @product.name %>
+        <% if @product.brand.icon.present? %>
         <span class="product-brand">
           <%= link_to(image_tag(@product.brand.icon(:original), :alt => @product.brand.name), "/search/brands/#{@product.brand_name}") if @product.brand.present? %>
         </span>
+        <%end%>
         <div class="favorite">
 
           <% if has_favorite?(@product) %>
