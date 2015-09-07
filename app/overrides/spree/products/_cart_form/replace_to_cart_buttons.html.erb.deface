@@ -12,7 +12,6 @@
         <p>Subtotal <strong id="product-price" class="buy--price"><span class="price selling" itemprop="price"><%= money_with_currency @product.price %></span></strong><small>(including VAT)</small></p>
     <% end %>
     <div class="add-to-cart">
-
         <%= hidden_field_tag(:quantity, 1) %>
         <%= button_tag :class => 'right', :id => 'add-to-cart-button', :type => :submit do %>
           <%= t(:add_to_cart) %>
