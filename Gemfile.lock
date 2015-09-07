@@ -308,7 +308,7 @@ GEM
     algoliasearch-rails (1.12.0)
       algoliasearch (>= 1.2.14)
       json (>= 1.5.1)
-    appsignal (0.12.beta.31)
+    appsignal (0.11.15)
       rack
       thread_safe
     arel (6.0.3)
@@ -602,7 +602,7 @@ PLATFORMS
 
 DEPENDENCIES
   algoliasearch-rails
-  appsignal (~> 0.12.beta)
+  appsignal
   awesome_print
   aws-sdk (~> 1.61.0)
   better_errors
