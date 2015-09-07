@@ -24,7 +24,12 @@
 
 <% bg = Spree::Background.where(taxon_id: nil).first %>
 <% if @product && @product.brand %>
-  <% bg = Spree::Background.where(taxon_id: @product.brand.id).first %>
+  <%
+    taxon_bg = Spree::Background.where(taxon_id: @product.brand.id).first
+    if taxon_bg.present?
+      bg = taxon_bg
+    end
+  %>
 <% end %>
 
 <% if bg %>
