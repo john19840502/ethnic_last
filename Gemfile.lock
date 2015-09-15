@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/pero-ict-solutions/spree.git
-  revision: 33f51dee2eeadad16f1b26c92710ddc387b2d8fe
+  revision: 3efd79923386d06d5e7e2c7e24dd264463dd80ef
   branch: 3-0-stable-pero
   specs:
     spree (3.0.5.beta)
