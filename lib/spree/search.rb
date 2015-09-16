@@ -39,7 +39,7 @@ class Search
     return false if facet == "prices"
     return false if facet == "colors"
     return false if facet == "brands"
-    #return false if facet == "categories" && facet_selected(facet)
+    return false if facet == "categories" && facet_selected(facet)
     true
   end
 
