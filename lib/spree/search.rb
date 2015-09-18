@@ -13,7 +13,7 @@ class Search
 
   def retrieve_products
     @products = Spree::Product.algolia_search(keywords,
-      { facets: '*', facetFilters: filters, numericFilters: price_range, page: @properties[:page] }
+      { facets: '*', facetFilters: filters, numericFilters: price_range, page: @properties[:page], hitsPerPage: 51 }
     )
   end
 

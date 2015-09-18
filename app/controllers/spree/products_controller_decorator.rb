@@ -1,5 +1,6 @@
 require 'application_responder'
 require 'spree/search'
+
 Spree::ProductsController.class_eval do
 
   before_action :set_similar_products, only: [:show]
@@ -13,11 +14,8 @@ Spree::ProductsController.class_eval do
     @searcher.current_user = try_spree_current_user
     @products = @searcher.retrieve_products
     @taxonomies = Spree::Taxonomy.includes(root: :children)
-    if params[:page].present?
-      render partial: 'spree/shared/products_list', locals: { products: @products}
-    else
-      respond_with(@products)
-    end
+
+    respond_with @products
   end
 
   def show
