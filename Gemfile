@@ -98,7 +98,6 @@ gem 'spree_dedicated_admin_option_types', path: 'spree_dedicated_admin_option_ty
 gem 'spree_quantity_promo', path: 'spree_quantity_promo'
 
 gem 'appsignal'
-#gem 'appsignal', '~> 0.12.beta'
 
 gem 'algoliasearch-rails'
 gem 'miro'
