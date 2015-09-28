@@ -7,7 +7,9 @@ module Spree
 
       def set_session_country_by_ip
         @geoip ||= GeoIP.new("#{Rails.root.to_s}/db/GeoIP.dat")
-        country_by_ip = @geoip.country(request.remote_ip)
+        country_by_ip = @geoip.country(request.env['HTTP_X_FORWARDED_FOR'])
+        Rails.logger.info "[GEO] request.remote_ip: #{request.remote_ip}"
+        Rails.logger.info "[GEO] HTTP_X_FORWARDED_FOR: #{request.env['HTTP_X_FORWARDED_FOR']}"
         begin
           country = Spree::Country.where( "iso = ? OR iso3 = ?", country_by_ip.country_code2, country_by_ip.country_code3 ).first
         rescue
