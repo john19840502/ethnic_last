@@ -2,7 +2,6 @@ Spree::Order.class_eval do
 
   insert_checkout_step :before_address, before: :address
 
-
   def pre_tax_amount
     line_items.sum(:pre_tax_amount)
   end
