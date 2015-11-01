@@ -70,6 +70,10 @@ Spree::Product.class_eval do
     end
   end
 
+  def remove_taxon(taxon)
+    #nop
+  end
+
   def variant_colors
     dominant_colors = []
     self.option_types.where(as_color_filter: true).each do |ot|
