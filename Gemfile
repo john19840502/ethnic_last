@@ -98,8 +98,6 @@ gem 'spree_decimal_quantity', path: 'spree_decimal_quantity'
 gem 'spree_dedicated_admin_option_types', path: 'spree_dedicated_admin_option_types'
 gem 'spree_quantity_promo', path: 'spree_quantity_promo'
 
-gem 'appsignal'
-
 gem 'algoliasearch-rails'
 gem 'miro'
 gem 'paleta'

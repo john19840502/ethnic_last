@@ -1,7 +1,0 @@
-production:
-    last_thing:
-      - source: /.cloud66/appsignal_deploy.sh
-        destination: <%= ENV['STACK_PATH'] %>/appsignal_deploy.sh
-        target: rails
-        execute: true
-        sudo: true
