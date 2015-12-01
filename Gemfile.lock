@@ -307,9 +307,6 @@ GEM
     algoliasearch-rails (1.12.0)
       algoliasearch (>= 1.2.14)
       json (>= 1.5.1)
-    appsignal (0.11.15)
-      rack
-      thread_safe
     arel (6.0.3)
     autoprefixer-rails (6.0.3)
       execjs
@@ -605,7 +602,6 @@ PLATFORMS
 
 DEPENDENCIES
   algoliasearch-rails
-  appsignal
   awesome_print
   aws-sdk (~> 1.61.0)
   better_errors
@@ -664,4 +660,4 @@ DEPENDENCIES
   xray-rails
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
