@@ -1,5 +1,5 @@
 // On page load
-$(function() {
+$(document).ready(function() {
 
     externalLinks();
 
