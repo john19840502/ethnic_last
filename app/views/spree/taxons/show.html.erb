@@ -102,19 +102,9 @@
 		  format: 'js',
 		  data: {price_range: price_range, price_filter_req: true},
 		  success: function (data) {
-              $('#products').infinitescroll('destroy');
-              $('#products').infinitescroll({
-                  state: {
-                      isDestroyed: false,
-                      isDone: false
-                  }
-              });
-              $('#products').data('infinitescroll', null);
-
               $('#products.product-listing').html(data);
               $('.products-wrapper > .pagination').html($('#products > temp > .pagination').html());
               $('#products > temp').remove();
-              initInfiniteScroll();
 
               set_current('price_range', price_range);
               set_current('price_filter_req', true);
