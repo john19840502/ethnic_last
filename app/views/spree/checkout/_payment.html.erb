@@ -4,23 +4,47 @@
     <dd><%= @order.ship_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
     <dt><%= Spree.t(:billing_address) %></dt>
     <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
+
     <% if @order.has_step?("delivery") %>
-        <dt><%= Spree.t(:shipping_method) %></dt>
-        <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
+      <% @order.shipments.each do |shipment| %>
+        <dt><%= Spree.t(:shipping_method) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dt>
+        <dd>
+          <%= Spree.t(:shipment_details, stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name) %>
+        </dd>
+      <% end %>
     <% end %>
-    <dt>VAT</dt>
-    <dd><%= money @order.tax_total %></dd>
+    
+    <!-- subtotal -->
     <dt><%= Spree.t(:subtotal) %></dt>
-    <dd><%= money @order.item_total %></dd>
-    <% @order.adjustments.eligible.each do |adjustment| %>
-        <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
-        <dt> <%= adjustment.label %> </dt>
-        <dd><%= money adjustment.amount %></dd>
+    <dd><%= @order.display_item_total.to_html %></dd>
+    <!-- subtotal -->
+
+    <!-- order taxes -->
+    <% if @order.all_adjustments.tax.exists? %>
+      <% @order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
+        <dt><%= Spree.t(:tax) %>: <strong><%= label %></strong></dt>
+        <dd><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %><dd>
+      <% end %>
     <% end %>
-    <dt><%= Spree.t(:shipping_total) %></dt>
-    <dd><%= money @order.shipment_total %></dd>
+    <!-- order taxes -->
+
+    <!-- order promotions -->
+    <% @order.adjustments.eligible.each do |adjustment| %>
+      <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+      <dt> <%= adjustment.label %> </dt>
+      <dd><%= money adjustment.display_amount.to_html %></dd>
+    <% end %>
+    <!-- order promotions -->
+
+    <!-- shipments amount considering discounts -->
+    <% @order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments| %>
+      <dt><%= Spree.t(:shipping) %>: <strong><%= name %></strong></dt>
+      <dd><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: @order.currency).to_html %></dd>
+    <% end %>
+    <!-- shipments amount considering discounts -->
+
     <dt><%= Spree.t(:order_total) %></dt>
-    <dd><%= money @order.total %></dd>
+    <dd><%= @order.display_total.to_html %></dd>
   </dl>
 </section>
 
@@ -39,11 +63,11 @@
           <p><%= item.variant.options_text %></p>
           <dl class="advanced">
             <dt>Price</dt>
-            <dd><%= money item.price %></dd>
+            <dd><%= item.single_money.to_html %></dd>
             <dt>Quantity</dt>
-            <dd><%=item.quantity%></dd>
-            <dt>Total</dt>
-            <dd><%= money(item.price * item.quantity) %></dd>
+            <dd><%= item.quantity %></dd>
+            <dt>Item Total</dt>
+            <dd><%= item.display_amount.to_html %></dd>
           </dl>
         </div>
       </li>
