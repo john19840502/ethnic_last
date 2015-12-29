@@ -10,11 +10,11 @@ $(document).ready(function() {
 
     // Bind an onclick to touch dropdown menu
     if (elementExists($('#dropdown'))) {
-        $('#dropdown').bind('click touchend', {element: '#dropdown > ul'}, toggleElement);
+        $('#dropdown').off('click touchend').on('click touchend', {element: '#dropdown > ul'}, toggleElement);
     }
 
     if (elementExists($('#currency_dropdown'))) {
-        $('#currency_dropdown').bind('click touchend', {element: '#currency_dropdown > ul'}, toggleElement);
+        $('#currency_dropdown').off('click touchend').on('click touchend', {element: '#currency_dropdown > ul'}, toggleElement);
     }
 
     if (elementExists($('#colors'))) {
@@ -216,16 +216,16 @@ function toggleElement(event) {
     if($(event.data.element).is(":visible")) {
 
         // Bind click function to the rest of the document
-        $('html').bind('click touchend', {element: event.data.element}, toggleElement);
+        $('html').off('click touchend').on('click touchend', {element: event.data.element}, toggleElement);
 
         // Prevent the element from disapearing when clicked
-        $(event.data.element).bind('click touchend', function(event) {
+        $(event.data.element).off('click touchend').on('click touchend', function(event) {
             event.stopPropagation();
         });
 
     } else {
-        $(event.data.element).unbind('click touchend');
-        $('html').unbind('click touchend');
+        $(event.data.element).off('click touchend');
+        $('html').off('click touchend');
     }
 
     event.stopPropagation();
