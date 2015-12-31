@@ -27,6 +27,15 @@
 // require spree/backend/all
 
 $(document).ready(function() {
+    var timeoutID=false;
+    $('form.edit_order .line_item_quantity').on("change", function(event) {
+        if(timeoutID) { clearTimeout(timeoutID); }
+        timeoutID = setTimeout(function() {
+          clearTimeout(timeoutID);
+          $('form.edit_order').submit();
+        }, 3000);
+    });
+
     $("a#country_currency_selector").click(function(event){
         event.preventDefault();
         $('#country_selector').show();
