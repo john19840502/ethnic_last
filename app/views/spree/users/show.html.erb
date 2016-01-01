@@ -40,7 +40,14 @@
   <% end %>
   </section>
   <div class="buttons">
-    <%= button_to "Back to shop", root_path, class: "soft" %>
+    <ul class="list-inline">
+      <li>
+        <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Back to shop".html_safe, "/collection", class: "button soft small button_back_to_cart" %>
+      </li>
+      <li>
+        <%= link_to "<span class='glyphicon glyphicon-shopping-cart'></span> Go to Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+      </li>
+    </ul>
   </div>
 
 </section>
