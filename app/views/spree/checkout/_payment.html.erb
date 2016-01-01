@@ -53,5 +53,6 @@
 <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.mollie_payment_method.id %>
 
 <div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
   <%= submit_tag "Confirm and start payment", :class => 'continue button primary right' %>
 </div>
