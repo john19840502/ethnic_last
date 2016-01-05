@@ -18,7 +18,26 @@ $(function() {
 		values: values,
 		slide: function( event, ui ) {
 			$( "#amount" ).val(currency_type + ui.values[ 0 ] + " - " + currency_type + ui.values[ 1 ] );
-		}
+		},
+    change: function() {
+      var full_url = set_current('page', 1);
+  		var price_range = $('#amount').val();
+  		var currency_type;
+  		var currency = $("a[title='Currency selection'] small").text();
+  		$('#amount').attr('class','true');
+  		if(currency == "USD")
+  			{price_range = price_range.replace(/\$/g,'')}
+  		else
+  			{price_range = price_range.replace(/\€/g,'')}
+
+  //		window.location.replace(full_url + "&price_range=" + price_range);
+  		$.ajax({
+  		  type: 'get',
+  		  url: full_url,
+  		  dataType: 'script',
+  		  data: {price_range: price_range}
+  		 });
+    }
 	});
 
     var min_val = currency_type + $("#slider-range" ).slider("values", 0 );
