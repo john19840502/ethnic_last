@@ -25,13 +25,18 @@
             <h2><%= link_to variant.product.name, product_path(variant.product) %></h2>
             <%= render partial: 'options', locals: { options: variant.sorted_option_values } %>
             <%= item_form.number_field :quantity, :min => 1, :class => "line_item_quantity", :size => 5, step: line_item.step, value: line_item.quantity %>
-            <small>x</small> <%= line_item.single_money.to_html %>
+            <small>x</small> <%= money_with_currency line_item.price %>
             <em>=</em>
-            <em><strong><%= line_item.display_amount.to_html %></strong></em>
+            <em><strong><%= money_with_currency line_item.amount %></strong></em>
           </div>
           <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>
             <span class="ss-delete"></span>
           <% end %>
+          <div data-hook="promotions">
+            <%= "Possible promotions: " + variant.product.possible_promotions.size.to_s %>
+            
+            <%= render :partial => 'spree/products/promotions', collection: variant.product.possible_promotions %>
+          </div>
         </li>
       <% end %>
     </ul>
