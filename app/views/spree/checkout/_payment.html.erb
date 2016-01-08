@@ -8,10 +8,10 @@
         <dt><%= Spree.t(:shipping_method) %></dt>
         <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
     <% end %>
-    <dt>VAT</dt>
-    <dd><%= money @order.tax_total %></dd>
     <dt><%= Spree.t(:subtotal) %></dt>
     <dd><%= money @order.item_total %></dd>
+    <dt>VAT</dt>
+    <dd><%= money @order.tax_total %></dd>
     <% @order.adjustments.eligible.each do |adjustment| %>
         <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
         <dt> <%= adjustment.label %> </dt>
