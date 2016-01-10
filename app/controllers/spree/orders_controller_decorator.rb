@@ -1,8 +1,11 @@
 Spree::OrdersController.class_eval do
   before_action :go_back_to
+  before_action :restrict_quantity, only: [:update]
 
   def update
-    begin
+    if flash[:error]
+      redirect_back_or_default(spree.cart_path) and return
+    else
       if @order.contents.update_cart(order_params)
         respond_with(@order) do |format|
           format.html do
@@ -15,14 +18,6 @@ Spree::OrdersController.class_eval do
           end
         end
       end
-    rescue ActiveRecord::StatementInvalid
-      error = Spree.t(:please_enter_reasonable_quantity)
-    end
-
-    if error
-      flash[:error] = error
-      redirect_back_or_default(spree.cart_path)
-    else
       respond_with(@order)
     end
   end
@@ -32,4 +27,14 @@ Spree::OrdersController.class_eval do
       session[:go_back_to] = request.referer
     end
   end
+
+  private
+    def restrict_quantity
+      order_params[:line_items_attributes].each_pair do |id, value|
+        if value["quantity"].to_i > 100
+          order_params[:line_items_attributes][id]["quantity"] = 100
+          flash[:error] = Spree.t(:contact_us_for_stock_check)
+        end
+      end
+    end
 end
