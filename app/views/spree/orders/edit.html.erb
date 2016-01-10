@@ -32,11 +32,6 @@
           <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>
             <span class="ss-delete"></span>
           <% end %>
-          <div data-hook="promotions">
-            <%= "Possible promotions: " + variant.product.possible_promotions.size.to_s %>
-            
-            <%= render :partial => 'spree/products/promotions', collection: variant.product.possible_promotions %>
-          </div>
         </li>
       <% end %>
     </ul>
@@ -47,7 +42,7 @@
     <% end %>
   	<div class="cart_page_free_shipping_text">
       <div id="shipping_rates" data-country="<%=session[:country_id]%>"></div>
-      Free shipping for purchase: <br/> +€350 within Europe <br/> +€500 worldwide
+      Free shipping for purchase: <br/> +<%= money_with_currency 350 %> within Europe <br/> +<%= money_with_currency 500 %> worldwide
     </div>
     <div class="buttons">
       <p class="left">
