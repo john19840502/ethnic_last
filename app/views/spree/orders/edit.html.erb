@@ -51,14 +51,12 @@
         <% end %>
       <p class ="right">
         <%= button_tag :class => 'button soft small refresh', :id => 'update-button' do %>
-          <i class="ss-icon">refresh</i>&nbsp;<strong><%= money_with_currency(@order.total) %></strong>
+          Update
+        <% end %>
+        <%= button_tag :class => 'button right', :id => 'checkout-link', :name => 'checkout' do %>
+          <%= t(:checkout) %>
         <% end %>
       </p>
-    </div>
-    <div class="buttons">
-      <%= button_tag :class => 'button right', :id => 'checkout-link', :name => 'checkout' do %>
-        <%= t(:checkout) %>
-      <% end %>
     </div>
     <% end %>
   <% end %>
