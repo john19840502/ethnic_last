@@ -18,12 +18,8 @@
     </ul>
   </li>
 
-  <li id="dropdown">
-    <a href="#" title="Shopping Bag">Shopping Bag <small><%= current_order ? current_order.item_count : 0 %></small><span class="ss-icon">dropdown</span></a>
-    <ul>
-      <li><%= link_to "Shopping cart", spree.cart_path %></li>
-      <span></span>
-    </ul>
+  <li>
+    <a href="<%= spree.cart_path %>" title="Shopping Bag">Shopping Bag <small><%= current_order ? current_order.item_count : 0 %></small></a>
   </li>
 
   <% if spree_current_user %>
