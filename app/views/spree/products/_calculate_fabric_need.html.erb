@@ -5,7 +5,7 @@
 <div id="tab_calc" class="tabContents">
 	<p>Calculate your curtain fabric need. We calculate this for you with the 2.2 standard industry measure.</p>
 	<p>(this is only a guidance, for an accurate calculation please contact your local curtain specialist!)</p>
-	<p>Window or area:</p>
+	<p>Window or area: (in cms)</p>
 	<% @product.combined_properties.each do |property| %>
 		<% if property[0]=="Width (cm)" %>
 			<% @width= property[1].to_f %>
