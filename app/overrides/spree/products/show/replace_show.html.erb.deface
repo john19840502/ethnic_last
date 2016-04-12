@@ -23,7 +23,9 @@
 
 <header>
   <ul class="options" class>
-    <li><%= link_to 'Back to collection', :back, onclick: 'history.back();return false;', title: 'Back to collection', class: 'ss-left' %></li>
+    <li><%#= link_to 'Back to collection', :back, onclick: 'history.back();return false;', title: 'Back to collection', class: 'ss-left' %></li>
+    <li><%= link_to 'Back to collection', :back, onclick: 'back();return false;', title: 'Back to collection', class: 'ss-left' %></li>
+    
     <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=accurate_title%>" class="ss-like" id="facebook-share">Like</a></li>
     <li><%= link_to "Mail", email_to_friend_path("product", @product), :class => "ss-mail"%></li>
     <li>
@@ -56,7 +58,8 @@
         <% end %>
         </ul>
       <%end %>
-      <% if @similar.present? %>
+      <!-- turn off you may also like-->
+     <!-- <% if @similar.present? %>
         <h3 class='similars-header'> You may also like: </h3>
         <ul class="thumbnails" id="similar-products">
             <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
@@ -71,7 +74,7 @@
             </div>
             <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
         </ul>
-      <%end%>
+      <%end%> -->
     </section>
 
     <section class="halfLarge">
