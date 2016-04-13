@@ -198,6 +198,7 @@ div.container {
       max-width: 1440px;
       width: 100%;
     }
+   
 }
 
 
@@ -434,6 +435,11 @@ section.content {
             color: rgba(#fff, 0.55);
         }
     }
+
+
+
+
+
     p.referral {
         margin-bottom: $margin-bottom / 2;
         a {
@@ -962,3 +968,15 @@ footer.footer {
 
 @import "modules/responsive";
 @import "core/print";
+
+
+
+/*==============collection_image==========*/
+.home-thumb
+{
+    width:700px;
+    height:550px;
+}                                                                                                                                                                            .image
+{
+    margin-left:19px;
+}           

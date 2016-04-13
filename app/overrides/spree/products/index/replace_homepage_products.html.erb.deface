@@ -28,9 +28,12 @@
     <%= render :partial => 'spree/shared/taxonomies'%>
     <%= render :partial => 'shared/brands' %>
   </aside>
-  <div class="products-wrapper">
+<div class="products-wrapper">
     <div class="block">
 			<div class="clear"></div>
+
+			<div class ="row">
+			<div class = "col-md-9">
 			<div class="home-thumb">
 				<!-- Bloco topo -->
 				<% slider1_images =  get_slider1_images %>
@@ -67,8 +70,28 @@
 				<% if small_images2.present? %>
 					<%=render :partial => "small_images", :locals => {:small_images => small_images2 } %>
 				<% end %>
+
 				<div class="clear"></div>
 			</div>
-		</div>
-  </div>
+			</div>
+			
+				<!--create extra column of this slider-->
+				<div class="col-md-3">
+				  <div class = "image" >
+					
+					<img src="../assets/images/Edward Van Vliet Shop 1.png" width="210px"; height= "512px";
+					onmouseover="this.src='../assets/images/Edward Van Vliet Shop 2.png';"
+					onmouseout="this.src='../assets/images/Edward Van Vliet Shop 1.png';">
+					</img>
+	
+				  </div>
+				</div>
+				</div>
+
+				
+
+				
+			
+	</div>
+</div>
 </section>
