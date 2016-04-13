@@ -78,9 +78,11 @@
 				<!--create extra column of this slider-->
 				<div class="col-md-3">
 				  <div class = "image" >
-					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210px"; height= "512px";
-					onmouseover="this.src='<%= asset_url('Edward Van Vliet Shop 2.png') %>';"
-					onmouseout="this.src='<%= asset_url('Edward Van Vliet Shop 1.png') %>';">
+            <a href="http://www.ethnicchic.com/search/brands/edward%20van%20vliet">
+    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210px"; height= "512px";
+    					onmouseover="this.src='<%= asset_url('Edward Van Vliet Shop 2.png') %>';"
+    					onmouseout="this.src='<%= asset_url('Edward Van Vliet Shop 1.png') %>';">
+            </a>
 					</img>
 	
 				  </div>
