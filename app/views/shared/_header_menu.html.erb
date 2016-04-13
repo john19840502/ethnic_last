@@ -1,10 +1,7 @@
-  
- 
-
-<nav>
+<nav style="position: relative;">
   <strong><a href="/" title="Ethnic Chic">Ethnic Chic</a></strong>
 <!-- <img src="../assets/images/Ethnic-Chic-White-Logo-02.png" width="25%" height="25%"></img>
- -->  <ul style="position: relative;">
+ -->  <ul>
       <!--TODO: change links back-->
       <%= spree_nav_link 'Home', root_path %>
       <%= spree_nav_link 'Impressions', impressions_path %>
@@ -12,9 +9,9 @@
       <li><a href="http://blog.ethnicchic.com", target="_blank">Blog</a></li>
       <%= spree_nav_link 'About', '/about' %>
       <%= spree_nav_link 'Contact', contact_us_path %>
-       
-      <%= link_to "http://www.ethnicchic.com/search/brands/edward%20van%20vliet", style: "position: absolute; right: 0;top: 0;display:inline-block;" do %>
+
+      </ul>  
+      <%= link_to "http://www.ethnicchic.com/search/brands/edward%20van%20vliet", style: "position: absolute; right: 0;bottom: 5px;display:inline-block;" do %>
         <%= image_tag("Edward-Ethnic-Chic-Button01.png",width: '150px') %>
       <% end %>
-      </ul>  
 </nav>
