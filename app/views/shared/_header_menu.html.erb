@@ -1,5 +1,15 @@
 <nav style="position: relative;">
-  <strong><a href="/" title="Ethnic Chic">Ethnic Chic</a></strong>
+  <strong>
+      <% if params[:filters] == 'brands/edward van vliet' %>
+        <a href="/" style="display: inline-block; text-align: center;" title="Ethnic Chic">
+          <%= image_tag "Edward-Ethnic-Chic-Logo01.png", width: 300 %>
+        </a>
+      <% else %>
+        <a href="/" title="Ethnic Chic">
+          Ethnic Chic
+        </a>
+      <% end %>
+  </strong>
 <!-- <img src="../assets/images/Ethnic-Chic-White-Logo-02.png" width="25%" height="25%"></img>
  -->  <ul>
       <!--TODO: change links back-->

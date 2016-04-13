@@ -1,5 +1,5 @@
 <!-- replace "body" -->
-<body>
+<body style="<%= "background: #304040 url(#{asset_url('edwardvavliet-background-LR9.0.jpg')}) center top fixed no-repeat;" if params[:filters] == 'brands/edward van vliet' %>" >
   <div class="container large">
     <%= flash_messages %>
     <%= render :partial => 'shared/header_menu' %>
