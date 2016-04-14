@@ -4,7 +4,7 @@
 	<%= stylesheet_link_tag 'frontend/924' %>
 	<%= stylesheet_link_tag 'frontend/_bl_novo-menu' %>
 	<%= stylesheet_link_tag 'frontend/flexslider' %>
-	<%= stylesheet_link_tag 'frontend/jquery' %>
+	<%= stylesheet_link_tag 'frontend/jquery' %>								
 	<%= javascript_include_tag 'jquery.flexslider' %>
 
 	<script type="text/javascript">
@@ -33,7 +33,7 @@
 			<div class="clear"></div>
 
 			<div class ="row">
-			<div class = "col-md-9">
+			<div class = "col-md-9" style="padding-right:0 !important;">
 			<div class="home-thumb">
 				<!-- Bloco topo -->
 				<% slider1_images =  get_slider1_images %>
@@ -76,13 +76,15 @@
 			</div>
 			
 				<!--create extra column of this slider-->
-				<div class="col-md-3">
+				<div class="col-md-3" style="padding-left:0 !important;">
 				  <div class = "image" >
 					
-					<img src="../assets/images/Edward Van Vliet Shop 1.png" width="210px"; height= "512px";
-					onmouseover="this.src='../assets/images/Edward Van Vliet Shop 2.png';"
-					onmouseout="this.src='../assets/images/Edward Van Vliet Shop 1.png';">
+					<img src="../assets/images/Slider-05.png" width="210px"; height= "512px";
+					onmouseover="this.src='../assets/images/Slider-06.png';"
+					onmouseout="this.src='../assets/images/Slider-05.png';">
 					</img>
+
+					
 	
 				  </div>
 				</div>
