@@ -33,7 +33,7 @@
 			<div class="clear"></div>
 
 			<div class ="row">
-			<div class = "col-md-9">
+			<div class = "col-md-9" style="padding-right:0 !important;">
 			<div class="home-thumb">
 				<!-- Bloco topo -->
 				<% slider1_images =  get_slider1_images %>

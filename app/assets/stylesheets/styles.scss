@@ -972,11 +972,15 @@ footer.footer {
 
 
 /*==============collection_image==========*/
-.home-thumb
-{
-    width:700px;
-    height:550px;
-}                                                                                                                                                                            .image
-{
-    margin-left:19px;
+.home-thumb {
+  width:700px;
+  height:530px;
+}                                                                                                                                             .image {
+  margin-left:-4px;
 }           
+
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .image {
+    margin-left:-54px;
+  }
+}
