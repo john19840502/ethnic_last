@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/'
 
+  get '/edwardvanvliet', to: redirect('/search/brands/edward%20van%20vliet')
+
   scope module: 'spree' do
     get '/brands/:brand_name/*filter', to: "search#brands_redirect", as: 'brand_redirector'
     get '/collection', to: 'products#index', as: 'collection'
