@@ -79,7 +79,7 @@
 				<div class="col-md-3" style="padding-left:0 !important;">
 				  <div class = "image" >
 					
-					<img src="../assets/images/Slider-05.png" width="210px"; height= "512px";
+					<img src="../assets/images/Slider-05.png" width="210px"; height= "511px";
 					onmouseover="this.src='../assets/images/Slider-06.png';"
 					onmouseout="this.src='../assets/images/Slider-05.png';">
 					</img>
