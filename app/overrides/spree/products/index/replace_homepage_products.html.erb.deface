@@ -79,7 +79,7 @@
 				<div class="col-md-3">
 				  <div class = "image" >
             <a href="http://www.ethnicchic.com/edwardvanvliet">
-    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210px"; height= "511px";
+    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210" height= "489"
     					onmouseover="this.src='<%= asset_url('Edward Van Vliet Shop 2.png') %>';"
     					onmouseout="this.src='<%= asset_url('Edward Van Vliet Shop 1.png') %>';">
             </a>
