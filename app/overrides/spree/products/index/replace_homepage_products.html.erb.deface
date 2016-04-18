@@ -32,8 +32,8 @@
     <div class="block">
 			<div class="clear"></div>
 
-			<div class ="row">
-			<div class = "col-md-9" style="padding-right:0 !important;">
+			<div >
+			<div style="float: left; width: 657px;">
 			<div class="home-thumb">
 				<!-- Bloco topo -->
 				<% slider1_images =  get_slider1_images %>
@@ -76,10 +76,10 @@
 			</div>
 			
 				<!--create extra column of this slider-->
-				<div class="col-md-3">
-				  <div class = "image" >
+				<div style="width: 210px; float: left;">
+				  <div>
             <a href="http://www.ethnicchic.com/edwardvanvliet">
-    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210" height= "489"
+    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210" height="480"
     					onmouseover="this.src='<%= asset_url('Edward Van Vliet Shop 2.png') %>';"
     					onmouseout="this.src='<%= asset_url('Edward Van Vliet Shop 1.png') %>';">
             </a>
