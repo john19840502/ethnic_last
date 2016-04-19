@@ -52,6 +52,19 @@
 
 <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.mollie_payment_method.id %>
 
+
+<%= check_box_tag 'monday','1' %> ‘I acknowledge that I have read and agree to the <%= link_to 'Terms and Condition','/terms' %>’
 <div class="buttons">
-  <%= submit_tag "Confirm and start payment", :class => 'continue button primary right' %>
+  <%= submit_tag "Confirm and start payment", :class => 'continue button primary right', disabled: 'disabled' %>
 </div>
+
+
+<script>
+var checkboxes = $("input[type='checkbox']"),
+    submitButt = $("input[type='submit']");
+
+checkboxes.click(function() {
+    submitButt.attr("disabled", !checkboxes.is(":checked"));
+});
+
+</script>
