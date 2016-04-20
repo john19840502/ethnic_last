@@ -16,6 +16,7 @@ input[type=email],
 input[type=password],
 input[type=tel],
 input[type=url],
+input[type=number],
 textarea,
 select {
     font-family: $font-family;
@@ -26,10 +27,15 @@ select {
     width: 18em;
     &:focus { outline: 0; }
 }
-input[type=number] {
+.variant-description input[type=number] {
     width: 100px;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 input[type=text],
 input[type=number],
 input[type=search],

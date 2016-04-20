@@ -35,12 +35,6 @@ module Spree
       @searcher.current_user = try_spree_current_user
       @products = @searcher.retrieve_products
       @page = @searcher.properties[:page]
-
-      if request.xhr?
-        to_paginate = @page.to_i == 0
-        render :partial => 'spree/shared/products_list', :locals => { products: @products, page: @page, to_paginate: to_paginate }
-      end
-
     end
 
     def brands_redirect

@@ -80,7 +80,7 @@
       <li>
         <%= bill_form.label :phone, t(:phone) %>
         <div>
-          <%= bill_form.phone_field :phone, :class => 'required' %>
+          <%= bill_form.number_field :phone, :class => 'required' %>
         </div>
       </li>
     </ul>
@@ -171,7 +171,7 @@
       <li>
         <%= ship_form.label :phone, t(:phone) %>
         <div>
-          <%= ship_form.phone_field :phone, :class => 'required' %>
+          <%= ship_form.number_field :phone, :class => 'required' %>
         </div>
       </li>
     </ul>
@@ -181,5 +181,6 @@
 
 
 <div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
   <%= submit_tag t(:save_and_continue), :class => 'continue button primary right' %>
 </div>

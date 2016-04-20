@@ -4,14 +4,35 @@
   <div data-hook="admin_product_form_meta_keywords">
     <%= f.field_container :meta_keywords, class: ['form-group'] do %>
       <%= f.label :meta_keywords, Spree.t(:meta_keywords) %>
-      <%= f.text_field :meta_keywords, class: 'form-control', disabled: true %>
+      <%= f.text_field :meta_keywords, class: 'form-control', disabled: f.object.new_record? %>
     <% end %>
+    
+    <% unless f.object.new_record? %>
+      <div class="alert alert-warning">
+        <p>
+          <button id="btn_meta_keywords" data-url="<%= generate_meta_keywords_admin_product_path(f.object) %>" class="btn btn-info btn-sm">Generate Meta Keywords</button>
+        </p>
+        <strong>Format: "[Product Name], [Brand Name], [Taxons]"</strong><br/>
+        <small><i>Note: You need to hit update button to save generated tags.</i></small>
+      </div>
+    <% end %>
+    
   </div>
 
   <div data-hook="admin_product_form_meta_description">
     <%= f.field_container :meta_description, class: ['form-group'] do %>
       <%= f.label :meta_description, Spree.t(:meta_description) %>
-      <%= f.text_field :meta_description, class: 'form-control', disabled: true %>
+      <%= f.text_field :meta_description, class: 'form-control', disabled: f.object.new_record? %>
+    <% end %>
+
+    <% unless f.object.new_record? %>
+      <div class="alert alert-warning">
+        <p>
+          <button id="btn_meta_description" data-url="<%= generate_meta_description_admin_product_path(f.object) %>" class="btn btn-info btn-sm">Generate Meta Description</button>
+        </p>
+        <strong>Format: "[Brand name] online shop [Meta Keywords] - Wordlwide Shipping, Ethnic Chic - Home Couture"</strong><br/>
+        <small><i>Note: You need to hit update button to save generated tags.</i></small>
+      </div>
     <% end %>
   </div>
 
