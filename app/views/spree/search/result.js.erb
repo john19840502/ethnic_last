@@ -1,0 +1,7 @@
+<% unless @products.empty? %>
+$('#products').html("<%=j render partial: 'spree/shared/products_list', :locals => { products: @products, page: @page } %>");
+<% else %>
+$('#products').html("<p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p>");
+<% end %>
+$('#products_pagination').html("<%=j paginate @products, theme: 'twitter-bootstrap-3' %>");
+set_current('price_range', '<%= params[:price_range] %>');

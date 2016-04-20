@@ -21,6 +21,7 @@
 
 en:
   spree:
+    contact_us_for_stock_check: "For quantity >100, Please contact us for a stock check and a made-to-measure offer"
     order_state:
       payment: Confirm and Pay
     warnings:

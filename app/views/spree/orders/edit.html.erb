@@ -25,7 +25,9 @@
             <h2><%= link_to variant.product.name, product_path(variant.product) %></h2>
             <%= render partial: 'options', locals: { options: variant.sorted_option_values } %>
             <%= item_form.number_field :quantity, :min => 1, :class => "line_item_quantity", :size => 5, step: line_item.step, value: line_item.quantity %>
-            <em><strong><%= money_with_currency line_item.price %></strong></em>
+            <small>x</small> <%= money_with_currency line_item.price %>
+            <em>=</em>
+            <em><strong><%= money_with_currency line_item.amount %></strong></em>
           </div>
           <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>
             <span class="ss-delete"></span>
@@ -40,7 +42,7 @@
     <% end %>
   	<div class="cart_page_free_shipping_text">
       <div id="shipping_rates" data-country="<%=session[:country_id]%>"></div>
-      Free shipping for purchase: <br/> +€350 within Europe <br/> +€500 worldwide
+      Free shipping for purchase: <br/> +<%= money_with_currency 350 %> within Europe <br/> +<%= money_with_currency 500 %> worldwide
     </div>
     <div class="buttons">
       <p class="left">
@@ -49,14 +51,12 @@
         <% end %>
       <p class ="right">
         <%= button_tag :class => 'button soft small refresh', :id => 'update-button' do %>
-          <i class="ss-icon">refresh</i>&nbsp;<strong><%= money_with_currency(@order.total) %></strong>
+          Update
+        <% end %>
+        <%= button_tag :class => 'button right', :id => 'checkout-link', :name => 'checkout' do %>
+          <%= t(:checkout) %>
         <% end %>
       </p>
-    </div>
-    <div class="buttons">
-      <%= button_tag :class => 'button right', :id => 'checkout-link', :name => 'checkout' do %>
-        <%= t(:checkout) %>
-      <% end %>
     </div>
     <% end %>
   <% end %>

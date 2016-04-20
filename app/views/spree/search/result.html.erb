@@ -34,7 +34,7 @@
     <%= render :partial => '/shared/facets' %>
 
   <p>
-		<label for="amount">PRICE RANGE:</label>
+		<label style="color: rgba(255, 255, 255, 0.5);" for="amount">PRICE RANGE:</label>
 		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
 	</p>
 	<div id="slider-range"></div>
@@ -47,7 +47,9 @@
 			<%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, page: @page } %>
     <% end %>
     </ul>
-		<%= paginate @products, theme: 'twitter-bootstrap-3' %>
+    <div id="products_pagination">
+      <%= paginate @products, theme: 'twitter-bootstrap-3' %>
+    </div>
   </div>
 </section>
 
@@ -70,31 +72,4 @@
 
   });
 
-	$("#slider-range").mouseup(function() {
-    var full_url = set_current('page', 1);
-		var price_range = $('#amount').val();
-		var currency_type;
-		var currency = $("a[title='Currency selection'] small").text();
-		$('#amount').attr('class','true');
-		if(currency == "USD")
-			{price_range = price_range.replace(/\$/g,'')}
-		else
-			{price_range = price_range.replace(/\€/g,'')}
-
-//		window.location.replace(full_url + "&price_range=" + price_range);
-		$.ajax({
-		  type: 'get',
-		  url: full_url,
-		  format: 'js',
-		  data: {price_range: price_range},
-		  success: function (data) {
-              $('#products.product-listing').html(data);
-              $('.products-wrapper > .pagination').html($('#products > temp > .pagination').html());
-              $('#products > temp').remove();
-
-              set_current('price_range', price_range);
-              // set_current('price_filter_req', true);
-		  }
-		 });
-	});
 </script>

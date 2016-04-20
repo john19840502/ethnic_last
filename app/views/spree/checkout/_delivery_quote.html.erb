@@ -4,4 +4,6 @@
 
   <p>If you would like to contact us please use: <a href="mailto:info@ethnicchic.com?subject=Delivery request for <%=@order.number%>">info@ethnicchic.com</a> with reference: <%=@order.number %></p>
 </section>
-<div class="buttons"></div>
+<div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+</div>

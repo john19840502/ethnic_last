@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/'
 
+  get '/edwardvanvliet', to: redirect('/search/brands/edward%20van%20vliet')
+
   scope module: 'spree' do
     get '/brands/:brand_name/*filter', to: "search#brands_redirect", as: 'brand_redirector'
     get '/collection', to: 'products#index', as: 'collection'
@@ -24,6 +26,12 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :information_requests
     resources :collection_images
+    resources :products do
+      member do
+        post :generate_meta_keywords
+        post :generate_meta_description
+      end
+    end
   end
   resources :favorites, only: [] do
     collection do
