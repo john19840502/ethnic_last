@@ -1,7 +1,7 @@
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
-  after_create :generate_meta_tags
-  #after_save :generate_meta_tags
+  after_create :save_meta_tags
+  # after_save :save_meta_tags
   before_destroy :remove_index
   has_many :product_variant_colors
 
@@ -174,32 +174,28 @@ Spree::Product.class_eval do
     measurements_props
   end
 
-  def generate_meta_tags
-
-    taxons_names = self.taxons.map(&:name)
-
-    # Set meta keywords value
-    meta_keywords = []
-    meta_keywords << self.name
-    meta_keywords << self.brand_name
-    meta_keywords << taxons_names
-    meta_keywords = meta_keywords.flatten
-    self.meta_keywords = meta_keywords.join(", ")
-
-    # Set meta description value
-    meta_description = []
-    meta_description << "#{self.brand_name} online shop #{self.name}"
-    taxons_names[taxons_names.index(taxons_names.last)] = "#{taxons_names.last} - worldwide shipping" if taxons_names.present?
-    meta_description << taxons_names
-    self.meta_description = meta_description.flatten.join(", ")
-    self.save!
+  def save_meta_tags
+    self.update_columns(meta_keywords: self.generate_meta_keywords, meta_description: self.generate_meta_description)
   end
 
   def brand_name
     self.brand.try(:name).try(:strip)
   end
 
+  def generate_meta_keywords
+    self.taxons.map(&:name).unshift(self.brand_name).unshift(self.name).reject { |s| s.nil? }.join(",")
+  end
+
+  def generate_meta_description
+    "#{self.brand_name} Online Shop #{self.generate_meta_keywords} - Worldwide Shipping, Ethnic Chic - Home Couture".strip
+  end
+
+  def generate_url
+    "#{self.brand_name} #{self.name}".strip.tr(" ", "-").downcase
+  end
+
   private
+
   def add_index
     self.index!
   end

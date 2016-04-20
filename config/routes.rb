@@ -26,6 +26,12 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :information_requests
     resources :collection_images
+    resources :products do
+      member do
+        post :generate_meta_keywords
+        post :generate_meta_description
+      end
+    end
   end
   resources :favorites, only: [] do
     collection do
