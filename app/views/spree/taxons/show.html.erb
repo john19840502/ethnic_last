@@ -1,3 +1,4 @@
+
 <head>
 	<%= stylesheet_link_tag "jquery-ui" %>
 	<%= javascript_include_tag "jquery-ui" %>
@@ -54,12 +55,15 @@
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
       <% if @products == nil || @products.empty? %>
-		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
+		 <!-- <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p> -->
+     <p> Unfortunately, we can’t find any products that match your search and / or filter. Please contact us if you need any assistance at info@ethnicchic.com or call us directly at +31203308066.</p>
+     
       <% else %>
           <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: false } %>
       <% end %>
     </ul>
     <%= paginate @products, theme: 'twitter-bootstrap-3' %>
+    <%#= paginate @products, :outer_window => 1 %>
   </div>
 </section>
 

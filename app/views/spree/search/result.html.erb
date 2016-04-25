@@ -42,7 +42,9 @@
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
     <% if @products == nil || @products.empty? %>
-		 <p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p>
+		 <!-- <p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p> -->
+		  <p> Unfortunately, we can’t find any products that match your search and / or filter. Please contact us if you need any assistance at info@ethnicchic.com or call us directly at +31203308066.</p>
+     
     <% else %>
 			<%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, page: @page } %>
     <% end %>
