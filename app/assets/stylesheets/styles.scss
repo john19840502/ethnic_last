@@ -991,3 +991,30 @@ nav
     text-align: center;
    }
 
+/*=================image algin properly============*/
+ul.products li img
+{
+    height:258.182px;
+} 
+
+/* ========================= Notification bar in top of the site =================================== */
+
+
+.notification {
+        display: block;
+        @include grid(48, 1);
+        font-size: 1.25em;
+    
+        line-height: 1.5em;
+        background-color:#948B8B;
+        margin-top: -37px;
+       
+        
+        a {
+            @include link-opacity;
+            display: block;
+            
+            font-weight: normal;
+            
+        }
+    }
