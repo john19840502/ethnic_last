@@ -9,7 +9,7 @@
     <div class="use_category">
       <div>
         <ul class="categories filter" id="<%=facet_key.gsub('.','_').gsub(' ', '_')%>" data-display="5">
-          <% for val in @products.facets[facet_key] %>
+          <% for val in (@products.facets[facet_key] || []) %>
           <%
             name = val[0]
             results = val[1]
@@ -41,7 +41,8 @@
 <div class="use_category">
   <div>
     <ul class="categories filter" id="<%=facet_key.gsub('.','_').gsub(' ', '_')%>" data-display="5">
-      <% for val in @products.facets[facet_key] %>
+
+      <% for val in (@products.facets[facet_key] || []) %>  <!-- add blank array -->
       <%
         name = val[0]
         results = val[1]

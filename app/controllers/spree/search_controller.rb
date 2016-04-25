@@ -23,7 +23,8 @@ module Spree
         redirect_uri = "/search/#{filter_parts.join("/")}?keywords=#{keywords}"
       end
       page = params[:page] || 0
-      redirect_uri << "?page=#{page}"
+      #redirect_uri << "?page=#{page}"
+      redirect_uri << "&page=#{page}"
       if( (keywords and previous_keywords) and keywords != previous_keywords)
         redirect_uri = "/search?keywords=#{keywords}"
       end
@@ -33,7 +34,7 @@ module Spree
     def result
       @searcher = Spree::Config.searcher_class.new(params.merge(currency: current_currency))
       @searcher.current_user = try_spree_current_user
-      @products = @searcher.retrieve_products
+      @products = make_random(@searcher.retrieve_products)
       @page = @searcher.properties[:page]
     end
 
@@ -48,6 +49,25 @@ module Spree
       end
 
     end
+
+    # sort random not alpha betically
+    
+    def make_random(obj)
+      q_length_ary = (0..obj.length-1).to_a
+      a_length_ary = []
+      if (obj.length-1)/2.to_i>0
+        (obj.length-1)/2.to_i.times do 
+          i = q_length_ary.sample
+          q_length_ary.delete(i)
+          a_length_ary << i
+          j = q_length_ary.sample
+          q_length_ary.delete(j)
+          a_length_ary << j        
+          obj[i], obj[j] = obj[j], obj[i]
+        end
+      end  
+      return obj
+    end  
 
 
   end
