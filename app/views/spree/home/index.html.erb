@@ -1,0 +1,49 @@
+<hgroup>
+  <h1>Our world of avant garde interior design.</h1>
+</hgroup>
+
+<header>
+  <ul class="slider">
+    <% for slider in Spree::Slider.by_group_key("homepage") %>
+      <li style="background-image: url('<%=slider.image%>');"><% if slider.url.present? %><a href="<%=slider.url%>"></a><% end %></li>
+    <% end %>
+  </ul>
+</header>
+
+<section class="content cta">
+  <p class="call-to-action">
+      <a href="/collection" title="Collection">
+          View our hand picked collection of <strong>exclusive brands</strong> representing daring and imaginative home couture.
+      </a>
+  </p>
+</section>
+
+<section class="content smaller">
+  <section class="half">
+    <h2><a href="/impressions" title="Impressions">We're interior designers</a></h2>
+    <figure class="top">
+      <a href="/impressions" title="Impressions">
+        <%= image_tag 'media/team.jpg', alt: 'TEAM' %>
+      </a>
+    </figure>
+    <p>Robin Toetenel &amp; Ingrid Steyrer</p>
+    <p>Ethnic Chic presents <strong>fusion decor</strong> creating a unique ambiance, mirroring our own evolving culture and a fascination with an ever changing world.</p>
+    <p>From top <strong>decorating</strong> advice uplifting a single room to full renovations and project management, you will find yourself at the right address...</p>
+    <p>Ethnic Chic works worldwide.</p>
+    <p>Let us help make your home fabulous and a true reflection of you!!</p>
+    <p>For some of <strong>our projects</strong> <a href="/impressions">click here</a></p>
+  </section>
+
+  <section class="half">
+    <h2><a href="/collection" title="Collection">Our amazing collection</a></h2>
+    <figure class="top">
+        <a href="/collection" title="Collection">
+            <%= image_tag 'media/collection.jpg', alt: 'Collection' %>
+        </a>
+    </figure>
+    <p>Every brand in the Ethnic Chic collection has been chosen for its award winning design.</p>
+    <p>From our amazing fabric library to furnishings, lighting and accessories, Ethnic Chic provides a full range of avant garde products under one roof.</p>
+    <p>View our hand picked collection of <strong>exclusive brands</strong> representing a complete array of daring and imaginative home couture.</p>
+    <p>Go to <a href="/collection">the collections</a> and find out for yourself!</p>
+  </section>
+</section>

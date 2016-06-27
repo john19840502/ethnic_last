@@ -1,0 +1,20 @@
+<!-- insert_before "[data-hook='search_results']" -->
+<%= render :partial => "shared/header" %>
+
+<section class="content">
+  <aside>
+    <%= form_tag '/search', :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+        <%= hidden_field_tag :previous_keywords, params[:keywords] %>
+      </div>
+    <% end %>
+    <header class="back-to-products">
+		<ul class="options">
+		  <li>
+			<a class="ss-left" title="Back to collection" href="/collection">Back to collection</a>
+		  </li>
+		</ul>
+	</header>
+  </aside>
+</section>

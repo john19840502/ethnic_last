@@ -1,0 +1,42 @@
+<%= render :partial => 'shared/header' %>
+<%= content_for :head do %>
+  <% bg = Spree::Background.where(brand_id: @brand.id).first %>
+  <% if bg %>
+  <style type="text/css">
+    html{
+      background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+  <% end %>
+<% end %>
+
+<section class="content">
+  <aside>
+    <% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+    <%= form_tag products_path, :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+      </div>
+    <% end %>
+    <%= render :partial => 'spree/shared/taxonomies' %>
+    <%= render :partial => 'shared/brands' %>
+  </aside>
+  <div class="products-wrapper">
+
+    <% if Spree::Brand::VISIBILITIES[@brand.visibility.to_s] == "Invisible" && !spree_current_user %>
+      <div class="products-empty">
+         <p>This very unique brand requires you to <%= link_to t(:login), spree.login_path %> or <%= link_to t(:register), spree.signup_path %> to view the collection / prices</p>
+      </div>
+    <% else %>
+      <% if @products == nil || @products.empty? %>
+      <div class="products-empty">
+         <p>Oops, there aren't any products for <%=@brand.name%>. Please choose an other one.</p>
+      </div>
+      <% else %>
+        <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+      <% end %>
+    <% end %>
+  </div>
+</section>

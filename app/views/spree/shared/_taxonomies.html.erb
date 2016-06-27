@@ -1,0 +1,27 @@
+<% Spree::Taxonomy.without_filters.each do |taxonomy| %>
+  <% if @taxon && !@taxon.brand? %>
+    <h2><%=@taxon.name%></h2>
+  <% else %>
+    <h2><%= taxonomy.name %></h2>
+  <% end %>
+  <!-- <%= taxons_nav(taxonomy.root, @taxon, Spree::Config[:max_level_in_taxons_menu] || 1) %> -->
+  <ul class="categories">
+    <% taxonomy.root.children.each do |child| %>
+      <li><a href="/search/<%=taxonomy.name.downcase%>/<%=child.name.downcase%>"><%=child.name%></a></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<% if @taxon %>
+  <% taxon_filters = all_taxon_filters(@taxon) %>
+  <% taxon_filters.each do |filter| %>
+    <h2 class="filter">
+      <a href="#" title="Show filter for <%=filter.name%>" class="toggle_filter" data-target="<%=filter.root.id%>"><%= filter.name %><span></span></a>
+    </h2>
+    <div class="<%= filter.name=='Use' ? 'use_category' : '' %>">
+		<%= taxons_nav_filters(filter.root, @taxon) %>
+	</div>
+  <% end %>
+
+<% end %>

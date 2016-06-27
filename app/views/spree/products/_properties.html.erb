@@ -1,0 +1,25 @@
+<% unless @product.combined_properties.empty?%>
+<div id="tab_props" class="tabContents">
+  <h6 class="product-section-title"><%= t('properties')%></h6>
+  <table id="product-properties" class="table-display" data-hook width="100%">
+    <tbody>
+      <% @product.combined_properties.each do |property| %>
+        <tr>
+          <td><strong><%= property[0] %></strong></td>
+          <td><%= property[1] %></td>
+        </tr>
+        <% if property[0]=="Width (cm)" && !property[1].blank? %>
+		  <td><strong><%= "Width (inches)" %></strong></td>
+          <td><%= (property[1].to_f/2.5).to_s %></td>
+		<% elsif property[0]=="Height (cm)" && !property[1].blank? %>
+		  <td><strong><%= "Height (inches)" %></strong></td>
+          <td><%= (property[1].to_f/2.5).to_s %></td>
+        <% elsif property[0]=="Repeat (cm)" && !property[1].blank? %>
+            <td><strong><%= "Repeat (inches)" %></strong></td>
+            <td><%= (property[1].to_f/2.5).to_s %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

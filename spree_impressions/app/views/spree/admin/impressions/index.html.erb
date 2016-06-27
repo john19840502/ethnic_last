@@ -1,0 +1,47 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:impressions) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:new_impression), new_admin_impression_url, :class => "btn-success", :icon => 'add', :id => 'admin_new_impression_link' %>
+<% end %>
+
+<table class="table" id="listing_impressions" data-hook>
+  <thead>
+  <tr data-hook="admin_impressions_index_headers">
+    <th></th>
+    <th>
+      <%= Spree.t('thumb') %>
+    </th>
+    <th>
+      <%= Spree.t('title') %>
+    </th>
+    <th>
+      <%= Spree.t('sub_title') %>
+    </th>
+    <th data-hook="admin_impressions_index_header_actions" class="actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @impressions.each do |impression|%>
+      <tr id="<%= spree_dom_id impression %>" data-hook="admin_impressions_index_rows">
+        <td><span class="handle"></span></td>
+        <td class='impression_thumb'>
+          <% if impression.images.count > 0 %>
+              <%= image_tag impression.images.first.attachment.url(:small) %>
+          <% else %>
+              No Images yet
+          <% end %>
+        </td>
+        <td class='impression_title'><%= impression.title %></td>
+        <td class='impression_sub_title'><%= impression.sub_title %></td>
+        <td class='actions text-right' data-hook='admin_impression_index_row_actions'>
+          <%= link_to_edit impression %>
+          <%= link_to_delete impression %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @impressions %>

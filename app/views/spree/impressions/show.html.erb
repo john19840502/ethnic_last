@@ -1,0 +1,43 @@
+<header>
+  <ul class="options">
+    <li><a href="/impressions" title="Back to impressions" class="ss-left">Back to impressions</a></li>
+    <li><a href="http://www.facebook.com/sharer.php?u=<%="http://#{request.host+request.fullpath}"%>?t=<%=@impression.title%>" class="ss-like" id="facebook-share">Like</a></li>
+    <li><%= link_to "Mail", email_to_friend_path("impression", @impression), :class => "ss-mail"%></li>
+  </ul>
+  <%= render :partial => '/shared/shopping_bag' %>
+</header>
+
+<section class="content">
+  <section class="halfLarge first">
+    <figure>
+      <%= image_tag @impression.images.first.attachment.url(:large) %>
+    </figure>
+
+    <% if @impression.images.count > 1 %>
+      <ul class="thumbnails">
+      <% @impression.images.each do |i| %>
+        <li><%= link_to image_tag(i.attachment.url(:product)), i.attachment.url(:large), :class=>"fancybox", :rel => "group" %></li>
+      <% end %>
+      </ul>
+    <%end %>
+  </section>
+
+  <section class="halfLarge">
+    <h1>
+      <%= @impression.title %>
+    </h1>
+    <p><%= @impression.description %></p>
+    <h2>Brands worked with</h2>
+    <ul class="brands-used">
+      <% @impression.brands.each do |brand| %>
+        <li><%= link_to(image_tag(brand.logo), brand_url(brand))%></li>
+      <% end %>
+    </ul>
+  </section>
+</section>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('ul.thumbnails a').unbind("click");
+    $("a.fancybox").fancybox();
+  });
+</script>

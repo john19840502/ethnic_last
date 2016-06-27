@@ -1,0 +1,49 @@
+<div data-hook="admin_user_form_fields">
+  <%= f.field_container :name do %>
+    <%= f.label :name, t(:name) %><br />
+    <%= f.text_field :name %>
+  <% end %>
+
+  <%= f.field_container :position do %>
+    <%= f.label :position, t(:position) %><br />
+    <%= f.text_field :position %>
+    <%= f.error_message_on :position %>
+  <% end %>
+
+  <%= f.field_container :page_url do %>
+    <%= f.label :page_url, t(:page_url) %><br />
+    <%= f.text_field :url %>
+    <%= f.error_message_on :url %>
+  <% end %>
+  
+  <%= f.field_container :attachment do %>
+    <%= f.label :attachment, t(:image) %><br />
+    <%= f.file_field :attachment %>
+    <%= f.error_message_on :attachment %>
+  <% end %>
+  
+  <h5> position1: 328 x 479 </h5>
+  <h5> position2 ~ postion 5: 164 x 239 </h5>
+  <h5> position6, position7(hoover image): 229 x 479 </h5>
+  
+  <%= f.field_container :new_tab do %>
+    <%= f.label :small, t(:open_in_new_tab) %><br />
+    <%= f.check_box :new_tab %>
+    <%= f.error_message_on :new_tab %>
+  <% end %>
+  
+</div>
+<style>
+	input#collection_image_name
+	{
+			width: 400px;
+	}
+	input#collection_image_position
+	{
+			width: 400px;
+	}
+	input#collection_image_url
+	{
+			width: 400px;
+	}	
+</style>

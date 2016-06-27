@@ -1,0 +1,19 @@
+# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+# To ban all spiders from the entire site uncomment the next two lines:
+User-agent: *
+Disallow: /checkout
+Disallow: /cart
+Disallow: /orders
+Disallow: /user
+Disallow: /account
+Disallow: /api
+Disallow: /password
+Disallow: /favorites
+Disallow: /email_to_friend
+
+User-agent: bingbot
+Crawl-delay: 15
+
+User-agent: Baiduspider
+Crawl-delay: 15

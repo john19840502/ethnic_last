@@ -1,0 +1,4 @@
+<!-- insert_bottom "[data-hook='admin_product_tabs']" -->
+<%= content_tag :li, :class => ('active' if current == 'Product OptionTypes') do %>
+  <%= link_to_with_icon 'th-large', Spree.t(:product_option_types), admin_product_product_option_types_url(@product) %>
+<% end if can?(:admin, Spree::Product) %>

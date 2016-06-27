@@ -1,0 +1,8 @@
+<% if @success %>
+    $("#favorable_<%= @favorable_type.demodulize.underscore %>_<%= @favorable_id %>").attr('href', '<%= raw favorite_path(@favorite, favorable_id: @favorable_id, favorable_type: @favorable_type) %>').data('method', 'delete').html('<%= raw("#{Spree.t(:remove_favorite)}<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>") %>');
+    update_favorites(<%= favorite_count %>, true);
+<% else %>
+    update_favorites(<%= favorite_count %>, false);
+<% end %>
+
+

@@ -1,0 +1,13 @@
+<h2>Brands</h2>
+<ul class="categories" id="brand-list" data-display="5">
+  <% for brand in Spree::Brand.active.order(:name) %>
+    <% if params[:brand_id].present? && params[:brand_id] == brand.id.to_s %>
+      <% params.delete(:brand_id) %>
+      <li class="selected"><%=link_to brand.name, url_for(params), title: "#{brand.name} products" %></li>
+    <%else%>
+      <li><%=link_to brand.name, url_for(params.merge(:brand_id => brand.id)), title: "#{brand.name} products" %></li>
+    <% end %>
+  <% end %>
+</ul>
+<a class="more-brands" id="brands-more">More brands</a>
+<a class="more-brands" id="brands-less">Less brands</a>

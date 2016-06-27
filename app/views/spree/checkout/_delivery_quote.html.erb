@@ -1,0 +1,9 @@
+<section>
+  <h2>Delivery quote needed.</h2>
+  <p>Thank you very much, we need to manualy calculate the correct shipping for you. We will contact you to provide you the best possible shipping option.</p>
+
+  <p>If you would like to contact us please use: <a href="mailto:info@ethnicchic.com?subject=Delivery request for <%=@order.number%>">info@ethnicchic.com</a> with reference: <%=@order.number %></p>
+</section>
+<div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+</div>

@@ -1,0 +1,7 @@
+<!-- insert_bottom "[data-hook='admin_products_index_search']" -->
+<div class="col-md-6">
+  <div class="form-group">
+    <%= f.label :brand, "Brand name" %>
+    <%= f.text_field :brand_search, :size => 15, class: "form-control" %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<h2>Brands</h2>
+<ul class="categories" id="brand-list" data-display="5">
+<%brands = Spree::Taxon.brands.active.sort {|a,b| a.name.downcase <=> b.name.downcase }%>
+ <% for brand in brands %>
+  <li><%=link_to brand.name, "/search/brands/#{brand.name.downcase}", title: "#{brand.name} products" %></li>
+ <% end %>
+</ul>
+<a class="more-brands" id="brands-more">More brands</a>
+<a class="more-brands" id="brands-less">Less brands</a>

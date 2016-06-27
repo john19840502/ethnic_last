@@ -1,0 +1,22 @@
+<h1><%= t(:listing_requests) %></h1>
+
+<div id="requests" data-hook></div>
+
+<table class="table" id="listing_requests">
+  <tr data-hook="admin_products_index_headers">
+    <th>Name</th>
+    <th>Email</th>
+    <th>Company</th>
+<!--<th>Address</th>-->
+    <th>Action</th>
+  </tr>
+<% @information_reqs.each do |req| %>
+  <tr data-hook="information_requests">
+    <td><%= req.name %></td>
+    <td><%= req.email %></td>
+    <td><%= req.company %></td>
+<!--<td>< %= req.address %></td>-->
+    <td><%= link_to 'Edit', admin_information_request_path(req), class: 'edit' %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,82 @@
+<!-- replace "[data-hook='homepage_products']" -->
+<head>
+	<%= stylesheet_link_tag 'frontend/960' %>
+	<%= stylesheet_link_tag 'frontend/924' %>
+	<%= stylesheet_link_tag 'frontend/_bl_novo-menu' %>
+	<%= stylesheet_link_tag 'frontend/flexslider' %>
+	<%= stylesheet_link_tag 'frontend/jquery' %>
+	<%= javascript_include_tag 'jquery.flexslider' %>
+
+	
+</head>
+
+<%= render :partial => "shared/header" %>
+
+<section class="content">
+  <aside>
+    <%= form_tag '/search', :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], placeholder: t(:search) %>
+      </div>
+    <% end %>
+    <%= render :partial => 'spree/shared/taxonomies'%>
+    <%= render :partial => 'shared/brands' %>
+  </aside>
+<div class="products-wrapper">
+    <div class="block">
+
+			<div style="width: 100%;">
+				<div style="width: 74%; float: left; ">
+					<div class="home-thumb">
+						<!-- Bloco topo -->
+						<% slider1_images =  get_slider1_images %>
+						<% if slider1_images.present? %>
+							<%=render :partial => "first_slider", :locals => {:slider1_images => slider1_images } %>
+						<% end %>
+
+						<% medium_images1 =  get_medium_images_block1 %>
+						<% if medium_images1.present? %>
+							<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images1 } %>
+						<% end %>
+
+						<div class="clear" style="float:left;"></div>
+					</div>
+				</div>
+				<!--create extra column of this slider-->
+				<div style="width: 26%; float: left;">
+				  <div>
+						<% slider6_image =  get_slider6_image %>
+						<% slider6_hoover_image = get_slider6_hoover_image %>
+						<div>
+							<a href="http://www.ethnicchic.com/edwardvanvliet" >
+										<img class="slider6" src="<%= slider6_image.attachment.url(:original) %>" 
+										onmouseover="this.src='<%= slider6_hoover_image.attachment.url(:original) %>';"
+										onmouseout="this.src='<%= slider6_image.attachment.url(:original) %>';"></img>
+							</a>
+						</div>
+				  </div>
+				</div>
+			</div>			
+	</div>
+</div>
+</section>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.slider-container').flexslider({
+			animation: "slide", directionNav: true, animationSpeed: 600, controlNav: false}
+		);
+		
+		function set_slider_height()
+		{
+			var cw = $('.block_2_images').width();
+			$('.slider6').css({'width':cw * 0.7 +'px'});
+			var ch = $('.block_2_images').height();
+			$('.slider6').css({'height':ch +'px'});				
+		}
+		setTimeout(set_slider_height, 100);
+		$(window).resize(function(){
+			set_slider_height();
+		}); 
+	});
+</script>

@@ -1,0 +1,14 @@
+
+<% options.each do |ov| %>
+
+      <p class="option-value">
+          <% if ov.image.present? %>
+            <%= image_tag(ov.image.url(:small))  %>
+            <%= " (#{ov.presentation})" %>
+          <% else %>
+            <%= "#{ov.presentation}" %>
+          <% end %>
+      </p>
+
+<% end %>
+

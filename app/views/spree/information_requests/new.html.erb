@@ -1,0 +1,45 @@
+<section class="focus">
+  <header>
+    <h1><%= "Request Information" %></h1>
+    <span class="close"><a href="<%=redirect_back_link%>" title="go back"></a></span>
+  </header>
+	<div class="information_req_errors"><%= render :partial => 'spree/shared/error_messages', :locals => { :target => @information_req } %></div>
+	<%= form_for @information_req, :url => '/create_information_requests' do |f| %>
+		  <section>
+			  <ul>
+				<li>
+					<%= f.label :product_url, t(:product_url) %>
+					<div><%= f.text_field :product_url, :id=>"product_url" %></div>
+				</li>
+				<li>
+					<%= f.label :email, t(:email) %>
+					<div><%= f.email_field :email %></div>
+				</li>
+				<li>
+					<%= f.label :name, t(:name) %>
+					<div><%= f.text_field :name %></div>
+				</li>
+				<li>
+					<%= f.label :company, t(:company) %>
+					<div><%= f.text_field :company %></div>
+				</li>
+				<li>
+					<%= f.label :address, t(:address) %>
+					<div><%= f.text_area :address, :rows=>2, :style=>"width: 20em;" %></div>
+				</li>
+				<li>
+					<%= f.label :question, t(:question) %>
+					<div><%= f.text_area :question, :rows=>5, :style=>"width: 20em;" %></div>
+				</li>
+			  </ul>
+		</section>
+		<div class="buttons">
+			<%= f.submit "Submit", :class => 'right' %>
+		</div>
+	<% end %>
+</section>
+<script>
+  $(document).ready(function(){
+    $('#product_url').attr('value',localStorage["product_url"]);
+  });
+</script>

@@ -1,0 +1,13 @@
+<section class="focus">
+  <header>
+    <h1><%= t(:editing_user) %></h1>
+    <span class="close"><a href="<%=redirect_back_link%>" title="go back"></a></span>
+  </header>
+  <%= render :partial => 'spree/shared/error_messages', locals: { target: @user } %>
+  <%= form_for @user, url: spree.user_path(@user), method: :put do |f| %>
+    <%= render :partial => 'spree/shared/user_form', locals: { f: f } %>
+    <div class="buttons">
+      <%= f.submit Spree.t(:update), class: 'right' %>
+    </div>
+  <% end %>
+</section>

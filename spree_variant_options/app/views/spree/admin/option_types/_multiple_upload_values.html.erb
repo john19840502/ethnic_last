@@ -1,0 +1,9 @@
+<fieldset>
+  <legend><%= t(:multiple_image_upload) %></legend>
+  <%= f.field_container :multiple_image_upload do %>
+    <span>When you upload multiple images, we will create an option value for each image</span>
+    <div class="field">
+      <%= f.file_field :option_value_images, :multiple => 'multiple' %>
+    </div>
+  <% end %>
+</fieldset>

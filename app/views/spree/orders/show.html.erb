@@ -1,0 +1,73 @@
+<section class="focus">
+  <header>
+    <h1><%= accurate_title %></h1>
+    <span class="close"><a href="<%=redirect_back_link%>"></a></span>
+  </header>
+
+  <% if @order.has_step?("address") %>
+    <section>
+      <dl class="advanced">
+        <dt><%= t(:shipping_address) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dt>
+        <dd><%= @order.ship_address %></dd>
+        <dt><%= t(:billing_address) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dt>
+        <dd><%= @order.bill_address %></dd>
+        <% if @order.has_step?("delivery") %>
+            <% @order.shipments.each do |shipment| %>
+              <dt><%= t(:shipping_method) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dt>
+              <dd><%= Spree.t(:shipment_details, stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name) %></dd>
+            <% end %>
+        <% end %>
+        <% @order.payments.valid.each do |payment| %>
+            <dt><%= t(:payment_information) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></dt>
+            <dd><%= payment.payment_method.name %></dd>
+        <% end %>
+        <dt>VAT</dt>
+        <dd><%= money @order.tax_total %></dd>
+        <dt><%= t(:subtotal) %></dt>
+        <dd><%= money @order.item_total %></dd>
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+            <dt> <%= adjustment.label %> </dt>
+            <dd><%= money adjustment.amount %></dd>
+        <% end %>
+        <dt><%= t(:order_total) %></dt>
+        <dd><%= money @order.total %></dd>
+      </dl>
+    </section>
+  <% end %>
+
+  <ul class="shopping-bag">
+    <% @order.line_items.each do |item| %>
+      <li>
+        <figure>
+          <% if item.variant.images.length == 0 %>
+              <%= small_image(item.variant.product)%>
+            <% else %>
+              <%= image_tag(item.variant.images.first.attachment.url(:small)) %>
+            <% end %>
+        </figure>
+        <div>
+            <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
+            <p><%= item.variant.options_text %></p>
+            <dl class="advanced">
+              <dt>Price</dt>
+              <dd><%=money item.price%></dd>
+              <dt>Quantity</dt>
+              <dd><%=item.quantity%></dd>
+              <dt>Total</dt>
+              <dd><%= money(item.price * item.quantity) %></dd>
+            </dl>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="buttons">
+    <%= button_to Spree.t(:back_to_store), spree.root_path, :class => "soft", method: "get" %>
+    <% unless params.has_key? :checkout_complete %>
+      <% if try_spree_current_user && respond_to?(:spree_account_path) %>
+        <%= button_to Spree.t(:my_account), spree_account_path, method: "get" %>
+      <% end %>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+<head>
+	<%= stylesheet_link_tag "jquery-ui" %>
+	<%= javascript_include_tag "jquery-ui" %>
+	<%= javascript_include_tag "price_range_selector" %>
+</head>
+<%= render :partial => 'shared/header' %>
+<% if @taxon %>
+    <%= content_for :head do %>
+        <% bg = get_background_image(@taxon) %>
+        <% if bg %>
+          <style type="text/css">
+            html{
+              background: #304040 url("<%= bg.image %>") center top fixed no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+          </style>
+        <% end %>
+    <% end %>
+<% end %>
+
+<section class="content">
+  <aside>
+    <% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+    <%= form_tag products_path, :method => :get, :class => "search" do %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+      </div>
+    <% end %>
+    <%= render :partial => 'spree/shared/taxonomies' %>
+    <% unless @taxon.parent.present? %>
+      <%= render :partial => 'shared/brands' %>
+    <% else %>
+      <%= render :partial => 'shared/subcategory_page_brands' %>
+    <% end %>
+    <h2 class="filter">
+      <a href="#" title="Show filter for color" class="toggle_filter" data-target="10">Color<span></span></a>
+    </h2>
+    <div class="" id="color-picker">
+      <%- Spree::PaletaColor::COLORS.each do |color|%>
+          <%- if params[:colors].present? && params[:colors].include?("#{color}") %>
+            <%= link_to '', '#', title: "Color ##{color}", id: "#{color}", style: "background: ##{color}", class: 'activated' %>
+          <%- else %>
+            <%= link_to '', '#', title: "Color ##{color}", id: "#{color}", style: "background: ##{color}" %>
+          <% end %>
+      <% end %>
+    </div>
+    <p>
+		<label for="amount">PRICE RANGE:</label>
+		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
+	</p>
+	<div id="slider-range"></div>
+  </aside>
+  <div class="products-wrapper">
+    <ul id="products" class="inline product-listing products" data-hook="">
+      <% if @products == nil || @products.empty? %>
+		 <p>Oops, there aren't any products in the category <%=@taxon.name%>. Please choose an other one.</p>
+      <% else %>
+          <%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, :taxon => @taxon, page: @page, to_paginate: false } %>
+      <% end %>
+    </ul>
+    <%= paginate @products, theme: 'twitter-bootstrap-3' %>
+  </div>
+</section>
+
+
+<script>
+	$('document').ready(function(){
+
+		$('ul.categories.filter:has( > li.selected)').css('display','block');
+		
+		var currency = $("a[title='Currency selection'] small").text();
+
+        $('#color-picker a').each(function(){
+            var url = window.location.href;
+            $(this).attr('href', url + '?&colors[]=' + $(this).attr('id'));
+            $(this).click(function(){
+                if($(this).hasClass('activated')){
+                    $(this).removeClass('activated').attr('href', url + '?&colors[]=' + $(this).attr('id'));
+                } else {
+                    $(this).addClass('activated').attr('href', '#' + $(this).attr('id'));
+                }
+            });
+        });
+    });
+
+	$("#slider-range").mouseup(function() {
+        var full_url = set_current('page', 1);
+		var price_range = $('#amount').val();
+		var currency_type;
+		var currency = $("a[title='Currency selection'] small").text();
+		$('#amount').attr('class','true');
+		if(currency == "USD")
+			{price_range = price_range.replace(/\$/g,'')}
+		else
+			{price_range = price_range.replace(/\€/g,'')}
+		
+//		window.location.replace(full_url + "&price_range=" + price_range);
+		$.ajax({
+		  type: 'get',
+		  url: full_url,
+		  format: 'js',
+		  data: {price_range: price_range, price_filter_req: true},
+		  success: function (data) {
+              $('#products.product-listing').html(data);
+              $('.products-wrapper > .pagination').html($('#products > temp > .pagination').html());
+              $('#products > temp').remove();
+
+              set_current('price_range', price_range);
+              set_current('price_filter_req', true);
+		  }
+		 });
+	});
+</script>

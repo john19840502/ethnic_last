@@ -1,0 +1,103 @@
+<style>
+	#tab_calc input[type="number"] {float: right;}
+	div.wallpaper_type span {margin-right: 15px;}
+	div.wallpaper_type span input[type="radio"] {margin-right: 2px;}
+	div.wallpaper_type {margin-bottom: 10px;}
+</style>
+
+<div id="tab_calc" class="tabContents">
+	<p>Calculate your curtain fabric need. We calculate this for you with the 2.2 standard industry measure.</p>
+	<p>(this is only a guidance, for an accurate calculation please contact your local curtain specialist!)</p>
+	<p>Window or area: (in cms)</p>
+	<% @product.combined_properties.each do |property| %>
+		<% if property[0]=="Width (cm)" %>
+			<% @width= property[1].to_f %>
+		<% elsif property[0]=="Height (cm)" %>
+			<% @height = property[1].to_f %>
+		<% elsif property[0]=="Repeat (cm)" %>
+			<% @repeat = property[1].to_f %>
+		<% end %>
+	<% end %>
+	<div class="wallpaper_type">
+		<span><input type="radio" name="wallpaper" value="meter" checked=true >Wallpaper by meter</span>
+		<span><input type="radio" name="wallpaper" value="roll" >Wallpaper by roll</span>
+	</div>
+	<table>
+		<tr>
+			<td>
+				<label>Width : </label>
+				<input type="number" id="width">
+			</td>
+			<td>
+				<label>Height :</label>
+				<input type="number" id="height">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Fabric Width : </label>
+				<input type="number" id="wallpaper_width" value="<%= @width %>">
+			</td>
+			<td>
+				<label>Fabric Repeat :</label>
+				<input type="number" id="wallpaper_repeat" value="<%= @repeat %>">
+			</td>
+		</tr>
+	</table>
+	<div>
+		<button type="submit" id="submit_values">Submit</button>
+		<span id="result" style="float: right;"></span>
+	</div>
+</div>
+
+
+<script>
+	$('#submit_values').on("click", function(e){
+
+		var need_type = $(".wallpaper_type input[type='radio']:checked").val();
+		var width = parseFloat($('#width').val());
+		var height = parseFloat($('#height').val());
+		var wallpaper_width = parseFloat($('#wallpaper_width').val());
+		var wallpaper_repeat = parseFloat($('#wallpaper_repeat').val());
+		var need;
+		var check_need_value;
+
+		var total_cuts = width/wallpaper_width;
+		var cuts_after_round = Math.round(total_cuts);
+		if(cuts_after_round < total_cuts)
+			{total_cuts = cuts_after_round+1;}
+		else
+			{total_cuts = cuts_after_round;}
+
+		//-----------calculation on the basis of need type 'wallpaper by meter/roll'------------
+
+		if(need_type == "meter")
+			{
+				need = (height + 15 + (wallpaper_repeat/2))*total_cuts;
+				need = (need/100).toFixed(1);
+				check_need_value = need;
+				need = need+' meter!'
+			}
+		else
+			{
+				var cuts_out_of_one_roll = 1000/(height + 15 + (wallpaper_repeat/2));
+				cuts_out_of_one_roll = Math.floor(cuts_out_of_one_roll);
+				need = Math.ceil(total_cuts/cuts_out_of_one_roll);
+				check_need_value = need;
+				if(need<=1)
+					{need = need + " roll!";}
+				else
+					{need = need + " rolls!";}
+			}
+
+		//------------------------------------------------------------------------------------
+
+		if($.trim(check_need_value)=="NaN")
+			{
+			$('span#result').html("");
+			alert("All 4 values are required.");
+			}
+		else
+			{$('span#result').html(need);}
+	});
+</script>

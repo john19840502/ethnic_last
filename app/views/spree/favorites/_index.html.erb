@@ -1,0 +1,42 @@
+<div id="favorites-index" data-hook="account_my_favorite_products" class="modal" style="display:block;">
+  <div class="modal-content">
+    <header>
+      <h1><%= Spree.t(:my_favorites) %></h1>
+      <span class="close"><a href="#" onclick="$('#favorites-index').remove();return false;" title="Close"></a></span>
+    </header>
+    <section>
+      <% if @favorites.present? %>
+        <%= form_tag send_email_favorites_path do %>
+          <ul id="favorites-list">
+            <%= render partial: @favorites %>
+          </ul>
+          <%= paginate @favorites %>
+          <%= link_to 'Print favorites', '#', id: 'print-favorites' %>
+          <% if false %>
+          <section>
+            <ul>
+              <li>
+                <%= label_tag :email_to, Spree.t(:email_to) %>
+                <%= text_field_tag :email_to %>
+              </li>
+              <li>
+                <%= label_tag :email_from, Spree.t(:email_from) %>
+                <%= text_field_tag :email_from %>
+              </li>
+              <li>
+                <%= label_tag :message, Spree.t(:message) %>
+                <%= text_area_tag :message %>
+              </li>
+            </ul>
+          </section>
+          <div class="buttons">
+            <%= submit_tag "Send", :class => 'continue button primary right' %>
+          </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p><%= Spree.t(:you_have_no_favorites_yet) %></p>
+      <% end %>
+    </section>
+  </div>
+</div>

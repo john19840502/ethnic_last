@@ -1,0 +1,47 @@
+<hgroup>
+    <h1>DESIGN IS A FUSION OF SPIRIT, CULTURE & TECHNIQUES</h1>
+</hgroup>
+
+<header>
+    <ul class="slider" id="slider">
+        <% for slider in Spree::Slider.by_group_key('about_us') %>
+            <li style="background-image: url('<%=slider.image%>');">
+                <% if slider.url.present? %><a href="<%=slider.url%>"></a><% end %>
+            </li>
+        <% end %>
+    </ul>
+    <ul class="pagers" id="pages"></ul>
+</header>
+
+<div class="brands">
+  <ul id="brand-list" data-display="10">
+    <% for taxon in @brands %>
+      <% if taxon.icon.present? %>
+        <li><%= link_to(image_tag(taxon.icon(:original)), "/search/brands/#{taxon.name.downcase}")%></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <a class="more-brands" id="brands-more">More brands</a>
+  <a class="more-brands" id="brands-less">Less brands</a>
+</div>
+
+<section class="content small">
+    <section class="half">
+        <h2>How we work</h2>
+        <p>Ethnic Chic presents a <a href="/impressions">way of living</a> where design meets natural beauty and traditional skills from ancient cultures.</p>
+        <p>Fusion decor creating unique home couture mirroring our own changing culture and our fascination with an ever changing world.</p>
+        <p>Let us help you make <a href="/impressions">your home</a> fabulous and a true reflection of you!!</p>
+    </section>
+
+    <section class="half">
+        <h2>Our amazing friends</h2>
+        <p>The amazing brands which we represent on this site are a personal reflection of who we are and our distinct style.</p>
+        <p>With their characteristic originality and attention to detail they produce trend setting decor pieces which transcend the contemporary spirit and give them a sense of timelessness.</p>
+        <p>It is our aim to provide you with furnishings, lighting, fabrics and accessories for your entire interior decor creating a powerful and unique personal statement!</p>
+        <p>View our hand picked collection of <a href="/collection">exclusive brands</a> representing a complete range of daring and imaginative home couture.</p>
+    </section>
+
+    <p class="call-to-action">
+        <a href="/collection">View our <strong>handcrafted interiors</strong> with a mix of natural <strong>beauty</strong>, <strong>culture</strong> and <strong>techniques</strong></a>
+    </p>
+</section>

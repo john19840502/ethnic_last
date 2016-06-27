@@ -1,0 +1,16 @@
+<% content_for :head do -%>
+  <%- if @page.meta_title.present? -%>
+    <meta name="title" content="<%=@page.meta_title%>">
+  <%- else -%>
+    <meta name="title" content="<%=@page.title%>">
+  <%- end -%>
+    <meta name="keywords" content="<%=@page.meta_keywords%>">
+    <meta name="description" content="<%=@page.meta_description%>">
+<% end -%>
+
+<section class="content">
+    <article class="single">
+        <h1><%= @page.title %></h1>
+        <%= raw @page.body %>
+    </article>
+</section>
