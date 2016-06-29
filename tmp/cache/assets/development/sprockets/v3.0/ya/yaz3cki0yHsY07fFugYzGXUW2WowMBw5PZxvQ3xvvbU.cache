@@ -1,0 +1,79 @@
+I"™
+(function() {
+  Spree.ready(function($) {
+    Spree.Rates = {};
+    Spree.onAddressShipRates = function() {
+      var getCountryId, order_use_billing, update_shipping_rates;
+      if (($('#checkout_form_address')).is('*')) {
+        getCountryId = function(region) {
+          return $('#' + region + 'country select').val();
+        };
+        Spree.updateShipping = function(region) {
+          var countryId;
+          countryId = getCountryId(region);
+          if (countryId != null) {
+            if (Spree.Rates[countryId] == null) {
+              ($('#shipping_rates')).html('Calculating shipping cost...');
+              return $.get('/api/shipping_rates', {
+                country_id: countryId
+              }, function(data) {
+                Spree.Rates[countryId] = {
+                  rates: data.rates,
+                  currency: data.currency
+                };
+                return Spree.show_rates(Spree.Rates[countryId]);
+              });
+            } else {
+              return Spree.show_rates(Spree.Rates[countryId]);
+            }
+          }
+        };
+        Spree.show_rates = function(rates) {
+          var cost, currency;
+          if (rates["rates"].length === 0) {
+            return ($('#shipping_rates')).html("No shipping rates for your location.");
+          } else {
+            cost = rates["rates"][0]["cost"];
+            currency = Spree.currency_sign(rates["currency"]);
+            return ($('#shipping_rates')).html("Shipping will cost you " + currency + cost + ".");
+          }
+        };
+        Spree.currency_sign = function(currency) {
+          switch (currency) {
+            case "EUR":
+              return 'â‚¬';
+            case "USD":
+              return '$';
+            default:
+              return currency;
+          }
+        };
+        ($('#bcountry select')).change(function() {
+          var order_use_billing;
+          order_use_billing = $('input#order_use_billing');
+          if (order_use_billing.is(':checked')) {
+            return Spree.updateShipping('b');
+          }
+        });
+        ($('#scountry select')).change(function() {
+          return Spree.updateShipping('s');
+        });
+        Spree.updateShipping('b');
+        order_use_billing = $('input#order_use_billing');
+        order_use_billing.change(function() {
+          return update_shipping_rates(order_use_billing);
+        });
+        return update_shipping_rates = function(order_use_billing) {
+          if (order_use_billing.is(':checked')) {
+            return Spree.updateShipping('b');
+          } else {
+            return Spree.updateShipping('s');
+          }
+        };
+      }
+    };
+    return Spree.onAddressShipRates();
+  });
+
+}).call(this);
+:ET

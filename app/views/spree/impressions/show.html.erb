@@ -26,7 +26,7 @@
     <h1>
       <%= @impression.title %>
     </h1>
-    <p><%= @impression.description %></p>
+    <p id="description"><%= @impression.description %></p>
     <h2>Brands worked with</h2>
     <ul class="brands-used">
       <% @impression.brands.each do |brand| %>
@@ -41,3 +41,8 @@ $(document).ready(function() {
     $("a.fancybox").fancybox();
   });
 </script>
+<style type>
+#description{
+  white-space: pre-wrap;
+}  
+</style>

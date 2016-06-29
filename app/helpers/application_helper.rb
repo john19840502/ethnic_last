@@ -240,4 +240,15 @@ module ApplicationHelper
     Spree::Money.new(count).to_html
   end
   
+  def get_code_from_country(country_name)
+  # case country_name 
+  # when 1    
+  #   puts "it was 1" 
+  # when 2    
+  #   puts "it was 2"
+  # else
+  #   puts "it was something else"
+  # end  
+    return "nl"
+  end
 end
