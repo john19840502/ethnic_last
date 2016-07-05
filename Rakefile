@@ -42,3 +42,13 @@ task :generate_meta_data => :environment do
     end
   end
 end
+
+desc 'generate meta info for products'
+task :generate_meta_info => :environment do
+  Spree::Product.find_each do |product|
+    begin
+	  product.save!
+	rescue
+	end
+  end
+end 	

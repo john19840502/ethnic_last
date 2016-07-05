@@ -26,7 +26,6 @@ $(document).ready(function() {
         skip_invisible : false
     });
 
-
     if (elementExists($('#brand-list'))) {
         brandToggle();
     }

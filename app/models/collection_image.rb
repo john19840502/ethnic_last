@@ -5,5 +5,5 @@ class CollectionImage < ActiveRecord::Base
 
   validates :position, presence: true
   validates_attachment_presence :attachment
-  validates_attachment_content_type :attachment, content_type: ['image/png', 'image/jpg']
+  validates_attachment_content_type :attachment, content_type: ['image/png', 'image/jpeg']
 end

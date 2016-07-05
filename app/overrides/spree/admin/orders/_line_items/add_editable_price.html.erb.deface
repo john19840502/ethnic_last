@@ -1,0 +1,7 @@
+<!-- replace "td.line-item-price" -->
+<td class="line-item-price-show text-center">
+	<%= item.single_money.to_html %>
+</td>
+<td class="line-item-price-edit text-center is-hidden">
+  <%= text_field_tag :single_money, item.single_money, :class => "line_item_price form-control", :size => 5 %>
+</td>

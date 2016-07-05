@@ -21,11 +21,13 @@ ul.products {
         @include border-radius(2px);
         cursor: pointer;
         &:nth-child(3n+1) { clear: left; }
+        height: 258p.773px;
         a {
             display: block;
             cursor: pointer;
             background: none;
             padding: 0;
+            top:0;            
         }
         div {
             opacity: 0;

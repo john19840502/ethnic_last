@@ -15,6 +15,7 @@ module Spree
         @order.shipping_address.save(validate: false)
 
         create_package_without_validations
+        #debugger
         @rates = Spree::Stock::Estimator.new(@order).shipping_rates(@package)
 
         @currency = Spree::Config["currency"]

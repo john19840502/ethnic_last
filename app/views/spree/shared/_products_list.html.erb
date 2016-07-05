@@ -11,3 +11,14 @@
 	  </li>
 	<% end %>
 <% end %>
+<script>
+function set_image_size()
+{
+	var cw = $('.product').width();
+	$('.product').css({'height':cw+'px'});
+}
+$(window).resize(function(){
+	set_image_size();
+}); 
+set_image_size();
+</script>

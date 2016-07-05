@@ -15,7 +15,7 @@ module ApplicationHelper
       image = product.images.where(search_result_asset: true).first
       image = product.images.first unless image
       options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt.tr('"','').tr('\'','')
-      options.reverse_merge!({src: image.attachment.url(:product) })
+      options.reverse_merge!({src: image.attachment.url(:large) })
       img = '<img '
       options.keys.each do |k|
         img += "#{k}=#{options[k]} "
@@ -184,11 +184,35 @@ module ApplicationHelper
   end
   
   def get_slider1_images
-    @slider1_imgs = CollectionImage.where(slider1: true)
+    @slider1_imgs = CollectionImage.where(position: 1)
+  end
+  
+  def get_slider2_images
+	  @slider2_imgs = CollectionImage.where(position: 2)
+  end
+  
+  def get_slider3_images
+	  @slider2_imgs = CollectionImage.where(position: 3)
+  end
+  
+  def get_slider4_images
+	  @slider2_imgs = CollectionImage.where(position: 4)
+  end
+  
+  def get_slider5_images
+	  @slider2_imgs = CollectionImage.where(position: 5)
+  end
+  
+  def get_slider6_image
+	  @slider6_imgs = CollectionImage.where(position: 6).first
+  end
+  
+  def get_slider6_hoover_image
+	  @slider6_hoover_imgs = CollectionImage.where(position: 7).first
   end
   
   def get_medium_images_block1
-    @medium_images = CollectionImage.where(medium: true).first(4)
+    @medium_images = CollectionImage.where(position: 2..5)
   end
   
   def get_small_images_block1
@@ -199,9 +223,6 @@ module ApplicationHelper
     @medium_images = CollectionImage.where(medium: true).limit(2).offset(4)
   end
   
-  def get_slider2_images
-	  @slider2_imgs = CollectionImage.where(slider2: true)
-  end
   
   def get_medium_images_block3
     @medium_images = CollectionImage.where(medium: true).limit(4).offset(6)
@@ -211,8 +232,23 @@ module ApplicationHelper
     @small_imgs = CollectionImage.where(small: true).limit(4).offset(4)
   end
 
+  def get_hove_over_image
+	  @hove_over_image = CollectionImage.where(hove_over: true).first	
+  end
+  
   def money(count)
     Spree::Money.new(count).to_html
   end
   
+  def get_code_from_country(country_name)
+  # case country_name 
+  # when 1    
+  #   puts "it was 1" 
+  # when 2    
+  #   puts "it was 2"
+  # else
+  #   puts "it was something else"
+  # end  
+    return "nl"
+  end
 end

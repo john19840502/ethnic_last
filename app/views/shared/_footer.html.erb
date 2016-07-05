@@ -9,7 +9,6 @@
     </ul>
 </footer>
 
-<%= render :partial => "/shared/countries_modal" %>
 
 <%if(session[:country_id] and country = Spree::Country.find(session[:country_id])) %>
     <% if Spree::Zone.default_tax && !Spree::Zone.default_tax.contains_country?(country) %>

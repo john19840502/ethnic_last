@@ -3,6 +3,7 @@ Spree::OrdersController.class_eval do
   before_action :restrict_quantity, only: [:update]
 
   def update
+    #debugger
     if flash[:error]
       redirect_back_or_default(spree.cart_path) and return
     else

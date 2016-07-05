@@ -1,58 +1,203 @@
-<section>
-  <dl class="advanced confirm">
-    <dt><%= Spree.t(:shipping_address) %></dt>
-    <dd><%= @order.ship_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
-    <dt><%= Spree.t(:billing_address) %></dt>
-    <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
-    <% if @order.has_step?("delivery") %>
-        <dt><%= Spree.t(:shipping_method) %></dt>
-        <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
+<% if @order[:payment_state] == "1" %>
+  <section>
+    <dl class="advanced confirm">
+      <dt><%= Spree.t(:shipping_address) %></dt>
+      <dd><%= @order.ship_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
+      <dt><%= Spree.t(:billing_address) %></dt>
+      <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
+      <% if @order.has_step?("delivery") %>
+          <dt><%= Spree.t(:shipping_method) %></dt>
+          <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
+      <% end %>
+      <dt><%= Spree.t(:subtotal) %></dt>
+      <dd><%= money @order.item_total %></dd>
+      <dt>VAT</dt>
+      <dd><%= money @order.tax_total %></dd>
+      <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+          <dt> <%= adjustment.label %> </dt>
+          <dd><%= money adjustment.amount %></dd>
+      <% end %>
+      <dt><%= Spree.t(:shipping_total) %></dt>
+      <dd><%= money @order.shipment_total %></dd>
+      <dt><%= Spree.t(:order_total) %></dt>
+      <dd><%= money @order.total %></dd>
+    </dl>
+  </section>
+
+  <ul class="shopping-bag">
+    <% @order.line_items.each do |item| %>
+        <li>
+          <figure>
+            <% if item.variant.images.length == 0 %>
+                <%= small_image(item.variant.product)%>
+            <% else %>
+                <%= image_tag(item.variant.images.first.attachment.url(:small)) %>
+            <% end %>
+          </figure>
+          <div>
+            <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
+            <p><%= item.variant.options_text %></p>
+            <dl class="advanced">
+              <dt>Price</dt>
+              <dd><%= money item.price %></dd>
+              <dt>Quantity</dt>
+              <dd><%=item.quantity%></dd>
+              <dt>Total</dt>
+              <dd><%= money(item.price * item.quantity) %></dd>
+            </dl>
+          </div>
+        </li>
     <% end %>
-    <dt><%= Spree.t(:subtotal) %></dt>
-    <dd><%= money @order.item_total %></dd>
-    <dt>VAT</dt>
-    <dd><%= money @order.tax_total %></dd>
-    <% @order.adjustments.eligible.each do |adjustment| %>
-        <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
-        <dt> <%= adjustment.label %> </dt>
-        <dd><%= money adjustment.amount %></dd>
-    <% end %>
-    <dt><%= Spree.t(:shipping_total) %></dt>
-    <dd><%= money @order.shipment_total %></dd>
-    <dt><%= Spree.t(:order_total) %></dt>
-    <dd><%= money @order.total %></dd>
-  </dl>
-</section>
+  </ul>
 
-<ul class="shopping-bag">
-  <% @order.line_items.each do |item| %>
-      <li>
-        <figure>
-          <% if item.variant.images.length == 0 %>
-              <%= small_image(item.variant.product)%>
-          <% else %>
-              <%= image_tag(item.variant.images.first.attachment.url(:small)) %>
-          <% end %>
-        </figure>
-        <div>
-          <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
-          <p><%= item.variant.options_text %></p>
-          <dl class="advanced">
-            <dt>Price</dt>
-            <dd><%= money item.price %></dd>
-            <dt>Quantity</dt>
-            <dd><%=item.quantity%></dd>
-            <dt>Total</dt>
-            <dd><%= money(item.price * item.quantity) %></dd>
-          </dl>
-        </div>
-      </li>
-  <% end %>
-</ul>
+  <div align="center">
+    <div> Due to safety reasons, we've put a limit to our online transactions of 6000. </div>
+    <div> As your current order is exceeding this amount, we will contact you shortly </div>
+    <div> for the payment of the remaining balance. <div>
+    <div> At the same time we will provide you accurate<div>
+    <div> information on the availability / lead time of the order.<div>
+    <br>
+    <div> To proceed with the payment of 6000, please click on <div>
+    <div> 'Confirm and start payment' </p>
+  </div>
 
-<%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.mollie_payment_method.id %>
+  <div align="center">
+    <input name="terms_conditions" id="terms_conditions" value="1" type="checkbox">
+    <label for="terms_id">General terms and conditions</label>
+  </div>
+  <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.mollie_payment_method.id %>
 
-<div class="buttons">
-  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
-  <%= submit_tag "Confirm and start payment", :class => 'continue button primary right' %>
-</div>
+  <div class="buttons">
+    <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+    <%= submit_tag "Confirm and start payment", :class => 'continue button primary right', :id => "confirm_start", :disabled => true  %>
+  </div>
+<% else %>
+  <section style="padding:0 0 0 0;">
+    <div class="panel panel-default" id="payment" style="border:none" data-hook>
+      <div class="panel-heading" style="display:none;">
+        <h3 class="panel-title"><%= Spree.t(:payment_information) %></h3>
+      </div>
+      <div class="panel-body" id="stripe_panel" data-hook="checkout_payment_step" >
+        <% if @payment_sources.present? %>
+          <div class="card_options" style="display:none;">
+            <%= radio_button_tag 'use_existing_card', 'yes', true %>
+            <label for="use_existing_card_yes">
+              <%= Spree.t(:use_existing_cc) %>
+            </label>
+            <br/>
+            <%= radio_button_tag 'use_existing_card', 'no' %>
+            <label for="use_existing_card_no">
+              <%= Spree.t(:use_new_cc_or_payment_method) %>
+            </label>
+          </div>
+
+          <div id="existing_cards" style="display:none;">
+            <p class="form-group" data-hook="existing_cards">
+              <table class="existing-credit-card-list">
+                <tbody>
+                  <% @payment_sources.each do |card| %>
+                    <tr id="<%= dom_id(card,'spree')%>" class="<%= cycle('even', 'odd') %>">
+                      <td><%= card.name %></td>
+                      <td><%= card.display_number %></td>
+                      <td><%= card.month %> / <%= card.year %></td>
+                      <td>
+                        <%= radio_button_tag "order[existing_card]", card.id, (card == @payment_sources.first), { class: "existing-cc-radio" }  %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </p>
+          </div>
+        <% end %>
+        <ul class="list-group" id="payment-method-fields" data-hook>
+          <% method = @order.stripe_payment_method %>
+            <li class="list-group-item" style="display:none;">
+              <label>
+                <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first, :class => 'stripe_payment_method' %>
+                <%= Spree.t(method.name, :scope => :payment_methods, :default => method.name) %>
+              </label>
+            </li>
+        </ul>
+
+        <ul class="nav" id="payment-methods" data-hook>
+            <li id="payment_method_<%= method.id %>" data-hook>
+              <fieldset>
+                <%= render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method } %>
+              </fieldset>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="well text-right form-buttons" data-hook="buttons" style="display:none;">
+      <%= submit_tag Spree.t(:save_and_continue), class: 'btn btn-lg btn-success primary' %>
+    </div>
+  </section>
+  
+  <div align="center">
+    <div> Due to safety reasons, we've put a limit to our online transactions of 6000. </div>
+    <div> As your current order is exceeding this amount, we will contact you shortly </div>
+    <div> for the payment of the remaining balance. <div>
+    <div> At the same time we will provide you accurate<div>
+    <div> information on the availability / lead time of the order.<div>
+    <br>
+    <div> To proceed with the payment of 6000, please click on <div>
+    <div> 'Confirm and start payment' </p>
+  </div>
+
+  <div align="center">
+    <input name="terms_conditions" id="terms_conditions" value="1" type="checkbox">
+    <label for="terms_id">General terms and conditions</label>
+  </div>
+
+  <div class="buttons">
+    <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+    <%= submit_tag "Confirm and start payment", :class => 'continue button primary right', :id => "confirm_start", :disabled => true  %>
+  </div>
+<% end %>
+
+<style>
+#payment{
+  boder:rgba(230,230,230,0.65);
+  background:rgba(230,230,230,0.65);
+}
+#stripe_panel{
+  boder:rgba(230,230,230,0.65);
+  background:rgba(230,230,230,0.65);
+}
+#payment{
+  boder:none;
+}
+#panel-body-big{
+  background:rgba(230,230,230,0.65);
+  border:none;
+}
+#payment-methods-stripe{
+  background:rgba(230,230,230,0.65);  
+  border:none;
+}
+#stripe_method_form{
+  background:rgba(230,230,230,0.65);  
+  border:none;  
+  width:100%;
+}
+</style>
+
+<script>
+  $("#use_existing_card_no").prop("checked", true).trigger("click");
+  $(".stripe_payment_method").prop("checked", true).trigger("click");
+  $("#terms_conditions").click(function(){
+    value = 1 - $(this).val();
+    $(this).val(value);
+    if (value == 1)
+    {
+      $("input#confirm_start").prop("disabled", true);
+    }
+    else
+    {
+      $("input#confirm_start").prop("disabled", false);
+    }
+  });
+</script>

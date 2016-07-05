@@ -13,6 +13,15 @@
       <div>
         <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
       </div>
+
+      <form role="form">
+		    <div class="radio">
+		      <label><input type="radio" name="search_in" value=1>within the entire wesite</label>
+		    </div>
+		    <div class="radio">
+		      <label><input type="radio" name="search_in" value=2>within the result</label>
+		    </div>
+		  </form>
     <% end %>
 
 		<%
@@ -42,7 +51,25 @@
   <div class="products-wrapper">
     <ul id="products" class="inline product-listing products" data-hook="">
     <% if @products == nil || @products.empty? %>
-		 <p>Oops, there aren't any products that match your search and/or filter. Please choose an other one.</p>
+		  <p>Unfortunately we can’t find any products that match your search and / or filter.
+				Please contact us if you need any assistance at info@ethnicchic.com or call us directly at+31203308066.</p>
+			<% if @similar.present? %>
+        <h3 class='similars-header'> You may also like: </h3>
+        <ul class="thumbnails" id="similar-products">
+            <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
+            <div class = 'similars-container'>
+              <% @similar.each_with_index do |product, index| %>
+                  <% i = product.images.first %>
+                  <li class='similar similar-<%= index.to_s %>'>
+                    <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), product_path(product) %></span>
+                    <div> <%= product.name %> </div>
+                  </li>
+              <% end %>
+            </div>
+            <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
+        </ul>
+      <%end%>
+    </section>
     <% else %>
 			<%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, page: @page } %>
     <% end %>

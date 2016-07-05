@@ -1,8 +1,8 @@
 <ul class="bag">
-    <li>
-      <%= link_to raw("<span class=\"glyphicon glyphicon-heart #{ @product && has_favorite?(@product) ? 'red' : ''}\" aria-hidden=\"true\"></span><small>#{favorite_count}</small>"), favorites_path, id: "favorites", remote: true %>
-    </li>
   <li>
+    <%= link_to raw("<span class=\"glyphicon glyphicon-heart #{ @product && has_favorite?(@product) ? 'red' : ''}\" aria-hidden=\"true\"></span><small>#{favorite_count}</small>"), favorites_path, id: "favorites", remote: true %>
+  </li>
+  <!-- <li>
     <%
       country_val = session[:country_name]
       country_val ||= "Select your country"
@@ -16,7 +16,7 @@
       <li><a href="/country/set_currency?currency=EUR">EUR</a></li>
       <li><a href="/country/set_currency?currency=USD">USD</a></li>
     </ul>
-  </li>
+  </li> -->
 
   <li>
     <a href="<%= spree.cart_path %>" title="Shopping Bag">Shopping Bag <small><%= current_order ? current_order.item_count : 0 %></small></a>
@@ -29,3 +29,10 @@
     <li id="link-to-login"><%= link_to t(:login), spree.login_path %></li>
   <% end %>
 </ul>
+
+<style>
+.bag{
+  position:absolute;
+  top:100px;
+}
+</style>

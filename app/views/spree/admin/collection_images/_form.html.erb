@@ -22,29 +22,9 @@
     <%= f.error_message_on :attachment %>
   <% end %>
   
-  <%= f.field_container :slider1 do %>
-    <%= f.label :slider1, t(:image_for_slider1) %><br />
-    <%= f.check_box :slider1 %>
-    <%= f.error_message_on :slider1 %>
-  <% end %>
-  
-  <%= f.field_container :slider2 do %>
-    <%= f.label :slider2, t(:image_for_slider2) %><br />
-    <%= f.check_box :slider2 %>
-    <%= f.error_message_on :slider2 %>
-  <% end %>
-  
-  <%= f.field_container :medium do %>
-    <%= f.label :medium, t(:medium_image) %><br />
-    <%= f.check_box :medium %>
-    <%= f.error_message_on :medium %>
-  <% end %>
-  
-  <%= f.field_container :small do %>
-    <%= f.label :small, t(:small_image) %><br />
-    <%= f.check_box :small %>
-    <%= f.error_message_on :small %>
-  <% end %>
+  <h5> position1: 328 x 479 </h5>
+  <h5> position2 ~ postion 5: 164 x 239 </h5>
+  <h5> position6, position7(hoover image): 229 x 479 </h5>
   
   <%= f.field_container :new_tab do %>
     <%= f.label :small, t(:open_in_new_tab) %><br />
@@ -53,3 +33,17 @@
   <% end %>
   
 </div>
+<style>
+	input#collection_image_name
+	{
+			width: 400px;
+	}
+	input#collection_image_position
+	{
+			width: 400px;
+	}
+	input#collection_image_url
+	{
+			width: 400px;
+	}	
+</style>

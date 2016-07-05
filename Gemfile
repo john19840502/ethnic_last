@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', github: 'rails/rails', branch: '4-2-stable'
 # Use postgresql as the database for Active Record
 gem 'pg'
+# Use rmagick
+gem 'rmagick'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -21,6 +23,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# Use world flag
+gem 'world-flags', '~> 0.6.5'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -83,6 +87,8 @@ gem 'spree_email_to_friend', github: 'spree-contrib/spree_email_to_friend', bran
 gem 'spree_taxon_filters', github: 'pero-ict-solutions/spree_taxon_filters'
 gem 'spree_mollie', github: 'pero-ict-solutions/spree_mollie', branch: '3-0-stable'
 gem 'spree_favorites', github: 'fesstor/spree_favorites', branch: 'add-spree-3-0-stable'
+gem 'spree_gateway', github: 'spree/spree_gateway', branch: '3-0-stable'
+gem 'world_flags', :git => 'git://github.com/djonasson/world_flags.git'
 
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'
@@ -102,3 +108,5 @@ gem 'algoliasearch-rails'
 gem 'miro'
 gem 'paleta'
 gem 'dotenv-rails', '1.0.2', :groups => [:development, :test]
+gem 'premailer-rails'
+gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'

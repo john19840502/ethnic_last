@@ -46,5 +46,10 @@ module Ethnicchic2
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W(#{Rails.root}/lib/spree)
+    config.exceptions_app = self.routes
+    config.assets.precompile += %w( flags/flags16.png )
+    config.assets.precompile += %w( flags/flags16_semi.png )
+    config.assets.precompile += %w( flags/flags32.png )
+    config.assets.precompile += %w( flags/flags32_semi.png )
   end
 end

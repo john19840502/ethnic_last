@@ -7,13 +7,7 @@
 	<%= stylesheet_link_tag 'frontend/jquery' %>
 	<%= javascript_include_tag 'jquery.flexslider' %>
 
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('.slider-container').flexslider({
-				animation: "slide", directionNav: true, animationSpeed: 600, controlNav: false}
-			);
-		});
-	</script>
+	
 </head>
 
 <%= render :partial => "shared/header" %>
@@ -30,69 +24,59 @@
   </aside>
 <div class="products-wrapper">
     <div class="block">
-			<div class="clear"></div>
 
-			<div style="width: 867px;">
-			<div style="float: left; width: 657px;">
-			<div class="home-thumb">
-				<!-- Bloco topo -->
-				<% slider1_images =  get_slider1_images %>
-				<% if slider1_images.present? %>
-					<%=render :partial => "first_slider", :locals => {:slider1_images => slider1_images } %>
-				<% end %>
+			<div style="width: 100%;">
+				<div style="width: 74%; float: left; ">
+					<div class="home-thumb">
+						<!-- Bloco topo -->
+						<% slider1_images =  get_slider1_images %>
+						<% if slider1_images.present? %>
+							<%=render :partial => "first_slider", :locals => {:slider1_images => slider1_images } %>
+						<% end %>
 
-				<% medium_images1 =  get_medium_images_block1 %>
-				<% if medium_images1.present? %>
-					<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images1 } %>
-				<% end %>
+						<% medium_images1 =  get_medium_images_block1 %>
+						<% if medium_images1.present? %>
+							<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images1 } %>
+						<% end %>
 
-				<% small_images1 =  get_small_images_block1 %>
-				<% if small_images1.present? %>
-					<%=render :partial => "small_images", :locals => {:small_images1 => small_images1 } %>
-				<% end %>
-
-				<% medium_images2 =  get_medium_images_block2 %>
-				<% if medium_images2.present? %>
-					<%=render :partial => "medium_images_first_block", :locals => {:medium_images => medium_images2 } %>
-				<% end %>
-
-				<% slider2_images =  get_slider2_images %>
-				<% if slider2_images.present? %>
-					<%=render :partial => "second_slider", :locals => {:slider2_images => slider2_images } %>
-				<% end %>
-
-				<% medium_images3 =  get_medium_images_block3 %>
-				<% if medium_images3.present? %>
-					<%=render :partial => "medium_images_last_block", :locals => {:medium_images => medium_images3 } %>
-				<% end %>
-
-				<% small_images2 =  get_small_images_block2 %>
-				<% if small_images2.present? %>
-					<%=render :partial => "small_images", :locals => {:small_images => small_images2 } %>
-				<% end %>
-
-				<div class="clear"></div>
-			</div>
-			</div>
-			
+						<div class="clear" style="float:left;"></div>
+					</div>
+				</div>
 				<!--create extra column of this slider-->
-				<div style="width: 210px; float: left;">
+				<div style="width: 26%; float: left;">
 				  <div>
-            <a href="http://www.ethnicchic.com/edwardvanvliet">
-    					<img src="<%= asset_url('Edward Van Vliet Shop 1.png') %>" width="210" height="480"
-    					onmouseover="this.src='<%= asset_url('Edward Van Vliet Shop 2.png') %>';"
-    					onmouseout="this.src='<%= asset_url('Edward Van Vliet Shop 1.png') %>';">
-            </a>
-					</img>
-	
+						<% slider6_image =  get_slider6_image %>
+						<% slider6_hoover_image = get_slider6_hoover_image %>
+						<div>
+							<a href="http://www.ethnicchic.com/edwardvanvliet" >
+										<img class="slider6" src="<%= slider6_image.attachment.url(:original) %>" 
+										onmouseover="this.src='<%= slider6_hoover_image.attachment.url(:original) %>';"
+										onmouseout="this.src='<%= slider6_image.attachment.url(:original) %>';"></img>
+							</a>
+						</div>
 				  </div>
 				</div>
-				</div>
-
-				
-
-				
-			
+			</div>			
 	</div>
 </div>
 </section>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.slider-container').flexslider({
+			animation: "slide", directionNav: true, animationSpeed: 600, controlNav: false}
+		);
+		
+		function set_slider_height()
+		{
+			var cw = $('.block_2_images').width();
+			$('.slider6').css({'width':cw * 0.7 +'px'});
+			var ch = $('.block_2_images').height();
+			$('.slider6').css({'height':ch +'px'});				
+		}
+		setTimeout(set_slider_height, 100);
+		$(window).resize(function(){
+			set_slider_height();
+		}); 
+	});
+</script>

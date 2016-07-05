@@ -1,3 +1,18 @@
+<% 
+  def get_vat_rate(country_name)
+    if ["Austria", "Belgium", "Bulgaria", "Croatia", "Czech Republic", "Cyprus", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland",
+"Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania","Slovenia", "Slovakia", "Spain", "Sweden", "United Kingdom"].include? country_name
+      return 1.0
+    else
+      return 100.0/121.0
+    end
+    return 1.0
+  end
+
+  vat_rate = get_vat_rate(Spree::Country.find(Spree::Address.find(@order.shipments.first.address_id).country_id).iso_name)
+
+%>
+
 <table id="order_summary" class="split">
   <tr>
     <td>Number</td>
@@ -45,14 +60,17 @@
       <th class="total number"><%= t(:total) %></th>
     </tr>
     <% order.line_items.each do |item| %>
+      <% #debugger %>
       <tr data-hook="order_details_line_item_row" class="<%= cycle('', 'alt') %>">
         <td class="name">
+          <%= item.variant.product.brand.name %>
           <%= item.variant.product.name %>
-          <%= "(" + item.variant.options_text + ")" unless item.variant .option_values.empty? %>
+          <%= "/" + item.variant.options_text.split(',').second.split(':').second unless item.variant.options_text.split(',').second.empty? %>
+          <%= "/" + item.variant.options_text.split(',').first.split(':').second unless item.variant.options_text.split(',').first.empty? %>
         </td>
-        <td class="price number"><%= money(item.price) %></td>
+        <td class="price number"><%= money(item.price * vat_rate) %></td>
         <td class="qty number"><%= item.quantity %></td>
-        <td class="total number"><%= money(item.price * item.quantity) %></td>
+        <td class="total number"><%= money(item.price * item.quantity * vat_rate) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -62,7 +80,7 @@
         <%= t(:subtotal) %>
       </td>
       <td class="total number">
-        <%= money order.item_total %>
+        <%= money order.item_total*vat_rate %>
       </td>
     </tr>
   </tbody>
@@ -72,7 +90,7 @@
         <% @order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
           <tr class="total">
             <td class="title" colspan="3"><%= Spree.t(:promotion) %> <%= label %>:</td>
-            <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+            <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount) * vat_rate, currency: @order.currency) %></td>
           </tr>
         <% end %>
       <% end %>
@@ -80,14 +98,20 @@
     <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
       <tr class="total">
         <td class="title" colspan="3"><%= Spree.t(:shipping) %> <%= name %>:</td>
-        <td class="total number"><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: @order.currency) %></td>
+        <td class="total number"><%= Spree::Money.new(shipments.sum(&:discounted_cost) * vat_rate, currency: @order.currency) %></td>
       </tr>
     <% end %>
     <% if @order.all_adjustments.eligible.tax.exists? %>
       <% @order.all_adjustments.eligible.tax.group_by(&:label).each do |label, adjustments| %>
         <tr class="total" colspan="3">
-          <td class="title"><%= Spree.t(:tax) %> <%= label %>:</td>
-          <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+          <% if (vat_rate != 1.0) %>
+            <td class="title"><%= Spree.t(:tax) %> <%= label %>:</td>
+            <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+          <% else 
+             label = "Refund VAT 0%"
+          %>
+            <td class="title"><%= Spree.t(:tax) %> <%= label %></td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>
@@ -106,7 +130,7 @@
         <%= t(:order_total) %>
       </td>
       <td class="total number">
-        <span id="order_total"><%= money order.total %></span>
+        <span id="order_total"><%= money order.total  * vat_rate %></span>
       </td>
     </tr>
   </tbody>

@@ -1,5 +1,4 @@
 Spree::Order.class_eval do
-
   insert_checkout_step :before_address, before: :address
 
   def pre_tax_amount
@@ -14,11 +13,17 @@ Spree::Order.class_eval do
     available_payment_methods.select{ |pm| pm.instance_of?(Spree::PaymentMethod::Mollie) }.first
   end
 
+  def stripe_payment_method
+    available_payment_methods.select { |pm| pm.instance_of?(Spree::Gateway::StripeGateway) }.first
+  end
+
   checkout_flow do
     go_to_state :address
     go_to_state :delivery, :if => lambda {|order| !order.delivery_quote_needed? }
     go_to_state :delivery_quote, :if => lambda { |order| order.delivery_quote_needed? }
-    go_to_state :payment, if: lambda { |order| order.payment_required? }
+    go_to_state :select_payment_method, :if => lambda {|order| order.payment_required?} 
+    go_to_state :payment, :if => lambda {|order| order.payment_required?} 
+    go_to_state :confirm, :if => lambda {|order| order.payment_required?} 
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.payments.exists?) || !order.payment_required? }
   end
 

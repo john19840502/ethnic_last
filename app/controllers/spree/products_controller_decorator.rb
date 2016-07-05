@@ -14,7 +14,6 @@ Spree::ProductsController.class_eval do
     @searcher.current_user = try_spree_current_user
     @products = @searcher.retrieve_products
     @taxonomies = Spree::Taxonomy.includes(root: :children)
-
     respond_with @products
   end
 
@@ -33,10 +32,16 @@ Spree::ProductsController.class_eval do
   def set_similar_products
     taxons = []
     @product.taxons.each do |t|
-      if t.taxonomy.name.downcase == "use" or t.taxonomy.name.downcase == "design"
-        taxons << "taxons.#{t.taxonomy.name.downcase}:#{t.name.downcase}"
-      end
+      taxons << "taxons.#{t.taxonomy.name.downcase}:#{t.name.downcase}"
     end
+    # category_name = ""
+    # @product.taxons.each do |t|
+    #   if t.taxonomy.name.downcase == "categories"
+    #     category_name = t.name.downcase
+    #   end
+    # end
+    #debugger
+    #products = Spree::Product.algolia_search('', { facets: [{:facet=>"categories", :value=>"#{category_name}"}], facetFilters: ["taxons.categories:#{category_name}"], hitsPerPage: 7 })
     products = Spree::Product.algolia_search('', { facets: '*', facetFilters: taxons, hitsPerPage: 7 })
     products.delete_if {|prod| prod.id == @product.id}
     @similar = products.select{ |prod| prod.images.first }

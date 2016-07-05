@@ -1,7 +1,7 @@
 Spree::Product.class_eval do
   delegate_belongs_to :master, :price_without_tax
-  after_create :generate_meta_tags
-  #after_save :generate_meta_tags
+  #after_create :generate_meta_tags
+  before_save :generate_meta_tags
   before_destroy :remove_index
   has_many :product_variant_colors
 
@@ -191,8 +191,14 @@ Spree::Product.class_eval do
     meta_description << "#{self.brand_name} online shop #{self.name}"
     taxons_names[taxons_names.index(taxons_names.last)] = "#{taxons_names.last} - worldwide shipping" if taxons_names.present?
     meta_description << taxons_names
+    meta_description << "Ethnicchic.com"
     self.meta_description = meta_description.flatten.join(", ")
-    self.save!
+    
+    slug = []
+	slug << self.brand_name
+	slug << self.name
+	slug = slug.flatten.join(" ").downcase.split(" ").join("-")
+	self.slug = slug
   end
 
   def brand_name

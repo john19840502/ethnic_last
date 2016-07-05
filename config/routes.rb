@@ -18,8 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/404_custom', to: 'errors#not_found'
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
 end
 
 Spree::Core::Engine.routes.draw do
@@ -35,3 +39,4 @@ Spree::Core::Engine.routes.draw do
   get '/search', to: 'search#result', as: 'product_search'
   get '/search/*filters', to: 'search#result', as: 'product_search_filtered'
 end
+

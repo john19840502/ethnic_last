@@ -1,0 +1,19 @@
+I"(function() {
+  $(function() {
+    if (($('form#update-cart')).is('*')) {
+      ($('form#update-cart .ss-delete')).show().one('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        ($(this)).parents('li').find('input.line_item_quantity').val(0);
+        ($(this)).parents('form').first().submit();
+        return false;
+      });
+    }
+    ($('form#update-cart')).submit(function() {
+      return ($('form#update-cart #update-button')).attr('disabled', true);
+    });
+    return true;
+  });
+
+}).call(this);
+:ET

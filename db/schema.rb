@@ -11,9 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710101139) do
+ActiveRecord::Schema.define(version: 20160504075728) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
+  enable_extension "uuid-ossp"
   enable_extension "plpgsql"
 
   create_table "collection_images", force: :cascade do |t|
@@ -32,6 +34,8 @@ ActiveRecord::Schema.define(version: 20150710101139) do
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
     t.boolean  "new_tab"
+    t.boolean  "slider6",                             default: false
+    t.boolean  "hove_over",                           default: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

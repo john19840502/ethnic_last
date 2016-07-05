@@ -16,7 +16,7 @@ Spree::Variant.class_eval do
 
   def price_without_tax
     amount_ex_vat = (price / 1.21)
-    BigDecimal.new(amount_ex_vat.to_s).round(2, BigDecimal::ROUND_HALF_UP)
+    BigDecimal.new(amount_ex_vat.to_s).round(5, BigDecimal::ROUND_HALF_UP)
   end
 
   def sorted_option_values

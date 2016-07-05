@@ -4,7 +4,7 @@ module Spree
       respond_to :html
 		  
 			def index
-			@collection_imgs = CollectionImage.all
+				@collection_imgs = CollectionImage.all
 			end
 
 			def new
@@ -21,7 +21,7 @@ module Spree
 				end
 			end
 
-				def edit
+			def edit
 				@collection_image = CollectionImage.find(params[:id])
 			end
 
@@ -44,8 +44,7 @@ module Spree
 			private
 			def collection_image_params
 				params.require(:collection_image).permit(:name, :position, :url, :attachment,
-																								:slider1, :slider2, :medium, :small,
-																								:new_tab)
+                    :slider1, :slider2, :slider6, :hove_over, :medium, :small, :new_tab)
 			end
     end
   end

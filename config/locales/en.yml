@@ -42,7 +42,8 @@ en:
     confirm: Confirm and pay
     delivery: delivery
     delivery_quote: Delivery Quote
-    payment: payment
+    select_payment_method: Select Payment Method
+    payment: Payment
     resumed: resumed
     returned: returned
   requests_list: Back to Requests list

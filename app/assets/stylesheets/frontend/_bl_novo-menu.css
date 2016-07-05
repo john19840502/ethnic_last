@@ -243,7 +243,7 @@ ul.nav li.active a,ul.nav-b li.active a {
 }
 
 .nav a:hover,.ul.nav-b a:hover {
-    color: #A58A62!important;
+    color: #fff !important;
     /*    font-family: 'proxi-bold',helvetica,arial,sans-serif;*/
 
 }

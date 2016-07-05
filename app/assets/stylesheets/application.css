@@ -15,5 +15,9 @@
  *= require backend/all
  *= require jquery.minicolors
  *= require styles
+ *= require flags/basic
+ *= require flags/flags16
+ *= require flags/flags32
+
  * require_tree .
 */

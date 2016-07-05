@@ -1,0 +1,54 @@
+  <section>
+    <dl class="advanced confirm">
+      <dt><%= Spree.t(:shipping_address) %></dt>
+      <dd><%= @order.ship_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
+      <dt><%= Spree.t(:billing_address) %></dt>
+      <dd><%= @order.bill_address %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dd>
+      <% if @order.has_step?("delivery") %>
+          <dt><%= Spree.t(:shipping_method) %></dt>
+          <dd><%= @order.shipments.last.shipping_method.name %><%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dd>
+      <% end %>
+      <dt><%= Spree.t(:subtotal) %></dt>
+      <dd><%= money @order.item_total %></dd>
+      <dt>VAT</dt>
+      <dd><%= money @order.tax_total %></dd>
+      <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+          <dt> <%= adjustment.label %> </dt>
+          <dd><%= money adjustment.amount %></dd>
+      <% end %>
+      <dt><%= Spree.t(:shipping_total) %></dt>
+      <dd><%= money @order.shipment_total %></dd>
+      <dt><%= Spree.t(:order_total) %></dt>
+      <dd><%= money @order.total %></dd>
+    </dl>
+  </section>
+
+  <ul class="shopping-bag">
+    <% @order.line_items.each do |item| %>
+        <li>
+          <figure>
+            <% if item.variant.images.length == 0 %>
+                <%= small_image(item.variant.product)%>
+            <% else %>
+                <%= image_tag(item.variant.images.first.attachment.url(:small)) %>
+            <% end %>
+          </figure>
+          <div>
+            <h2><%= link_to item.variant.product.name, product_path(item.variant.product) %></h2>
+            <p><%= item.variant.options_text %></p>
+            <dl class="advanced">
+              <dt>Price</dt>
+              <dd><%= money item.price %></dd>
+              <dt>Quantity</dt>
+              <dd><%=item.quantity%></dd>
+              <dt>Total</dt>
+              <dd><%= money(item.price * item.quantity) %></dd>
+            </dl>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+
+  <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.mollie_payment_method.id %>
+

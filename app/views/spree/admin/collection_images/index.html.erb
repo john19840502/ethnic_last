@@ -16,10 +16,6 @@
     <th>position</th>
     <th>Url</th>
     <th>Image</th>
-    <th>Slider1</th>
-    <th>Slider2</th>
-    <th>Medium</th>
-    <th>Small</th>
     <th>Action</th>
   </tr>
 <% @collection_imgs.each do |image| %>
@@ -28,10 +24,6 @@
     <td><%= image.position %></td>
     <td><%= image.url %></td>
     <td><%=image_tag image.attachment.url(:icon) %></td>
-    <td><%= image.slider1 %></td>
-    <td><%= image.slider2 %></td>
-    <td><%= image.medium %></td>
-    <td><%= image.small %></td>
     <td>
 		<%= link_to 'Delete', admin_collection_image_path(image), method: 'delete', class: 'edit' %>
 		|<%= link_to ' Edit', edit_admin_collection_image_path(image), class: 'edit' %></td>

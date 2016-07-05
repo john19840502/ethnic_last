@@ -35,7 +35,7 @@ Spree::Taxon.class_eval do
   end
 
   def self.brands
-    brands_root.children.active.order(:name)
+    brands_root.children.active.order(:name) 
   end
 
   def brand?

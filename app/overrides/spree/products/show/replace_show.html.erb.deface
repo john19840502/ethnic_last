@@ -58,8 +58,8 @@
         <% end %>
         </ul>
       <%end %>
-      <!-- turn off you may also like-->
-     <!-- <% if @similar.present? %>
+      <!-- turn on you may also like-->
+      <% if @similar.present? %>
         <h3 class='similars-header'> You may also like: </h3>
         <ul class="thumbnails" id="similar-products">
             <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
@@ -74,7 +74,7 @@
             </div>
             <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
         </ul>
-      <%end%> -->
+      <%end%>
     </section>
 
     <section class="halfLarge">
