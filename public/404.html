@@ -5,30 +5,37 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
-    background-color: #EFEFEF;
+    background-color: #304040;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
     margin: 0;
+
   }
 
   div.dialog {
-    width: 95%;
+    /*width: 95%;
+    height:95%;*/
     max-width: 33em;
     margin: 4em auto 0;
+    padding-top: 20px;
+    padding-right: 100px;
+
   }
 
   div.dialog > div {
-    border: 1px solid #CCC;
+    /*border: 1px solid #CCC;*/
     border-right-color: #999;
     border-left-color: #999;
     border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
+    /*border-top: #B00100 solid 4px;*/
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     background-color: white;
     padding: 7px 12% 0;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+    width: 95%;
+    height:100%;
   }
 
   h1 {
@@ -51,17 +58,99 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  div
+  {
+    padding-top:50px;
+    
+  }
+  div.footer
+  {
+    padding-top: 120px;
+    padding-bottom: 0px;
+    color:#666;
+    font-size: 30px;
+    font:inherit;
+  }
+  div.footer_nav ul  li
+  {
+    display: inline;
+    font-size: 12px;
+    padding:20px;
+    color:rgba(247,247,247,0.64);
+  }
+  
+
+  a:link 
+  {
+    display: inline-block;
+    color: rgba(246,246,246,0.31);
+    
+    text-decoration: none;
+    padding:0.4em 2em 0.4em 2em;
+  }
+  a:visited 
+  {
+    display: inline-block;
+    color: rgba(246,246,246,0.31);
+    
+    text-decoration: none;
+    padding:0.4em 2em 0.4em 2em;
+  }
+  a:hover 
+  {
+    display: inline-block;
+    color: rgba(246,246,246,0.31);
+    
+    text-decoration: underline;
+    padding:0.4em 2em 0.4em 2em;
+  }
+  a:active 
+  {
+    display: inline-block;
+    color: white;
+    
+    text-decoration: underline;
+    padding:0.4em 2em 0.4em 2em;
+  }
+  .footerimg img{margin:0px 0px -22px 0px;}
   </style>
 </head>
+                                                                                                                                          
 
-<body>
+<body >
+<div align="center">
+ <a href="http://www.ethnicchic.com/" ><img src="http://185.14.185.121/assets/Ethnic-Chic-White-Logo-02-6792984fd731bbca3b5444d949f299c18e3202ec52aa1def31c6164d2c51e712.png",width="250px", height="58px"></img></a>
+
+</div>
+
   <!-- This file lives in public/404.html -->
   <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+     <!--  <h1>The page you were looking for doesn't exist.</h1>
+      <p>You may have mistyped the address or the page may have moved.</p> -->
+       <p>Unfortunately we can’t find any products that match your search and / or filter.
+        Please contact us if you need any assistance at info@ethnicchic.com or call us directly at
+        +31203308066.</p>
+     
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+     <!--  <p>If you are the application owner check the logs for more information.</p> -->
   </div>
+
+  
 </body>
+
+
+  <div class="footer">
+    <span>___________________________________________________</span>
+    <strong ><a class="footerimg" href="http://www.ethnicchic.com/" ><img src="http://185.14.185.121/assets/Ethnic-Chic-White-Logo-02-6792984fd731bbca3b5444d949f299c18e3202ec52aa1def31c6164d2c51e712.png",width="250px", height="58px"></img></a></strong>
+    <span>___________________________________________________</span>
+    <div class="footer_nav">
+      <ul>
+        <li><a rel="external" href="http://facebook.com/ethnicchic" title="Ethnic Chic Facebook">Facebook</a></li>
+        <li><a href= "/contact-us" title="Contact Ethnic Chic">Contact</a></li>
+        <li><a href="/terms" title="Terms &amp; conditions">Terms</a></li>
+      </ul>
+    </div>
+  </div>
 </html>
