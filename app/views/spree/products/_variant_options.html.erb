@@ -1,0 +1,60 @@
+<% if @product.has_variants? %>
+  <div id="product-variants">
+    <% index = 0 %>
+    <% @product.grouped_option_values.each do |type, values| %>
+      <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
+        <fieldset>
+          <span class="variations--number"><%=index+1%></span>
+          <label><%= type.presentation %></label>
+          <% if(values.sort_by(&:position).try(:first).try(:has_image?)) %>
+            <ul class="colors">
+          <% else %>
+            <ul class="variations">
+          <% end %>
+          <% values.sort_by(&:position).each do |value| %>
+            <% classes = ["option-value"] %>
+            <% unless (variants = @product.variants_for_option_value(value)).empty? %>
+              <% classes << (variants.sum(&:total_on_hand) > 0 ? "in-stock" : "out-of-stock" ) if index == 0 %>
+              <li>
+                <% if value.has_image? %>
+                  <% classes << "pop" %>
+                  <%= link_to image_tag(value.image.url, :alt => value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}"  %>
+                      <div class="popout" style="display:none;" rel=<%="popup-#{type.id}-#{value.id}"%>>
+                        <span class="popout--arrow"></span>
+                        <a class="button soft" href="#" onclick="$('div[rel]').hide();">Close</a>
+                        <a class="button" href="#">Choose</a>
+                        <%= image_tag(value.image(:original), :alt => value.presentation) %>
+                        <small><%=type.presentation%> : <%=value.presentation%></small>
+                      </div>
+                <% else %>
+                  <%= link_to content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %>
+                <% end %>
+                <div class="locked-popout" style="display:none;" rel=<%="popup-#{type.id}-#{value.id}-locked"%>>
+                  <span class="popout--arrow"></span>
+                  <a class="button" onclick="$('div[rel]').hide();">Close</a>
+                  <p class="warning"> <%= Spree.t('warnings.option_variants.choose_previous') %></p>
+                </div>
+              </li>
+            <% end %>
+          <% end %>
+          <li class="clear"></li>
+          </ul>
+        </fieldset>
+      </div>
+      <% index += 1 %>
+    <% end %>
+    <%= hidden_field_tag "variant_id", "", :id => "variant_id", :class => "hidden" %>
+    <%= hidden_field_tag "products[#{@product.id}]", "", :id => "product_variant_id", :class => "hidden" %>
+    <script type="text/javascript">
+    //<![CDATA[
+      var variant_options = new VariantOptions({
+        options: <%== @product.variant_options_hash(session[:currency]).to_json -%>,
+        track_inventory_levels: <%==  !!Spree::Config[:track_inventory_levels] -%>,
+        allow_backorders: <%==  false -%>,
+        allow_select_outofstock: <%== !!SpreeVariantOptions::VariantConfig[:allow_select_outofstock] -%>,
+        default_instock: <%== !!SpreeVariantOptions::VariantConfig[:default_instock] -%>
+      });
+    //]]>
+    </script>
+  </div>
+<% end%>

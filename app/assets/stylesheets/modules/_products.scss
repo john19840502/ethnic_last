@@ -1,0 +1,119 @@
+// =========== Products
+
+@import "core/settings";
+@import "core/mixins";
+@import "core/grid";
+div.products-wrapper {
+    @include grid(36, 1, 0);
+    @include clearfix;
+}
+div.products-empty {
+    font-size: 1.1em;
+    padding-top: 0.2em;
+}
+ul.products {
+    @include clearfix;
+    margin-bottom: $margin-bottom;
+    li {
+        @include grid(16, 0.2);
+        margin-bottom: 0.75%;
+        position: relative;
+        @include border-radius(2px);
+        cursor: pointer;
+        &:nth-child(3n+1) { clear: left; }
+        height: 258p.773px;
+        a {
+            display: block;
+            cursor: pointer;
+            background: none;
+            padding: 0;
+            top:0;            
+        }
+        div {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            bottom: 1em;
+            background: rgba(#000, 0.85);
+            @include transition(opacity 0.2s);
+            padding: 0.75em 1em 0.75em 1em;
+            @include border-radius(0px 4px 4px 0px);
+            max-width: 95%;
+            h3, p {
+                margin-bottom: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            h3 {
+                 text-transform: uppercase;
+                 font-weight: normal;
+                 font-size: 1.1em;
+            }
+            p {
+                color: $color-brand;
+                font-weight: normal;
+                font-size: 0.85em;
+            }
+        }
+        span.product-brand {
+            opacity: 0;
+            visibility: hidden;
+            @include transition(opacity 0.2s 0.2s);
+            position: absolute;
+            z-index: 2;
+            top: 0.5em;
+            height: 30%;
+            width: 60%;
+            right: 0.5em;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        span.product-color {
+            position: absolute;
+            display: block;
+            height: 4em;
+            width: 4em;
+            bottom: 1.25em;
+            left: 1.25em;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            @include border-radius(2px);
+            @include box-shadow(0px 1px 3px rgba(#000, 0.35));
+        }
+        img {
+            width: 100%;
+            display: block;
+            @include border-radius(2px);
+            @include filter(grayscale(50%));
+            /*@include transition(-webkit-filter 0.2s);*/
+            @include box-shadow(0px 0px 8px rgba(#000, 0.3));
+        }
+        &:hover {
+            div { visibility: visible; opacity: 1; }
+            span.product-brand { visibility: visible; opacity: 0.75; }
+            img {
+                @include filter(grayscale(0%));
+                @include box-shadow(0px 0px 15px rgba(#000, 0.4));
+            }
+            a:after {
+                position: absolute;
+                z-index: 1;
+                content: " ";
+                display: block;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(black, 0.35);
+            }
+        }
+    }
+}

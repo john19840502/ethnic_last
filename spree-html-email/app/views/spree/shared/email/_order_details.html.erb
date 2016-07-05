@@ -1,0 +1,137 @@
+<% 
+  def get_vat_rate(country_name)
+    if ["Austria", "Belgium", "Bulgaria", "Croatia", "Czech Republic", "Cyprus", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland",
+"Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania","Slovenia", "Slovakia", "Spain", "Sweden", "United Kingdom"].include? country_name
+      return 1.0
+    else
+      return 100.0/121.0
+    end
+    return 1.0
+  end
+
+  vat_rate = get_vat_rate(Spree::Country.find(Spree::Address.find(@order.shipments.first.address_id).country_id).iso_name)
+
+%>
+
+<table id="order_summary" class="split">
+  <tr>
+    <td>Number</td>
+    <td><%= order.number %></td>
+  </tr>
+  <tr class="alt">
+    <td>Payment Method</td>
+    <td><%= order.payments.completed.collect {|p| p.payment_method.name }.join(', ') %></td>
+  </tr>
+  <% if order.canceled? %>
+    <tr>
+      <td>Status</td>
+      <td>Canceled</td>
+    </tr>
+  <% else %>
+    <tr>
+      <td>Submitted</td>
+      <td><%= l(order.completed_at.to_date, format: :short) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<table id="addresses">
+  <tr>
+    <td>
+      <h2><span><%= t(:billing_address) %></span></h2>
+      <%= render partial: 'spree/shared/email/address', locals: {address: order.bill_address} %>
+    </td>
+    <td>
+      <h2><span><%= t(:shipping_address) %></span></h2>
+      <%= render partial: 'spree/shared/email/address', locals: {address: order.ship_address} %>
+    </td>
+  </tr>
+</table>
+
+<div class="spacer_15">&nbsp;</div>
+<h2><span>Order Details</span></h2>
+
+<table id="order_details">
+  <tbody id="line-items">
+    <tr data-hook="order_details_line_items_headers">
+      <th><%= t(:items_purchased) %></th>
+      <th class="price number"><%= t(:price) %></th>
+      <th class="qty number"><%= t(:qty) %></th>
+      <th class="total number"><%= t(:total) %></th>
+    </tr>
+    <% order.line_items.each do |item| %>
+      <% #debugger %>
+      <tr data-hook="order_details_line_item_row" class="<%= cycle('', 'alt') %>">
+        <td class="name">
+          <%= item.variant.product.brand.name %>
+          <%= item.variant.product.name %>
+          <%= "/" + item.variant.options_text.split(',').second.split(':').second unless item.variant.options_text.split(',').second.empty? %>
+          <%= "/" + item.variant.options_text.split(',').first.split(':').second unless item.variant.options_text.split(',').first.empty? %>
+        </td>
+        <td class="price number"><%= money(item.price * vat_rate) %></td>
+        <td class="qty number"><%= item.quantity %></td>
+        <td class="total number"><%= money(item.price * item.quantity * vat_rate) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tbody id="subtotal" data-hook="order_details_subtotal">
+    <tr id="subtotal-row">
+      <td class="title" colspan="3">
+        <%= t(:subtotal) %>
+      </td>
+      <td class="total number">
+        <%= money order.item_total*vat_rate %>
+      </td>
+    </tr>
+  </tbody>
+  <tbody id="order-charges" data-hook="order_details_adjustments">
+    <% if @order.line_item_adjustments.exists? %>
+      <% if @order.all_adjustments.promotion.eligible.exists? %>
+        <% @order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+          <tr class="total">
+            <td class="title" colspan="3"><%= Spree.t(:promotion) %> <%= label %>:</td>
+            <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount) * vat_rate, currency: @order.currency) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
+      <tr class="total">
+        <td class="title" colspan="3"><%= Spree.t(:shipping) %> <%= name %>:</td>
+        <td class="total number"><%= Spree::Money.new(shipments.sum(&:discounted_cost) * vat_rate, currency: @order.currency) %></td>
+      </tr>
+    <% end %>
+    <% if @order.all_adjustments.eligible.tax.exists? %>
+      <% @order.all_adjustments.eligible.tax.group_by(&:label).each do |label, adjustments| %>
+        <tr class="total" colspan="3">
+          <% if (vat_rate != 1.0) %>
+            <td class="title"><%= Spree.t(:tax) %> <%= label %>:</td>
+            <td class="total number"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+          <% else 
+             label = "Refund VAT 0%"
+          %>
+            <td class="title"><%= Spree.t(:tax) %> <%= label %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    <% @order.adjustments.eligible.each do |adjustment| %>
+      <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+      <tr class="total">
+        <td class="title" colspan="3"><%= adjustment.label %>:</td>
+        <td class="total number"><%= adjustment.display_amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+  <tbody id="order-total" data-hook="order_details_total">
+    <tr class="total">
+      <td class="title" colspan="3">
+        <%= t(:order_total) %>
+      </td>
+      <td class="total number">
+        <span id="order_total"><%= money order.total  * vat_rate %></span>
+      </td>
+    </tr>
+  </tbody>
+</table>

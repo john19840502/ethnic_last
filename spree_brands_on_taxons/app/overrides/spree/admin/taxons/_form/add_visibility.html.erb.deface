@@ -1,0 +1,5 @@
+<!-- insert_bottom "[data-hook='admin_inside_taxon_form']" -->
+<%= f.field_container :visibility, class: ['form-group'] do %>
+  <%= f.label :visibility, Spree.t(:price_visibility) %>
+  <%= f.collection_select(:visibility,Spree::Taxon::VISIBILITIES, :first, :last, {}, {class: 'form-control'}) %>
+<% end %>

@@ -1,0 +1,65 @@
+<% if @products.present? %>
+<% @products.facets.keys.each do |facet| %>
+  <% facet_key = facet %>
+  <% facet = facet.gsub('taxons.','') %>
+  <% if @searcher.display_facet?(facet) %>
+    <h2 class="filter">
+      <a href="#" title="Show filter for <%=facet%>" class="toggle_filter" data-target="<%=facet_key.gsub('.','_').gsub(' ', '_')%>"><%=facet%><span></span></a>
+    </h2>
+    <div class="use_category">
+      <div>
+        <ul class="categories filter" id="<%=facet_key.gsub('.','_').gsub(' ', '_')%>" data-display="5">
+          <% for val in @products.facets[facet_key] %>
+          <%
+            name = val[0]
+            results = val[1]
+          %>
+          <% if @searcher.facet_and_value_selected(facet, name) %>
+            <% link= "#{request.fullpath}/#{facet}/#{name}"%>
+            <li class="selected">
+              <a href="#", onclick="remove_filter('<%=facet%>','<%=name%>');">
+                <%= name.titleize %> (<%=results%>)
+                <span class="remove_filter">Remove filter</span>
+                <span class="ss-icon filter-close">␡</span>
+              </a>
+            </li>
+          <% else %>
+            <li><%=link_to "#{name.titleize} (#{results})", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products" %></li>
+          <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% facet_key = "taxons.brands" %>
+<% facet = "brands" %>
+<h2 class="filter">
+  <a href="#" title="Show filter for <%=facet%>" class="toggle_filter" data-target="<%=facet_key.gsub('.','_').gsub(' ', '_')%>"><%=facet%><span></span></a>
+</h2>
+<div class="use_category">
+  <div>
+    <ul class="categories filter" id="<%=facet_key.gsub('.','_').gsub(' ', '_')%>" data-display="5">
+      <% for val in @products.facets[facet_key] %>
+      <%
+        name = val[0]
+        results = val[1]
+      %>
+      <% if @searcher.facet_and_value_selected(facet, name) %>
+        <% link= "#{request.fullpath}/#{facet}/#{name}"%>
+        <li class="selected">
+          <a href="#", onclick="remove_filter('<%=facet%>','<%=name%>');">
+            <%= name.titleize %> (<%=results%>)
+            <span class="remove_filter">Remove filter</span>
+            <span class="ss-icon filter-close">␡</span>
+          </a>
+        </li>
+      <% else %>
+        <li><%=link_to "#{name.titleize} (#{results})", "/search/#{@searcher.link_for_facet_value(facet,name)}", title: "#{name} products" %></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>

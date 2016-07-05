@@ -1,0 +1,13 @@
+<div id="designer_or_project" class="tabContents">
+	<p>Are you an interior designer, architect, company or working on a large project. Please fill in the form and specify your request. We will explain to you all the various options we specially offer!</p>
+	<p>If you need help to design your house? Please also feel free to contact us!</p>
+	<div style="display: block;  margin-bottom: 70px;">
+		<a class="designer_or_project_tab" id="req_more_information" style="float: right;" href="/new_information_requests">Request information</a>
+	</div>
+</div>
+<script>
+  $('#req_more_information').click(function(){
+    var current_url = $(location).attr('href');
+    localStorage["product_url"] = current_url;
+  });
+</script>

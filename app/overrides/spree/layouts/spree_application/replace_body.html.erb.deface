@@ -1,0 +1,16 @@
+<!-- replace "body" -->
+<body style="<%= "background: #304040 
+url(#{asset_url(params[:background_image])}) center top fixed no-repeat;" if params[:filters] == 'brands/edward van vliet' %>" >
+  <div class="container large">
+    <%= flash_messages %>
+    <%= render :partial => 'shared/header_menu' %>
+    <%= yield %>
+    <div id="scroller">
+      <i class="glyphicon glyphicon-chevron-up"></i>
+    </div>
+    <%= render :partial => 'shared/footer' %>
+    <%= render :partial => 'shared/countries_modal' %>
+    <%= render :partial => 'spree/shared/google_analytics' %>
+  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvn61Qq27-qO7r9QCFMSp_IFiALTonwdA&sensor=false"></script>
+</body>

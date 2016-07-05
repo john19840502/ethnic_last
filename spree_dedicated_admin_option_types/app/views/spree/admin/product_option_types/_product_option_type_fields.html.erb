@@ -1,0 +1,14 @@
+<tr class="product_option_type fields" id="spree_<%= dom_id(f.object) %>" data-hook="product_option_type">
+  <td class='property_name'>
+    <%= f.text_field :option_type_name, class: 'form-control', :disabled => true %>
+  </td>
+  <td class="actions actions-1">
+    <% if f.object.persisted? && can?(:destroy, f.object) %>
+      <%= link_to_delete f.object,
+        {
+          url: spree.admin_product_option_type_url(f.object),
+          no_text: true
+        }  %>
+    <% end %>
+  </td>
+</tr>

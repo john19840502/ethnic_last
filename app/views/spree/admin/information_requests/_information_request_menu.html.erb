@@ -1,0 +1,5 @@
+<% if can? :admin, InformationRequest %>
+    <ul class="nav nav-sidebar">
+      <%= tab InformationRequest, url: spree.admin_information_requests_url, icon: 'file', label: InformationRequest.model_name.human(count: :many) %>
+    </ul>
+<% end %>

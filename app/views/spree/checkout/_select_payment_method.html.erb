@@ -1,0 +1,40 @@
+<section>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <div class="btn-group" data-toggle="buttons">
+                <div class="radio-inline_mollie" style="position:relative;">
+                  <input name="which_payment" id="radio1" value="1" type="radio" checked="" style="float:left;margin:15px">
+                  <%= image_tag "frontend/paypal_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/sofort_method.png", :size => "50x20", :style => "margin-bottom:15px;" %>
+                  <%= image_tag "frontend/ideal_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/bancontact_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/iban_method.png", :size => "50x20", :style => "margin-bottom:15px;" %>
+                  <%= image_tag "frontend/bitcoin_method.png", :size => "50x50" %>
+                </div>
+                <div class="radio-inline_stripe">
+                  <input name="which_payment" id="radio2" value="2" type="radio" style="float:left;margin:15px"> 
+                  <%= image_tag "frontend/visa_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/mastercard_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/discover_method.png", :size => "50x50" %>
+                  <%= image_tag "frontend/american_method.png", :size => "50x50" %>
+               </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+  <%= submit_tag t(:save_and_continue), :class => 'continue button primary right' %>
+</div>
+
+<style>
+.radio-inline_mollie{
+
+}
+.radio-inline_stripe{
+  padding-top:10px;
+}
+</style>

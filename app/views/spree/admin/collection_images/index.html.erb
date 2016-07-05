@@ -1,0 +1,33 @@
+<div>
+  <h1 class="col-sm-5 pull-left"><%= t(:listing_requests) %></h1>
+  <div class='pull-right col-sm-2 add-slider' style="margin-top: 20px">
+    <%= button_link_to t(:new_image), new_admin_collection_image_path, { remote: false, icon: 'add', id: 'new_collection_image' } %>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<hr>
+
+<!--<div id="requests" data-hook></div>-->
+
+<table class="table" id="listing_requests">
+  <tr data-hook="admin_collection_images_index_headers">
+    <th>Name</th>
+    <th>position</th>
+    <th>Url</th>
+    <th>Image</th>
+    <th>Action</th>
+  </tr>
+<% @collection_imgs.each do |image| %>
+  <tr data-hook="information_requests">
+    <td><%= image.name %></td>
+    <td><%= image.position %></td>
+    <td><%= image.url %></td>
+    <td><%=image_tag image.attachment.url(:icon) %></td>
+    <td>
+		<%= link_to 'Delete', admin_collection_image_path(image), method: 'delete', class: 'edit' %>
+		|<%= link_to ' Edit', edit_admin_collection_image_path(image), class: 'edit' %></td>
+	</td>
+  </tr>
+<% end %>
+</table>

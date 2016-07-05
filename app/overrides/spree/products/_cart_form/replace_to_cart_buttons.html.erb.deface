@@ -1,0 +1,21 @@
+<!-- remove ".product-section-title" -->
+<!-- replace "[data-hook='product_price']" -->
+<div data-hook="product_price" class="columns five <% if !@product.has_variants? %> alpha <% else %> omega <% end %>">
+  <div class="buttons">
+    <%if(session[:country_id] and country = Spree::Country.find(session[:country_id])) %>
+      <% if !Spree::Zone.default_tax.contains_country?(Spree::Country.find(session[:country_id])) %>
+        <p>Subtotal <strong id="product-price" class="buy--price"><span class="price selling" itemprop="price"><%= money_with_currency @product.price_without_tax %></span></strong><small>(without VAT)</small></p>
+      <% else %>
+        <p>Subtotal <strong id="product-price" class="buy--price"><span class="price selling" itemprop="price"><%= money_with_currency @product.price %></span></strong><small>(including VAT)</small></p>
+      <% end %>
+    <% else %>
+        <p>Subtotal <strong id="product-price" class="buy--price"><span class="price selling" itemprop="price"><%= money_with_currency @product.price %></span></strong><small>(including VAT)</small></p>
+    <% end %>
+    <div class="add-to-cart">
+        <%= hidden_field_tag(:quantity, 1) %>
+        <%= button_tag :class => 'right', :id => 'add-to-cart-button', :type => :submit do %>
+          <%= t(:add_to_cart) %>
+        <% end %>
+    </div>
+  </div>
+</div>

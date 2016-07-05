@@ -1,0 +1,289 @@
+/* =========== Focus */
+
+@import "core/settings";
+@import "core/mixins";
+@import "core/grid";
+.focus-no-background {
+    max-width: (660px / $font-size) + em;
+    margin: auto;
+}
+
+.focus {
+    //@include animation(header, 1s, default, 0s);
+    color: #7b7b7b;
+    font-weight: normal;
+    max-width: (660px / $font-size) + em;
+    margin-bottom: $margin-bottom * 3 !important;
+    margin: auto;
+    background: rgba(#fff, 0.85);
+    background-image: image-url('opacity85.png') \9;
+    @include border-radius(2px);
+    @include box-shadow(0px 0px 15px rgba(#000, 0.5));
+
+    &:after {
+        background: rgba(#000, 0.5);
+        content: " ";
+        height: 100%;
+        opacity: 0.9;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+    header {
+        border-bottom: 1px solid rgba(#000, 0.2);
+        border-bottom: 1px solid #c0bfc0 \9;
+        background: rgba(#fff, 0.5);
+        background-image: image-url('opacity85.png') \9;
+        @include border-radius(2px 2px 0px 0px);
+        @include box-shadow(0px 1px 3px rgba(#000, 0.07));
+        text-transform: uppercase;
+        margin-bottom: $margin-bottom;
+        @include clearfix;
+        padding: 1em 1.9em;
+        position: relative;
+        h1 {
+            margin: 0;
+            font-weight: 400;
+            color: #7b7b7b !important;
+        }
+        span.close {
+            position: absolute;
+            right: 1.3em;
+            top: .8em;
+            a {
+                background: image-url('close.png');
+                background-image: image-url('closeIE.png') \9;
+                background-size: 100%;
+                height: 1.75em;
+                width: 1.75em;
+                display: block;
+                cursor: pointer;
+                opacity: 0.7;
+                &:hover { opacity: 1; }
+            }
+        }
+    }
+    section {
+        border-bottom: 1px solid rgba(#000, 0.1);
+        border-bottom: 1px solid #c0bfc0 \9;
+        padding: 0em 2em 1em 2em;
+        margin-bottom: $margin-bottom;
+        @include clearfix;
+        a {
+            background: rgba(#000, 0.1);
+            background-color: #c9c7c9 \9;
+            @include border-radius(5px);
+            padding: 0.1em 0.3em 0.2em 0.3em;
+            font-weight: bold;
+            color: #444;
+            &:hover { color: #111; }
+        }
+    }
+    h1, h2, h3, h4 {
+        font-weight: normal;
+        text-shadow: 1px 1px 0px rgba(#fff, 0.5);
+        text-transform: none;
+        margin-bottom: $margin-bottom / 2;
+    }
+    h2 {
+        padding-right: 1em;
+        font-size: 1.25em;
+    }
+    h4 { font-weight: bold; color: rgba(#000, 0.35); margin-bottom: $margin-bottom / 3; }
+
+    ul.shopping-bag {
+        margin-top: -$margin-bottom;
+        li {
+            @include clearfix;
+            padding: 1em 1.9em;
+            position: relative;
+            border-bottom: 1px solid rgba(#000, 0.1);
+            figure {
+                @include grid(10, 0, 1);
+                padding: 3px;
+                background: rgba(#ffffff ,0.5);
+                @include border-radius(2px);
+                border: 1px solid rgba(#000, 0.2);
+                position: relative;
+                @include box-shadow(0px 1px 2px rgba(#000, 0.075));
+                img { display: block; }
+                span.product-color {
+                    position: absolute;
+                    display: block;
+                    height: 3em;
+                    width: 3em;
+                    bottom: 6px;
+                    left: 6px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    @include border-radius(2px);
+                    @include box-shadow(0px 1px 3px rgba(#000, 0.35));
+                }
+            }
+            div {
+                @include grid(38);
+                padding: 0.5;
+                p { margin-bottom: $margin-bottom / 3; }
+                em {
+                    padding-left: 1em;
+                    padding-top: 0.4em;
+                    font-style: normal;
+                    display: inline-block;
+                }
+                span.symbol {
+                    display: inline-block;
+                    line-height: 2.5em;
+                    height: 2.85em;
+                    width: 2.85em;
+                    margin-left: -0.35em;
+                    font-size: 0.5em;
+                    text-align: center;
+                    @include border-radius(50px);
+                    border: 1px solid #cccacc;
+                    cursor: pointer;
+                    @include gradient(top, #fff, rgba(#fff, 0));
+                    @include box-shadow(0px 1px 2px rgba(#000, 0.075));
+                    background-size: 100%;
+                    &:hover {
+                        background: #fff;
+                    }
+                    &:active {
+                        background: #ccc;
+                        border-color: #888;
+                        @include box-shadow((inset 0px 1px 6px rgba(#000, 0.5), 0 0 0));
+                    }
+                }
+              &.variant-description {
+                p.option-value {
+                  img {
+                    vertical-align: middle;
+                  }
+                }
+              }
+            }
+
+            span.ss-delete {
+                font-size: 0.7em;
+                position: absolute;
+                top: 1.9em;
+                right: 3.65em;
+                cursor: pointer;
+                opacity: 0.75;
+                &:hover { opacity: 1; }
+            }
+
+            a {
+                color: #666;
+                &:hover { color: #333; }
+            }
+        }
+    }
+    small.transfer-costs {
+        display: block;
+        text-align: center;
+        padding: 1em;
+        color: lighten(#7b7b7b, 5%);
+    }
+
+    ul.products {
+        @include grid-reset;
+        li {
+            @include grid(12, 0.2);
+            img { @include box-shadow(0px 1px 3px rgba(#000, 0.3)); }
+        }
+    }
+
+    ul.colors {
+        @include clearfix;
+        li {
+            float: left;
+            margin-bottom: 0.15em;
+            @include transition(all 0.1s);
+            @include grid(6.85, 0.1);
+            @include border-radius(2px);
+            img { width: 100%; height: auto; @include border-radius(2px); }
+            a {
+                background: none;
+                display: block;
+                padding: 0;
+                @include border-radius(2px);
+                &:hover { background: none; }
+            }
+            &:hover {
+                @include box-shadow(0px 0px 10px rgba(#000, 0.3));
+                position: relative;
+                z-index: 1;
+            }
+        }
+    }
+    th, td {
+        border-color: rgba(#000, 0.2);
+    }
+    div.buttons {
+        border-top: 1px solid rgba(#000, 0.2);
+        border-top: 1px solid #c0bfc0 \9;
+        background: rgba(#fff, 0.5);
+        background-image: image-url('opacity85.png') \9;
+        @include border-radius(0px 0px 2px 2px);
+        @include box-shadow(0px -1px 3px rgba(#000, 0.07));
+        @include clearfix;
+        padding: 1em 2em 1.25em 2em;
+        p {
+            padding-top: 0.55em;
+            margin-bottom: 0;
+            strong { color: #333; font-size: 1.15em; }
+            small { color: #999; margin-left: 0.5em; }
+        }
+        .left { float: left; }
+        .right { float: right; }
+        &.center { text-align: center; }
+        a.button.refresh {
+            @include border-radius(50%);
+            padding: 4px;
+            margin-left: 10px;
+            //width: 24px;
+            //height: 24px;
+            float: right;
+            display: block;
+            text-align: center;
+            line-height: 1;
+            position: relative;
+            .ss-icon {
+                position: relative;
+                top: 2px;
+            }
+        }
+    }
+    ::-webkit-input-placeholder {
+        color: rgba(#000, 0.3);
+    }
+    :-moz-placeholder {
+        color: rgba(#000, 0.3);
+    }
+
+    input[type=text],
+    input[type=number],
+    input[type=search],
+    input[type=email],
+    input[type=password],
+    input[type=tel],
+    input[type=url],
+    textarea,
+    select {
+        @include box-shadow((inset 0px 1px 8px rgba($color-basic, 0.1)));
+        background: rgba(#fff, 0.5);
+        border: 1px solid rgba(#000, 0.2);
+        border: 1px solid #c0bfc0 \9;
+        color: lighten($color-basic, 40%);
+        &:focus {
+            border: 1px solid rgba(#000, 0.3);
+            color: $color-basic;
+            @include box-shadow(0px 0px 6px rgba($color-basic, 0.15));
+        }
+    }
+}

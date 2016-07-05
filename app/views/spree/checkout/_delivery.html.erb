@@ -1,0 +1,23 @@
+<section>
+  <h2><%= t(:shipping_method) %></h2>
+    <div>
+      <ul>
+        <li>
+          <%= form.fields_for :shipments do |ship_form| %>
+            <% ship_form.object.shipping_rates.each do |rate| %>
+            <div>
+              <%= ship_form.radio_button :selected_shipping_rate_id, rate.id %> &nbsp;
+              <%= rate.name %> <%= rate.display_cost %>
+             </div>
+             <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="free_shipping_text">Free shipping for purchase: <br/> +<%= money_with_currency 350 %> within Europe <br/> +<%= money_with_currency 500 %> worldwide</div>
+</section>
+
+<div class="buttons">
+  <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span> Shopping Bag".html_safe, spree.cart_path, class: "button soft small button_back_to_cart" %>
+  <%= submit_tag t(:save_and_continue), :class => 'continue button primary right' %>
+</div>

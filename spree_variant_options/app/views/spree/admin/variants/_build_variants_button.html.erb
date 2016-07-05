@@ -1,0 +1,16 @@
+<div class="toolbar" data-hook="toolbar">
+  <ul class="actions">
+    <% if current == "Variants" and @product.variants.count == 0 %>
+    <li id="build_variants_link">
+      <%= button_link_to t(:build_variants, :default => "Build variants"), generate_for_option_types_admin_product_variants_url, {:icon => 'add', :id => 'admin_build_variants', :method => :post } %>
+    </li>
+    <% end -%>
+    <% if current == "Variants" and @product.variants.count > 0 %>
+    <li id="destroy_all_variants_link">
+      <%= button_link_to t(:destroy_variants, :default => "Delete all variants"), delete_all_admin_product_variants_url, {:icon => 'delete', :id => 'admin_delete_all_variants', :method => :post, :confirm => "Are you sure? No turning back" } %>
+    </li>
+    <% end -%>
+  </ul>
+  <br class="clear">
+</div>
+<div id ="admin_build_variants"></div>

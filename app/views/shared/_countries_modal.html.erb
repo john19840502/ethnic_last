@@ -1,0 +1,22 @@
+<div id="country_selector" class="modal" style="display:none">
+  <div class="modal-content">
+    <header>
+      <h1>Choose your country</h1>
+      <span class="close"><a href="#" onclick="$('#country_selector').hide();return false;" title="Close"></a></span>
+    </header>
+    <section>
+
+    <% Spree::Zone.where(for_popup: true).each do |zone| %>
+      <div class="<%= zone.members.count > 10 ? 'two-third' : 'one-third' %>">
+        <h3><%=zone.name%></h3>
+        <ul class="countries">
+          <% zone.zoneables.reverse.each do |country| %>
+            <%=country_select_link country.name,country.id%>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    </section>
+  </div>
+</div>
+ 

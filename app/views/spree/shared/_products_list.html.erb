@@ -1,0 +1,24 @@
+<% products.each do |product| %>
+	<% if product.available? %>
+	  <li class="product" id="product_<%= product.id %>" itemscope itemtype="http://schema.org/Product">
+		  <%= link_to product, class: 'info', itemprop: "name", title: product.name, onClick: "set_current('page',#{page.to_s}); return true;" do %>
+			<%= product_image(product, itemprop: "image") %>
+			<div><h3><%= product.name %></h3><p><%= product.subtitle %></p></div>
+			<% if product.brand && product.brand.icon? %>
+				<span class="product-brand" style="background-image: url('<%= product.brand.icon(:original) %>');"></span>
+			<% end %>
+		<% end %>
+	  </li>
+	<% end %>
+<% end %>
+<script>
+function set_image_size()
+{
+	var cw = $('.product').width();
+	$('.product').css({'height':cw+'px'});
+}
+$(window).resize(function(){
+	set_image_size();
+}); 
+set_image_size();
+</script>

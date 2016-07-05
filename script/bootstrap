@@ -1,0 +1,64 @@
+#!/bin/sh
+# Make sure local dependencies are met.
+
+cd "$(dirname $0)"/..
+
+
+read -p "Would you like to reset the gems bundle? (y/n) " -n 1 -r
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  rm -f .bundle/config
+
+  bundle check --path .bundle > /dev/null 2>&1 ||
+    bundle install --path=.bundle
+fi
+
+read -p "Would you like to (re)initialize the database? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  bundle exec rake db:setup
+else
+  echo ''
+
+  : ${STACK_ENV:='production'}
+
+  read -p "Would you like to retrieve a database snapshot from $STACK_ENV? (y/n) " -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    [[ -d tmp/psql ]] || mkdir -p tmp/psql
+    [[ -e tmp/psql/snapshot.dump ]] && rm tmp/psql/snapshot.dump
+
+    if [[ $STACK_ENV == 'production' ]]; then
+      stack_name='ethnicchic'
+    elif [[ $STACK_ENV == 'staging' ]]; then
+      stack_name='ec-staging'
+    else
+      echo ""
+      echo "Unrecognized STACK_ENV. Use 'production' or 'staging'." && exit 1
+    fi
+
+    echo "\nOpening a port on the ${stack_name} stack..."
+
+    cx lease -s $stack_name -p 5432 > /dev/null
+
+    echo "Retrieving POSTGRESQL_URL from $stack_name..."
+
+    PGURL=$(cx env-vars list -s $stack_name POSTGRESQL_URL_EXT | tail -1 | awk '{ print $2 }')
+
+    if [[ $PGURL == '' ]]; then
+      echo "Something went wrong.  Cannot get PGURL."
+    else
+      echo "Creating database snapshot from $PGURL..."
+
+      pg_dump -Fc $PGURL > tmp/psql/snapshot.dump
+
+      echo 'Restoring database snapshot...'
+
+      pg_restore -cOx -d ethnicchic2_development tmp/psql/snapshot.dump
+    fi
+  else
+    echo ''
+  fi
+fi
+
+echo "Done!"

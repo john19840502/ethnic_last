@@ -1,0 +1,29 @@
+<div>
+  <h1 class="col-sm-5 pull-left">Sliders</h1>
+  <div class='pull-right col-sm-2 add-slider' style="margin-top: 20px">
+        <%= button_link_to 'Add Slider', new_object_url, {class: 'btn btn-success', icon: 'add'} %>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<hr>
+
+<table class="table" id="sliders">
+  <tr data-hook="admin_sliders_index_headers">
+    <th>thumb</th>
+    <th>group_key</th>
+    <th>url</th>
+    <th data-hook="admin_sliders_index_headers_actions"></th>
+  </tr>
+  <% @sliders.each do |slider| -%>
+    <tr>
+      <td><%= image_tag slider.image(:thumb) %></td>
+      <td><%= slider.group_key %></td>
+      <td><%= slider.url %></td>
+      <td class="actions" data-hook="admin_sliders_index_row_actions">
+        <%= link_to_edit slider %>
+        <%= link_to_delete slider %>
+      </td>
+    </tr>
+  <% end -%>
+</table>

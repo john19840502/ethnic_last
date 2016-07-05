@@ -1,0 +1,9 @@
+<% unless @taxon && @taxon.brand? %>
+    <% filter = Spree::Taxon.brands_root %>
+    <h2 class="filter">
+      <a href="#" title="Show filter for <%=filter.name%>" class="toggle_filter" data-target="00"><%= filter.name %><span></span></a>
+    </h2>
+    <div class="<%= filter.name=='Use' ? 'use_category' : '' %>">
+      <%= brands_nav_filters(@brands, @taxon) %>
+    </div>
+<% end %>

@@ -1,0 +1,73 @@
+<section class="focus">
+  <header>
+    <h1>Shopping bag</h1>
+    <span class="close"><a href="<%= session[:go_back_to] || redirect_back_link%>" title="Close"></a></span>
+  </header>
+  <% if @order.line_items.empty? %>
+    <section><p>Your shopping bag is empty</p></section>
+  <% else %>
+    <ul class="shopping-bag">
+    <%= form_for @order.reload, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
+      <%= order_form.fields_for :line_items do |item_form| %>
+        <%
+          variant = item_form.object.variant
+          line_item = item_form.object
+        %>
+        <li>
+          <figure>
+            <% if variant.images.length == 0 %>
+              <%= small_image(variant.product)%>
+            <% else %>
+              <%= image_tag(variant.images.first.attachment.url(:small)) %>
+            <% end %>
+          </figure>
+          <div class="variant-description">
+            <h2><%= link_to variant.product.name, product_path(variant.product) %></h2>
+            <%= render partial: 'options', locals: { options: variant.sorted_option_values } %>
+            <%= item_form.number_field :quantity, :min => 1, :class => "line_item_quantity", :size => 5, step: line_item.step, value: line_item.quantity %>
+            <small>x</small> <%= money_with_currency line_item.price %>
+            <em>=</em>
+            <em><strong><%= money_with_currency line_item.amount %></strong></em>
+          </div>
+          <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>
+            <span class="ss-delete"></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <% unless @order.adjustments.eligible.blank? %>
+      <% @order.adjustments.eligible.each do |adjustment| %>
+        <small class="transfer-costs"><%= adjustment.label %> <strong><%= money_with_currency(adjustment.amount) %></strong>.</small>
+      <% end %>
+    <% end %>
+  	<div class="cart_page_free_shipping_text">
+      <div id="shipping_rates" data-country="<%=session[:country_id]%>"></div>
+      Free shipping for purchase: <br/> +<%= money_with_currency 350 %> within Europe <br/> +<%= money_with_currency 500 %> worldwide
+    </div>
+    <div class="buttons">
+      <p class="left">
+        <%= link_to empty_cart_path, :class => 'button soft small', :id => 'empty-button', :method => :put do %>
+          Empty bag
+        <% end %>
+      <p class ="right">
+        <%= button_tag :class => 'button soft small refresh', :id => 'update-button' do %>
+          Update
+        <% end %>
+        <%= button_tag :class => 'button right', :id => 'checkout-link', :name => 'checkout' do %>
+          <%= t(:checkout) %>
+        <% end %>
+      </p>
+    </div>
+    <% end %>
+  <% end %>
+</section>
+
+<div class="payment-logos">
+  <ul>
+    <li> <%= image_tag "logo-visa.png", :alt => "Visa" %></li>
+    <li> <%= image_tag "logo-mastercard.png", :alt => "Mastercard" %></li>
+    <li> <%= image_tag "logo-amex.png", :alt => "American Express" %></li>
+    <li> <%= image_tag "logo-paypal.png", :alt => "Paypal" %></li>
+    <li> <%= image_tag "logo-ideal.png", :alt => "iDeal" %></li>
+  </ul>
+</div>

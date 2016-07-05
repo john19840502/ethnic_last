@@ -1,0 +1,17 @@
+<%= root_url(host: 'example.com') %>
+<html>
+    <head>
+      <%= stylesheet_link_tag "/css/print-favorites.css" %>
+    </head>
+    <body>
+        <p>
+          Your friend, <%= @email_from %> sent you his favorite products with message:
+        </p>
+        <p>
+          <%= @message %>
+        </p>
+        <ul id="favorites-list">
+          <%= render partial: @favorites %>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+<nav style="position: relative; align:centre; padding-top:0px;">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background:rgba(255,255,255,0.1); margin-bottom:10px;">
+    <div id="world_wide_shipping_text" style="margin-top: 15px;">
+        <h2 style="font-size:1.2em; color:#fff">Worldwide Express Shipping</h2>
+    </div>
+    <ul class="nav navbar-nav navbar-right f32">
+      <li>
+        <h6 style="padding-top:15px; color:rgb(255,255,255);">Currency:</h6>
+      </li>
+      <li id="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="float:left;background:transparent;" aria-expanded="false" title="Currency selection"><small><%=session[:currency] || "EUR"%></small><span class="ss-icon">dropdown</span></a>
+        <ul class="dropdown-menu" style="background:transparent;">
+          <li id="eur_currency"><a href="/country/set_currency?currency=EUR">EUR</a></li>
+          <li id="usd_currency"><a href="/country/set_currency?currency=USD">USD</a></li>
+        </ul>
+      </li>
+      <li>
+        <h6 style="padding-top:15px; color:rgb(255,255,255);">Shipping to:</h6>
+      </li>
+      <li class="flag <%=get_code_from_country(session[:country_name])%> selected" style="margin-top:10px;margin-left: 5px;">
+      <li>
+        <%
+        country_val = session[:country_name]
+        country_val ||= "Select your country"
+        %>
+        <a id="country_currency_selector" style="background:transparent;"href="#" title="Select country"><%= country_val %> <span class="ss-icon">dropdown</span></a>
+      </li>
+    </ul>
+  </div>
+  
+  <strong align=center>
+      <% if params[:filters] == 'brands/edward van vliet' %>
+        <a href="/" class="ethnic_logo_image" style="display: inline-block; text-align: center;" title="Ethnic Chic">
+          <%= image_tag "Edward-Ethnic-Chic-Logo01.png", width: 300 %>
+        </a>
+      <% else %>
+        <a href="/" class="ethnic_logo_image" style="display: inline-block; text-align: center;" title="Ethnic Chic">
+            <%= image_tag "Ethnic-Chic-Logo.png", width: 300 %>
+        </a>
+      <% end %>
+  </strong>
+<!-- <img src="../assets/images/Ethnic-Chic-White-Logo-02.png" width="25%" height="25%"></img>
+ -->  
+  <ul>
+  <!--TODO: change links back-->
+    <%= spree_nav_link 'Home', '/' %>
+    <%= spree_nav_link 'Impressions', '/impressions' %>
+    <%= spree_nav_link 'Online Shop', '/collection' %>
+    <li><a href="http://blog.ethnicchic.com", target="_blank">Blog</a></li>
+    <%= spree_nav_link 'About', '/about' %>
+    <%= spree_nav_link 'Contact', '/contact-us' %>
+  </ul>  
+      <%= link_to "http://www.ethnicchic.com/edwardvanvliet", style: "position: absolute; right: 0;bottom: 5px;display:inline-block;" do %>
+        <%= image_tag("Edward-Ethnic-Chic-Button01.png",width: '170px', :class => "edward_image_logo") %>
+      <% end %>
+</nav>
+
+<style>
+#eur_currency{
+  float:left;
+  margin-left:10px;
+}
+#usd_currency{
+  float:right;
+  margin-right:10px;
+}
+#world_wide_shipping_text{
+  float:left;
+  magin-top:10px;
+}
+#country_name{
+  float:right;
+  background-color:transparent;
+}
+
+#currency_dropdown{
+  float:right;
+  background-color:transparent;
+}
+
+ul#world_wide_shipping{
+  background-color:lightgrey;
+}
+
+#currency_select{
+  backgroud:transparent;
+}
+#currency_eur{
+  backgroud:transparent;
+}
+#currency_usd{
+  backgroud:transparent;
+}
+
+.container.large{
+  padding:0;
+}
+img.edward_image_logo:hover{
+  background:rgba(0, 0, 0, 0.45);
+  border-radius: 4px 4px 4px 4px;
+}
+</style>

@@ -1,0 +1,102 @@
+<head>
+	<%= stylesheet_link_tag "jquery-ui" %>
+	<%= javascript_include_tag "jquery-ui" %>
+	<%= javascript_include_tag "price_range_selector" %>
+</head>
+<%= render :partial => 'shared/header' %>
+<section class="content">
+  <aside>
+    <%= form_tag "/do_search", :method => :post, :class => "search", :id => "search" do %>
+			<input type="hidden" id="filters" name="filters" value='<%=@searcher.json_filters%>' />
+			<input type="hidden" id="remove_filter" name="remove_filter" value='' />
+			<%= hidden_field_tag :previous_keywords, params[:keywords] %>
+      <div>
+        <%= search_field_tag :keywords, params[:keywords], :placeholder => t(:search) %>
+      </div>
+
+      <form role="form">
+		    <div class="radio">
+		      <label><input type="radio" name="search_in" value=1>within the entire wesite</label>
+		    </div>
+		    <div class="radio">
+		      <label><input type="radio" name="search_in" value=2>within the result</label>
+		    </div>
+		  </form>
+    <% end %>
+
+		<%
+			title = @searcher.selected_category
+			title = @searcher.selected_brand unless title
+			title = "" unless title
+		%>
+		<h2><%=title%></h2>
+		<ul class="categories">
+			<% if @searcher.selected_category %>
+				<li class="back"><a href="/collection"><span></span>Back to Categories</a></li>
+				<li class="selected"><a href="/search/categories/<%=title%>/">All <%=title%></a></li>
+			<% elsif @searcher.selected_brand %>
+				<li class="back"><a href="/collection"><span></span>Back to Brands</a></li>
+				<li class="selected"><a href="/search/brands/<%=title%>/">All <%=title%></a></li>
+			<% end %>
+		</ul>
+
+    <%= render :partial => '/shared/facets' %>
+
+  <p>
+		<label style="color: rgba(255, 255, 255, 0.5);" for="amount">PRICE RANGE:</label>
+		<input type="text" id="amount" name="price_range" readonly style="border:0; color:rgba(255, 255, 255, 0.75); font-weight:bold; margin-top: 5px;" class="false">
+	</p>
+	<div id="slider-range"></div>
+  </aside>
+  <div class="products-wrapper">
+    <ul id="products" class="inline product-listing products" data-hook="">
+    <% if @products == nil || @products.empty? %>
+		  <p>Unfortunately we can’t find any products that match your search and / or filter.
+				Please contact us if you need any assistance at info@ethnicchic.com or call us directly at+31203308066.</p>
+			<% if @similar.present? %>
+        <h3 class='similars-header'> You may also like: </h3>
+        <ul class="thumbnails" id="similar-products">
+            <%= link_to 'Previous', '#', class: 'previous-similar similar-nav' %>
+            <div class = 'similars-container'>
+              <% @similar.each_with_index do |product, index| %>
+                  <% i = product.images.first %>
+                  <li class='similar similar-<%= index.to_s %>'>
+                    <span id="small-image"><%= link_to image_tag(i.attachment.url(:product), :alt => i.alt), product_path(product) %></span>
+                    <div> <%= product.name %> </div>
+                  </li>
+              <% end %>
+            </div>
+            <%= link_to 'Next', '#', class: 'next-similar similar-nav' %>
+        </ul>
+      <%end%>
+    </section>
+    <% else %>
+			<%= render :partial => 'spree/shared/products_list', :locals => { :products => @products, page: @page } %>
+    <% end %>
+    </ul>
+    <div id="products_pagination">
+      <%= paginate @products, theme: 'twitter-bootstrap-3' %>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+
+	function remove_filter(facet, value){
+		$("#remove_filter").val('{"facet": "'+facet+'", "value": "'+value+'"}');
+		$("#search").submit();
+	}
+
+	$(document).ready(function(){
+
+		// initInfiniteScroll();
+
+		$('ul.categories.filter').toggle();
+
+		$('ul.categories.filter:has( > li.selected)').css('display','block');
+
+		var currency = $("a[title='Currency selection'] small").text();
+
+  });
+
+</script>

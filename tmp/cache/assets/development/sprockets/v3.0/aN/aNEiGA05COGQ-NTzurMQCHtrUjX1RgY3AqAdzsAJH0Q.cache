@@ -1,0 +1,48 @@
+I"¸(function() {
+  Spree.ready(function($) {
+    Spree.Rates = {};
+    Spree.updateShipping = function() {
+      var countryId;
+      countryId = ($('#shipping_rates')).data('country');
+      if (countryId != null) {
+        if (Spree.Rates[countryId] == null) {
+          ($('#shipping_rates')).html('Calculating shipping cost...');
+          return $.get('/api/shipping_rates', {
+            country_id: countryId
+          }, function(data) {
+            Spree.Rates[countryId] = {
+              rates: data.rates,
+              currency: data.currency
+            };
+            return Spree.show_rates(Spree.Rates[countryId]);
+          });
+        } else {
+          return Spree.show_rates(Spree.Rates[countryId]);
+        }
+      }
+    };
+    Spree.show_rates = function(rates) {
+      var cost, currency;
+      if (rates["rates"].length === 0) {
+        return ($('#shipping_rates')).html("Please proceed to checkout for the shipping rate on this order.");
+      } else {
+        cost = rates["rates"][0]["cost"];
+        currency = Spree.currency_sign(rates["currency"]);
+        return ($('#shipping_rates')).html("Shipping will cost you " + currency + cost + ".");
+      }
+    };
+    Spree.currency_sign = function(currency) {
+      switch (currency) {
+        case "EUR":
+          return 'â‚¬';
+        case "USD":
+          return '$';
+        default:
+          return currency;
+      }
+    };
+    return Spree.updateShipping();
+  });
+
+}).call(this);
+:ET

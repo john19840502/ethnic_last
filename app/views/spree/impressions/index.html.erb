@@ -1,0 +1,20 @@
+<style type="text/css">
+	img.expand { width: 10px; }
+</style>
+
+<hgroup>
+    <h1>DESIGN IS A FUSION OF SPIRIT, CULTURE & TECHNIQUES</h1>
+</hgroup>
+
+<% @impressions.each_slice(3) do |impression_slice| %>
+  <ul class="impressions <%= cycle("odd", "even") -%>">
+    <% impression_slice.each do |impression| %>
+      <li>
+        <%= link_to impression_path(impression) do %>
+          <%= image_tag(impression.images.first.attachment.url(:large), :class => "expand") %>
+          <div><h3><%= impression.title %></h3><p><%=impression.sub_title%></p></div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

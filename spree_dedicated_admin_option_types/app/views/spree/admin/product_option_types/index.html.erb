@@ -1,0 +1,70 @@
+<%= render 'spree/admin/shared/product_tabs', :current => 'Product Option Types' %>
+<%= render 'spree/admin/shared/error_messages', :target => @product %>
+
+<%= form_for @product, :url => spree.admin_product_url(@product), :method => :put do |f| %>
+  <fieldset>
+    <table class="table">
+      <thead>
+        <tr data-hook="product_option_types_header">
+          <th><%= Spree.t(:option_type) %></th>
+          <th class="action"></th>
+        </tr>
+      </thead>
+      <tbody id="product_option_types" data-hook>
+        <%= f.fields_for :product_option_types do |pp_form| %>
+          <%= render 'product_option_type_fields', :f => pp_form %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= hidden_field_tag 'clear_product_option_types', 'true' %>
+  </fieldset>
+<% end %>
+
+
+<% if can? :create, Spree::ProductOptionType %>
+<div>
+  <%= search_form_for [:admin, @search], url: admin_product_product_option_types_url(@product) do |f| %>
+  <div class="box">
+    <h3><%= t(:search) %></h3>
+    <%- locals = {:f => f} %>
+    <div data-hook="admin_option_types_index_search">
+      <p>
+        <%= f.label :name_cont, t(:name) %><br />
+        <%= f.text_field :name_cont, :size => 15 %>
+      </p>
+    </div>
+
+    <div data-hook="admin_option_types_index_search_buttons">
+      <p class="form-buttons">
+        <%= button t(:search) %>
+      </p>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
+<table class="index" id="listing_option_types">
+  <tr data-hook="option_header">
+    <th><%= t(:name) %></th>
+    <th><%= t(:presentation) %></th>
+    <th></th>
+  </tr>
+  <tbody>
+  <% @option_types.each do |option_type| %>
+    <tr class="spree_option_type" id="<%= spree_dom_id option_type %>" data-hook="option_row">
+      <td><%= option_type.name %></td>
+      <td class="presentation"><%= option_type.presentation %></td>
+      <td class="actions">
+        <%= form_tag(admin_product_product_option_types_path(@product), :method=>'post') do %>
+          <%= hidden_field_tag :option_type_id, option_type.id %>
+          <%= button_tag "Add" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @option_types %>
+
+<% end %>

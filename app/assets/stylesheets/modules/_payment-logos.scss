@@ -1,0 +1,28 @@
+// =========== Payment logos
+
+@import "core/settings";
+@import "core/mixins";
+div.payment-logos {
+    max-width: (660px / $font-size) + em;
+    margin: auto;
+    margin-bottom: $margin-bottom * 2;
+    text-align: center;
+    ul {
+        text-align: center;
+        margin: auto;
+        display: inline-block;
+        &:hover img {
+            opacity: 0.85;
+        }
+    }
+    li {
+        display: inline-block;
+    }
+    img {
+        width: 2.6em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        opacity: 0.5;
+        @include transition(opacity 250ms);
+    }
+}

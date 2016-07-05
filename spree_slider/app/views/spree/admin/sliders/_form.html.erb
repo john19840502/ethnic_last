@@ -1,0 +1,28 @@
+<%= form_for [:admin, @slider], :html => { :multipart => true } do |f| %>
+    <div class="row" data-hook="admin_page_form_fields">
+      <div class="col-md-6" data-hook="admin_page_form_left">
+        <div class="form-group">
+          <%= f.field_container :image do %>
+              <%= f.label :image %> <br />
+              <%= f.file_field :image, :class => 'fullwidth title' %>
+              <%= f.error_message_on :image %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.field_container :group_key do %>
+              <%= f.label :group_key %> <br />
+              <%= f.text_field :group_key, :class => 'fullwidth title' %>
+              <%= f.error_message_on :group_key %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.field_container :url do %>
+              <%= f.label :url %> <br />
+              <%= f.text_field :url, :class => 'fullwidth title' %>
+              <%= f.error_message_on :url %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render "spree/admin/shared/#{@slider.new_record? ? 'new' : 'edit'}_resource_links" %>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="block_2 omega">
+	<% medium_images.each do |image| %>
+		<div class="block_4 alpha">
+			<a href="<%= image.url %>" target = "<%= image.new_tab ? '_blank' : '' %>">
+				<%=image_tag image.attachment.url(:medium), :class=>"block_4_images" %>
+			</a>
+		</div>
+	<% end %>
+</div>
