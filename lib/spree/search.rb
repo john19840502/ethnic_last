@@ -12,8 +12,15 @@ class Search
   end
 
   def retrieve_products
+    total_page = Spree::Product.algolia_search(keywords,
+      { facets: '*', facetFilters: filters, numericFilters: price_range, page: 0, hitsPerPage: 100000 }).length / 51 - 1 
+
+    page = @properties[:page].to_i
+    if page <= total_page
+      page = total_page - page 
+    end
     @products = Spree::Product.algolia_search(keywords,
-      { facets: '*', facetFilters: filters, numericFilters: price_range, page: @properties[:page], hitsPerPage: 51 }
+      { facets: '*', facetFilters: filters, numericFilters: price_range, page: page, hitsPerPage: 51 }
     )
   end
 

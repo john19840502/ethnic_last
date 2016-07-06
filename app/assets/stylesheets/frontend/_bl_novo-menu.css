@@ -2718,3 +2718,43 @@ left: 0 !important;
     top: 240px !important;
     left: 40px !important;
 }
+
+#eur_currency{
+  float:left;
+  margin-left:10px;
+}
+#usd_currency{
+  float:right;
+  margin-right:10px;
+}
+#world_wide_shipping_text{
+  float:left;
+  magin-top:10px;
+}
+#country_name{
+  float:right;
+  background-color:transparent;
+}
+
+#currency_dropdown{
+  float:right;
+  background-color:transparent;
+}
+
+ul#world_wide_shipping{
+  background-color:lightgrey;
+}
+
+#currency_select{
+  backgroud:transparent;
+}
+#currency_eur{
+  backgroud:transparent;
+}
+#currency_usd{
+  backgroud:transparent;
+}
+
+.container.large{
+  padding-top:0px;
+}
