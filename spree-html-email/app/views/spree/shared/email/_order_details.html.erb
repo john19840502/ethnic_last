@@ -65,8 +65,8 @@
         <td class="name">
           <%= item.variant.product.brand.name %>
           <%= item.variant.product.name %>
-          <%= "/" + item.variant.options_text.split(',').second.split(':').second unless item.variant.options_text.split(',').second.empty? %>
-          <%= "/" + item.variant.options_text.split(',').first.split(':').second unless item.variant.options_text.split(',').first.empty? %>
+          <%= "/" + item.variant.options_text.split(',').second.split(':').second unless item.variant.options_text.empty? %>
+          <%= "/" + item.variant.options_text.split(',').first.split(':').second unless item.variant.options_text.empty? %>
         </td>
         <td class="price number"><%= money(item.price * vat_rate) %></td>
         <td class="qty number"><%= item.quantity %></td>

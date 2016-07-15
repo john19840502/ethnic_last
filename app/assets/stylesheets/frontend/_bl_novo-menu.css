@@ -310,8 +310,8 @@ ul.nav li.active a,ul.nav-b li.active a {
 
 .slider-container {
     /*    width:924px;            height:420px;*/
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 div.container_12 div.slider-container {
@@ -2184,8 +2184,8 @@ div.lpbl-form form span,div.lpbl-form form label {
 }
 
 .block_2_images {
-	max-width: 440px;
-	max-height: 640px;
+	/*max-width: 440px;
+	max-height: 640px;*/
 	width: 100%;
 }
 

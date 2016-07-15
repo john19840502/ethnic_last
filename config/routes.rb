@@ -30,6 +30,12 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :information_requests
     resources :collection_images
+    resources :invoicing_system
+    resources :orders, except: [:show] do
+      member do
+        post :invoice
+      end
+    end
   end
   resources :favorites, only: [] do
     collection do

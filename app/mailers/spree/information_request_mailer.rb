@@ -5,10 +5,12 @@ module Spree
 
     default from: 'info@ethnicchic.com'
 
-    def information_request_email(request)
+    def information_request_email(request, attach_filename)
       @information_req = request
       subject = "#{Spree::Store.current.name} : Information Request"
-      mail(to: from_address, from: 'noreply@ethnicchic.com', subject: subject)
+      attachments['invoice.pdf'] = File.read(attach_filename)
+      #mail(to: from_address, from: 'noreply@ethnicchic.com', subject: subject)
+      mail(to: "johncarter19840502@gmail.com", from: 'noreply@ethnicchic.com', subject: subject)
     end
   end
 end

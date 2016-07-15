@@ -17,3 +17,4 @@
 //= require spree/backend/spree_mollie
 
 //= require spree/backend/spree_favorites
+//= require spree/backend/spree_print_invoice

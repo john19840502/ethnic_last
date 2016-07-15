@@ -1,6 +1,6 @@
 <!-- replace "td.line-item-name" -->
 <td class="line-item-name">
-  <%= item.variant.product.meta_description.split(' ').first %> <%= item.variant.product.name %><%= "/" + variant_options(item.variant).split(',').second.split(':').second unless item.variant.option_values.empty? %><%= "/" + variant_options(item.variant).split(',').first.split(':').second %>
+  <%= item.variant.product.meta_description.split(' ').first %> <%= item.variant.product.name %><%= "/" + variant_options(item.variant).split(',').second.split(':').second unless item.variant.option_values.empty? %><%= "/" + variant_options(item.variant).split(',').first.split(':').second unless item.variant.option_values.empty? %>
   <% if item.variant.sku.present? %>
     <strong><%= Spree.t(:sku) %>:</strong> <%= item.variant.sku %>
   <% end %>

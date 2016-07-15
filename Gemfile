@@ -89,6 +89,7 @@ gem 'spree_mollie', github: 'pero-ict-solutions/spree_mollie', branch: '3-0-stab
 gem 'spree_favorites', github: 'fesstor/spree_favorites', branch: 'add-spree-3-0-stable'
 gem 'spree_gateway', github: 'spree/spree_gateway', branch: '3-0-stable'
 gem 'world_flags', :git => 'git://github.com/djonasson/world_flags.git'
+gem 'spree_print_invoice', github: 'spree-contrib/spree_print_invoice', branch: '3-0-stable'
 
 gem 'spree_slider', path: 'spree_slider'
 gem 'spree_html_email', path: 'spree-html-email'

@@ -1,10 +1,10 @@
 <div class="block_2 top-slider-intro">
 	<div class="slider-container">
 		<div style="overflow: hidden; position: relative;" class="flex-viewport">
-			<ul style="width: 2000%; transition-duration: 0s; transform: translate3d(-924px, 0px, 0px);" class="slides">
+			<ul class="slides">
 				<% slider1_images.each do |image| %>
-					<li>
-						<a href="<%= image.url %>" target = "<%= image.new_tab ? '_blank' : '' %>">
+					<li style="display:inline-block;">
+						<a href="<%= image.url %>" target = "<%= image.new_tab ? '_blank' : '' %>" >
 							<%=image_tag image.attachment.url(), class: 'block_2_images' %>
 						</a>
 					</li>

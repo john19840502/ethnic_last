@@ -11,11 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504075728) do
+ActiveRecord::Schema.define(version: 20160713163652) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
-  enable_extension "uuid-ossp"
   enable_extension "plpgsql"
 
   create_table "collection_images", force: :cascade do |t|
@@ -376,6 +374,8 @@ ActiveRecord::Schema.define(version: 20160504075728) do
     t.integer  "canceler_id"
     t.integer  "store_id"
     t.integer  "state_lock_version",                                          default: 0,       null: false
+    t.integer  "invoice_number"
+    t.date     "invoice_date"
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id", using: :btree
