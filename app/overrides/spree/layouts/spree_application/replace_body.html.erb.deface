@@ -1,25 +1,31 @@
 <!-- replace "body" -->
-<body style="<%= "background: #304040 
-url(#{asset_url(params[:background_image])}) center top fixed no-repeat;" if params[:filters] == 'brands/edward van vliet' %>" >
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background:rgba(255,255,255,0.1); margin-bottom:10px;">
+<body>
+  <div class="collapse navbar-collapse" id="world-wide-shipping" style="background:rgba(255,255,255,0.1); font-size:0.95em !important; color:rgba(255,255,255,0.75); margin-bottom:10px;">
     <div id="world_wide_shipping_text" style="margin-top: 15px;">
-        <h2 style="font-size:0.95em; color:rgba(255,255,255,0.75);">Worldwide Express Shipping</h2>
+        WORLDWIDE EXPRESS SHIPPING
     </div>
-    <ul class="nav navbar-nav navbar-right f32">
-      <li>
-        <h6 style="padding-top:15px; color:rgba(255,255,255,0.75);">Currency:</h6>
+    <ul class="nav navbar-nav navbar-right f16">
+      <li style="padding-top:15px; color:rgba(255,255,255,0.75);">
+        CURRENCY:
       </li>
       <li id="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="float:left;background:transparent;" aria-expanded="false" title="Currency selection"><small><%=session[:currency] || "EUR"%></small><span class="ss-icon">dropdown</span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size:1em;float:left;background:transparent;" aria-expanded="false" title="Currency selection">
+          <%=session[:currency] || "EUR"%>
+          <span class="ss-icon">dropdown</span>
+        </a>
         <ul class="dropdown-menu" style="background:transparent;">
-          <li id="eur_currency"><a href="/country/set_currency?currency=EUR">EUR</a></li>
-          <li id="usd_currency"><a href="/country/set_currency?currency=USD">USD</a></li>
+          <li id="eur_currency">
+            <a href="/country/set_currency?currency=EUR">EUR</a>
+          </li>
+          <li id="usd_currency">
+            <a href="/country/set_currency?currency=USD">USD</a>
+          </li>
         </ul>
       </li>
-      <li>
-        <h6 style="padding-top:15px; color:rgba(255,255,255,0.75);">Shipping to:</h6>
+      <li style="padding-top:15px;" >
+        SHIPPING TO:
       </li>
-      <li class="flag <%=get_code_from_country(session[:country_name])%> selected" style="margin-top:10px;margin-left: 8px;">
+      <li class="flag <%=get_code_from_country(session[:country_name])%> selected" style="margin-top:18px;margin-left: 8px;">
       <li>
         <%
         country_val = session[:country_name]

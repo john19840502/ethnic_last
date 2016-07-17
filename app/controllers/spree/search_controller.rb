@@ -7,9 +7,6 @@ module Spree
       filters = JSON.parse(params[:filters]) if params[:filters].present?
       keywords = params[:keywords] if params[:keywords].present?
       remove_filter = JSON.parse(params[:remove_filter]) if params[:remove_filter].present?
-      if (params[:search_in] == "1")
-        filters = nil
-      end
       previous_keywords = params[:previous_keywords] if params[:previous_keywords].present?
 
       filter_parts = []
@@ -20,19 +17,34 @@ module Spree
             filter_parts << f["value"]
           end
       end
-      redirect_uri = "/search/#{filter_parts.join("/")}"
-      if keywords.present?
-        redirect_uri = "/search/#{filter_parts.join("/")}?keywords=#{keywords}"
+      redirect_uri = "/search"
+      if filter_parts.join("/") != ""
+        redirect_uri = "/search/#{filter_parts.join("/")}"
       end
       page = params[:page] || 0
-      redirect_uri << "?page=#{page}"
-      if( (keywords and previous_keywords) and keywords != previous_keywords)
-        redirect_uri = "/search?keywords=#{keywords}"
+      search_keywords = keywords
+      if (params[:search_in] == "2" && previous_keywords.present?)
+        search_keywords = keywords + " " + previous_keywords
       end
+      if search_keywords.present?
+        search_params = {'keywords' => search_keywords}
+        redirect_uri << "?#{search_params.to_query}"
+      else
+        redirect_uri << "?page=#{page}"
+      end
+      # if( (keywords and previous_keywords) and keywords != previous_keywords)
+      #   redirect_uri = "/search?keywords=#{keywords}"
+      # end
+      # if (params[:search_in] == "2")
+      #   keywords = keywords + " " + previous_keywords
+      #   params = {'keywords' => keywords, 'page' => page}
+      #   redirect_uri = "/search?#{params.to_query}"
+      # end
       redirect_to URI.escape(redirect_uri)
     end
 
     def result
+      debugger
       @searcher = Spree::Config.searcher_class.new(params.merge(currency: current_currency))
       @searcher.current_user = try_spree_current_user
       @products = @searcher.retrieve_products
