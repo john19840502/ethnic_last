@@ -1,3 +1,6 @@
+<style>
+
+</style>
 <section class="focus">
   <header>
     <h1>Shopping bag</h1>
@@ -28,6 +31,10 @@
             <small>x</small> <%= money_with_currency line_item.price %>
             <em>=</em>
             <em><strong><%= money_with_currency line_item.amount %></strong></em>
+            <% if line_item['id'].to_s == @over_quantity_item_id %>
+              <small style="color:red; display:block;">For a quantity of 100 or more, please contact us for a stock check / lead time and a made-to-measure offer.
+  Please email us at info@ethnicchic.com or call us directly +31203308066.</small>
+            <% end %>
           </div>
           <%= link_to '#', :class => 'delete', :id => "delete_#{dom_id(line_item)}"  do %>
             <span class="ss-delete"></span>
@@ -45,7 +52,7 @@
       Free shipping for purchase: <br/> +<%= money_with_currency 350 %> within Europe <br/> +<%= money_with_currency 500 %> worldwide
     </div>
     <div class="buttons">
-      <p class="left">
+      <p class="left" style="margin-top:3px; ">
         <%= link_to empty_cart_path, :class => 'button soft small', :id => 'empty-button', :method => :put do %>
           Empty bag
         <% end %>

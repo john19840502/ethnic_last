@@ -2,8 +2,10 @@ Spree::OrdersController.class_eval do
   before_action :go_back_to
   before_action :restrict_quantity, only: [:update]
 
+  @@over_quantity_item_id = '-1'
+
   def update
-    if flash[:error]
+    if @@over_quantity_item_id != '-1'
       redirect_back_or_default(spree.cart_path) and return
     else
       if @order.contents.update_cart(order_params)
@@ -28,12 +30,20 @@ Spree::OrdersController.class_eval do
     end
   end
 
+  # Shows the current incomplete order from the session
+  def edit
+    @over_quantity_item_id = @@over_quantity_item_id
+    @order = current_order || Order.incomplete.find_or_initialize_by(guest_token: cookies.signed[:guest_token])
+    associate_user
+  end
+
   private
     def restrict_quantity
+      @@over_quantity_item_id = '-1'
       order_params[:line_items_attributes].each_pair do |id, value|
         if value["quantity"].to_i > 100
           order_params[:line_items_attributes][id]["quantity"] = 100
-          flash[:error] = Spree.t(:contact_us_for_stock_check)
+          @@over_quantity_item_id = order_params[:line_items_attributes][id]["id"]
         end
       end
     end

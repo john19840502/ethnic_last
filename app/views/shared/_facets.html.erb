@@ -2,7 +2,7 @@
 <% @products.facets.keys.each do |facet| %>
   <% facet_key = facet %>
   <% facet = facet.gsub('taxons.','') %>
-  <% if @searcher.display_facet?(facet) %>
+  <% if facet_key != "taxons.style" && @searcher.display_facet?(facet) %>
     <h2 class="filter">
       <a href="#" title="Show filter for <%=facet%>" class="toggle_filter" data-target="<%=facet_key.gsub('.','_').gsub(' ', '_')%>"><%=facet%><span></span></a>
     </h2>

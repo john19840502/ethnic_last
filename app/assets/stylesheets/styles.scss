@@ -978,3 +978,17 @@ footer.footer {
     margin-left:-69px;
   }
 }
+
+
+.variant-description input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: inner-spin-button !important;
+    -webkit-user-select: none;
+    opacity:1;
+} 
+
+.variant-description input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
+   -webkit-appearance: outer-spin-button !important;    
+   -webkit-user-select: none;
+   opacity:1;
+}
