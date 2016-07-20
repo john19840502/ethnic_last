@@ -63,7 +63,7 @@
 			var cw = $('.block_2_images').width();
 			$('.slider6').css({'width':cw * 0.7 +'px'});
 			var ch = $('.block_2_images').height();
-			$('.slider6').css({'height':ch +'px'});				
+			$('.slider6').css({'height':ch +'px'});			
 		}
 		setTimeout(set_slider_height, 100);
 		$(window).resize(function(){

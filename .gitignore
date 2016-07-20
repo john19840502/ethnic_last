@@ -28,7 +28,6 @@ spec/dummy
 public
 config/*.yml
 
-
 # editors stuff
 *.swp
 *.swo
@@ -38,6 +37,8 @@ config/*.yml
 .project
 .idea
 
+#ignore .env file
+/.env
 
 .ruby-gemset
 .ruby-version
