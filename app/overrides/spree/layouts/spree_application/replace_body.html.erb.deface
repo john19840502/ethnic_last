@@ -25,12 +25,12 @@
       <li style="padding-top:15px;" >
         SHIPPING TO:
       </li>
-      <li class="flag <%=get_code_from_country(session[:country_name])%> selected" style="margin-top:18px;margin-left: 8px;">
-      <li>
-        <%
+      <%
         country_val = session[:country_name]
         country_val ||= "Select your country"
-        %>
+      %>
+      <li class="flag <%=get_code_from_country(session[:country_name]) if session[:country_name].present? %> selected" style="margin-top:18px;margin-left: 8px;">
+      <li>
         <a id="country_currency_selector" style="background:transparent;"href="#" title="Select country"><%= country_val %></a>
       </li>
     </ul>

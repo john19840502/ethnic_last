@@ -52,6 +52,12 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
+    setTimeout(function(){
+        $('.messages').remove();
+    }, 3000);
+
+    $('div.container div#world-wide-shipping').remove();
+    
 });
 
 function filterToggle(){
